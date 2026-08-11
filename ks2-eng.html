@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://D0D58254-464A-48E7-BEBF-156628EC9A0C// --><tw-storydata name="Artichoke Templating" startnode="4" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="D0D58254-464A-48E7-BEBF-156628EC9A0C" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+	<!-- UUID://D0D58254-464A-48E7-BEBF-156628EC9A0D// --><tw-storydata name="Artichoke Templating" startnode="5" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="D0D58254-464A-48E7-BEBF-156628EC9A0D" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
@@ -116,7 +116,7 @@ $(document.head).find('#style-ui-bar').remove();
 //   ks1-cym
 //   ks2-cym
 
-setup.buildID = "ks1-eng";
+setup.buildID = "ks2-eng";
 
 
 // /* Google Tag */
@@ -403,26 +403,28 @@ setup.isTutorialComplete = (tutorialID) => {
 
 &lt;p&gt;Tutorials menu&lt;/p&gt;
 
-  &lt;&lt;button &quot;Tutorial 1&quot;&gt;&gt;
-        &lt;&lt;goto &quot;tutorial1&quot;&gt;&gt;
-    &lt;&lt;/button&gt;&gt;
 &lt;&lt;if $userchoices.tutorialProgress.includes(1)&gt;&gt;
     &lt;p&gt;Tutorial 1 — COMPLETE!&lt;/p&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;button &quot;Tutorial 1&quot;&gt;&gt;
+        &lt;&lt;goto &quot;tutorial1&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-  &lt;&lt;button &quot;Tutorial 2&quot;&gt;&gt;
-        &lt;&lt;goto &quot;tutorial2&quot;&gt;&gt;
-    &lt;&lt;/button&gt;&gt;
 &lt;&lt;if $userchoices.tutorialProgress.includes(2)&gt;&gt;
     &lt;p&gt;Tutorial 2 — COMPLETE!&lt;/p&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;button &quot;Tutorial 2&quot;&gt;&gt;
+        &lt;&lt;goto &quot;tutorial2&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-
-  &lt;&lt;button &quot;Tutorial 3&quot;&gt;&gt;
+&lt;&lt;if $userchoices.tutorialProgress.includes(3)&gt;&gt;
+    &lt;p&gt;Tutorial 3 — COMPLETE!&lt;/p&gt;
+&lt;&lt;else&gt;&gt;
+    &lt;&lt;button &quot;Tutorial 3&quot;&gt;&gt;
         &lt;&lt;goto &quot;tutorial3&quot;&gt;&gt;
     &lt;&lt;/button&gt;&gt;
-&lt;&lt;if $userchoices.tutorialProgress.includes(3)&gt;&gt;
-    &lt;p&gt;Tutorial 3 — COMPLETE!&lt;/p&gt;  
 &lt;&lt;/if&gt;&gt;
 
 &lt;&lt;button &quot;Landing&quot;&gt;&gt;

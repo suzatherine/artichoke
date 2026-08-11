@@ -282,6 +282,14 @@ setup.completeTutorial = (tutorialID) => {
  */
 setup.isTutorialComplete = (tutorialID) => {
     return State.variables.userchoices.tutorialProgress.includes(tutorialID);
+};
+
+
+setup.clearTutorialProgress = () => {
+    localStorage.setItem(
+        setup.tutorialStorageKey,
+        []
+    );
 };</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;cacheaudio &quot;success&quot; &quot;assets/sound/uploadcomplete.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;distort&quot; &quot;assets/sound/Ffalabalam-distorted.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;notification&quot; &quot;assets/sound/Notification.wav&quot;&gt;&gt;
@@ -339,25 +347,41 @@ setup.isTutorialComplete = (tutorialID) => {
 
 &lt;&lt;button &quot;Tutorials&quot;&gt;&gt;
     &lt;&lt;goto &quot;tutorials-menu&quot;&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="landing-ks1-eng" tags="nobr" position="475,100" size="100,100">&lt;&lt;set $userchoices.language to &quot;eng&quot;&gt;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="landing-ks1-eng" tags="nobr" position="475,100" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;set $passage &quot;landing-ks1-eng&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
+
+&lt;&lt;set $userchoices.language to &quot;eng&quot;&gt;&gt;
 &lt;&lt;set $userchoices.keyStage to 1&gt;&gt;
 
 &lt;main&gt;
 &lt;&lt;include &quot;landing-text&quot;&gt;&gt;
 &lt;&lt;include &quot;codeword-landing&quot;&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="5" name="landing-ks2-eng" tags="nobr" position="600,100" size="100,100">&lt;&lt;set $userchoices.language to &quot;eng&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="5" name="landing-ks2-eng" tags="nobr" position="600,100" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;landing-ks2-eng&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
+
+&lt;&lt;set $userchoices.language to &quot;eng&quot;&gt;&gt;
 &lt;&lt;set $userchoices.keyStage to 2&gt;&gt;
 
 &lt;main&gt;
 &lt;&lt;include &quot;landing-text&quot;&gt;&gt;
 &lt;&lt;include &quot;codeword-landing&quot;&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="6" name="landing-ks1-cym" tags="nobr" position="725,100" size="100,100">&lt;&lt;set $userchoices.language to &quot;cym&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="6" name="landing-ks1-cym" tags="nobr" position="725,100" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;landing-ks1-cym&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
+
+&lt;&lt;set $userchoices.language to &quot;cym&quot;&gt;&gt;
 &lt;&lt;set $userchoices.keyStage to 1&gt;&gt;
 &lt;main&gt;
 &lt;&lt;include &quot;landing-text&quot;&gt;&gt;
 &lt;&lt;include &quot;codeword-landing&quot;&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="7" name="landing-ks2-cym" tags="nobr" position="850,100" size="100,100">&lt;&lt;set $userchoices.language to &quot;cym&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="7" name="landing-ks2-cym" tags="nobr" position="850,100" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;landing-ks2-cym&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
+
+&lt;&lt;set $userchoices.language to &quot;cym&quot;&gt;&gt;
 &lt;&lt;set $userchoices.keyStage to 2&gt;&gt;
 &lt;main&gt;
 &lt;&lt;include &quot;landing-text&quot;&gt;&gt;
@@ -394,12 +418,14 @@ setup.isTutorialComplete = (tutorialID) => {
 &lt;br/&gt;
 &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
 
-&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="video1" tags="nobr" position="1100,100" size="100,100">&lt;main&gt;
+&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="video1" tags="nobr" position="1100,100" size="100,100">&lt;&lt;set $passage to &quot;video1&quot;&gt;&gt;
+&lt;main&gt;
 &lt;p&gt;video 1&lt;/p&gt;
 &lt;&lt;button &quot;landing&quot;&gt;&gt;
     &lt;&lt;goto &quot;landing-ks1-eng&quot;&gt;&gt;
     &lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="10" name="tutorials-menu" tags="nobr" position="1225,100" size="100,100">&lt;main&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="10" name="tutorials-menu" tags="nobr" position="1225,100" size="100,100">&lt;&lt;set $passage to &quot;tutorials-menu&quot;&gt;&gt;
+&lt;main&gt;
 
 &lt;p&gt;Tutorials menu&lt;/p&gt;
 
@@ -429,7 +455,15 @@ setup.isTutorialComplete = (tutorialID) => {
     &lt;&lt;goto &quot;landing-ks1-eng&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="11" name="tutorial1" tags="nobr" position="100,225" size="100,100">&lt;main&gt;
+&lt;&lt;button &quot;Clear Progress&quot;&gt;&gt;
+    &lt;&lt;set $userchoices.tutorialProgress to []&gt;&gt;
+    &lt;&lt;run setup.clearTutorialProgress()&gt;&gt;
+    &lt;&lt;goto $passage&gt;&gt;
+    &lt;&lt;/button&gt;&gt;
+
+
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="11" name="tutorial1" tags="nobr" position="100,225" size="100,100">&lt;&lt;set $passage &quot;tutorial1&quot;&gt;&gt;
+&lt;main&gt;
 
 &lt;p&gt;Tutorial 1&lt;/p&gt;
 
@@ -443,7 +477,8 @@ setup.isTutorialComplete = (tutorialID) => {
 
 &lt;&lt;/button&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="12" name="tutorial2" tags="nobr" position="225,225" size="100,100">&lt;main&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="12" name="tutorial2" tags="nobr" position="225,225" size="100,100">&lt;&lt;set $passage &quot;tutorial2&quot;&gt;&gt;
+&lt;main&gt;
 
 &lt;p&gt;Tutorial 2&lt;/p&gt;
 
@@ -457,7 +492,8 @@ setup.isTutorialComplete = (tutorialID) => {
 
 &lt;&lt;/button&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="13" name="tutorial3" tags="nobr" position="350,225" size="100,100">&lt;main&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="13" name="tutorial3" tags="nobr" position="350,225" size="100,100">&lt;&lt;set $passage &quot;tutorial3&quot;&gt;&gt;
+&lt;main&gt;
 
 &lt;p&gt;Tutorial 3&lt;/p&gt;
 

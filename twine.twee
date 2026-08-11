@@ -7,7 +7,7 @@ Artichoke Templating
 	"ifid": "D0D58254-464A-48E7-BEBF-156628EC9A0C",
 	"format": "SugarCube",
 	"format-version": "2.36.1",
-	"start": "landing",
+	"start": "landing-ks1-eng",
 	"zoom": 1
 }
 
@@ -30,52 +30,61 @@ Artichoke Templating
 $('#ui-bar').remove();
 $(document.head).find('#style-ui-bar').remove();
 
+// Change this for each compiled version.
+// Examples:
+//   ks1-eng
+//   ks2-eng
+//   ks1-cym
+//   ks2-cym
 
-/* Google Tag */
-setup.JSLoaded = false;
- var lockID = LoadScreen.lock();  // Lock loading screen
- importScripts("https://www.googletagmanager.com/gtag/js?id=G-C6NP1M5W57")
-     .then(function() {
-
-         setup.JSLoaded = true;
-         window.dataLayer = window.dataLayer || [];
-         window.gtag = function (){ dataLayer.push(arguments); };
-         gtag('js', new Date());
-         gtag('config', 'G-C6NP1M5W57');
-          //  console.log("Sending to GA");
-         LoadScreen.unlock(lockID);  // Unlock loading screen
-     }).catch(function(error) {
-         console.log("Error: Could not load 'gtag.js'.");
-      LoadScreen.unlock(lockID);  // Unlock loading screen
-     }
- );
-
-/* Track Passage Views using SugarCube's passage display events */
-$(document).on(':passagedisplay', function(ev) {
-    var passageName = ev.passage.title;
-    // console.log("sending", passageName, "to GA")
-    // Send passage view event to Google Analytics
-    if (setup.JSLoaded) {
-        gtag('event', 'Passage View', {
-            event_label: passageName,
-            event_category: 'Passage',
-        });
-    }
-});
+setup.buildID = "ks1-eng";
 
 
- $(document).on('click', 'a', function (ev) {
- // Get the destination of the clicked link var passage 
- var passage = $(this).attr('data-passage');
- // Send the click event to Google Analytics
-    if (setup.JSLoaded && passage) {
-      // console.log("sending", passage, "click to GA")
-        gtag('event', 'Navigation', {
-            event_label: passage,
-            event_category: 'GuestClick'
-        });
-    }
- });
+// /* Google Tag */
+// setup.JSLoaded = false;
+//  var lockID = LoadScreen.lock();  // Lock loading screen
+//  importScripts("https://www.googletagmanager.com/gtag/js?id=G-C6NP1M5W57")
+//      .then(function() {
+
+//          setup.JSLoaded = true;
+//          window.dataLayer = window.dataLayer || [];
+//          window.gtag = function (){ dataLayer.push(arguments); };
+//          gtag('js', new Date());
+//          gtag('config', 'G-C6NP1M5W57');
+//           //  console.log("Sending to GA");
+//          LoadScreen.unlock(lockID);  // Unlock loading screen
+//      }).catch(function(error) {
+//          console.log("Error: Could not load 'gtag.js'.");
+//       LoadScreen.unlock(lockID);  // Unlock loading screen
+//      }
+//  );
+
+// /* Track Passage Views using SugarCube's passage display events */
+// $(document).on(':passagedisplay', function(ev) {
+//     var passageName = ev.passage.title;
+//     // console.log("sending", passageName, "to GA")
+//     // Send passage view event to Google Analytics
+//     if (setup.JSLoaded) {
+//         gtag('event', 'Passage View', {
+//             event_label: passageName,
+//             event_category: 'Passage',
+//         });
+//     }
+// });
+
+
+//  $(document).on('click', 'a', function (ev) {
+//  // Get the destination of the clicked link var passage 
+//  var passage = $(this).attr('data-passage');
+//  // Send the click event to Google Analytics
+//     if (setup.JSLoaded && passage) {
+//       // console.log("sending", passage, "click to GA")
+//         gtag('event', 'Navigation', {
+//             event_label: passage,
+//             event_category: 'GuestClick'
+//         });
+//     }
+//  });
 
 setup.chooseStoryAudio = () => {
   const storyAudioNeeded = State.variables.storyAudioNeeded;
@@ -114,51 +123,6 @@ setup.chooseStoryAudio = () => {
   playNext();
 };
 
-// Take picture 
-setup.takePicture = () => {
-    console.log("taking image")
-    const fileInput = document.getElementById("inputImg");
-  const takePhotoBtn = document.getElementById("takePhotoBtn");
-  const savePhotoBtn = document.getElementById("savePhotoBtn");
-  const previewImg = document.getElementById("previewImg");
-  const previewContainer = document.getElementById("preview");
-  
-
-  let imageDataUrl = null;
-
-  takePhotoBtn.addEventListener("click", () => {
-    console.log("fileInput", fileInput)
-    fileInput.click();
-  });
-
-  fileInput.addEventListener("change", () => {
-    const file = fileInput.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = function () {
-      imageDataUrl = reader.result;
-      previewImg.src = imageDataUrl;
-      previewContainer.classList.remove("hide");
-      savePhotoBtn.classList.remove("hide");
-     // ✅ Replace the entire button container with "Next"
-
-    };
-    reader.readAsDataURL(file);
-  });
-
-  savePhotoBtn.addEventListener("click", () => {
-    if (!imageDataUrl) return;
-
-    const link = document.createElement("a");
-    link.href = imageDataUrl;
-    link.download = "view_from_the_hill.jpg";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  });
-};
-
 // add placeholder text to input 
 
 setup.addPlaceholder = () => {
@@ -168,8 +132,87 @@ setup.addPlaceholder = () => {
         console.log("Found textbox:", textbox);
         textbox.setAttribute("placeholder", "Type here");
     }
-
 } 
+
+// LOCAL Storage Tutorial Progress
+
+setup.tutorialStorageKey = `artichoke-tutorial-progress-${setup.buildID}`;
+
+// *
+//  * Load tutorial progress from localStorage.
+//  *
+//  * Returns an array such as:
+//  * [1, 2]
+//  *
+//  * If nothing has been saved, or the stored data is invalid,
+//  * return an empty array.
+//  */
+setup.loadTutorialProgress = () => {
+    console.log("setup.tutorialStorageKey", setup.tutorialStorageKey)
+    console.log("setup.buildID", setup.buildID)
+    const saved = localStorage.getItem(setup.tutorialStorageKey);
+
+    if (!saved) {
+        return [];
+    }
+
+    try {
+        const progress = JSON.parse(saved);
+
+        return Array.isArray(progress) ? progress : [];
+    } catch (error) {
+        console.warn("Could not load tutorial progress:", error);
+        return [];
+    }
+};
+
+
+/*
+ * Save tutorial progress to localStorage.
+ */
+setup.saveTutorialProgress = (tutorialProgress) => {
+    localStorage.setItem(
+        setup.tutorialStorageKey,
+        JSON.stringify(tutorialProgress)
+    );
+};
+
+
+/*
+ * Mark a tutorial as complete.
+ *
+ * The Set prevents duplicates.
+ *
+ * Example:
+ * [1, 2] + 2 → [1, 2]
+ * [1, 2] + 3 → [1, 2, 3]
+ */
+setup.completeTutorial = (tutorialID) => {
+    const progress = State.variables.userchoices.tutorialProgress;
+
+    if (!progress.includes(tutorialID)) {
+        progress.push(tutorialID);
+    }
+
+    setup.saveTutorialProgress(progress);
+};
+
+
+/*
+ * Check whether a tutorial has been completed.
+ */
+setup.isTutorialComplete = (tutorialID) => {
+    return State.variables.userchoices.tutorialProgress.includes(tutorialID);
+};
+
+
+setup.clearTutorialProgress = () => {
+    localStorage.setItem(
+        setup.tutorialStorageKey,
+        []
+    );
+};
+
 
 :: StoryInit
 <<cacheaudio "success" "assets/sound/uploadcomplete.mp3">>
@@ -177,6 +220,12 @@ setup.addPlaceholder = () => {
 <<cacheaudio "notification" "assets/sound/Notification.wav">>
 <<cacheaudio "ping" "assets/sound/ping1.mp3">>
 <<cacheaudio "ticker" "assets/sound/ticker.mp3">>
+<<set $userchoices to {
+    language: null,
+    keyStage: null,
+    audioOn: true,
+    tutorialProgress: setup.loadTutorialProgress()
+}>>
 
 <script>
     const link = document.createElement("link");
@@ -188,5 +237,246 @@ setup.addPlaceholder = () => {
 
 
 
-:: landing [nobr]
-landing
+
+/* TEMPLATES */
+
+:: _templateCodeword [nobr]
+<<set $codeword to "">>  /* ensure it's blank so the placeholder shows */
+
+<div class="codeinput">
+  <<textbox "$codeword" "">>
+
+  <div class="input-btn">
+  <<button "Enter">>
+    <<set $codeword to $codeword.toUpperCase().trim()>>
+
+    /* Correct */
+    <<if $codeword is $correctCodeword>>
+      <<replace "#coderesult">><span>Correct!</span>
+        <<audio "success" play>>
+      <</replace>>
+     
+      <<timed 3s>><<goto $nextpass>><</timed>>
+    <<elseif $codeword isnot "">>
+      /* Incorrect (non-empty) */
+      <<replace "#coderesult">><span>Try again.</span><</replace>>
+      <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+    <</if>>
+  <</button>>
+  </div>
+</div>
+<br/>
+<div id="coderesult"></div>
+
+<<done>><<set $e to setup.addPlaceholder()>><</done>>
+
+:: landing-text [nobr]
+<p>landing KS$userchoices.keyStage $userchoices.language</p>
+<<button "Restart">>
+    <<set $rz to Engine.restart()>>
+<</button>>
+
+<<button "Tutorials">>
+    <<goto "tutorials-menu">>
+<</button>>
+
+:: landing-ks1-eng [nobr]
+<<set $prevPassage to "">>
+<<set $passage "landing-ks1-eng">>
+<<set $nextPassage to "">>
+
+<<set $userchoices.language to "eng">>
+<<set $userchoices.keyStage to 1>>
+
+<main>
+<<include "landing-text">>
+<<include "codeword-landing">>
+
+</main>
+
+
+
+
+
+:: landing-ks2-eng [nobr]
+<<set $prevPassage to "">>
+<<set $passage to "landing-ks2-eng">>
+<<set $nextPassage to "">>
+
+<<set $userchoices.language to "eng">>
+<<set $userchoices.keyStage to 2>>
+
+<main>
+<<include "landing-text">>
+<<include "codeword-landing">>
+</main>
+
+
+:: landing-ks1-cym [nobr]
+<<set $prevPassage to "">>
+<<set $passage to "landing-ks1-cym">>
+<<set $nextPassage to "">>
+
+<<set $userchoices.language to "cym">>
+<<set $userchoices.keyStage to 1>>
+<main>
+<<include "landing-text">>
+<<include "codeword-landing">>
+</main>
+
+
+:: landing-ks2-cym [nobr]
+<<set $prevPassage to "">>
+<<set $passage to "landing-ks2-cym">>
+<<set $nextPassage to "">>
+
+<<set $userchoices.language to "cym">>
+<<set $userchoices.keyStage to 2>>
+<main>
+<<include "landing-text">>
+<<include "codeword-landing">>
+</main>
+
+
+:: codeword-landing [nobr]
+/* Not using template because there are two options of journey  */
+<<set $codeword to "">>  /* ensure it's blank so the placeholder shows */
+
+<div class="codeinput">
+  <<textbox "$codeword" "">>
+
+  <div class="input-btn">
+  <<button "Enter">>
+    <<set $codeword to $codeword.toUpperCase().trim()>>
+
+    /* Correct */
+    <<if $codeword is "BFG">>
+      <<replace "#coderesult">><span>Correct!</span>
+        <<audio "success" play>>
+      <</replace>>
+      <<timed 3s>><<goto "video1">><</timed>>
+    <<elseif $codeword is "TUTORIALS">>
+        <<replace "#coderesult">><span>Correct!</span>
+        <<audio "success" play>>
+      <</replace>>
+      <<timed 3s>><<goto "tutorials-menu">><</timed>>
+    <<elseif $codeword isnot "">>
+      /* Incorrect (non-empty) */
+      <<replace "#coderesult">><span>Try again.</span><</replace>>
+      <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+    <</if>>
+  <</button>>
+  </div>
+</div>
+<br/>
+<div id="coderesult"></div>
+
+<<done>><<set $e to setup.addPlaceholder()>><</done>>
+
+
+:: video1 [nobr]
+<<set $passage to "video1">>
+<main>
+<p>video 1</p>
+<<button "landing">>
+    <<goto "landing-ks1-eng">>
+    <</button>>
+</main>
+
+
+:: tutorials-menu [nobr]
+<<set $passage to "tutorials-menu">>
+<main>
+
+<p>Tutorials menu</p>
+
+  <<button "Tutorial 1">>
+        <<goto "tutorial1">>
+    <</button>>
+<<if $userchoices.tutorialProgress.includes(1)>>
+    <p>Tutorial 1 — COMPLETE!</p>
+<</if>>
+
+  <<button "Tutorial 2">>
+        <<goto "tutorial2">>
+    <</button>>
+<<if $userchoices.tutorialProgress.includes(2)>>
+    <p>Tutorial 2 — COMPLETE!</p>
+<</if>>
+
+
+  <<button "Tutorial 3">>
+        <<goto "tutorial3">>
+    <</button>>
+<<if $userchoices.tutorialProgress.includes(3)>>
+    <p>Tutorial 3 — COMPLETE!</p>  
+<</if>>
+
+<<button "Landing">>
+    <<goto "landing-ks1-eng">>
+<</button>>
+
+<<button "Clear Progress">>
+    <<set $userchoices.tutorialProgress to []>>
+    <<run setup.clearTutorialProgress()>>
+    <<goto $passage>>
+    <</button>>
+
+
+</main>
+
+
+:: tutorial1 [nobr]
+<<set $passage "tutorial1">>
+<main>
+
+<p>Tutorial 1</p>
+
+<<button "I've finished">>
+
+    <<run setup.completeTutorial(1)>>
+
+    <<timed 2s>>
+        <<goto "tutorials-menu">>
+    <</timed>>
+
+<</button>>
+
+</main>
+
+:: tutorial2 [nobr]
+<<set $passage "tutorial2">>
+<main>
+
+<p>Tutorial 2</p>
+
+<<button "I've finished">>
+
+    <<run setup.completeTutorial(2)>>
+
+    <<timed 2s>>
+        <<goto "tutorials-menu">>
+    <</timed>>
+
+<</button>>
+
+</main>
+
+
+:: tutorial3 [nobr]
+<<set $passage "tutorial3">>
+<main>
+
+<p>Tutorial 3</p>
+
+<<button "I've finished">>
+
+    <<run setup.completeTutorial(3)>>
+
+    <<timed 2s>>
+        <<goto "tutorials-menu">>
+    <</timed>>
+
+<</button>>
+
+</main>
