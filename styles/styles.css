@@ -1,0 +1,256 @@
+/* GENERAL STYLES */
+
+:root {
+  --grey: #dcd7d8;
+  --greyblue: #abbecd;
+  --blue: #809db4;
+  --maroon: #681038;
+  --white: #ffffff;
+  --black: #000000;
+  --purple: #a57684;
+  --main-bg-color: var(--greyblue);
+  --font-chapter: 'FSMe', sans-serif;
+  --font-headings: 'FSMe', sans-serif;
+  --font-body: 'FSMe', sans-serif;
+  --font-story: 'FSMe', sans-serif;
+  --padding: 2rem;
+  --box-shadow: 0.5rem 0.5rem black;
+}
+
+/* Bold weight */
+@font-face {
+  font-family: 'FSMe';
+  src: url('/assets/fonts/FSMe-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Light weight */
+@font-face {
+  font-family: 'FSMe';
+  src: url('/assets/fonts/FSMe-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Light weight */
+@font-face {
+  font-family: 'FSMe';
+  src: url('/assets/fonts/FSMe-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* BUTTONS & LINKS  */
+
+button,
+.inline-btn-wrapper > a {
+  font-family: var(--font-headings);
+  padding: 0.8rem;
+  font-size: 1.8rem;
+  background: var(--maroon);
+  color: white;
+  font-weight: 800;
+  border: none;
+  outline: none;
+  width: 100%;
+}
+
+button:hover,
+button:focus,
+button:active {
+  background-color: var(--purple);
+  color: var(--white);
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btn-container > .white {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-btn-container > button,
+.button-wrapper.secondary > button,
+.btn-container > .white > button {
+  background: var(--white);
+  color: var(--black);
+}
+
+.button-wrapper.purple > button {
+  background-color: var(--purple);
+  color: black;
+}
+
+button:focus,
+.inline-btn-wrapper > a {
+  transform: translate(2px, 2px);
+}
+
+/* icon buttons in footer  */
+
+.footer-icons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 1.5rem;
+  background: var(--greyblue);
+}
+
+.footer-icons > a {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+}
+
+.footer-icons > a:first-child,
+.footer-icons > a:last-child {
+  width: 100%;
+  justify-self: center;
+
+  justify-content: flex-start;
+}
+
+.footer-icons > a > img {
+  width: 2rem;
+}
+
+/* STRUCTURAL */
+
+body {
+  background-color: var(--main-bg-color);
+  font-family: var(--font-body);
+  font-size: 10px;
+  min-height: 100vh;
+  display: flex;
+  /* color: var(--color-two); */
+  color: black;
+  justify-content: center;
+  align-items: center;
+  overflow: scroll;
+}
+
+header,
+footer,
+main {
+  width: 100%;
+  padding: 2rem;
+}
+
+main {
+  height: 100%;
+  margin-block-end: 10rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* TYPOGRAPHY  */
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-headings);
+  font-weight: 600;
+  /* color:white; */
+}
+
+h1 {
+  font-size: 3.5rem;
+}
+h2 {
+  font-size: 2.7rem;
+}
+
+h3 {
+  font-size: 2.2rem;
+}
+p {
+  font-size: 1.7rem;
+  margin-block-end: 1.5rem;
+  line-height: 2.4rem;
+  font-weight: 400;
+  letter-spacing: -0.03rem;
+}
+
+p.bold {
+  font-weight: bold;
+}
+
+span.accent {
+  font-family: var(--font-headings);
+  font-weight: 700;
+}
+
+/* INPUT  */
+
+input[type='text'] {
+  -webkit-appearance: none; /* Safari/Chrome */
+  -moz-appearance: none; /* Firefox */
+  appearance: none; /* Modern browsers */
+  border: none;
+  border-bottom: 3px solid var(--maroon);
+  border-radius: 0; /* Remove rounded corners */
+  box-shadow: none; /* Remove inner shadow on iOS */
+  background: transparent;
+  outline: none;
+  text-align: center;
+  font-weight: 600;
+  color: var(--maroon);
+  transition: border-color 0.3s ease;
+}
+input[type='text']:hover,
+html[data-outlines] input:focus,
+html[data-outlines] select:focus,
+html[data-outlines] textarea:focus,
+input:hover,
+select:hover,
+textarea:hover {
+  background: transparent;
+  border-bottom: 3px solid var(--black);
+  color: var(--black);
+}
+input[type='text']:focus {
+  background: transparent;
+  border-bottom: 3px solid var(--black);
+}
+
+input[type='text']::placeholder {
+  color: var(--maroon);
+}
+
+.codeinput {
+  display: flex;
+  gap: 0.5rem;
+  align-items: end;
+  justify-content: space-around;
+}
+
+.codeinput > .input-btn {
+  display: flex;
+}
+
+.codeinput > .input-btn > button {
+  padding: 0.5rem 2rem;
+  display: flex;
+}
+
+#coderesult {
+  font-weight: 900;
+  font-size: 1.6rem;
+}
+
+/* TABLET / DESKTOP */
+
+@media screen and (min-width: 700px) {
+}

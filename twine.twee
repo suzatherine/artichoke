@@ -1,0 +1,192 @@
+:: StoryTitle
+Artichoke Templating
+
+
+:: StoryData
+{
+	"ifid": "D0D58254-464A-48E7-BEBF-156628EC9A0C",
+	"format": "SugarCube",
+	"format-version": "2.36.1",
+	"start": "landing",
+	"zoom": 1
+}
+
+
+
+:: Story Stylesheet [stylesheet]
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+@import url("styles/generics.css");
+@import url("styles/removetwinestyles.css");
+@import url("styles/styles.css");
+
+
+
+:: UserScript [script]
+
+:: Story JavaScript [script]
+$('#ui-bar').remove();
+$(document.head).find('#style-ui-bar').remove();
+
+
+/* Google Tag */
+setup.JSLoaded = false;
+ var lockID = LoadScreen.lock();  // Lock loading screen
+ importScripts("https://www.googletagmanager.com/gtag/js?id=G-C6NP1M5W57")
+     .then(function() {
+
+         setup.JSLoaded = true;
+         window.dataLayer = window.dataLayer || [];
+         window.gtag = function (){ dataLayer.push(arguments); };
+         gtag('js', new Date());
+         gtag('config', 'G-C6NP1M5W57');
+          //  console.log("Sending to GA");
+         LoadScreen.unlock(lockID);  // Unlock loading screen
+     }).catch(function(error) {
+         console.log("Error: Could not load 'gtag.js'.");
+      LoadScreen.unlock(lockID);  // Unlock loading screen
+     }
+ );
+
+/* Track Passage Views using SugarCube's passage display events */
+$(document).on(':passagedisplay', function(ev) {
+    var passageName = ev.passage.title;
+    // console.log("sending", passageName, "to GA")
+    // Send passage view event to Google Analytics
+    if (setup.JSLoaded) {
+        gtag('event', 'Passage View', {
+            event_label: passageName,
+            event_category: 'Passage',
+        });
+    }
+});
+
+
+ $(document).on('click', 'a', function (ev) {
+ // Get the destination of the clicked link var passage 
+ var passage = $(this).attr('data-passage');
+ // Send the click event to Google Analytics
+    if (setup.JSLoaded && passage) {
+      // console.log("sending", passage, "click to GA")
+        gtag('event', 'Navigation', {
+            event_label: passage,
+            event_category: 'GuestClick'
+        });
+    }
+ });
+
+setup.chooseStoryAudio = () => {
+  const storyAudioNeeded = State.variables.storyAudioNeeded;
+  const storyMonsterNeeded = State.variables.storyMonsterNeeded;
+  const audio = document.getElementById("audioPlayer");
+    console.log("audio", audio)
+  if (!audio) {
+    console.error("Audio element with ID 'audioPlayer' not found.");
+    return;
+  }
+
+  // Remove any previously attached 'ended' event to avoid duplicates
+  audio.replaceWith(audio.cloneNode(true));
+  const freshAudio = document.getElementById("audioPlayer");
+
+  // Build audio file paths based on storyAudioNeeded numbers
+  const audioFiles = storyAudioNeeded.map(num => 
+    `assets/voiceover/strongertogethervo_7_${storyMonsterNeeded}_2_S${num}.mp3`
+  );
+
+  let currentTrack = 0;
+
+  function playNext() {
+    if (currentTrack < audioFiles.length) {
+      freshAudio.src = audioFiles[currentTrack];
+      freshAudio.play().catch(err => {
+        console.error("Audio play failed:", err);
+      });
+      currentTrack++;
+    }
+  }
+
+  freshAudio.addEventListener("ended", playNext);
+
+  // Start playback
+  playNext();
+};
+
+// Take picture 
+setup.takePicture = () => {
+    console.log("taking image")
+    const fileInput = document.getElementById("inputImg");
+  const takePhotoBtn = document.getElementById("takePhotoBtn");
+  const savePhotoBtn = document.getElementById("savePhotoBtn");
+  const previewImg = document.getElementById("previewImg");
+  const previewContainer = document.getElementById("preview");
+  
+
+  let imageDataUrl = null;
+
+  takePhotoBtn.addEventListener("click", () => {
+    console.log("fileInput", fileInput)
+    fileInput.click();
+  });
+
+  fileInput.addEventListener("change", () => {
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function () {
+      imageDataUrl = reader.result;
+      previewImg.src = imageDataUrl;
+      previewContainer.classList.remove("hide");
+      savePhotoBtn.classList.remove("hide");
+     // ✅ Replace the entire button container with "Next"
+
+    };
+    reader.readAsDataURL(file);
+  });
+
+  savePhotoBtn.addEventListener("click", () => {
+    if (!imageDataUrl) return;
+
+    const link = document.createElement("a");
+    link.href = imageDataUrl;
+    link.download = "view_from_the_hill.jpg";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+};
+
+// add placeholder text to input 
+
+setup.addPlaceholder = () => {
+
+    const textbox = document.getElementById("textbox-codeword");
+    if (textbox) {
+        console.log("Found textbox:", textbox);
+        textbox.setAttribute("placeholder", "Type here");
+    }
+
+} 
+
+:: StoryInit
+<<cacheaudio "success" "assets/sound/uploadcomplete.mp3">>
+<<cacheaudio "distort" "assets/sound/Ffalabalam-distorted.mp3">>
+<<cacheaudio "notification" "assets/sound/Notification.wav">>
+<<cacheaudio "ping" "assets/sound/ping1.mp3">>
+<<cacheaudio "ticker" "assets/sound/ticker.mp3">>
+
+<script>
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = "assets/img/leadImage.png";
+    document.head.appendChild(link);
+</script>
+
+
+
+:: landing [nobr]
+landing
