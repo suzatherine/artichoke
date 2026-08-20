@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://D0D58254-464A-48E7-BEBF-156628EC9A0C// --><tw-storydata name="Artichoke Templating" startnode="4" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="D0D58254-464A-48E7-BEBF-156628EC9A0C" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+	<!-- UUID://D0D58254-464A-48E7-BEBF-156628EC9A0C// --><tw-storydata name="Artichoke Templating" startnode="6" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="D0D58254-464A-48E7-BEBF-156628EC9A0C" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
@@ -282,6 +282,14 @@ setup.completeTutorial = (tutorialID) => {
  */
 setup.isTutorialComplete = (tutorialID) => {
     return State.variables.userchoices.tutorialProgress.includes(tutorialID);
+};
+
+
+setup.clearTutorialProgress = () => {
+    localStorage.setItem(
+        setup.tutorialStorageKey,
+        []
+    );
 };</script><tw-passagedata pid="1" name="StoryInit" tags="" position="100,100" size="100,100">&lt;&lt;cacheaudio &quot;success&quot; &quot;assets/sound/uploadcomplete.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;distort&quot; &quot;assets/sound/Ffalabalam-distorted.mp3&quot;&gt;&gt;
 &lt;&lt;cacheaudio &quot;notification&quot; &quot;assets/sound/Notification.wav&quot;&gt;&gt;
@@ -293,6 +301,8 @@ setup.isTutorialComplete = (tutorialID) => {
     audioOn: true,
     tutorialProgress: setup.loadTutorialProgress()
 }&gt;&gt;
+/* Initialise codewords */
+&lt;&lt;include &quot;codeword-storage&quot;&gt;&gt;
 
 &lt;script&gt;
     const link = document.createElement(&quot;link&quot;);
@@ -300,12 +310,31 @@ setup.isTutorialComplete = (tutorialID) => {
     link.as = &quot;image&quot;;
     link.href = &quot;assets/img/leadImage.png&quot;;
     document.head.appendChild(link);
-&lt;/script&gt;
+&lt;/script&gt;</tw-passagedata><tw-passagedata pid="2" name="codeword-storage" tags="nobr" position="225,100" size="100,100">&lt;&lt;set $codewords to {
+    cwEntryPageToStage2: {
+        destinationPassage: &quot;stage2-landing&quot;,
+        eng: &quot;THEO&quot;, 
+        cym: &quot;THEO&quot;
+    }, 
+    cwEntryPageToStage3: {
+        destinationPassage: &quot;stage3-landing&quot;,
+        eng: &quot;BFG&quot;, 
+        cym: &quot;BFG&quot;
+    },
+ cwEntryPageToStage4: {
+        destinationPassage: &quot;stage4-landing&quot;,
+        eng: &quot;DELIVERED&quot;, 
+        cym: &quot;DELIVERED&quot;
+    },
+cwEntryPageToStage5: {
+        destinationPassage: &quot;stage5-landing&quot;,
+        eng: &quot;DREAM TEAM&quot;, 
+        cym: &quot;DREAM TEAM&quot;
+    },
+}&gt;&gt;
 
 
-
-
-/* TEMPLATES */</tw-passagedata><tw-passagedata pid="2" name="_templateCodeword" tags="nobr" position="225,100" size="100,100">&lt;&lt;set $codeword to &quot;&quot;&gt;&gt;  /* ensure it&#39;s blank so the placeholder shows */
+/* TEMPLATES */</tw-passagedata><tw-passagedata pid="3" name="_templateCodeword" tags="nobr" position="350,100" size="100,100">&lt;&lt;set $codeword to &quot;&quot;&gt;&gt;  /* ensure it&#39;s blank so the placeholder shows */
 
 &lt;div class=&quot;codeinput&quot;&gt;
   &lt;&lt;textbox &quot;$codeword&quot; &quot;&quot;&gt;&gt;
@@ -332,37 +361,66 @@ setup.isTutorialComplete = (tutorialID) => {
 &lt;br/&gt;
 &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
 
-&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="3" name="landing-text" tags="nobr" position="350,100" size="100,100">&lt;p&gt;landing KS$userchoices.keyStage $userchoices.language&lt;/p&gt;
+&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="_templateLandingPage" tags="nobr" position="475,100" size="100,100">&lt;div class=&quot;page-wrapper&quot;&gt;
+    &lt;header&gt;&lt;/header&gt;
+    &lt;main class=&quot;main-content-center&quot;&gt;
+    &lt;div class=&quot;hero-image&quot;&gt;
+    &lt;img src=&quot;assets/img/placeholder.jpeg&quot;/&gt;
+    &lt;/div&gt;
+        &lt;&lt;button &quot;Enter&quot;&gt;&gt;
+            &lt;&lt;goto $nextPassage&gt;&gt;
+            &lt;&lt;/button&gt;&gt;
+    &lt;/main&gt;
+     &lt;footer&gt;&lt;/footer&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="5" name="landing-text" tags="nobr" position="600,100" size="100,100">&lt;p&gt;landing KS$userchoices.keyStage $userchoices.language&lt;/p&gt;
 &lt;&lt;button &quot;Restart&quot;&gt;&gt;
     &lt;&lt;set $rz to Engine.restart()&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;button &quot;Tutorials&quot;&gt;&gt;
     &lt;&lt;goto &quot;tutorials-menu&quot;&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="4" name="landing-ks1-eng" tags="nobr" position="475,100" size="100,100">&lt;&lt;set $userchoices.language to &quot;eng&quot;&gt;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="6" name="landing-ks1-eng" tags="nobr" position="725,100" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;landing-ks1-eng&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;entry-page&quot;&gt;&gt;
+
+&lt;&lt;set $userchoices.language to &quot;eng&quot;&gt;&gt;
 &lt;&lt;set $userchoices.keyStage to 1&gt;&gt;
 
-&lt;main&gt;
-&lt;&lt;include &quot;landing-text&quot;&gt;&gt;
-&lt;&lt;include &quot;codeword-landing&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="7" name="landing-ks2-eng" tags="nobr" position="850,100" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;landing-ks2-eng&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;entry-page&quot;&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="5" name="landing-ks2-eng" tags="nobr" position="600,100" size="100,100">&lt;&lt;set $userchoices.language to &quot;eng&quot;&gt;&gt;
+&lt;&lt;set $userchoices.language to &quot;eng&quot;&gt;&gt;
 &lt;&lt;set $userchoices.keyStage to 2&gt;&gt;
 
-&lt;main&gt;
-&lt;&lt;include &quot;landing-text&quot;&gt;&gt;
-&lt;&lt;include &quot;codeword-landing&quot;&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="6" name="landing-ks1-cym" tags="nobr" position="725,100" size="100,100">&lt;&lt;set $userchoices.language to &quot;cym&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="landing-ks1-cym" tags="nobr" position="975,100" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;landing-ks1-cym&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;entry-page&quot;&gt;&gt;
+
+&lt;&lt;set $userchoices.language to &quot;cym&quot;&gt;&gt;
 &lt;&lt;set $userchoices.keyStage to 1&gt;&gt;
-&lt;main&gt;
-&lt;&lt;include &quot;landing-text&quot;&gt;&gt;
-&lt;&lt;include &quot;codeword-landing&quot;&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="7" name="landing-ks2-cym" tags="nobr" position="850,100" size="100,100">&lt;&lt;set $userchoices.language to &quot;cym&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="landing-ks2-cym" tags="nobr" position="1100,100" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;landing-ks2-cym&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;entry-page&quot;&gt;&gt;
+
+&lt;&lt;set $userchoices.language to &quot;cym&quot;&gt;&gt;
 &lt;&lt;set $userchoices.keyStage to 2&gt;&gt;
-&lt;main&gt;
-&lt;&lt;include &quot;landing-text&quot;&gt;&gt;
-&lt;&lt;include &quot;codeword-landing&quot;&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="8" name="codeword-landing" tags="nobr" position="975,100" size="100,100">/* Not using template because there are two options of journey  */
+
+&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="entry-page" tags="nobr" position="1225,100" size="100,100">&lt;&lt;set $passage to &quot;entry-page&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
+
+ &lt;div class=&quot;page-wrapper&quot;&gt;
+     &lt;main class=&quot;main-content-center&quot;&gt;
+        &lt;div class=&quot;hero-image&quot;&gt;
+        &lt;img src=&quot;assets/img/placeholder.jpeg&quot;/&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;hero-text&quot;&gt;
+        &lt;p&gt;Welcome to the Library Portal&lt;/p&gt;
+&lt;p&gt;To gain entry please enter the codeword from the Library Assistant&lt;/p&gt;
+        &lt;/div&gt;    
+            &lt;&lt;include &quot;codeword-landing&quot;&gt;&gt;
+        &lt;/main&gt;
+ &lt;/div&gt;</tw-passagedata><tw-passagedata pid="11" name="codeword-landing" tags="nobr" position="100,225" size="100,100">/* Not using template because there are two options of journey  */
 &lt;&lt;set $codeword to &quot;&quot;&gt;&gt;  /* ensure it&#39;s blank so the placeholder shows */
 
 &lt;div class=&quot;codeinput&quot;&gt;
@@ -370,36 +428,65 @@ setup.isTutorialComplete = (tutorialID) => {
 
   &lt;div class=&quot;input-btn&quot;&gt;
   &lt;&lt;button &quot;Enter&quot;&gt;&gt;
-    &lt;&lt;set $codeword to $codeword.toUpperCase().trim()&gt;&gt;
 
-    /* Correct */
-    &lt;&lt;if $codeword is &quot;BFG&quot;&gt;&gt;
-      &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;span&gt;Correct!&lt;/span&gt;
-        &lt;&lt;audio &quot;success&quot; play&gt;&gt;
-      &lt;&lt;/replace&gt;&gt;
-      &lt;&lt;timed 3s&gt;&gt;&lt;&lt;goto &quot;video1&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;
-    &lt;&lt;elseif $codeword is &quot;TUTORIALS&quot;&gt;&gt;
-        &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;span&gt;Correct!&lt;/span&gt;
-        &lt;&lt;audio &quot;success&quot; play&gt;&gt;
-      &lt;&lt;/replace&gt;&gt;
-      &lt;&lt;timed 3s&gt;&gt;&lt;&lt;goto &quot;tutorials-menu&quot;&gt;&gt;&lt;&lt;/timed&gt;&gt;
-    &lt;&lt;elseif $codeword isnot &quot;&quot;&gt;&gt;
-      /* Incorrect (non-empty) */
-      &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;span&gt;Try again.&lt;/span&gt;&lt;&lt;/replace&gt;&gt;
-      &lt;&lt;timed 1.5s&gt;&gt;&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
-    &lt;&lt;/if&gt;&gt;
-  &lt;&lt;/button&gt;&gt;
+            /* Normalise the user&#39;s input */
+            &lt;&lt;set $codeword to $codeword.trim().toUpperCase()&gt;&gt;
+
+            /* Reset the destination before searching */
+            &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
+
+            /* Search every codeword entry */
+            &lt;&lt;for _key, _entry range $codewords&gt;&gt;
+
+                &lt;&lt;if $codeword is _entry[$userchoices.language]&gt;&gt;
+                    &lt;&lt;set $nextPassage to _entry.destinationPassage&gt;&gt;
+                    &lt;&lt;break&gt;&gt;
+                &lt;&lt;/if&gt;&gt;
+            &lt;&lt;/for&gt;&gt;
+
+            &lt;&lt;if $nextPassage isnot &quot;&quot;&gt;&gt;
+                &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;
+                    &lt;span&gt;Correct!&lt;/span&gt;
+                    &lt;&lt;audio &quot;success&quot; play&gt;&gt;
+                &lt;&lt;/replace&gt;&gt;
+
+                &lt;&lt;timed 3s&gt;&gt;
+                    &lt;&lt;goto $nextPassage&gt;&gt;
+                &lt;&lt;/timed&gt;&gt;
+
+            &lt;&lt;elseif $codeword isnot &quot;&quot;&gt;&gt;
+                &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;
+                    &lt;span&gt;Try again.&lt;/span&gt;
+                &lt;&lt;/replace&gt;&gt;
+
+                &lt;&lt;timed 1.5s&gt;&gt;
+                    &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;/timed&gt;&gt;
+
+            &lt;&lt;/if&gt;&gt;
+
+        &lt;&lt;/button&gt;&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 &lt;br/&gt;
 &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
 
-&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="video1" tags="nobr" position="1100,100" size="100,100">&lt;main&gt;
+&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="stage2-landing" tags="nobr" position="225,225" size="100,100">&lt;main&gt;
+STAGE 2
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="13" name="stage3-landing" tags="nobr" position="350,225" size="100,100">&lt;main&gt;
+STAGE 3
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="14" name="stage4-landing" tags="nobr" position="475,225" size="100,100">&lt;main&gt;
+STAGE 4
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="15" name="stage5-landing" tags="nobr" position="600,225" size="100,100">&lt;main&gt;
+STAGE 5
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="16" name="video1" tags="nobr" position="725,225" size="100,100">&lt;&lt;set $passage to &quot;video1&quot;&gt;&gt;
+&lt;main&gt;
 &lt;p&gt;video 1&lt;/p&gt;
 &lt;&lt;button &quot;landing&quot;&gt;&gt;
     &lt;&lt;goto &quot;landing-ks1-eng&quot;&gt;&gt;
     &lt;&lt;/button&gt;&gt;
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="10" name="tutorials-menu" tags="nobr" position="1225,100" size="100,100">&lt;main&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="17" name="tutorials-menu" tags="nobr" position="850,225" size="100,100">&lt;&lt;set $passage to &quot;tutorials-menu&quot;&gt;&gt;
+&lt;main&gt;
 
 &lt;p&gt;Tutorials menu&lt;/p&gt;
 
@@ -429,7 +516,15 @@ setup.isTutorialComplete = (tutorialID) => {
     &lt;&lt;goto &quot;landing-ks1-eng&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="11" name="tutorial1" tags="nobr" position="100,225" size="100,100">&lt;main&gt;
+&lt;&lt;button &quot;Clear Progress&quot;&gt;&gt;
+    &lt;&lt;set $userchoices.tutorialProgress to []&gt;&gt;
+    &lt;&lt;run setup.clearTutorialProgress()&gt;&gt;
+    &lt;&lt;goto $passage&gt;&gt;
+    &lt;&lt;/button&gt;&gt;
+
+
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="18" name="tutorial1" tags="nobr" position="975,225" size="100,100">&lt;&lt;set $passage to &quot;tutorial1&quot;&gt;&gt;
+&lt;main&gt;
 
 &lt;p&gt;Tutorial 1&lt;/p&gt;
 
@@ -443,7 +538,8 @@ setup.isTutorialComplete = (tutorialID) => {
 
 &lt;&lt;/button&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="12" name="tutorial2" tags="nobr" position="225,225" size="100,100">&lt;main&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="19" name="tutorial2" tags="nobr" position="1100,225" size="100,100">&lt;&lt;set $passage to &quot;tutorial2&quot;&gt;&gt;
+&lt;main&gt;
 
 &lt;p&gt;Tutorial 2&lt;/p&gt;
 
@@ -457,7 +553,8 @@ setup.isTutorialComplete = (tutorialID) => {
 
 &lt;&lt;/button&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="13" name="tutorial3" tags="nobr" position="350,225" size="100,100">&lt;main&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="20" name="tutorial3" tags="nobr" position="1225,225" size="100,100">&lt;&lt;set $passage to &quot;tutorial3&quot;&gt;&gt;
+&lt;main&gt;
 
 &lt;p&gt;Tutorial 3&lt;/p&gt;
 

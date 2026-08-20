@@ -226,6 +226,8 @@ setup.clearTutorialProgress = () => {
     audioOn: true,
     tutorialProgress: setup.loadTutorialProgress()
 }>>
+/* Initialise codewords */
+<<include "codeword-storage">>
 
 <script>
     const link = document.createElement("link");
@@ -236,6 +238,29 @@ setup.clearTutorialProgress = () => {
 </script>
 
 
+:: codeword-storage [nobr]
+<<set $codewords to {
+    cwEntryPageToStage2: {
+        destinationPassage: "stage2-landing",
+        eng: "THEO", 
+        cym: "THEO"
+    }, 
+    cwEntryPageToStage3: {
+        destinationPassage: "stage3-landing",
+        eng: "BFG", 
+        cym: "BFG"
+    },
+ cwEntryPageToStage4: {
+        destinationPassage: "stage4-landing",
+        eng: "DELIVERED", 
+        cym: "DELIVERED"
+    },
+cwEntryPageToStage5: {
+        destinationPassage: "stage5-landing",
+        eng: "DREAM TEAM", 
+        cym: "DREAM TEAM"
+    },
+}>>
 
 
 /* TEMPLATES */
@@ -270,6 +295,23 @@ setup.clearTutorialProgress = () => {
 
 <<done>><<set $e to setup.addPlaceholder()>><</done>>
 
+:: _templateLandingPage [nobr]
+<div class="page-wrapper">
+    <header></header>
+    <main class="main-content-center">
+    <div class="hero-image">
+    <img src="assets/img/placeholder.jpeg"/>
+    </div>
+        <<button "Enter">>
+            <<goto $nextPassage>>
+            <</button>>
+    </main>
+     <footer></footer>
+</div>
+
+
+
+
 :: landing-text [nobr]
 <p>landing KS$userchoices.keyStage $userchoices.language</p>
 <<button "Restart">>
@@ -282,62 +324,62 @@ setup.clearTutorialProgress = () => {
 
 :: landing-ks1-eng [nobr]
 <<set $prevPassage to "">>
-<<set $passage "landing-ks1-eng">>
-<<set $nextPassage to "">>
+<<set $passage to "landing-ks1-eng">>
+<<set $nextPassage to "entry-page">>
 
 <<set $userchoices.language to "eng">>
 <<set $userchoices.keyStage to 1>>
 
-<main>
-<<include "landing-text">>
-<<include "codeword-landing">>
-
-</main>
-
-
-
+<<include "_templateLandingPage">>
 
 
 :: landing-ks2-eng [nobr]
 <<set $prevPassage to "">>
 <<set $passage to "landing-ks2-eng">>
-<<set $nextPassage to "">>
+<<set $nextPassage to "entry-page">>
 
 <<set $userchoices.language to "eng">>
 <<set $userchoices.keyStage to 2>>
 
-<main>
-<<include "landing-text">>
-<<include "codeword-landing">>
-</main>
+<<include "_templateLandingPage">>
 
 
 :: landing-ks1-cym [nobr]
 <<set $prevPassage to "">>
 <<set $passage to "landing-ks1-cym">>
-<<set $nextPassage to "">>
+<<set $nextPassage to "entry-page">>
 
 <<set $userchoices.language to "cym">>
 <<set $userchoices.keyStage to 1>>
-<main>
-<<include "landing-text">>
-<<include "codeword-landing">>
-</main>
-
+<<include "_templateLandingPage">>
 
 :: landing-ks2-cym [nobr]
 <<set $prevPassage to "">>
 <<set $passage to "landing-ks2-cym">>
-<<set $nextPassage to "">>
+<<set $nextPassage to "entry-page">>
 
 <<set $userchoices.language to "cym">>
 <<set $userchoices.keyStage to 2>>
-<main>
-<<include "landing-text">>
-<<include "codeword-landing">>
-</main>
+
+<<include "_templateLandingPage">>
 
 
+:: entry-page [nobr]
+<<set $passage to "entry-page">>
+<<set $nextPassage to "">>
+
+ <div class="page-wrapper">
+     <main class="main-content-center">
+        <div class="hero-image">
+        <img src="assets/img/placeholder.jpeg"/>
+        </div>
+        <div class="hero-text">
+        <p>Welcome to the Library Portal</p>
+<p>To gain entry please enter the codeword from the Library Assistant</p>
+        </div>    
+            <<include "codeword-landing">>
+        </main>
+ </div>
 :: codeword-landing [nobr]
 /* Not using template because there are two options of journey  */
 <<set $codeword to "">>  /* ensure it's blank so the placeholder shows */
@@ -347,31 +389,72 @@ setup.clearTutorialProgress = () => {
 
   <div class="input-btn">
   <<button "Enter">>
-    <<set $codeword to $codeword.toUpperCase().trim()>>
 
-    /* Correct */
-    <<if $codeword is "BFG">>
-      <<replace "#coderesult">><span>Correct!</span>
-        <<audio "success" play>>
-      <</replace>>
-      <<timed 3s>><<goto "video1">><</timed>>
-    <<elseif $codeword is "TUTORIALS">>
-        <<replace "#coderesult">><span>Correct!</span>
-        <<audio "success" play>>
-      <</replace>>
-      <<timed 3s>><<goto "tutorials-menu">><</timed>>
-    <<elseif $codeword isnot "">>
-      /* Incorrect (non-empty) */
-      <<replace "#coderesult">><span>Try again.</span><</replace>>
-      <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
-    <</if>>
-  <</button>>
+            /* Normalise the user's input */
+            <<set $codeword to $codeword.trim().toUpperCase()>>
+
+            /* Reset the destination before searching */
+            <<set $nextPassage to "">>
+
+            /* Search every codeword entry */
+            <<for _key, _entry range $codewords>>
+
+                <<if $codeword is _entry[$userchoices.language]>>
+                    <<set $nextPassage to _entry.destinationPassage>>
+                    <<break>>
+                <</if>>
+            <</for>>
+
+            <<if $nextPassage isnot "">>
+                <<replace "#coderesult">>
+                    <span>Correct!</span>
+                    <<audio "success" play>>
+                <</replace>>
+
+                <<timed 3s>>
+                    <<goto $nextPassage>>
+                <</timed>>
+
+            <<elseif $codeword isnot "">>
+                <<replace "#coderesult">>
+                    <span>Try again.</span>
+                <</replace>>
+
+                <<timed 1.5s>>
+                    <<replace "#coderesult">><</replace>>
+                <</timed>>
+
+            <</if>>
+
+        <</button>>
   </div>
 </div>
 <br/>
 <div id="coderesult"></div>
 
 <<done>><<set $e to setup.addPlaceholder()>><</done>>
+
+:: stage2-landing [nobr]
+<main>
+STAGE 2
+</main>
+
+
+
+:: stage3-landing [nobr]
+<main>
+STAGE 3
+</main>
+
+:: stage4-landing [nobr]
+<main>
+STAGE 4
+</main>
+
+:: stage5-landing [nobr]
+<main>
+STAGE 5
+</main>
 
 
 :: video1 [nobr]
@@ -427,7 +510,7 @@ setup.clearTutorialProgress = () => {
 
 
 :: tutorial1 [nobr]
-<<set $passage "tutorial1">>
+<<set $passage to "tutorial1">>
 <main>
 
 <p>Tutorial 1</p>
@@ -445,7 +528,7 @@ setup.clearTutorialProgress = () => {
 </main>
 
 :: tutorial2 [nobr]
-<<set $passage "tutorial2">>
+<<set $passage to "tutorial2">>
 <main>
 
 <p>Tutorial 2</p>
@@ -464,7 +547,7 @@ setup.clearTutorialProgress = () => {
 
 
 :: tutorial3 [nobr]
-<<set $passage "tutorial3">>
+<<set $passage to "tutorial3">>
 <main>
 
 <p>Tutorial 3</p>
