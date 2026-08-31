@@ -213,6 +213,40 @@ setup.clearTutorialProgress = () => {
     );
 };
 
+// SCROLL INTO VIEW 
+
+setup.scrollIntoView = (id) => {
+  const container = document.getElementById(id);
+  if (!container) return;
+
+  container.scrollTo({
+    top: container.scrollHeight,
+    behavior: "smooth"
+  });
+};
+
+/* Start bubble animation by injecting bubble elements into #bubbles */
+setup.startBubbles = () => {
+
+        const container = document.getElementById('bubbles');
+        if (!container) return;
+        // clear any existing bubbles
+        container.innerHTML = '';
+        const count = 36;
+        for (let i = 0; i < count; i++) {
+       
+                const b = document.createElement('div');
+                b.className = 'bubble';
+                const size = Math.round(Math.random() * 60 + 20);
+                b.style.width = size + 'px';
+                b.style.height = size + 'px';
+                b.style.left = Math.random() * 100 + '%';
+                b.style.animationDuration = (Math.random() * 6 + 6).toFixed(2) + 's';
+                b.style.animationDelay = (Math.random() * 4).toFixed(2) + 's';
+                b.style.opacity = (Math.random() * 0.6 + 0.25).toFixed(2);
+                container.appendChild(b);
+        }
+};
 
 :: StoryInit
 <<cacheaudio "success" "assets/sound/uploadcomplete.mp3">>
@@ -229,6 +263,8 @@ setup.clearTutorialProgress = () => {
 /* Initialise codewords */
 <<include "codeword-storage">>
 
+
+
 <script>
     const link = document.createElement("link");
     link.rel = "preload";
@@ -239,28 +275,112 @@ setup.clearTutorialProgress = () => {
 
 
 :: codeword-storage [nobr]
-<<set $codewords to {
+<<set $codewordsLanding to {
     cwEntryPageToStage2: {
-        destinationPassage: "stage2-landing",
+        destinationPassage: "stage2-videoChat",
         eng: "THEO", 
         cym: "THEO"
     }, 
-    cwEntryPageToStage3: {
-        destinationPassage: "stage3-landing",
+cwEntryPageToStage3: {
+        destinationPassage: "stage3-videoChat",
         eng: "BFG", 
         cym: "BFG"
     },
  cwEntryPageToStage4: {
-        destinationPassage: "stage4-landing",
+        destinationPassage: "stage4-videoChat",
         eng: "DELIVERED", 
         cym: "DELIVERED"
     },
 cwEntryPageToStage5: {
-        destinationPassage: "stage5-landing",
+        destinationPassage: "stage5-videoChat",
         eng: "DREAM TEAM", 
         cym: "DREAM TEAM"
     },
+
 }>>
+
+<<set $codewords to {
+    cwStage2ChatToDreamJar: {
+        startingPassage: "stage2-videoChat",
+        destinationPassage: "stage2-fullScreenChat",
+        eng: "CODEWORD", 
+        cym: "CODEWORD"
+    }, 
+     cwStage3ChatToVideo: {
+        startingPassage: "stage3-videoChat",
+        destinationPassage: "stage3-tutorials-menu",
+        eng: "CODEWORD", 
+        cym: "CODEWORD"
+    }, 
+    cwStage4ChatToVideo: {
+        startingPassage: "stage4-videoChat",
+        destinationPassage: "stage4-fullScreenChat",
+        eng: "CODEWORD", 
+        cym: "CODEWORD"
+    }, 
+     cwStage5ChatToVideo: {
+        startingPassage: "stage5-videoChat",
+        destinationPassage: "stage5-ending",
+        eng: "CODEWORD", 
+        cym: "CODEWORD"
+    }, 
+
+
+
+}>>
+
+/* WIDGETS  */
+:: widgets [widget nobr]
+<<widget "voicenote">>
+    <<set _soundFile to _args[0]>>
+  <<audio "ping" "play">>
+    <<append "#chatHistory">>
+ <div class="voicenote">
+<<link "<img src = 'assets/img/play.png'>" >>
+ <<replace "#audio">>
+  <audio autoplay>
+    <source sc-eval:src=_soundFile>
+    </audio>
+  <</replace>>
+  <<replace "#status">><em>Playing...</em><</replace>>
+<</link>> 
+<p id="status">Voice note </p></div>
+    <</append>>
+<</widget>>>>
+
+<<widget "pictureMessage">>
+    <<set _imgFile to _args[0]>>
+  <<audio "ping" "play">>
+    <<append "#chatHistory">>
+ <div class="picture-message">
+       <img sc-eval:src=_imgFile>
+        </div>
+    <</append>>
+ <<run setup.scrollIntoView("chatHistory")>>
+<</widget>>>>
+
+
+/* STRUCTURAL  */
+
+:: header-logo [nobr]
+<header class="logo-left">
+<div class="logo-wrapper">
+<img src="assets/img/star.png" alt="logo"/>
+</div>
+</header>
+
+:: footer [nobr]
+<footer>
+[img[assets/img/star.png][$userchoices.landingPage]]
+<<button "Restart">>
+<<set $f to Engine.restart()>>
+    <</button>>
+      <<button "Next">><<goto $nextPassage>><</button>>
+
+      <<button "Back">><<goto $prevPassage>><</button>>
+</footer>
+
+
 
 
 /* TEMPLATES */
@@ -309,6 +429,77 @@ cwEntryPageToStage5: {
      <footer></footer>
 </div>
 
+:: _templateVideoChat [nobr]
+<div class="page-wrapper">
+<<include "header-logo">>
+<div id="audio"></div>
+<main class="video-chat">
+
+<div class="video-wrapper" id="videoWrapper">
+/* IFRAME  */
+ <img src="assets/img/placeholder.jpeg"/>
+</div>
+<div class="chat-wrapper">
+    <div class="chat-header">
+        <img src="assets/img/star.png" alt="avatar"/>
+        <span>Theo</span>
+    </div>
+    <div class="chat-history" id="chatHistory">
+    
+    </div>
+    <div class="chat-input-wrapper">
+
+    <<include "codeword-chat">>
+    </div>
+</div>
+
+</main>
+
+<<include "footer">>
+</div>
+
+:: _templateFullScreenChat [nobr]
+<div class="page-wrapper">
+<<include "header-logo">>
+<div id="audio"></div>
+<main class="full-screen-chat">
+
+<div class="chat-wrapper">
+    <div class="chat-header">
+        <img src="assets/img/star.png" alt="avatar"/>
+        <span>Theo</span>
+    </div>
+    <div class="chat-history" id="chatHistory">
+   
+    </div>
+   
+    /* <div class="chat-input-wrapper">
+   
+    <<include "codeword-chat">>
+    </div> */
+</div>
+ <<button "Next">>
+        <<goto $nextPassage>>   
+        <</button>>
+</main>
+
+<<include "footer">>
+</div>
+
+:: _templateFullScreenVideo [nobr]
+<div class="page-wrapper">
+<<include "header-logo">>
+<div id="audio"></div>
+<main class="full-screen-video">
+
+<div class="video-wrapper" id="videoWrapper">
+/* IFRAME  */
+ <img src="assets/img/placeholder.jpeg"/>
+</div>
+</main>
+
+<<include "footer">>
+</div>
 
 
 
@@ -319,7 +510,7 @@ cwEntryPageToStage5: {
 <</button>>
 
 <<button "Tutorials">>
-    <<goto "tutorials-menu">>
+    <<goto "stage3-tutorials-menu">>
 <</button>>
 
 :: landing-ks1-eng [nobr]
@@ -329,6 +520,7 @@ cwEntryPageToStage5: {
 
 <<set $userchoices.language to "eng">>
 <<set $userchoices.keyStage to 1>>
+<<set $userchoices.landingPage to "landing-ks1-eng">>
 
 <<include "_templateLandingPage">>
 
@@ -379,6 +571,7 @@ cwEntryPageToStage5: {
         </div>    
             <<include "codeword-landing">>
         </main>
+        <<include "footer">>
  </div>
 :: codeword-landing [nobr]
 /* Not using template because there are two options of journey  */
@@ -397,11 +590,64 @@ cwEntryPageToStage5: {
             <<set $nextPassage to "">>
 
             /* Search every codeword entry */
-            <<for _key, _entry range $codewords>>
+            <<for _key, _entry range $codewordsLanding>>
 
                 <<if $codeword is _entry[$userchoices.language]>>
                     <<set $nextPassage to _entry.destinationPassage>>
                     <<break>>
+                <</if>>
+            <</for>>
+
+            <<if $nextPassage isnot "">>
+                <<replace "#coderesult">>
+                    <span>Correct!</span>
+                    <<audio "success" play>>
+                <</replace>>
+
+                <<timed 3s>>
+                    <<goto "connecting">>
+                <</timed>>
+
+            <<elseif $codeword isnot "">>
+                <<replace "#coderesult">>
+                    <span>Try again.</span>
+                <</replace>>
+
+                <<timed 1.5s>>
+                    <<replace "#coderesult">><</replace>>
+                <</timed>>
+
+            <</if>>
+
+        <</button>>
+  </div>
+</div>
+<br/>
+<div id="coderesult"></div>
+
+<<done>><<set $e to setup.addPlaceholder()>><</done>>
+
+:: codeword-chat [nobr]
+/* Not using template because there are two options of journey  */
+/* This is the codeword chat input. It will check codewords based on the starting passage. */
+<<set $codeword to "">>  /* ensure it's blank so the placeholder shows */
+
+<div class="codeinput">
+  <<textbox "$codeword" "">>
+
+  <div class="input-btn">
+  <<button "Enter">>
+
+            /* Normalise the user's input */
+            <<set $codeword to $codeword.trim().toUpperCase()>>
+
+            /* Reset the destination before searching */
+            <<set $nextPassage to "">>
+
+            /* Search codewords that start at this passage */
+            <<for _key, _entry range $codewords>>
+                <<if _entry.startingPassage is $passage>>
+                    <<if $codeword is _entry[$userchoices.language]>><<set $nextPassage to _entry.destinationPassage>><<break>><</if>>
                 <</if>>
             <</for>>
 
@@ -434,28 +680,721 @@ cwEntryPageToStage5: {
 
 <<done>><<set $e to setup.addPlaceholder()>><</done>>
 
-:: stage2-landing [nobr]
+:: connecting [nobr]
+ <div class="page-wrapper">
+     <main class="main-content-center">
+        <div class="hero-image">
+        <img src="assets/img/placeholder.jpeg"/>
+        </div>
+        <div class="hero-text">
+        <span><<type 60ms>>Connecting...<</type>>
+        </span>
+        </div>    
+
+
+       <<timed 3s>>
+        <<goto $nextPassage>>
+        <</timed>>
+        </main>
+ </div>
+
+
+
+
+:: stage2-videoChat [nobr]
+<<set $prevPassage to "">>
+<<set $passage to "stage2-videoChat">>
+<<set $nextPassage to "stage2-fullScreenChat">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage2-videoChat-video-eng">>
+    <</replace>>
+    <</timed>>
+    <<include "stage2-videoChat-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage2-videoChat-video-cym">>
+     <</replace>>
+     <</timed>>
+    <<include "stage2-videoChat-messages-eng">>
+<</if>>
+
+
+
+
+:: stage2-videoChat-video-eng[nobr]
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+:: stage2-videoChat-video-cym[nobr]
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+:: stage2-videoChat-messages-eng [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum English</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum English</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum English</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 6s>>
+    <<voicenote "assets/sound/ping1.mp3">>
+    <</timed>>
+
+<<timed 8s>>
+    <<pictureMessage "assets/img/placeholder.jpeg">>
+    <</timed>>
+
+:: stage2-videoChat-messages-cym [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+:: stage2-fullScreenChat [nobr]
+<<set $prevPassage to "stage2-videoChat">>
+<<set $passage to "stage2-fullScreenChat">>
+<<set $nextPassage to "stage2-dreamJar">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+    <<include "stage2-videoChat-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage2-videoChat-messages-cym">>
+<</if>>
+
+:: stage2-dreamJar [nobr]
+<<set $prevPassage to "stage2-videoChat">>
+<<set $passage to "stage2-dreamJar">>
+<<set $nextPassage to "">>
+
+DREAM JAR
+
+<<include "footer">>
+
+
+
+
+
+
+/* STAGE 3  */
+
+:: stage3-videoChat [nobr]
+<<set $prevPassage to "">>
+<<set $passage to "stage3-videoChat">>
+<<set $nextPassage to "stage3-fullScreenChat">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage3-videoChat-video-eng">>
+    <</replace>>
+    <</timed>>
+    <<include "stage3-videoChat-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage3-videoChat-video-cym">>
+     <</replace>>
+     <</timed>>
+    <<include "stage3-videoChat-messages-eng">>
+<</if>>
+
+
+
+
+:: stage3-videoChat-video-eng[nobr]
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+:: stage3-videoChat-video-cym[nobr]
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+:: stage3-videoChat-messages-eng [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Stage 3</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum English</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum English</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 6s>>
+    <<voicenote "assets/sound/ping1.mp3">>
+    <</timed>>
+
+<<timed 8s>>
+    <<pictureMessage "assets/img/placeholder.jpeg">>
+    <</timed>>
+
+:: stage3-videoChat-messages-cym [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+       <span>Stage 3</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+:: stage3-fullScreenChat [nobr]
+<<set $prevPassage to "stage3-videoChat">>
+<<set $passage to "stage3-fullScreenChat">>
+<<set $nextPassage to "stage3-tutorials-menu">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+    <<include "stage3-videoChat-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage3-videoChat-messages-cym">>
+<</if>>
+
+
+:: stage3-tutorials-menu [nobr]
+<<set $prevPassage to "stage3-fullScreenChat">>
+<<set $passage to "stage3-tutorials-menu">>
+<<set $nextPassage to "">>
 <main>
-STAGE 2
+
+<p>Tutorials menu</p>
+
+<div class="bubble-grid" role="list">
+    <div class="bubble-btn" role="listitem">
+        <a class="bubble-link" data-passage="stage3-tutorial1-fullScreenVideo">Tutorial 1</a>
+      <<if $userchoices.tutorialProgress.includes(1)>><div class="bubble-complete">✓</div><</if>>
+    </div>
+
+
+    <div class="bubble-btn" role="listitem">
+        <a class="bubble-link" data-passage="stage3-tutorial2-fullScreenVideo">Tutorial 2</a>
+        <<if $userchoices.tutorialProgress.includes(2)>><div class="bubble-complete">✓</div><</if>>
+    </div>
+
+    <div class="bubble-btn" role="listitem">
+        <a class="bubble-link" data-passage="stage3-tutorial3-fullScreenVideo">Tutorial 3</a>
+        <<if $userchoices.tutorialProgress.includes(3)>><div class="bubble-complete">✓</div><</if>>
+    </div>
+</div>
+
+<p>Once you have finished all 3 tasks...</p>
+    <<button "Submit">>
+                <<goto "stage3-submit-videoChat">>
+        <</button>>
+
+
+<<button "Landing">>
+        <<goto "landing-ks1-eng">>
+<</button>>
+
+<<button "Clear Progress">>
+        <<set $userchoices.tutorialProgress to []>>
+        <<run setup.clearTutorialProgress()>>
+        <<goto $passage>>
+        <</button>>
+
+</main>
+
+:: stage3-tutorial1-fullScreenVideo [nobr]
+<<set $prevPassage to "stage3-tutorials-menu">>
+<<set $passage to "stage3-tutorial1-fullScreenVideo">>
+<<set $nextPassage to "stage3-tutorial1-fullScreenChat">>
+<<include "_templateFullScreenVideo">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage3-videoChat-video-eng">>
+    <</replace>>
+    <</timed>>
+<<elseif $userchoices.language is "cym">>
+     <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage3-videoChat-video-cym">>
+     <</replace>>
+     <</timed>>
+<</if>>
+
+:: stage3-tutorial1-fullScreenChat [nobr]
+<<set $prevPassage to "stage3-tutorial1-fullScreenVideo">>
+<<set $passage to "stage3-tutorial1-fullScreenChat">>
+<<set $nextPassage to "stage3-tutorial1-task">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+    <<include "stage3-videoChat-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage3-videoChat-messages-cym">>
+<</if>>
+
+
+
+:: stage3-tutorial1-task [nobr]
+<<set $prevPassage to "stage3-tutorial1-fullScreenChat">>
+<<set $passage to "stage3-tutorial1-task">>
+<<set $nextPassage to "">>
+<main>
+
+<p>Tutorial 1 Task</p>
+
+<<button "I've finished">>
+
+    <<run setup.completeTutorial(1)>>
+
+    <<timed 2s>>
+        <<goto "stage3-tutorials-menu">>
+    <</timed>>
+
+<</button>>
+
 </main>
 
 
+:: stage3-tutorial2-fullScreenVideo [nobr]
+<<set $prevPassage to "stage3-tutorials-menu">>
+<<set $passage to "stage3-tutorial2-fullScreenVideo">>
+<<set $nextPassage to "stage3-tutorial2-fullScreenChat">>
+<<include "_templateFullScreenVideo">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage3-videoChat-video-eng">>
+    <</replace>>
+    <</timed>>
+<<elseif $userchoices.language is "cym">>
+     <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage3-videoChat-video-cym">>
+     <</replace>>
+     <</timed>>
+<</if>>
 
-:: stage3-landing [nobr]
+:: stage3-tutorial2-fullScreenChat [nobr]
+<<set $prevPassage to "stage3-tutorial2-fullScreenVideo">>
+<<set $passage to "stage3-tutorial2-fullScreenChat">>
+<<set $nextPassage to "stage3-tutorial2-doodle">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+    <<include "stage3-videoChat-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage3-videoChat-messages-cym">>
+<</if>>
+
+
+:: stage3-tutorial2-doodle [nobr]
+<<set $prevPassage to "stage3-tutorial2-fullScreenChat">>
+<<set $passage to "stage3-tutorial2-doodle">>
+<<set $nextPassage to "">>
 <main>
-STAGE 3
+
+<p>Tutorial 2 Doodle</p>
+
+<<button "I've finished">>
+
+    <<run setup.completeTutorial(2)>>
+
+    <<timed 2s>>
+        <<goto "stage3-tutorials-menu">>
+    <</timed>>
+
+<</button>>
+
 </main>
 
-:: stage4-landing [nobr]
-<main>
-STAGE 4
-</main>
+:: stage3-tutorial3-fullScreenVideo [nobr]
+<<set $prevPassage to "stage3-tutorials-menu">>
+<<set $passage to "stage3-tutorial3-fullScreenVideo">>
+<<set $nextPassage to "stage3-tutorial3-fullScreenChat">>
+<<include "_templateFullScreenVideo">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage3-videoChat-video-eng">>
+    <</replace>>
+    <</timed>>
+<<elseif $userchoices.language is "cym">>
+     <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage3-videoChat-video-cym">>
+     <</replace>>
+     <</timed>>
+<</if>>
 
-:: stage5-landing [nobr]
-<main>
-STAGE 5
-</main>
+:: stage3-tutorial3-fullScreenChat [nobr]
+<<set $prevPassage to "stage3-tutorial3-fullScreenVideo">>
+<<set $passage to "stage3-tutorial3-fullScreenChat">>
+<<set $nextPassage to "">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+    <<include "stage3-videoChat-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage3-videoChat-messages-cym">>
+<</if>>
 
+<<button "I've finished">>
+    <<run setup.completeTutorial(3)>>
+    <<timed 2s>>
+        <<goto "stage3-tutorials-menu">>
+    <</timed>>
+<</button>>
+
+
+
+
+:: stage3-submit-videoChat [nobr]
+<<set $prevPassage to "stage3-tutorials-menu">>
+<<set $passage to "stage3-submit-videoChat">>
+<<set $nextPassage to "stage3-submit-fullScreenChat">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage2-videoChat-video-eng">>
+    <</replace>>
+    <</timed>>
+    <<include "stage2-videoChat-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage2-videoChat-video-cym">>
+     <</replace>>
+     <</timed>>
+    <<include "stage2-videoChat-messages-eng">>
+<</if>>
+
+:: stage3-submit-fullScreenChat [nobr]
+<<set $prevPassage to "stage3-submit-videoChat">>
+<<set $passage to "stage3-submit-fullScreenChat">>
+<<set $nextPassage to "">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+    <<include "stage3-videoChat-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage3-videoChat-messages-cym">>
+<</if>>
+
+
+/* STAGE 4 */
+
+:: stage4-videoChat [nobr]
+<<set $prevPassage to "">>
+<<set $passage to "stage4-videoChat">>
+<<set $nextPassage to "stage4-fullScreenChat">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage4-videoChat-video-eng">>
+    <</replace>>
+    <</timed>>
+    <<timed 1s>>
+    <<include "stage4-videoChat-messages-eng">>
+    <</timed>>
+<<elseif $userchoices.language is "cym">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage4-videoChat-video-cym">>
+     <</replace>>
+     <</timed>>
+      <<timed 1s>>
+    <<include "stage4-videoChat-messages-eng">>
+    <</timed>>
+<</if>>
+
+
+
+
+:: stage4-videoChat-video-eng[nobr]
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+:: stage4-videoChat-video-cym[nobr]
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+:: stage4-videoChat-messages-eng [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Stage 4</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum English</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum English</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 6s>>
+    <<voicenote "assets/sound/ping1.mp3">>
+    <</timed>>
+
+<<timed 8s>>
+    <<pictureMessage "assets/img/placeholder.jpeg">>
+    <</timed>>
+
+:: stage4-videoChat-messages-cym [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Stage 4</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+:: stage4-fullScreenChat [nobr]
+<<set $prevPassage to "stage4-videoChat">>
+<<set $passage to "stage4-fullScreenChat">>
+<<set $nextPassage to "stage4-dreamJar">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+    <<include "stage4-videoChat-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage4-videoChat-messages-cym">>
+<</if>>
+
+:: stage4-dreamJar [nobr]
+<<set $prevPassage to "stage4-fullScreenChat">>
+<<set $passage to "stage4-dreamJar">>
+<<set $nextPassage to "">>
+DREAM JAR
+
+<<include "footer">>
+:: stage4-fullScreenVideo [nobr]
+<<set $prevPassage to "stage4-videoChat">>
+<<set $passage to "stage4-fullScreenVideo">>
+<<set $nextPassage to "">>
+<<include "_templateFullScreenVideo">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage4-videoChat-video-eng">>
+    <</replace>>
+    <</timed>>
+<<elseif $userchoices.language is "cym">>
+     <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage4-videoChat-video-cym">>
+     <</replace>>
+     <</timed>>
+<</if>>
+
+
+/* STAGE 5  */
+
+
+:: stage5-videoChat [nobr]
+<<set $prevPassage to "">>
+<<set $passage to "stage5-videoChat">>
+<<set $nextPassage to "stage5-fullScreenChat">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage5-videoChat-video-eng">>
+    <</replace>>
+    <</timed>>
+    <<timed 1s>>
+    <<include "stage5-videoChat-messages-eng">>
+    <</timed>>
+<<elseif $userchoices.language is "cym">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage5-videoChat-video-cym">>
+     <</replace>>
+     <</timed>>
+      <<timed 1s>>
+    <<include "stage5-videoChat-messages-eng">>
+    <</timed>>
+<</if>>
+
+
+
+
+:: stage5-videoChat-video-eng[nobr]
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+:: stage5-videoChat-video-cym[nobr]
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+:: stage5-videoChat-messages-eng [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Stage 5</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum English</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum English</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 6s>>
+    <<voicenote "assets/sound/ping1.mp3">>
+    <</timed>>
+
+<<timed 8s>>
+    <<pictureMessage "assets/img/placeholder.jpeg">>
+    <</timed>>
+
+:: stage5-videoChat-messages-cym [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Stage 5</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+:: stage5-ending [nobr]
+<<set $passage to "stage5-ending">>
+<div class="page-wrapper">
+    <main class="main-content-center">
+        <div class="bubbles-wrapper">
+            <div id="bubbles"></div>
+            <div class="content">
+                <h1>Stage 5</h1>
+           
+             
+            </div>
+        </div>
+    </main>
+</div>
+<<include "footer">>
+
+<!-- Bubble CSS moved to styles/styles.css -->
+<<done>>
+<<run setup.startBubbles()>>
+<</done>>
 
 :: video1 [nobr]
 <<set $passage to "video1">>
@@ -466,100 +1405,3 @@ STAGE 5
     <</button>>
 </main>
 
-
-:: tutorials-menu [nobr]
-<<set $passage to "tutorials-menu">>
-<main>
-
-<p>Tutorials menu</p>
-
-  <<button "Tutorial 1">>
-        <<goto "tutorial1">>
-    <</button>>
-<<if $userchoices.tutorialProgress.includes(1)>>
-    <p>Tutorial 1 — COMPLETE!</p>
-<</if>>
-
-  <<button "Tutorial 2">>
-        <<goto "tutorial2">>
-    <</button>>
-<<if $userchoices.tutorialProgress.includes(2)>>
-    <p>Tutorial 2 — COMPLETE!</p>
-<</if>>
-
-
-  <<button "Tutorial 3">>
-        <<goto "tutorial3">>
-    <</button>>
-<<if $userchoices.tutorialProgress.includes(3)>>
-    <p>Tutorial 3 — COMPLETE!</p>  
-<</if>>
-
-<<button "Landing">>
-    <<goto "landing-ks1-eng">>
-<</button>>
-
-<<button "Clear Progress">>
-    <<set $userchoices.tutorialProgress to []>>
-    <<run setup.clearTutorialProgress()>>
-    <<goto $passage>>
-    <</button>>
-
-
-</main>
-
-
-:: tutorial1 [nobr]
-<<set $passage to "tutorial1">>
-<main>
-
-<p>Tutorial 1</p>
-
-<<button "I've finished">>
-
-    <<run setup.completeTutorial(1)>>
-
-    <<timed 2s>>
-        <<goto "tutorials-menu">>
-    <</timed>>
-
-<</button>>
-
-</main>
-
-:: tutorial2 [nobr]
-<<set $passage to "tutorial2">>
-<main>
-
-<p>Tutorial 2</p>
-
-<<button "I've finished">>
-
-    <<run setup.completeTutorial(2)>>
-
-    <<timed 2s>>
-        <<goto "tutorials-menu">>
-    <</timed>>
-
-<</button>>
-
-</main>
-
-
-:: tutorial3 [nobr]
-<<set $passage to "tutorial3">>
-<main>
-
-<p>Tutorial 3</p>
-
-<<button "I've finished">>
-
-    <<run setup.completeTutorial(3)>>
-
-    <<timed 2s>>
-        <<goto "tutorials-menu">>
-    <</timed>>
-
-<</button>>
-
-</main>
