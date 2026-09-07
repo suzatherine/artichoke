@@ -248,6 +248,247 @@ setup.startBubbles = () => {
         }
 };
 
+setup.dreamJarDrag = () => {
+
+    const jar = document.getElementById("dream-jar");
+    const jarImage = document.getElementById("dream-jar-image");
+    const message = document.getElementById("dream-jar-message");
+
+    if (!jar || !jarImage) {
+        return;
+    }
+
+    const labels = [
+        document.getElementById("dream-label-one"),
+        document.getElementById("dream-label-two"),
+        document.getElementById("dream-label-three")
+    ];
+
+    let completed = new Set();
+
+    /*
+     * Make each label draggable.
+     */
+    labels.forEach((label) => {
+
+        if (!label) {
+            return;
+        }
+
+        let dragging = false;
+        let offsetX = 0;
+        let offsetY = 0;
+
+        /*
+         * Start dragging
+         */
+        label.addEventListener("pointerdown", (e) => {
+
+            // Don't allow a correctly placed label to be moved again
+            if (label.classList.contains("placed")) {
+                return;
+            }
+
+            e.preventDefault();
+
+            dragging = true;
+
+            const labelRect = label.getBoundingClientRect();
+
+            offsetX = e.clientX - labelRect.left;
+            offsetY = e.clientY - labelRect.top;
+
+            label.classList.add("dragging");
+
+            // Keep receiving pointer events even if the pointer moves
+            // outside the label.
+            label.setPointerCapture(e.pointerId);
+        });
+
+
+        /*
+         * Move the label
+         */
+        label.addEventListener("pointermove", (e) => {
+
+            if (!dragging) {
+                return;
+            }
+
+            e.preventDefault();
+
+            const jarRect = jar.getBoundingClientRect();
+
+            let x = e.clientX - jarRect.left - offsetX;
+            let y = e.clientY - jarRect.top - offsetY;
+
+            label.style.left = `${x}px`;
+            label.style.top = `${y}px`;
+        });
+
+
+        /*
+         * Finish dragging
+         */
+        label.addEventListener("pointerup", (e) => {
+
+            if (!dragging) {
+                return;
+            }
+
+            dragging = false;
+
+            label.classList.remove("dragging");
+
+            try {
+                label.releasePointerCapture(e.pointerId);
+            } catch (error) {
+                // Pointer capture may already have been released.
+            }
+
+            checkDrop(label);
+        });
+
+
+        /*
+         * Also handle the pointer being cancelled
+         */
+        label.addEventListener("pointercancel", () => {
+
+            if (!dragging) {
+                return;
+            }
+
+            dragging = false;
+
+            label.classList.remove("dragging");
+
+            checkDrop(label);
+        });
+
+    });
+
+
+    /*
+     * Check whether a label has been dropped onto the jar.
+     */
+    function checkDrop(label) {
+
+        const labelRect = label.getBoundingClientRect();
+        const jarRect = jarImage.getBoundingClientRect();
+
+        /*
+         * Find the centre point of the label.
+         */
+        const labelCentreX =
+            labelRect.left + (labelRect.width / 2);
+
+        const labelCentreY =
+            labelRect.top + (labelRect.height / 2);
+
+        /*
+         * The label counts as being on the jar when its centre
+         * is inside the jar image.
+         */
+        const insideJar =
+            labelCentreX >= jarRect.left &&
+            labelCentreX <= jarRect.right &&
+            labelCentreY >= jarRect.top &&
+            labelCentreY <= jarRect.bottom;
+
+
+        if (insideJar) {
+
+            placeLabel(label);
+
+        } else {
+
+            /*
+             * If the label wasn't dropped on the jar,
+             * return it to its original position.
+             */
+            label.classList.remove("placed");
+
+            label.style.left = "";
+            label.style.top = "";
+
+        }
+    }
+
+
+    /*
+     * Lock a label onto the jar.
+     */
+    function placeLabel(label) {
+
+        if (label.classList.contains("placed")) {
+            return;
+        }
+
+        label.classList.add("placed");
+
+        /*
+         * Record that this label has been successfully placed.
+         */
+        completed.add(label.id);
+
+        /*
+         * Put the label roughly in the centre of the jar.
+         *
+         * Each label gets a slightly different position so they
+         * don't all sit directly on top of one another.
+         */
+        const positions = {
+            "dream-label-one": {
+                left: "57%",
+                top: "36%"
+            },
+
+            "dream-label-two": {
+                left: "50%",
+                top: "50%"
+            },
+
+            "dream-label-three": {
+                left: "44%",
+                top: "68%"
+            }
+        };
+
+        const position = positions[label.id];
+
+        if (position) {
+            label.style.left = position.left;
+            label.style.top = position.top;
+        }
+
+
+        /*
+         * Check whether all labels have been placed.
+         */
+        checkComplete();
+    }
+
+
+    /*
+     * Check whether the player has completed the activity.
+     */
+    function checkComplete() {
+
+        if (completed.size === labels.length) {
+
+            message.textContent = "Well done!";
+
+            message.classList.add("show");
+
+        } else {
+
+            message.textContent = "";
+            message.classList.remove("show");
+        }
+    }
+};
+
 :: StoryInit
 <<cacheaudio "success" "assets/sound/uploadcomplete.mp3">>
 <<cacheaudio "distort" "assets/sound/Ffalabalam-distorted.mp3">>
@@ -286,6 +527,11 @@ cwEntryPageToStage3: {
         eng: "BFG", 
         cym: "BFG"
     },
+cwEntryPageToStage3TutorialMenu: {
+        destinationPassage: "stage3-tutorials-menu",
+        eng: "DREAMS", 
+        cym: "DREAMS"
+    },
  cwEntryPageToStage4: {
         destinationPassage: "stage4-videoChat",
         eng: "DELIVERED", 
@@ -300,11 +546,17 @@ cwEntryPageToStage5: {
 }>>
 
 <<set $codewords to {
-    cwStage2ChatToDreamJar: {
+    cwStage2ChatToFullChat: {
         startingPassage: "stage2-videoChat",
         destinationPassage: "stage2-fullScreenChat",
-        eng: "CODEWORD", 
-        cym: "CODEWORD"
+        eng: "YES", 
+        cym: "YES"
+    }, 
+     cwStage2ChatToDreamJar: {
+        startingPassage: "stage2-fullScreenChat",
+        destinationPassage: "stage2-dreamJar",
+        eng: "JAR", 
+        cym: "JAR"
     }, 
      cwStage3ChatToVideo: {
         startingPassage: "stage3-videoChat",
@@ -364,20 +616,28 @@ cwEntryPageToStage5: {
 
 :: header-logo [nobr]
 <header class="logo-left">
-<div class="logo-wrapper">
-<img src="assets/img/star.png" alt="logo"/>
+<div class="logo-container">
+    <div class="logo-wrapper">
+    <img src="assets/img/portal-logo-w.png" alt="logo"/>
+    </div>
+        <h2>Library Portal</h2>
 </div>
+
+
+<div id="pageName"></div>
 </header>
 
 :: footer [nobr]
 <footer>
-[img[assets/img/star.png][$userchoices.landingPage]]
+  <<button "Back">><<goto $prevPassage>><</button>>
 <<button "Restart">>
 <<set $f to Engine.restart()>>
     <</button>>
+    
+      [img[assets/img/home-icon.png][$userchoices.landingPage]]
       <<button "Next">><<goto $nextPassage>><</button>>
 
-      <<button "Back">><<goto $prevPassage>><</button>>
+    
 </footer>
 
 
@@ -389,45 +649,41 @@ cwEntryPageToStage5: {
 <<set $codeword to "">>  /* ensure it's blank so the placeholder shows */
 
 <div class="codeinput">
-  <<textbox "$codeword" "">>
+    <<textbox "$codeword" "">>
 
-  <div class="input-btn">
-  <<button "Enter">>
-    <<set $codeword to $codeword.toUpperCase().trim()>>
+    <div class="input-btn">
+    <<button "Enter">>
+        <<set $codeword to $codeword.toUpperCase().trim()>>
 
-    /* Correct */
-    <<if $codeword is $correctCodeword>>
-      <<replace "#coderesult">><span>Correct!</span>
-        <<audio "success" play>>
-      <</replace>>
+        /* Correct */
+        <<if $codeword is $correctCodeword>>
+            <<replace "#coderesult">><span>Correct!</span>
+                <<audio "success" play>>
+            <</replace>>
      
-      <<timed 3s>><<goto $nextpass>><</timed>>
-    <<elseif $codeword isnot "">>
-      /* Incorrect (non-empty) */
-      <<replace "#coderesult">><span>Try again.</span><</replace>>
-      <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
-    <</if>>
-  <</button>>
-  </div>
-</div>
-<br/>
-<div id="coderesult"></div>
-
-<<done>><<set $e to setup.addPlaceholder()>><</done>>
+            <<timed 3s>><<goto $nextpass>><</timed>>
+        <<elseif $codeword isnot "">>
+            /* Incorrect (non-empty) */
+            <<replace "#coderesult">><span>Try again.</span><</replace>>
+            <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
+        <</if>>
+    <</button>>
+    </div>
 
 :: _templateLandingPage [nobr]
-<div class="page-wrapper">
+<div class="page-wrapper full-screen-landing">
     <header></header>
     <main class="main-content-center">
     <div class="hero-image">
-    <img src="assets/img/placeholder.jpeg"/>
+    <img src="assets/img/portal-logo-w.png" alt="logo"/>
     </div>
         <<button "Enter">>
             <<goto $nextPassage>>
             <</button>>
     </main>
-     <footer></footer>
+
 </div>
+
 
 :: _templateVideoChat [nobr]
 <div class="page-wrapper">
@@ -441,7 +697,7 @@ cwEntryPageToStage5: {
 </div>
 <div class="chat-wrapper">
     <div class="chat-header">
-        <img src="assets/img/star.png" alt="avatar"/>
+        <img src="assets/img/portal-logo-b.png" alt="avatar"/>
         <span>Theo</span>
     </div>
     <div class="chat-history" id="chatHistory">
@@ -466,21 +722,19 @@ cwEntryPageToStage5: {
 
 <div class="chat-wrapper">
     <div class="chat-header">
-        <img src="assets/img/star.png" alt="avatar"/>
+        <img src="assets/img/user-round-black.png" alt="avatar"/>
         <span>Theo</span>
     </div>
     <div class="chat-history" id="chatHistory">
    
     </div>
    
-    /* <div class="chat-input-wrapper">
+    <div class="chat-input-wrapper">
    
     <<include "codeword-chat">>
-    </div> */
+    </div>
 </div>
- <<button "Next">>
-        <<goto $nextPassage>>   
-        <</button>>
+
 </main>
 
 <<include "footer">>
@@ -563,7 +817,7 @@ cwEntryPageToStage5: {
  <div class="page-wrapper">
      <main class="main-content-center">
         <div class="hero-image">
-        <img src="assets/img/placeholder.jpeg"/>
+        <img src="assets/img/portal-logo-w.png"/>
         </div>
         <div class="hero-text">
         <p>Welcome to the Library Portal</p>
@@ -580,7 +834,7 @@ cwEntryPageToStage5: {
 <div class="codeinput">
   <<textbox "$codeword" "">>
 
-  <div class="input-btn">
+  <div class="input-btn" id="codeword-input-btn">
   <<button "Enter">>
 
             /* Normalise the user's input */
@@ -592,15 +846,12 @@ cwEntryPageToStage5: {
             /* Search every codeword entry */
             <<for _key, _entry range $codewordsLanding>>
 
-                <<if $codeword is _entry[$userchoices.language]>>
-                    <<set $nextPassage to _entry.destinationPassage>>
-                    <<break>>
-                <</if>>
+                <<if $codeword is _entry[$userchoices.language]>><<set $nextPassage to _entry.destinationPassage>><<break>><</if>>
             <</for>>
 
             <<if $nextPassage isnot "">>
-                <<replace "#coderesult">>
-                    <span>Correct!</span>
+                 <<replace "#codeword-input-btn">>
+                    <<type 70ms>> <span class="correct-label">Correct!</span><</type>>
                     <<audio "success" play>>
                 <</replace>>
 
@@ -622,8 +873,8 @@ cwEntryPageToStage5: {
         <</button>>
   </div>
 </div>
-<br/>
-<div id="coderesult"></div>
+
+<div id="coderesult" class="white"></div>
 
 <<done>><<set $e to setup.addPlaceholder()>><</done>>
 
@@ -635,7 +886,7 @@ cwEntryPageToStage5: {
 <div class="codeinput">
   <<textbox "$codeword" "">>
 
-  <div class="input-btn">
+  <div class="input-btn" id="codeword-input-btn">
   <<button "Enter">>
 
             /* Normalise the user's input */
@@ -652,8 +903,8 @@ cwEntryPageToStage5: {
             <</for>>
 
             <<if $nextPassage isnot "">>
-                <<replace "#coderesult">>
-                    <span>Correct!</span>
+                <<replace "#codeword-input-btn">>
+                   <<type 70ms>> <span class="correct-label">Correct!</span><</type>>
                     <<audio "success" play>>
                 <</replace>>
 
@@ -681,11 +932,12 @@ cwEntryPageToStage5: {
 <<done>><<set $e to setup.addPlaceholder()>><</done>>
 
 :: connecting [nobr]
- <div class="page-wrapper">
+ <div class="page-wrapper full-screen-landing">
      <main class="main-content-center">
-        <div class="hero-image">
-        <img src="assets/img/placeholder.jpeg"/>
-        </div>
+        <div class="connecting-image-wrapper">
+         <img src="assets/img/portal-logo-w.png" class="spinning" alt="logo"/>
+         <img src="assets/img/user-round-white.png" alt="user icon" class="user-icon"/>
+         </div>
         <div class="hero-text">
         <span><<type 60ms>>Connecting...<</type>>
         </span>
@@ -698,11 +950,10 @@ cwEntryPageToStage5: {
         </main>
  </div>
 
-
-
+<footer></footer>
 
 :: stage2-videoChat [nobr]
-<<set $prevPassage to "">>
+<<set $prevPassage to $userchoices.landingPage>>
 <<set $passage to "stage2-videoChat">>
 <<set $nextPassage to "stage2-fullScreenChat">>
 <<include "_templateVideoChat">>
@@ -737,7 +988,7 @@ cwEntryPageToStage5: {
 <<timed 0.1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Lorem Ipsum English</span>
+        <span>Hello - are you receiving my messages?  </span>
         </div>
         <</append>>
     <</timed>>
@@ -745,26 +996,11 @@ cwEntryPageToStage5: {
 <<timed 2s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Lorem Ipsum English</span>
+        <span>Reply YES if you are.</span>
         </div>
         <</append>>
     <</timed>>
 
-<<timed 4s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum English</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 6s>>
-    <<voicenote "assets/sound/ping1.mp3">>
-    <</timed>>
-
-<<timed 8s>>
-    <<pictureMessage "assets/img/placeholder.jpeg">>
-    <</timed>>
 
 :: stage2-videoChat-messages-cym [nobr]
 <<timed 0.1s>>
@@ -798,19 +1034,155 @@ cwEntryPageToStage5: {
 <<set $nextPassage to "stage2-dreamJar">>
 <<include "_templateFullScreenChat">>
 <<if $userchoices.language is "eng">>
-    <<include "stage2-videoChat-messages-eng">>
+    <<include "stage2-fullScreenChat-messages-eng">>
 <<elseif $userchoices.language is "cym">>
-    <<include "stage2-videoChat-messages-cym">>
+    <<include "stage2-fullScreenChat-messages-cym">>
 <</if>>
 
+:: stage2-fullScreenChat-messages-eng [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Oh that’s amazing.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I want us to understand what the BFG is asking for us to do. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Before we share our Dreams - we need to understand what Dreams are. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 6s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>
+Let’s start with how the BFG holds onto Dreams. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+<<timed 8s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>
+Dream Jars. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+<br/><br/>
+<<timed 11s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>
+I’ve sent over some templates we have here in the Library portal or you can use real jars if you’d like.
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 13s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>
+Once you have them ready I have some quotes from the BFG about Dream Jars to inspire your design. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 15s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>
+Just message me the word JAR and I’ll send over the quotes. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+:: stage2-fullScreenChat-messages-cym [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
 :: stage2-dreamJar [nobr]
-<<set $prevPassage to "stage2-videoChat">>
+
+<<set $prevPassage to "stage2-fullScreenChat">>
 <<set $passage to "stage2-dreamJar">>
-<<set $nextPassage to "">>
+<<set $nextPassage to $userchoices.landingPage>>
 
-DREAM JAR
+<<include "header-logo">>
+<main>
 
+<div id="dream-jar-container">
+
+    <div id="dream-jar">
+        <img id="dream-jar-image"
+             src="assets/img/jar.png"
+             alt="Dream jar">
+
+        <div id="dream-label-one"
+             class="dream-jar-label label-one"
+             draggable="false">
+            LABEL 1
+        </div>
+
+        <div id="dream-label-two"
+             class="dream-jar-label label-two"
+             draggable="false">
+            LABEL 2
+        </div>
+
+        <div id="dream-label-three"
+             class="dream-jar-label label-three"
+             draggable="false">
+            LABEL 3
+        </div>
+    </div>
+
+    <div id="dream-jar-message"></div>
+
+</div>
+</main>
 <<include "footer">>
+
+<<done>> <<run setup.dreamJarDrag()>>
+    <</done>>
 
 
 
@@ -925,45 +1297,63 @@ DREAM JAR
 <<set $prevPassage to "stage3-fullScreenChat">>
 <<set $passage to "stage3-tutorials-menu">>
 <<set $nextPassage to "">>
-<main>
 
-<p>Tutorials menu</p>
+<<include "header-logo">>
+<<timed 0.1s>>
+    <<replace "#pageName">><h3>Tutorials</h3><</replace>>
+<</timed>>
+<main class="tutorials-menu">
+    <p>There are 3 tutorials to complete.</p>
 
 <div class="bubble-grid" role="list">
-    <div class="bubble-btn" role="listitem">
+    <div class="bubble-btn one" role="listitem">
         <a class="bubble-link" data-passage="stage3-tutorial1-fullScreenVideo">Tutorial 1</a>
-      <<if $userchoices.tutorialProgress.includes(1)>><div class="bubble-complete">✓</div><</if>>
+      <<if $userchoices.tutorialProgress.includes(1)>>
+ <<addclass ".one" "completed">>
+      <div class="bubble-complete">✓</div><</if>>
     </div>
 
 
-    <div class="bubble-btn" role="listitem">
+    <div class="bubble-btn two" role="listitem">
         <a class="bubble-link" data-passage="stage3-tutorial2-fullScreenVideo">Tutorial 2</a>
-        <<if $userchoices.tutorialProgress.includes(2)>><div class="bubble-complete">✓</div><</if>>
+        <<if $userchoices.tutorialProgress.includes(2)>>
+            <<timed 0.1s>>
+            <<addclass ".two" "completed">>
+            <</timed>>
+        <div class="bubble-complete">✓</div><</if>>
     </div>
 
-    <div class="bubble-btn" role="listitem">
+    <div class="bubble-btn three" role="listitem">
         <a class="bubble-link" data-passage="stage3-tutorial3-fullScreenVideo">Tutorial 3</a>
-        <<if $userchoices.tutorialProgress.includes(3)>><div class="bubble-complete">✓</div><</if>>
+        <<if $userchoices.tutorialProgress.includes(3)>>
+             <<timed 0.1s>>
+            <<addclass ".three" "completed">>
+            <</timed>>
+        <div class="bubble-complete">✓</div><</if>>
     </div>
 </div>
 
-<p>Once you have finished all 3 tasks...</p>
-    <<button "Submit">>
-                <<goto "stage3-submit-videoChat">>
-        <</button>>
+<div class="tutorial-complete">
+    <p>Once you have finished all 3 tasks...</p>
+ <div class="tutorial-complete-btns">
+     <<button "Submit">>
+         <<goto "stage3-submit-videoChat">>
+            <</button>>
+        
+      
+ </div>
+</div>
 
-
-<<button "Landing">>
-        <<goto "landing-ks1-eng">>
-<</button>>
-
-<<button "Clear Progress">>
-        <<set $userchoices.tutorialProgress to []>>
+<div class="clear-progress-container">
+    <p>Or if you want to start again...</p>
+    <<button "Clear progress">>
         <<run setup.clearTutorialProgress()>>
-        <<goto $passage>>
-        <</button>>
+        <<goto "stage3-tutorials-menu">>
+    <</button>>
+    </div>
 
 </main>
+<<include "footer">>
 
 :: stage3-tutorial1-fullScreenVideo [nobr]
 <<set $prevPassage to "stage3-tutorials-menu">>

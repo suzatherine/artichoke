@@ -1,16 +1,30 @@
 /* GENERAL STYLES */
 
 :root {
-  --grey: #dcd7d8;
-  --greyblue: #abbecd;
-  --blue: #809db4;
-  --maroon: #681038;
-  --white: #ffffff;
-  --black: #000000;
-  --purple: #a57684;
-  --main-bg-color: var(--greyblue);
+  /* Palette added from user-supplied values */
+  --palette-navy: #0a3956;
+  --palette-slate: #64778d;
+  --palette-muted: #ced7dd;
+  --palette-green: #98ca90;
+  --palette-mint: #c1dfbc;
+  --palette-mint-pale: #eaf4e9;
+  --palette-pink: #f591a9;
+  --palette-sky: #a5d1f1;
+  --palette-blush: #f9bdcb;
+  --palette-light-sky: #c9e3f7;
+  --palette-cream-rose: #fde9ee;
+  --palette-ice: #edf6fc;
+  --palette-light-grey-blue: #ccd5d8;
+  --palette-pale: #e0e6e8;
+  --palette-offwhite: #f5f7f7;
+  --main-bg-color: var(--palette-navy);
+  --button-bg-color: var(--palette-blush);
+  --button-hover-color: var(--palette-sky);
+  --text-color: var(--palette-ice);
+  --input-bg-color: var(--palette-pink);
+  --input-bg-color-hover: var(--palette-cream-rose);
   --font-chapter: 'FSMe', sans-serif;
-  --font-headings: 'FSMe', sans-serif;
+  --font-headings: 'Fantastic Mr Font', sans-serif;
   --font-body: 'FSMe', sans-serif;
   --font-story: 'FSMe', sans-serif;
   --padding: 2rem;
@@ -20,7 +34,7 @@
 /* Bold weight */
 @font-face {
   font-family: 'FSMe';
-  src: url('/assets/fonts/FSMe-Bold.otf') format('opentype');
+  src: url('/assets/font/FSME/FSMe-Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
@@ -28,7 +42,7 @@
 /* Light weight */
 @font-face {
   font-family: 'FSMe';
-  src: url('/assets/fonts/FSMe-Light.otf') format('opentype');
+  src: url('/assets/font/FSME/FSMe-Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
 }
@@ -36,9 +50,21 @@
 /* Light weight */
 @font-face {
   font-family: 'FSMe';
-  src: url('/assets/fonts/FSMe-Regular.otf') format('opentype');
+  src: url('/assets/font/FSME/FSMe-Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
+}
+
+/* Fantastic Mr Font - user-provided in assets/font */
+@font-face {
+  font-family: 'Fantastic Mr Font';
+  src:
+    url('/assets/font/FantasticMrFont.woff2') format('woff2'),
+    url('/assets/font/FantasticMrFont.woff') format('woff'),
+    url('/assets/font/FantasticMrFont.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 /* BUTTONS & LINKS  */
@@ -48,8 +74,8 @@ button,
   font-family: var(--font-headings);
   padding: 0.8rem;
   font-size: 1.8rem;
-  background: var(--maroon);
-  color: white;
+  background: var(--button-bg-color);
+  color: black;
   font-weight: 800;
   border: none;
   outline: none;
@@ -59,8 +85,8 @@ button,
 button:hover,
 button:focus,
 button:active {
-  background-color: var(--purple);
-  color: var(--white);
+  background-color: var(--button-hover-color);
+  color: var(black);
 }
 
 .btn-container {
@@ -104,7 +130,7 @@ button:focus,
   bottom: 0;
   left: 0;
   padding: 1.5rem;
-  background: var(--greyblue);
+  background: var(--palette-light-grey-blue);
 }
 
 .footer-icons > a {
@@ -134,7 +160,7 @@ body {
   min-height: 100vh;
   display: flex;
   /* color: var(--color-two); */
-  color: black;
+  color: var(--text-color);
   justify-content: center;
   align-items: center;
   overflow: scroll;
@@ -155,6 +181,15 @@ main {
 }
 
 /* footer  */
+footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: var(--palette-slate);
+}
 footer > a > img {
   max-width: 50px;
 }
@@ -162,10 +197,14 @@ footer > a > img {
 /* headers */
 header.logo-left {
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: end;
 }
-
+header .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 header .logo-wrapper {
   max-width: 4rem;
 }
@@ -177,6 +216,11 @@ header .logo-wrapper {
   flex-direction: column;
   align-items: center;
 }
+
+.page-wrapper.full-screen-landing {
+  padding-bottom: 10rem;
+}
+
 /* TYPOGRAPHY  */
 
 h1,
@@ -224,11 +268,11 @@ input[type='text'] {
   border-bottom: 3px solid var(--maroon);
   border-radius: 0; /* Remove rounded corners */
   box-shadow: none; /* Remove inner shadow on iOS */
-  background: transparent;
+  background: var(--input-bg-color);
   outline: none;
   text-align: center;
   font-weight: 600;
-  color: var(--maroon);
+  color: black;
   transition: border-color 0.3s ease;
 }
 input[type='text']:hover,
@@ -238,17 +282,54 @@ html[data-outlines] textarea:focus,
 input:hover,
 select:hover,
 textarea:hover {
-  background: transparent;
+  background: var(--input-bg-color-hover);
   border-bottom: 3px solid var(--black);
-  color: var(--black);
+  color: var(black);
 }
 input[type='text']:focus {
-  background: transparent;
+  background: var(--input-bg-color-hover);
   border-bottom: 3px solid var(--black);
 }
 
 input[type='text']::placeholder {
   color: var(--maroon);
+}
+
+/* When the input is correct, make it green using the palette variable */
+.codeinput input.correct {
+  background: var(--palette-green) !important;
+  color: black !important;
+  border-bottom: 3px solid var(--palette-green) !important;
+}
+
+/* Highlight the enter button briefly on incorrect attempts */
+#enter-btn.highlight {
+  box-shadow: 0 0 0.6rem 0.15rem rgba(152, 202, 144, 0.25);
+  border-radius: 6px;
+}
+
+#enter-btn.highlight button {
+  transform: translateY(-2px);
+}
+
+/* Helper to hide original button when showing temporary labels */
+.hidden {
+  display: none !important;
+}
+
+.temp-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-weight: 800;
+  background: var(--palette-cream-rose);
+  border-radius: 6px;
+}
+
+.temp-label.correct-label {
+  background: var(--palette-green);
+  color: black;
 }
 
 .codeinput {
@@ -270,6 +351,11 @@ input[type='text']::placeholder {
 #coderesult {
   font-weight: 900;
   font-size: 1.6rem;
+  color: black;
+}
+
+#coderesult.white {
+  color: white;
 }
 
 /* TABLET / DESKTOP */
@@ -315,8 +401,8 @@ input[type='text']::placeholder {
   display: grid;
   grid-template-columns: 2fr 1fr;
 
-  gap: 1rem;
-  padding: 1rem;
+  gap: 2rem;
+  padding: 2rem;
 
   min-height: 0;
 }
@@ -359,13 +445,14 @@ input[type='text']::placeholder {
 
 #chatHistory > .message-received,
 #chatHistory > .voicenote {
-  background-color: black;
-  color: white;
-  padding: 5px 8px;
+  background: var(--palette-light-grey-blue);
+  color: black;
+  padding: 5px 10px;
   position: relative;
   margin-left: 1rem;
   border-radius: 8px;
   width: fit-content;
+  line-height: 1.4;
 }
 
 #chatHistory > .voicenote {
@@ -392,7 +479,8 @@ input[type='text']::placeholder {
   gap: 0.75rem;
   padding: 1rem;
   border-bottom: 3px solid #ccc;
-  background: #d4ddec;
+  background: var(--palette-light-grey-blue);
+  color: black;
 }
 
 .chat-header img {
@@ -403,6 +491,8 @@ input[type='text']::placeholder {
 
 .chat-header span {
   font-weight: bold;
+  font-family: var(--font-headings);
+  font-size: 2.2rem;
 }
 
 /* Chat messages */
@@ -432,6 +522,18 @@ input[type='text']::placeholder {
   background: #d4ddec;
 }
 
+#codeword-input-btn > .macro-type {
+  padding: 2px 6px;
+  transform: rotate(-4deg);
+  background: var(--palette-green);
+}
+
+#codeword-input-btn > .correct-label,
+#codeword-input-btn > .macro-type > .correct-label {
+  color: black;
+  font-weight: 800;
+}
+
 @media screen and (max-width: 768px) {
   .video-chat {
     grid-template-columns: 1fr;
@@ -456,7 +558,7 @@ input[type='text']::placeholder {
   width: 100%;
   min-height: 0;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   padding: 1rem;
 }
@@ -482,11 +584,10 @@ input[type='text']::placeholder {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-
   padding: 1rem;
 
   border-bottom: 3px solid #ccc;
-  background: #d4ddec;
+  background: var(--palette-light-grey-blue);
 }
 
 .full-screen-chat .chat-header img {
@@ -527,7 +628,7 @@ input[type='text']::placeholder {
 
   border-radius: 0.75rem;
 
-  background: #eee;
+  background: var(--palette-light-grey-blue);
 }
 
 /* ========================================
@@ -599,6 +700,7 @@ input[type='text']::placeholder {
   flex: 1;
   width: 100%;
   min-height: 0;
+  max-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -680,7 +782,7 @@ input[type='text']::placeholder {
 .bubble-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.25rem;
+  gap: 5rem;
   justify-content: center;
   align-items: center;
   padding: 1rem;
@@ -701,7 +803,11 @@ input[type='text']::placeholder {
       rgba(255, 255, 255, 0.08) 40%,
       transparent 60%
     ),
-    linear-gradient(180deg, #6ec6ff 0%, #2a90c9 100%);
+    linear-gradient(
+      180deg,
+      var(--palette-sky) 0%,
+      var(--palette-light-sky) 100%
+    );
   color: #04243b;
   font-weight: 700;
   font-size: 1.3rem;
@@ -736,6 +842,34 @@ input[type='text']::placeholder {
   color: inherit;
   text-decoration: none;
 }
+
+.bubble-btn.completed {
+  background:
+    radial-gradient(
+      circle at 30% 30%,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.25) 20%,
+      rgba(255, 255, 255, 0.08) 40%,
+      transparent 60%
+    ),
+    linear-gradient(180deg, var(--palette-green) 0%, var(--palette-mint) 100%);
+}
+
+/* Spinning logo for connecting passage */
+.spinning {
+  display: inline-block;
+  animation: spin 2.2s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
 .bubble-complete {
   position: absolute;
   top: 10px;
@@ -757,4 +891,230 @@ input[type='text']::placeholder {
     height: 110px;
     font-size: 0.95rem;
   }
+}
+
+/* CONNECTING  */
+.connecting-image-wrapper {
+  display: grid;
+  place-items: center;
+  max-width: 300px;
+}
+
+.connecting-image-wrapper > img.user-icon {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* =========================================================
+   DREAM JAR
+   ========================================================= */
+
+#dream-jar-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dream-jar-title {
+  margin-bottom: 20px;
+}
+
+/* ---------------------------------------------------------
+   Jar container
+   --------------------------------------------------------- */
+
+#dream-jar {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  max-height: 700px;
+  min-height: 450px;
+  margin: 0 auto;
+
+  touch-action: none;
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------
+   Jar image
+   --------------------------------------------------------- */
+
+#dream-jar-image {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  left: 0;
+  top: 0;
+
+  object-fit: contain;
+
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------
+   Draggable labels
+   --------------------------------------------------------- */
+
+.dream-jar-label {
+  position: absolute;
+
+  width: 120px;
+  min-height: 45px;
+
+  padding: 12px 10px;
+
+  box-sizing: border-box;
+
+  border-radius: 8px;
+
+  color: white;
+
+  font-weight: bold;
+
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: grab;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  touch-action: none;
+
+  z-index: 10;
+
+  transform: translate(-50%, -50%);
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    opacity 0.2s ease;
+}
+
+/* ---------------------------------------------------------
+   Different label colours
+   --------------------------------------------------------- */
+
+.label-one {
+  background-color: #e85d75;
+}
+
+.label-two {
+  background-color: #4c8eda;
+}
+
+.label-three {
+  background-color: #56a878;
+}
+
+/* ---------------------------------------------------------
+   Starting positions
+   --------------------------------------------------------- */
+
+#dream-label-one {
+  left: 18%;
+  top: 20%;
+}
+
+#dream-label-two {
+  left: 50%;
+  top: 15%;
+}
+
+#dream-label-three {
+  left: 82%;
+  top: 22%;
+}
+
+/* ---------------------------------------------------------
+   Label while being dragged
+   --------------------------------------------------------- */
+
+.dream-jar-label.dragging {
+  cursor: grabbing;
+
+  transform: translate(-50%, -50%) scale(1.08);
+
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+
+  z-index: 100;
+}
+
+/* ---------------------------------------------------------
+   Label successfully placed
+   --------------------------------------------------------- */
+
+.dream-jar-label.placed {
+  cursor: default;
+
+  z-index: 20;
+
+  transform: translate(-50%, -50%) scale(1);
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ---------------------------------------------------------
+   Completion message
+   --------------------------------------------------------- */
+
+#dream-jar-message {
+  min-height: 60px;
+
+  margin-top: 20px;
+
+  font-size: 2em;
+  font-weight: bold;
+
+  opacity: 0;
+
+  transform: scale(0.8);
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+#dream-jar-message.show {
+  opacity: 1;
+
+  transform: scale(1);
+}
+
+/* TUTORIALS MENU */
+
+main.tutorials-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  height: 80vh;
+}
+
+.tutorial-complete-btns {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.clear-progress-container {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  flex-direction: column;
 }
