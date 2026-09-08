@@ -98,7 +98,7 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<!-- UUID://D0D58254-464A-48E7-BEBF-156628EC9A0C// --><tw-storydata name="Artichoke Templating" startnode="12" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="D0D58254-464A-48E7-BEBF-156628EC9A0C" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+	<!-- UUID://D0D58254-464A-48E7-BEBF-156628EC9A0C// --><tw-storydata name="Artichoke Templating" startnode="13" creator="Tweego" creator-version="2.1.1+81d1d71" ifid="D0D58254-464A-48E7-BEBF-156628EC9A0C" zoom="1" format="SugarCube" format-version="2.36.1" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
@@ -590,9 +590,9 @@ setup.dreamJarDrag = () => {
     document.head.appendChild(link);
 &lt;/script&gt;</tw-passagedata><tw-passagedata pid="2" name="codeword-storage" tags="nobr" position="225,100" size="100,100">&lt;&lt;set $codewordsLanding to {
     cwEntryPageToStage2: {
-        destinationPassage: &quot;stage2-videoChat&quot;,
-        eng: &quot;THEO&quot;, 
-        cym: &quot;THEO&quot;
+        destinationPassage:&quot;stage2-securityCheck-a&quot;,
+        eng: &quot;BEA&quot;, 
+        cym: &quot;BEA&quot;
     }, 
 cwEntryPageToStage3: {
         destinationPassage: &quot;stage3-videoChat&quot;,
@@ -617,6 +617,27 @@ cwEntryPageToStage5: {
 
 }&gt;&gt;
 
+&lt;&lt;set $codewordsSecurityCheck to {
+    cwStage2SecurityCheckAB: {
+        startingPassage: &quot;stage2-securityCheck-a&quot;,
+        destinationPassage: &quot;stage2-securityCheck-b&quot;,
+        eng: &quot;WHIZZPOPPER&quot;, 
+        cym: &quot;WHIZZPOPPER&quot;
+    }, 
+    cwStage2SecurityCheckBC: {
+        startingPassage: &quot;stage2-securityCheck-b&quot;,
+        destinationPassage: &quot;stage2-securityCheck-c&quot;,
+        eng: &quot;RUMPLEDUMPUS&quot;, 
+        cym: &quot;RUMPLEDUMPUS&quot;
+    }, 
+     cwStage2SecurityCheckCD: {
+        startingPassage: &quot;stage2-securityCheck-c&quot;,
+        destinationPassage: &quot;stage2-videoChat&quot;,
+        eng: &quot;WHOOPSY-WHIFFLING&quot;, 
+        cym: &quot;WHOOPSY-WHIFFLING&quot;
+    }, 
+}&gt;&gt;
+
 &lt;&lt;set $codewords to {
     cwStage2ChatToFullChat: {
         startingPassage: &quot;stage2-videoChat&quot;,
@@ -624,11 +645,24 @@ cwEntryPageToStage5: {
         eng: &quot;YES&quot;, 
         cym: &quot;YES&quot;
     }, 
-     cwStage2ChatToDreamJar: {
-        startingPassage: &quot;stage2-fullScreenChat&quot;,
-        destinationPassage: &quot;stage2-dreamJar&quot;,
+     cwStage2DreamJarIntroAB: {
+        startingPassage: &quot;stage2-DreamJarIntro-a&quot;,
+        destinationPassage: &quot;stage2-DreamJarIntro-b&quot;,
         eng: &quot;JAR&quot;, 
         cym: &quot;JAR&quot;
+    }, 
+
+      cwStage2DreamJarIntroBtoDreamJar: {
+        startingPassage: &quot;stage2-DreamJarIntro-b&quot;,
+        destinationPassage: &quot;stage2-exercise-dreamJar&quot;,
+        eng: &quot;DESIGNED&quot;, 
+        cym: &quot;DESIGNED&quot;
+    }, 
+cwStage2DreamJartoDreamJarOutro: {
+        startingPassage: &quot;stage2-exercise-dreamJar&quot;,
+        destinationPassage: &quot;stage2-DreamJarOutro&quot;,
+        eng: &quot;FILL&quot;, 
+        cym: &quot;FILL&quot;
     }, 
      cwStage3ChatToVideo: {
         startingPassage: &quot;stage3-videoChat&quot;,
@@ -655,6 +689,8 @@ cwEntryPageToStage5: {
 
 /* WIDGETS  */</tw-passagedata><tw-passagedata pid="3" name="widgets" tags="widget nobr" position="350,100" size="100,100">&lt;&lt;widget &quot;voicenote&quot;&gt;&gt;
     &lt;&lt;set _soundFile to _args[0]&gt;&gt;
+    &lt;&lt;set _transcriptDelay to _args[1]&gt;&gt;
+    &lt;&lt;set _transcriptPassage to _args[2]&gt;&gt;
   &lt;&lt;audio &quot;ping&quot; &quot;play&quot;&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
  &lt;div class=&quot;voicenote&quot;&gt;
@@ -665,9 +701,18 @@ cwEntryPageToStage5: {
     &lt;/audio&gt;
   &lt;&lt;/replace&gt;&gt;
   &lt;&lt;replace &quot;#status&quot;&gt;&gt;&lt;em&gt;Playing...&lt;/em&gt;&lt;&lt;/replace&gt;&gt;
+  &lt;&lt;timed _transcriptDelay&gt;&gt;
+        &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+            &lt;div class=&quot;transcript&quot;&gt;
+                &lt;&lt;include _transcriptPassage&gt;&gt;
+            &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
 &lt;&lt;/link&gt;&gt; 
-&lt;p id=&quot;status&quot;&gt;Voice note &lt;/p&gt;&lt;/div&gt;
+&lt;span id=&quot;status&quot;&gt;Voice note &lt;/span&gt;&lt;/div&gt;
     &lt;&lt;/append&gt;&gt;
+    
+    
 &lt;&lt;/widget&gt;&gt;&gt;&gt;
 
 &lt;&lt;widget &quot;pictureMessage&quot;&gt;&gt;
@@ -757,9 +802,9 @@ cwEntryPageToStage5: {
     &lt;div class=&quot;chat-history&quot; id=&quot;chatHistory&quot;&gt;
     
     &lt;/div&gt;
-    &lt;div class=&quot;chat-input-wrapper&quot;&gt;
+    &lt;div class=&quot;chat-input-wrapper&quot; id=&quot;chatInputWrapper&quot;&gt;
 
-    &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
+   
     &lt;/div&gt;
 &lt;/div&gt;
 
@@ -780,16 +825,39 @@ cwEntryPageToStage5: {
    
     &lt;/div&gt;
    
-    &lt;div class=&quot;chat-input-wrapper&quot;&gt;
+    &lt;div class=&quot;chat-input-wrapper&quot; id=&quot;chatInputWrapper&quot;&gt;
    
-    &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
+
     &lt;/div&gt;
 &lt;/div&gt;
 
 &lt;/main&gt;
 
 &lt;&lt;include &quot;footer&quot;&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="_templateFullScreenVideo" tags="nobr" position="1225,100" size="100,100">&lt;div class=&quot;page-wrapper&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="_templateSecurityCheck" tags="nobr" position="1225,100" size="100,100">&lt;div class=&quot;page-wrapper&quot;&gt;
+/* &lt;&lt;include &quot;header-logo&quot;&gt;&gt; */
+&lt;br/&gt;&lt;br/&gt;
+&lt;div id=&quot;audio&quot;&gt;&lt;/div&gt;
+&lt;main class=&quot;full-screen-chat security-check&quot;&gt;
+
+&lt;div class=&quot;chat-wrapper&quot;&gt;
+    &lt;div class=&quot;chat-header&quot;&gt;
+        &lt;span&gt;Security Check&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;chat-history&quot; id=&quot;chatHistory&quot;&gt;
+   
+    &lt;/div&gt;
+   
+    &lt;div class=&quot;chat-input-wrapper&quot;&gt;
+   
+    &lt;&lt;include &quot;codeword-security-check&quot;&gt;&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;/main&gt;
+
+/* &lt;&lt;include &quot;footer&quot;&gt;&gt; */
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="11" name="_templateFullScreenVideo" tags="nobr" position="100,225" size="100,100">&lt;div class=&quot;page-wrapper&quot;&gt;
 &lt;&lt;include &quot;header-logo&quot;&gt;&gt;
 &lt;div id=&quot;audio&quot;&gt;&lt;/div&gt;
 &lt;main class=&quot;full-screen-video&quot;&gt;
@@ -801,14 +869,14 @@ cwEntryPageToStage5: {
 &lt;/main&gt;
 
 &lt;&lt;include &quot;footer&quot;&gt;&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="11" name="landing-text" tags="nobr" position="100,225" size="100,100">&lt;p&gt;landing KS$userchoices.keyStage $userchoices.language&lt;/p&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="landing-text" tags="nobr" position="225,225" size="100,100">&lt;p&gt;landing KS$userchoices.keyStage $userchoices.language&lt;/p&gt;
 &lt;&lt;button &quot;Restart&quot;&gt;&gt;
     &lt;&lt;set $rz to Engine.restart()&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
 &lt;&lt;button &quot;Tutorials&quot;&gt;&gt;
     &lt;&lt;goto &quot;stage3-tutorials-menu&quot;&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="12" name="landing-ks1-eng" tags="nobr" position="225,225" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="landing-ks1-eng" tags="nobr" position="350,225" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;landing-ks1-eng&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;entry-page&quot;&gt;&gt;
 
@@ -816,27 +884,27 @@ cwEntryPageToStage5: {
 &lt;&lt;set $userchoices.keyStage to 1&gt;&gt;
 &lt;&lt;set $userchoices.landingPage to &quot;landing-ks1-eng&quot;&gt;&gt;
 
-&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="landing-ks2-eng" tags="nobr" position="350,225" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="landing-ks2-eng" tags="nobr" position="475,225" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;landing-ks2-eng&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;entry-page&quot;&gt;&gt;
 
 &lt;&lt;set $userchoices.language to &quot;eng&quot;&gt;&gt;
 &lt;&lt;set $userchoices.keyStage to 2&gt;&gt;
 
-&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="14" name="landing-ks1-cym" tags="nobr" position="475,225" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="landing-ks1-cym" tags="nobr" position="600,225" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;landing-ks1-cym&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;entry-page&quot;&gt;&gt;
 
 &lt;&lt;set $userchoices.language to &quot;cym&quot;&gt;&gt;
 &lt;&lt;set $userchoices.keyStage to 1&gt;&gt;
-&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="15" name="landing-ks2-cym" tags="nobr" position="600,225" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="landing-ks2-cym" tags="nobr" position="725,225" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;landing-ks2-cym&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;entry-page&quot;&gt;&gt;
 
 &lt;&lt;set $userchoices.language to &quot;cym&quot;&gt;&gt;
 &lt;&lt;set $userchoices.keyStage to 2&gt;&gt;
 
-&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="entry-page" tags="nobr" position="725,225" size="100,100">&lt;&lt;set $passage to &quot;entry-page&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="17" name="entry-page" tags="nobr" position="850,225" size="100,100">&lt;&lt;set $passage to &quot;entry-page&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 
  &lt;div class=&quot;page-wrapper&quot;&gt;
@@ -850,8 +918,8 @@ cwEntryPageToStage5: {
         &lt;/div&gt;    
             &lt;&lt;include &quot;codeword-landing&quot;&gt;&gt;
         &lt;/main&gt;
-        &lt;&lt;include &quot;footer&quot;&gt;&gt;
- &lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="codeword-landing" tags="nobr" position="850,225" size="100,100">/* Not using template because there are two options of journey  */
+&lt;&lt;include &quot;footer&quot;&gt;&gt;
+ &lt;/div&gt;</tw-passagedata><tw-passagedata pid="18" name="codeword-landing" tags="nobr" position="975,225" size="100,100">/* Not using template because there are two options of journey  */
 &lt;&lt;set $codeword to &quot;&quot;&gt;&gt;  /* ensure it&#39;s blank so the placeholder shows */
 
 &lt;div class=&quot;codeinput&quot;&gt;
@@ -899,7 +967,61 @@ cwEntryPageToStage5: {
 
 &lt;div id=&quot;coderesult&quot; class=&quot;white&quot;&gt;&lt;/div&gt;
 
-&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="18" name="codeword-chat" tags="nobr" position="975,225" size="100,100">/* Not using template because there are two options of journey  */
+&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="codeword-security-check" tags="nobr" position="1100,225" size="100,100">/* Not using template because there are two options of journey  */
+/* This is the codeword chat input. It will check codewords based on the starting passage. */
+&lt;&lt;set $codeword to &quot;&quot;&gt;&gt;  /* ensure it&#39;s blank so the placeholder shows */
+
+&lt;div class=&quot;codeinput&quot;&gt;
+  &lt;&lt;textbox &quot;$codeword&quot; &quot;&quot;&gt;&gt;
+
+  &lt;div class=&quot;input-btn&quot; id=&quot;codeword-input-btn&quot;&gt;
+  &lt;&lt;button &quot;Enter&quot;&gt;&gt;
+
+            /* Normalise the user&#39;s input */
+            &lt;&lt;set $codeword to $codeword.trim().toUpperCase()&gt;&gt;
+
+            /* Reset the destination before searching */
+            &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
+
+            /* Search codewords that start at this passage */
+            &lt;&lt;for _key, _entry range $codewordsSecurityCheck&gt;&gt;
+                &lt;&lt;if _entry.startingPassage is $passage&gt;&gt;
+                    &lt;&lt;if $codeword is _entry[$userchoices.language]&gt;&gt;&lt;&lt;set $nextPassage to _entry.destinationPassage&gt;&gt;&lt;&lt;break&gt;&gt;&lt;&lt;/if&gt;&gt;
+                &lt;&lt;/if&gt;&gt;
+            &lt;&lt;/for&gt;&gt;
+
+            &lt;&lt;if $nextPassage isnot &quot;&quot;&gt;&gt;
+                &lt;&lt;replace &quot;#codeword-input-btn&quot;&gt;&gt;
+                   &lt;&lt;type 70ms&gt;&gt; &lt;span class=&quot;correct-label&quot;&gt;Correct!&lt;/span&gt;&lt;&lt;/type&gt;&gt;
+                    &lt;&lt;audio &quot;success&quot; play&gt;&gt;
+                &lt;&lt;/replace&gt;&gt;
+        /* If we are at the end of the security check, go to connecting, otherwise go to the next passage in the security check. */
+                &lt;&lt;timed 3s&gt;&gt;
+               &lt;&lt;if passage() is &quot;stage2-securityCheck-c&quot;&gt;&gt;
+                    &lt;&lt;goto &quot;connecting&quot;&gt;&gt;
+                &lt;&lt;else&gt;&gt;
+                    &lt;&lt;goto $nextPassage&gt;&gt;
+                &lt;&lt;/if&gt;&gt;
+                     &lt;&lt;/timed&gt;&gt;
+
+            &lt;&lt;elseif $codeword isnot &quot;&quot;&gt;&gt;
+                &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;
+                    &lt;span&gt;Try again.&lt;/span&gt;
+                &lt;&lt;/replace&gt;&gt;
+
+                &lt;&lt;timed 1.5s&gt;&gt;
+                    &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+                &lt;&lt;/timed&gt;&gt;
+
+            &lt;&lt;/if&gt;&gt;
+
+        &lt;&lt;/button&gt;&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;br/&gt;
+&lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
+
+&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="20" name="codeword-chat" tags="nobr" position="1225,225" size="100,100">/* Not using template because there are two options of journey  */
 /* This is the codeword chat input. It will check codewords based on the starting passage. */
 &lt;&lt;set $codeword to &quot;&quot;&gt;&gt;  /* ensure it&#39;s blank so the placeholder shows */
 
@@ -949,7 +1071,110 @@ cwEntryPageToStage5: {
 &lt;br/&gt;
 &lt;div id=&quot;coderesult&quot;&gt;&lt;/div&gt;
 
-&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="19" name="connecting" tags="nobr" position="1100,225" size="100,100">&lt;div class=&quot;page-wrapper full-screen-landing&quot;&gt;
+&lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="stage2-securityCheck-a" tags="nobr" position="100,350" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
+&lt;&lt;set $passage to &quot;stage2-securityCheck-a&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage2-securityCheck-b&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateSecurityCheck&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-securityCheck-a-messages-eng&quot;&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-securityCheck-a-messages-cym&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="22" name="stage2-securityCheck-a-messages-eng" tags="nobr" position="225,350" size="100,100">&lt;&lt;timed 1s&gt;&gt; 
+     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Sorry - I need to confirm you are real. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 3s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;If you are real then please write in WHIZZPOPPER&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="23" name="stage2-securityCheck-a-messages-cym" tags="nobr" position="350,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt; 
+     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="stage2-securityCheck-b" tags="nobr" position="475,350" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
+&lt;&lt;set $passage to &quot;stage2-securityCheck-b&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage2-securityCheck-b&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateSecurityCheck&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-securityCheck-b-messages-eng&quot;&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-securityCheck-b-messages-cym&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="stage2-securityCheck-b-messages-eng" tags="nobr" position="600,350" size="100,100">&lt;&lt;timed 1s&gt;&gt; 
+     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Excellent - if you are really real then please now type in RUMPLEDUMPUS
+&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="stage2-securityCheck-b-messages-cym" tags="nobr" position="725,350" size="100,100">&lt;&lt;timed 1s&gt;&gt; 
+     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="stage2-securityCheck-c" tags="nobr" position="850,350" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
+&lt;&lt;set $passage to &quot;stage2-securityCheck-c&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage2-securityCheck-c&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateSecurityCheck&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-securityCheck-c-messages-eng&quot;&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-securityCheck-c-messages-cym&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="stage2-securityCheck-c-messages-eng" tags="nobr" position="975,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt; 
+     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Ok - one more check - we have to be safe.
+&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 2s&gt;&gt; 
+     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;If you are really really real then enter the word WHOOPSY-WHIFFLING
+&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="stage2-securityCheck-c-messages-cym" tags="nobr" position="1100,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt; 
+     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="connecting" tags="nobr" position="1225,350" size="100,100">&lt;div class=&quot;page-wrapper full-screen-landing&quot;&gt;
      &lt;main class=&quot;main-content-center&quot;&gt;
         &lt;div class=&quot;connecting-image-wrapper&quot;&gt;
          &lt;img src=&quot;assets/img/portal-logo-w.png&quot; class=&quot;spinning&quot; alt=&quot;logo&quot;/&gt;
@@ -965,9 +1190,7 @@ cwEntryPageToStage5: {
         &lt;&lt;goto $nextPassage&gt;&gt;
         &lt;&lt;/timed&gt;&gt;
         &lt;/main&gt;
- &lt;/div&gt;
-
-&lt;footer&gt;&lt;/footer&gt;</tw-passagedata><tw-passagedata pid="20" name="stage2-videoChat" tags="nobr" position="1225,225" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
+ &lt;/div&gt;</tw-passagedata><tw-passagedata pid="31" name="stage2-videoChat" tags="nobr" position="100,475" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
 &lt;&lt;set $passage to &quot;stage2-videoChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage2-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
@@ -977,17 +1200,21 @@ cwEntryPageToStage5: {
         &lt;&lt;include &quot;stage2-videoChat-video-eng&quot;&gt;&gt;
     &lt;&lt;/replace&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
+     &lt;&lt;timed 5s&gt;&gt;
     &lt;&lt;include &quot;stage2-videoChat-messages-eng&quot;&gt;&gt;
+     &lt;&lt;/timed&gt;&gt;
 &lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
     &lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
         &lt;&lt;include &quot;stage2-videoChat-video-cym&quot;&gt;&gt;
      &lt;&lt;/replace&gt;&gt;
      &lt;&lt;/timed&gt;&gt;
+      &lt;&lt;timed 5s&gt;&gt;
     &lt;&lt;include &quot;stage2-videoChat-messages-eng&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="21" name="stage2-videoChat-video-eng" tags="nobr" position="100,350" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="22" name="stage2-videoChat-video-cym" tags="nobr" position="225,350" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="23" name="stage2-videoChat-messages-eng" tags="nobr" position="350,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+     &lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="32" name="stage2-videoChat-video-eng" tags="nobr" position="225,475" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="33" name="stage2-videoChat-video-cym" tags="nobr" position="350,475" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="34" name="stage2-videoChat-messages-eng" tags="nobr" position="475,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Hello - are you receiving my messages?  &lt;/span&gt;
@@ -1001,7 +1228,13 @@ cwEntryPageToStage5: {
         &lt;span&gt;Reply YES if you are.&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="stage2-videoChat-messages-cym" tags="nobr" position="475,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+      &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="stage2-videoChat-messages-cym" tags="nobr" position="600,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
@@ -1023,15 +1256,15 @@ cwEntryPageToStage5: {
         &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="25" name="stage2-fullScreenChat" tags="nobr" position="600,350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage2-videoChat&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="stage2-fullScreenChat" tags="nobr" position="725,475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage2-videoChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage2-fullScreenChat&quot;&gt;&gt;
-&lt;&lt;set $nextPassage to &quot;stage2-dreamJar&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage2-BFGRecap&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
 &lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
     &lt;&lt;include &quot;stage2-fullScreenChat-messages-eng&quot;&gt;&gt;
 &lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
     &lt;&lt;include &quot;stage2-fullScreenChat-messages-cym&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="26" name="stage2-fullScreenChat-messages-eng" tags="nobr" position="725,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="stage2-fullScreenChat-messages-eng" tags="nobr" position="850,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Oh that’s amazing.&lt;/span&gt;
@@ -1042,7 +1275,7 @@ cwEntryPageToStage5: {
 &lt;&lt;timed 2s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;I want us to understand what the BFG is asking for us to do. &lt;/span&gt;
+        &lt;span&gt;I just realised - you might not have read the BFG 43 times and might be slightly confused.  &lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
@@ -1050,60 +1283,24 @@ cwEntryPageToStage5: {
 &lt;&lt;timed 4s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;Before we share our Dreams - we need to understand what Dreams are. 
+        &lt;span&gt;Do you want me to summarise the book for you or just get on with the exercise? 
 &lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 6s&gt;&gt;
-    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;
-Let’s start with how the BFG holds onto Dreams. 
-&lt;/span&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+         &lt;div class=&quot;btn-option-wrapper&quot;&gt;
+      &lt;&lt;button &quot;BFG Recap&quot;&gt;&gt;
+        &lt;&lt;goto &quot;stage2-BFGRecap&quot;&gt;&gt;
+        &lt;&lt;/button&gt;&gt;
+         &lt;&lt;button &quot;Get on&quot;&gt;&gt;
+            &lt;&lt;goto &quot;stage2-DreamJarIntro-a&quot;&gt;&gt;
+        &lt;&lt;/button&gt;&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;
-&lt;&lt;timed 8s&gt;&gt;
-    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;
-Dream Jars. 
-&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;
-&lt;br/&gt;&lt;br/&gt;
-&lt;&lt;timed 11s&gt;&gt;
-    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;
-I’ve sent over some templates we have here in the Library portal or you can use real jars if you’d like.
-&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;
-
-&lt;&lt;timed 13s&gt;&gt;
-    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;
-Once you have them ready I have some quotes from the BFG about Dream Jars to inspire your design. 
-&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;
-
-&lt;&lt;timed 15s&gt;&gt;
-    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;
-Just message me the word JAR and I’ll send over the quotes. 
-&lt;/span&gt;
-        &lt;/div&gt;
-        &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="stage2-fullScreenChat-messages-cym" tags="nobr" position="850,350" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="stage2-fullScreenChat-messages-cym" tags="nobr" position="975,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
@@ -1125,14 +1322,348 @@ Just message me the word JAR and I’ll send over the quotes.
         &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="stage2-dreamJar" tags="nobr" position="975,350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage2-fullScreenChat&quot;&gt;&gt;
-&lt;&lt;set $passage to &quot;stage2-dreamJar&quot;&gt;&gt;
-&lt;&lt;set $nextPassage to $userchoices.landingPage&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="stage2-BFGRecap" tags="nobr" position="1100,475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage2-fullScreenChat&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;stage2-BFGRecap&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage2-DreamJarIntro-a&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-BFGRecap-messages-eng&quot;&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-BFGRecap-messages-cym&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="stage2-BFGRecap-messages-eng" tags="nobr" position="1225,475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Ok - here’s a recap on the story of the BFG. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;include &quot;header-logo&quot;&gt;&gt;
-&lt;main&gt;
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage2-BFGRecap-vn-transcript-eng&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
 
-&lt;div id=&quot;dream-jar-container&quot;&gt;
+&lt;&lt;timed 14s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+         &lt;div class=&quot;btn-option-wrapper&quot;&gt;
+         &lt;&lt;button &quot;Get on&quot;&gt;&gt;
+            &lt;&lt;goto $nextPassage&gt;&gt;
+        &lt;&lt;/button&gt;&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="stage2-BFGRecap-vn-transcript-eng" tags="nobr" position="100,600" size="100,100">&lt;p&gt;Transcript:&lt;/p&gt;
+&lt;p&gt;So, there’s a little girl called Sophie, who is snatched from her orphanage by the BFG, a friendly giant, who collects and delivers sweet dreams to children with a special trumpet. The BFG carries Sophie back to faraway Giant Country. Unlike the 9 other terrifying and enormous giants who eat humans, the BFG lives on Snozzcumbers. &lt;/p&gt;
+
+&lt;p&gt;
+    Sophie and BFG form an unlikely friendship and BFG teaches Sophie about how he keeps dreams in jars. 
+    
+&lt;/p&gt;
+&lt;p&gt;They hatch a brave plan to stop the human-eating giants by delivering a dream to the Queen that will help prove their existence. When the Queen wakes up, Sophie is in her bedroom, further confirming the truth of the dream. &lt;/p&gt;
+
+&lt;p&gt;With the support of the army, they travel back to Giant Country and capture the man-eating ? giants with helicopters.The giants are taken away and the BFG is deemed the ‘Royal Dream-Blower’.&lt;/p&gt;</tw-passagedata><tw-passagedata pid="42" name="stage2-BFGRecap-messages-cym" tags="nobr" position="225,600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 4s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="stage2-DreamJarIntro-a" tags="nobr" position="350,600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage2-BFGRecap&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;stage2-DreamJarIntro-a&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage2-DreamJarIntro-b&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-DreamJarIntro-a-messages-eng&quot;&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-DreamJarIntro-messages-cym&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="stage2-DreamJarIntro-a-messages-eng" tags="nobr" position="475,600" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Ok - I want us to understand what the BFG is asking for us to do. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Before we share our Dreams - we need to understand what Dreams are.  &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 4s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Let’s start with how the BFG holds onto Dreams. 
+&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 6s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Dream Jars. 
+&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 8s&gt;&gt;
+    &lt;&lt;replace &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;I’ve sent over some templates we have here in the Library portal or you can use real jars if you’d like.&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 10s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Once you have them ready I have some quotes from the BFG about Dream Jars to inspire your design.  &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 12s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Just message me the word JAR and I’ll send over the quotes. 
+&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+
+&lt;&lt;timed 14s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+      &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="stage2-DreamJarIntro-a-messages-cym" tags="nobr" position="600,600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 4s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="46" name="stage2-DreamJarIntro-b" tags="nobr" position="725,600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage2-DreamJarIntro-a&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;stage2-DreamJarIntro-b&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage2-exercise-dreamJar&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-DreamJarIntro-b-messages-eng&quot;&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-DreamJarIntro-messages-cym&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="stage2-DreamJarIntro-b-messages-eng" tags="nobr" position="850,600" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage2-DreamJarIntro-b-vn-transcript-eng&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 10s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;So Dream Jars are colourful and vibrant - I’ll leave you to design yours and I’ll work on one here too.  &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 13s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Message me the word DESIGNED when you are ready for the next part. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 15s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+      &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="48" name="stage2-DreamJarIntro-b-vn-transcript-eng" tags="nobr" position="975,600" size="100,100">&lt;p&gt;‘She saw the faint translucent outline of something about the size of a hen’s egg. There was just a touch of colour in it, a pale sea-green, soft and shimmering and very beautiful. &lt;/p&gt;
+&lt;p&gt;There it lay, this small oblong sea-green jellyfish thing, at the bottom of the jar, quite peaceful, but pulsing gently, the whole of it moving in and out ever so slightly, as though it was breathing.’ &lt;/p&gt;</tw-passagedata><tw-passagedata pid="49" name="stage2-DreamJarIntro-b-messages-cym" tags="nobr" position="1100,600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 4s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="stage2-exercise-dreamJar" tags="nobr" position="1225,600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage2-DreamJarIntro-b&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;stage2-exercise-dreamJar&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage2-DreamJarOutro&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+    &lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+        &lt;&lt;include &quot;dreamJar&quot;&gt;&gt;
+    &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+     &lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;include &quot;stage2-exercise-dreamJar-1-messages-eng&quot;&gt;&gt;
+     &lt;&lt;/timed&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+    &lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+        &lt;&lt;include &quot;dreamJar&quot;&gt;&gt;
+     &lt;&lt;/replace&gt;&gt;
+     &lt;&lt;/timed&gt;&gt;
+      &lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;include &quot;stage2-exercise-dreamJar-1-messages-cym&quot;&gt;&gt;
+     &lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="stage2-exercise-dreamJar-1-messages-eng" tags="nobr" position="100,725" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;I’ve uploaded my jar onto the portal - here it is. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Now, a beautiful Dream Jar is one thing - but it’s what’s inside that’s important. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 6s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;I&#39;ve done a bit of Dreamological research and it seems like there are 3 main types of dreams...&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 9s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;ul&gt;
+        &lt;li&gt;NIGHT-TIME DREAMS - Where magical stories happen (RED)&lt;/li&gt;
+        &lt;li&gt;DAY DREAMS - Where our imagination changes the world around us (BLUE)&lt;/li&gt;
+        &lt;li&gt;FUTURE DREAMS - What we aspire to reach for ourselves. (GREEN)&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 12s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;I’ve given them different colours and put my examples on the board. Discuss each of them and then drag them into the jar to move on. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 15s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+         &lt;div class=&quot;btn-option-wrapper&quot;&gt;
+    &lt;&lt;button &quot;Next&quot;&gt;&gt; 
+        /* Clear next button when pressed  */
+    &lt;&lt;replace &quot;#chatInputWrapper&quot;&gt;&gt;
+           &lt;&lt;/replace&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+    &lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;include &quot;stage2-exercise-dreamJar-2-messages-eng&quot;&gt;&gt;
+     &lt;&lt;/timed&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+    &lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;include &quot;stage2-exercise-dreamJar-2-messages-cym&quot;&gt;&gt;
+     &lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+        &lt;&lt;/button&gt;&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="stage2-exercise-dreamJar-2-messages-eng" tags="nobr" position="225,725" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;replace &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;So, they were my examples - but have you got any you’d like to add to your jar?  &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 3s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Teacher, I’ll leave you to hold these conversations and maybe add some dreams to your jars. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 9s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;ul&gt;
+        &lt;li&gt;NIGHT-TIME DREAMS - Have you had any silly night-time dreams recently? &lt;/li&gt;
+&lt;li&gt;DAY DREAMS - Have you ever imagined a different version of your classroom, school or town?&lt;/li&gt;
+&lt;li&gt;FUTURE DREAMS - Have you got any dreams for your future? &lt;/li&gt;
+&lt;/ul&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 9s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+       &lt;span&gt;Let me know when you have had the chance to FILL your Dream Jars. &lt;/span&gt;
+       &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+
+&lt;&lt;timed 15s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+     &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="dreamJar" tags="nobr" position="350,725" size="100,100">&lt;div id=&quot;dream-jar-container&quot;&gt;
 
     &lt;div id=&quot;dream-jar&quot;&gt;
         &lt;img id=&quot;dream-jar-image&quot;
@@ -1142,37 +1673,70 @@ Just message me the word JAR and I’ll send over the quotes.
         &lt;div id=&quot;dream-label-one&quot;
              class=&quot;dream-jar-label label-one&quot;
              draggable=&quot;false&quot;&gt;
-            LABEL 1
+            Dreaming I’m flying like a bird 
         &lt;/div&gt;
 
         &lt;div id=&quot;dream-label-two&quot;
              class=&quot;dream-jar-label label-two&quot;
              draggable=&quot;false&quot;&gt;
-            LABEL 2
+           Dreaming what Lionel would look like if he was a Turtle
         &lt;/div&gt;
 
         &lt;div id=&quot;dream-label-three&quot;
              class=&quot;dream-jar-label label-three&quot;
              draggable=&quot;false&quot;&gt;
-            LABEL 3
+          Dreaming of doing a cartwheel
         &lt;/div&gt;
     &lt;/div&gt;
 
     &lt;div id=&quot;dream-jar-message&quot;&gt;&lt;/div&gt;
 
 &lt;/div&gt;
-&lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;
-
 &lt;&lt;done&gt;&gt; &lt;&lt;run setup.dreamJarDrag()&gt;&gt;
-    &lt;&lt;/done&gt;&gt;
+    &lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="54" name="stage2-DreamJarOutro" tags="nobr" position="475,725" size="100,100">&lt;&lt;set $prevPassage to &quot;stage2-exercise-dreamJar&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;stage2-DreamJarOutro&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to $userchoices.landingPage&gt;&gt;
+&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-DreamJarOutro-messages-eng&quot;&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage2-DreamJarOutro-messages-cym&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="stage2-DreamJarOutro-messages-eng" tags="nobr" position="600,725" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage2-DreamJarOutro-vn-transcript-eng&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
 
 
+&lt;&lt;timed 12s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+    &lt;div class=&quot;btn-option-wrapper&quot;&gt;
+       &lt;&lt;button &quot;Finished&quot;&gt;&gt;
+        &lt;&lt;goto $userchoices.landingPage&gt;&gt;
+        &lt;&lt;/button&gt;&gt;
+     &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="56" name="stage2-DreamJarOutro-vn-transcript-eng" tags="nobr" position="725,725" size="100,100">&lt;p&gt;Thank you for all of your hard work - I’m getting messages from people who are joining the Dream Team from across the UK - all stepping up to the challenge together. It’s incredibly inspiring but making me realise I need to know my stuff. I think what you have been exploring will help though - I’ve got to do some more investigating. &lt;/p&gt;
 
+&lt;p&gt;Keep adding to your Dream Jar - maybe you’ll have a dream about Lionel flying kites with 2 Pink Hippotamuses called Denise. &lt;/p&gt;
 
+&lt;p&gt;When you are ready to continue Dream Team - put BFG into the library portal and we can reconnect. See you soon.&lt;/p&gt;</tw-passagedata><tw-passagedata pid="57" name="stage2-DreamJarOutro-messages-cym" tags="nobr" position="850,725" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
 
+&lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
 
-/* STAGE 3  */</tw-passagedata><tw-passagedata pid="29" name="stage3-videoChat" tags="nobr" position="1100,350" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+/* STAGE 3  */</tw-passagedata><tw-passagedata pid="58" name="stage3-videoChat" tags="nobr" position="975,725" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-videoChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
@@ -1190,9 +1754,9 @@ Just message me the word JAR and I’ll send over the quotes.
      &lt;&lt;/replace&gt;&gt;
      &lt;&lt;/timed&gt;&gt;
     &lt;&lt;include &quot;stage3-videoChat-messages-eng&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="stage3-videoChat-video-eng" tags="nobr" position="1225,350" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="31" name="stage3-videoChat-video-cym" tags="nobr" position="100,475" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="32" name="stage3-videoChat-messages-eng" tags="nobr" position="225,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="stage3-videoChat-video-eng" tags="nobr" position="1100,725" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="60" name="stage3-videoChat-video-cym" tags="nobr" position="1225,725" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="61" name="stage3-videoChat-messages-eng" tags="nobr" position="100,850" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Stage 3&lt;/span&gt;
@@ -1222,7 +1786,7 @@ Just message me the word JAR and I’ll send over the quotes.
 
 &lt;&lt;timed 8s&gt;&gt;
     &lt;&lt;pictureMessage &quot;assets/img/placeholder.jpeg&quot;&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="33" name="stage3-videoChat-messages-cym" tags="nobr" position="350,475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="62" name="stage3-videoChat-messages-cym" tags="nobr" position="225,850" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
        &lt;span&gt;Stage 3&lt;/span&gt;
@@ -1244,7 +1808,7 @@ Just message me the word JAR and I’ll send over the quotes.
         &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="34" name="stage3-fullScreenChat" tags="nobr" position="475,475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-videoChat&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="63" name="stage3-fullScreenChat" tags="nobr" position="350,850" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-videoChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
@@ -1252,7 +1816,7 @@ Just message me the word JAR and I’ll send over the quotes.
     &lt;&lt;include &quot;stage3-videoChat-messages-eng&quot;&gt;&gt;
 &lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
     &lt;&lt;include &quot;stage3-videoChat-messages-cym&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="stage3-tutorials-menu" tags="nobr" position="600,475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-fullScreenChat&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="64" name="stage3-tutorials-menu" tags="nobr" position="475,850" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 
@@ -1311,7 +1875,7 @@ Just message me the word JAR and I’ll send over the quotes.
     &lt;/div&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="stage3-tutorial1-fullScreenVideo" tags="nobr" position="725,475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="65" name="stage3-tutorial1-fullScreenVideo" tags="nobr" position="600,850" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-fullScreenVideo&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
@@ -1327,7 +1891,7 @@ Just message me the word JAR and I’ll send over the quotes.
         &lt;&lt;include &quot;stage3-videoChat-video-cym&quot;&gt;&gt;
      &lt;&lt;/replace&gt;&gt;
      &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="37" name="stage3-tutorial1-fullScreenChat" tags="nobr" position="850,475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-fullScreenVideo&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="66" name="stage3-tutorial1-fullScreenChat" tags="nobr" position="725,850" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-fullScreenVideo&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-task&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
@@ -1335,7 +1899,7 @@ Just message me the word JAR and I’ll send over the quotes.
     &lt;&lt;include &quot;stage3-videoChat-messages-eng&quot;&gt;&gt;
 &lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
     &lt;&lt;include &quot;stage3-videoChat-messages-cym&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="stage3-tutorial1-task" tags="nobr" position="975,475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-fullScreenChat&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="67" name="stage3-tutorial1-task" tags="nobr" position="850,850" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-task&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 &lt;main&gt;
@@ -1352,7 +1916,7 @@ Just message me the word JAR and I’ll send over the quotes.
 
 &lt;&lt;/button&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="39" name="stage3-tutorial2-fullScreenVideo" tags="nobr" position="1100,475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="68" name="stage3-tutorial2-fullScreenVideo" tags="nobr" position="975,850" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial2-fullScreenVideo&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
@@ -1368,7 +1932,7 @@ Just message me the word JAR and I’ll send over the quotes.
         &lt;&lt;include &quot;stage3-videoChat-video-cym&quot;&gt;&gt;
      &lt;&lt;/replace&gt;&gt;
      &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="stage3-tutorial2-fullScreenChat" tags="nobr" position="1225,475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-fullScreenVideo&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="69" name="stage3-tutorial2-fullScreenChat" tags="nobr" position="1100,850" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-fullScreenVideo&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial2-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-doodle&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
@@ -1376,7 +1940,7 @@ Just message me the word JAR and I’ll send over the quotes.
     &lt;&lt;include &quot;stage3-videoChat-messages-eng&quot;&gt;&gt;
 &lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
     &lt;&lt;include &quot;stage3-videoChat-messages-cym&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="41" name="stage3-tutorial2-doodle" tags="nobr" position="100,600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-fullScreenChat&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="70" name="stage3-tutorial2-doodle" tags="nobr" position="1225,850" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial2-doodle&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 &lt;main&gt;
@@ -1393,7 +1957,7 @@ Just message me the word JAR and I’ll send over the quotes.
 
 &lt;&lt;/button&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="42" name="stage3-tutorial3-fullScreenVideo" tags="nobr" position="225,600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="71" name="stage3-tutorial3-fullScreenVideo" tags="nobr" position="100,975" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial3-fullScreenVideo&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial3-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
@@ -1409,7 +1973,7 @@ Just message me the word JAR and I’ll send over the quotes.
         &lt;&lt;include &quot;stage3-videoChat-video-cym&quot;&gt;&gt;
      &lt;&lt;/replace&gt;&gt;
      &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="stage3-tutorial3-fullScreenChat" tags="nobr" position="350,600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial3-fullScreenVideo&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="stage3-tutorial3-fullScreenChat" tags="nobr" position="225,975" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial3-fullScreenVideo&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial3-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
@@ -1424,7 +1988,7 @@ Just message me the word JAR and I’ll send over the quotes.
     &lt;&lt;timed 2s&gt;&gt;
         &lt;&lt;goto &quot;stage3-tutorials-menu&quot;&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="44" name="stage3-submit-videoChat" tags="nobr" position="475,600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="73" name="stage3-submit-videoChat" tags="nobr" position="350,975" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submit-videoChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-submit-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
@@ -1442,7 +2006,7 @@ Just message me the word JAR and I’ll send over the quotes.
      &lt;&lt;/replace&gt;&gt;
      &lt;&lt;/timed&gt;&gt;
     &lt;&lt;include &quot;stage2-videoChat-messages-eng&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="45" name="stage3-submit-fullScreenChat" tags="nobr" position="600,600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submit-videoChat&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="74" name="stage3-submit-fullScreenChat" tags="nobr" position="475,975" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submit-videoChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submit-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
@@ -1453,7 +2017,7 @@ Just message me the word JAR and I’ll send over the quotes.
 &lt;&lt;/if&gt;&gt;
 
 
-/* STAGE 4 */</tw-passagedata><tw-passagedata pid="46" name="stage4-videoChat" tags="nobr" position="725,600" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+/* STAGE 4 */</tw-passagedata><tw-passagedata pid="75" name="stage4-videoChat" tags="nobr" position="600,975" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage4-videoChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage4-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
@@ -1475,9 +2039,9 @@ Just message me the word JAR and I’ll send over the quotes.
       &lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;include &quot;stage4-videoChat-messages-eng&quot;&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="47" name="stage4-videoChat-video-eng" tags="nobr" position="850,600" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="48" name="stage4-videoChat-video-cym" tags="nobr" position="975,600" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="49" name="stage4-videoChat-messages-eng" tags="nobr" position="1100,600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="76" name="stage4-videoChat-video-eng" tags="nobr" position="725,975" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="77" name="stage4-videoChat-video-cym" tags="nobr" position="850,975" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="78" name="stage4-videoChat-messages-eng" tags="nobr" position="975,975" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Stage 4&lt;/span&gt;
@@ -1507,7 +2071,7 @@ Just message me the word JAR and I’ll send over the quotes.
 
 &lt;&lt;timed 8s&gt;&gt;
     &lt;&lt;pictureMessage &quot;assets/img/placeholder.jpeg&quot;&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="50" name="stage4-videoChat-messages-cym" tags="nobr" position="1225,600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="79" name="stage4-videoChat-messages-cym" tags="nobr" position="1100,975" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Stage 4&lt;/span&gt;
@@ -1529,7 +2093,7 @@ Just message me the word JAR and I’ll send over the quotes.
         &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="51" name="stage4-fullScreenChat" tags="nobr" position="100,725" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-videoChat&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="80" name="stage4-fullScreenChat" tags="nobr" position="1225,975" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-videoChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage4-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage4-dreamJar&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
@@ -1537,12 +2101,12 @@ Just message me the word JAR and I’ll send over the quotes.
     &lt;&lt;include &quot;stage4-videoChat-messages-eng&quot;&gt;&gt;
 &lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
     &lt;&lt;include &quot;stage4-videoChat-messages-cym&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="52" name="stage4-dreamJar" tags="nobr" position="225,725" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-fullScreenChat&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="81" name="stage4-dreamJar" tags="nobr" position="100,1100" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage4-dreamJar&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 DREAM JAR
 
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="53" name="stage4-fullScreenVideo" tags="nobr" position="350,725" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-videoChat&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="82" name="stage4-fullScreenVideo" tags="nobr" position="225,1100" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-videoChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage4-fullScreenVideo&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
@@ -1561,7 +2125,7 @@ DREAM JAR
 &lt;&lt;/if&gt;&gt;
 
 
-/* STAGE 5  */</tw-passagedata><tw-passagedata pid="54" name="stage5-videoChat" tags="nobr" position="475,725" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+/* STAGE 5  */</tw-passagedata><tw-passagedata pid="83" name="stage5-videoChat" tags="nobr" position="350,1100" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage5-videoChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage5-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
@@ -1583,9 +2147,9 @@ DREAM JAR
       &lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;include &quot;stage5-videoChat-messages-eng&quot;&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="55" name="stage5-videoChat-video-eng" tags="nobr" position="600,725" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="56" name="stage5-videoChat-video-cym" tags="nobr" position="725,725" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="57" name="stage5-videoChat-messages-eng" tags="nobr" position="850,725" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="84" name="stage5-videoChat-video-eng" tags="nobr" position="475,1100" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="85" name="stage5-videoChat-video-cym" tags="nobr" position="600,1100" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="86" name="stage5-videoChat-messages-eng" tags="nobr" position="725,1100" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Stage 5&lt;/span&gt;
@@ -1615,7 +2179,7 @@ DREAM JAR
 
 &lt;&lt;timed 8s&gt;&gt;
     &lt;&lt;pictureMessage &quot;assets/img/placeholder.jpeg&quot;&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="58" name="stage5-videoChat-messages-cym" tags="nobr" position="975,725" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="87" name="stage5-videoChat-messages-cym" tags="nobr" position="850,1100" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Stage 5&lt;/span&gt;
@@ -1637,7 +2201,7 @@ DREAM JAR
         &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="59" name="stage5-ending" tags="nobr" position="1100,725" size="100,100">&lt;&lt;set $passage to &quot;stage5-ending&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="88" name="stage5-ending" tags="nobr" position="975,1100" size="100,100">&lt;&lt;set $passage to &quot;stage5-ending&quot;&gt;&gt;
 &lt;div class=&quot;page-wrapper&quot;&gt;
     &lt;main class=&quot;main-content-center&quot;&gt;
         &lt;div class=&quot;bubbles-wrapper&quot;&gt;
@@ -1655,7 +2219,7 @@ DREAM JAR
 &lt;!-- Bubble CSS moved to styles/styles.css --&gt;
 &lt;&lt;done&gt;&gt;
 &lt;&lt;run setup.startBubbles()&gt;&gt;
-&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="60" name="video1" tags="nobr" position="1225,725" size="100,100">&lt;&lt;set $passage to &quot;video1&quot;&gt;&gt;
+&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="89" name="video1" tags="nobr" position="1100,1100" size="100,100">&lt;&lt;set $passage to &quot;video1&quot;&gt;&gt;
 &lt;main&gt;
 &lt;p&gt;video 1&lt;/p&gt;
 &lt;&lt;button &quot;landing&quot;&gt;&gt;

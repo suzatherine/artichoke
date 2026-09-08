@@ -92,7 +92,12 @@ button:active {
 .btn-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
+}
+
+.btn-option-wrapper {
+  display: flex;
+  gap: 2rem;
 }
 
 .btn-container > .white {
@@ -178,6 +183,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  margin-block-end: 10rem;
 }
 
 /* footer  */
@@ -447,12 +453,14 @@ input[type='text']::placeholder {
 #chatHistory > .voicenote {
   background: var(--palette-light-grey-blue);
   color: black;
-  padding: 5px 10px;
+  padding: 7px 18px;
   position: relative;
   margin-left: 1rem;
   border-radius: 8px;
   width: fit-content;
   line-height: 1.4;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
 }
 
 #chatHistory > .voicenote {
@@ -469,6 +477,22 @@ input[type='text']::placeholder {
 #chatHistory > .voicenote > a > img {
   max-width: 40px;
   margin-right: 2rem;
+  filter: invert();
+}
+
+#chatHistory > .transcript {
+  font-size: 1.6rem;
+  font-style: italic;
+  color: var(--palette-offwhite);
+  margin-top: 0.5rem;
+  margin-left: 1rem;
+  max-width: 80%;
+}
+
+#chatHistory ul {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style-type: disc;
 }
 
 /* Header */
@@ -693,6 +717,18 @@ input[type='text']::placeholder {
   .full-screen-chat .message-received {
     max-width: 85%;
   }
+}
+
+/* SECURITY CHECK CHAT */
+.security-check .chat-wrapper {
+  border: 3px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 600px;
+}
+
+.full-screen-chat.security-check .chat-header {
+  background: var(--palette-pink);
 }
 
 /* FULL SCREEN VIDEO */
@@ -964,26 +1000,19 @@ input[type='text']::placeholder {
 
 .dream-jar-label {
   position: absolute;
-
   width: 120px;
   min-height: 45px;
-
   padding: 12px 10px;
-
   box-sizing: border-box;
-
   border-radius: 8px;
-
   color: white;
-
   font-weight: bold;
-
   text-align: center;
-
+  font-family: var(--font-headings);
   display: flex;
   align-items: center;
   justify-content: center;
-
+  font-size: 1.2rem;
   cursor: grab;
 
   user-select: none;

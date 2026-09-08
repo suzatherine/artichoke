@@ -518,9 +518,9 @@ setup.dreamJarDrag = () => {
 :: codeword-storage [nobr]
 <<set $codewordsLanding to {
     cwEntryPageToStage2: {
-        destinationPassage: "stage2-videoChat",
-        eng: "THEO", 
-        cym: "THEO"
+        destinationPassage:"stage2-securityCheck-a",
+        eng: "BEA", 
+        cym: "BEA"
     }, 
 cwEntryPageToStage3: {
         destinationPassage: "stage3-videoChat",
@@ -545,6 +545,27 @@ cwEntryPageToStage5: {
 
 }>>
 
+<<set $codewordsSecurityCheck to {
+    cwStage2SecurityCheckAB: {
+        startingPassage: "stage2-securityCheck-a",
+        destinationPassage: "stage2-securityCheck-b",
+        eng: "WHIZZPOPPER", 
+        cym: "WHIZZPOPPER"
+    }, 
+    cwStage2SecurityCheckBC: {
+        startingPassage: "stage2-securityCheck-b",
+        destinationPassage: "stage2-securityCheck-c",
+        eng: "RUMPLEDUMPUS", 
+        cym: "RUMPLEDUMPUS"
+    }, 
+     cwStage2SecurityCheckCD: {
+        startingPassage: "stage2-securityCheck-c",
+        destinationPassage: "stage2-videoChat",
+        eng: "WHOOPSY-WHIFFLING", 
+        cym: "WHOOPSY-WHIFFLING"
+    }, 
+}>>
+
 <<set $codewords to {
     cwStage2ChatToFullChat: {
         startingPassage: "stage2-videoChat",
@@ -552,11 +573,24 @@ cwEntryPageToStage5: {
         eng: "YES", 
         cym: "YES"
     }, 
-     cwStage2ChatToDreamJar: {
-        startingPassage: "stage2-fullScreenChat",
-        destinationPassage: "stage2-dreamJar",
+     cwStage2DreamJarIntroAB: {
+        startingPassage: "stage2-DreamJarIntro-a",
+        destinationPassage: "stage2-DreamJarIntro-b",
         eng: "JAR", 
         cym: "JAR"
+    }, 
+
+      cwStage2DreamJarIntroBtoDreamJar: {
+        startingPassage: "stage2-DreamJarIntro-b",
+        destinationPassage: "stage2-exercise-dreamJar",
+        eng: "DESIGNED", 
+        cym: "DESIGNED"
+    }, 
+cwStage2DreamJartoDreamJarOutro: {
+        startingPassage: "stage2-exercise-dreamJar",
+        destinationPassage: "stage2-DreamJarOutro",
+        eng: "FILL", 
+        cym: "FILL"
     }, 
      cwStage3ChatToVideo: {
         startingPassage: "stage3-videoChat",
@@ -585,6 +619,8 @@ cwEntryPageToStage5: {
 :: widgets [widget nobr]
 <<widget "voicenote">>
     <<set _soundFile to _args[0]>>
+    <<set _transcriptDelay to _args[1]>>
+    <<set _transcriptPassage to _args[2]>>
   <<audio "ping" "play">>
     <<append "#chatHistory">>
  <div class="voicenote">
@@ -595,9 +631,18 @@ cwEntryPageToStage5: {
     </audio>
   <</replace>>
   <<replace "#status">><em>Playing...</em><</replace>>
+  <<timed _transcriptDelay>>
+        <<append "#chatHistory">>
+            <div class="transcript">
+                <<include _transcriptPassage>>
+            </div>
+        <</append>>
+    <</timed>>
 <</link>> 
-<p id="status">Voice note </p></div>
+<span id="status">Voice note </span></div>
     <</append>>
+    
+    
 <</widget>>>>
 
 <<widget "pictureMessage">>
@@ -703,9 +748,9 @@ cwEntryPageToStage5: {
     <div class="chat-history" id="chatHistory">
     
     </div>
-    <div class="chat-input-wrapper">
+    <div class="chat-input-wrapper" id="chatInputWrapper">
 
-    <<include "codeword-chat">>
+   
     </div>
 </div>
 
@@ -729,15 +774,42 @@ cwEntryPageToStage5: {
    
     </div>
    
-    <div class="chat-input-wrapper">
+    <div class="chat-input-wrapper" id="chatInputWrapper">
    
-    <<include "codeword-chat">>
+
     </div>
 </div>
 
 </main>
 
 <<include "footer">>
+</div>
+
+
+:: _templateSecurityCheck [nobr]
+<div class="page-wrapper">
+/* <<include "header-logo">> */
+<br/><br/>
+<div id="audio"></div>
+<main class="full-screen-chat security-check">
+
+<div class="chat-wrapper">
+    <div class="chat-header">
+        <span>Security Check</span>
+    </div>
+    <div class="chat-history" id="chatHistory">
+   
+    </div>
+   
+    <div class="chat-input-wrapper">
+   
+    <<include "codeword-security-check">>
+    </div>
+</div>
+
+</main>
+
+/* <<include "footer">> */
 </div>
 
 :: _templateFullScreenVideo [nobr]
@@ -825,7 +897,7 @@ cwEntryPageToStage5: {
         </div>    
             <<include "codeword-landing">>
         </main>
-        <<include "footer">>
+<<include "footer">>
  </div>
 :: codeword-landing [nobr]
 /* Not using template because there are two options of journey  */
@@ -875,6 +947,63 @@ cwEntryPageToStage5: {
 </div>
 
 <div id="coderesult" class="white"></div>
+
+<<done>><<set $e to setup.addPlaceholder()>><</done>>
+
+:: codeword-security-check [nobr]
+/* Not using template because there are two options of journey  */
+/* This is the codeword chat input. It will check codewords based on the starting passage. */
+<<set $codeword to "">>  /* ensure it's blank so the placeholder shows */
+
+<div class="codeinput">
+  <<textbox "$codeword" "">>
+
+  <div class="input-btn" id="codeword-input-btn">
+  <<button "Enter">>
+
+            /* Normalise the user's input */
+            <<set $codeword to $codeword.trim().toUpperCase()>>
+
+            /* Reset the destination before searching */
+            <<set $nextPassage to "">>
+
+            /* Search codewords that start at this passage */
+            <<for _key, _entry range $codewordsSecurityCheck>>
+                <<if _entry.startingPassage is $passage>>
+                    <<if $codeword is _entry[$userchoices.language]>><<set $nextPassage to _entry.destinationPassage>><<break>><</if>>
+                <</if>>
+            <</for>>
+
+            <<if $nextPassage isnot "">>
+                <<replace "#codeword-input-btn">>
+                   <<type 70ms>> <span class="correct-label">Correct!</span><</type>>
+                    <<audio "success" play>>
+                <</replace>>
+        /* If we are at the end of the security check, go to connecting, otherwise go to the next passage in the security check. */
+                <<timed 3s>>
+               <<if passage() is "stage2-securityCheck-c">>
+                    <<goto "connecting">>
+                <<else>>
+                    <<goto $nextPassage>>
+                <</if>>
+                     <</timed>>
+
+            <<elseif $codeword isnot "">>
+                <<replace "#coderesult">>
+                    <span>Try again.</span>
+                <</replace>>
+
+                <<timed 1.5s>>
+                    <<replace "#coderesult">><</replace>>
+                <</timed>>
+
+            <</if>>
+
+        <</button>>
+  </div>
+</div>
+<br/>
+<div id="coderesult"></div>
 
 <<done>><<set $e to setup.addPlaceholder()>><</done>>
 
@@ -931,6 +1060,143 @@ cwEntryPageToStage5: {
 
 <<done>><<set $e to setup.addPlaceholder()>><</done>>
 
+
+:: stage2-securityCheck-a [nobr]
+<<set $prevPassage to $userchoices.landingPage>>
+<<set $passage to "stage2-securityCheck-a">>
+<<set $nextPassage to "stage2-securityCheck-b">>
+<<include "_templateSecurityCheck">>
+<<if $userchoices.language is "eng">>
+    <<include "stage2-securityCheck-a-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage2-securityCheck-a-messages-cym">>
+<</if>>
+
+:: stage2-securityCheck-a-messages-eng [nobr]
+<<timed 1s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Sorry - I need to confirm you are real. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>If you are real then please write in WHIZZPOPPER</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+:: stage2-securityCheck-a-messages-cym [nobr]
+<<timed 0.1s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+:: stage2-securityCheck-b [nobr]
+<<set $prevPassage to $userchoices.landingPage>>
+<<set $passage to "stage2-securityCheck-b">>
+<<set $nextPassage to "stage2-securityCheck-b">>
+<<include "_templateSecurityCheck">>
+<<if $userchoices.language is "eng">>
+    <<include "stage2-securityCheck-b-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage2-securityCheck-b-messages-cym">>
+<</if>>
+
+:: stage2-securityCheck-b-messages-eng [nobr]
+<<timed 1s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Excellent - if you are really real then please now type in RUMPLEDUMPUS
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+
+:: stage2-securityCheck-b-messages-cym [nobr]
+<<timed 1s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+:: stage2-securityCheck-c [nobr]
+<<set $prevPassage to $userchoices.landingPage>>
+<<set $passage to "stage2-securityCheck-c">>
+<<set $nextPassage to "stage2-securityCheck-c">>
+<<include "_templateSecurityCheck">>
+<<if $userchoices.language is "eng">>
+    <<include "stage2-securityCheck-c-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage2-securityCheck-c-messages-cym">>
+<</if>>
+
+:: stage2-securityCheck-c-messages-eng [nobr]
+<<timed 0.1s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Ok - one more check - we have to be safe.
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>If you are really really real then enter the word WHOOPSY-WHIFFLING
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+
+
+:: stage2-securityCheck-c-messages-cym [nobr]
+<<timed 0.1s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
 :: connecting [nobr]
  <div class="page-wrapper full-screen-landing">
      <main class="main-content-center">
@@ -950,7 +1216,7 @@ cwEntryPageToStage5: {
         </main>
  </div>
 
-<footer></footer>
+
 
 :: stage2-videoChat [nobr]
 <<set $prevPassage to $userchoices.landingPage>>
@@ -963,14 +1229,18 @@ cwEntryPageToStage5: {
         <<include "stage2-videoChat-video-eng">>
     <</replace>>
     <</timed>>
+     <<timed 5s>>
     <<include "stage2-videoChat-messages-eng">>
+     <</timed>>
 <<elseif $userchoices.language is "cym">>
     <<timed 0.1s>>
     <<replace "#videoWrapper">>
         <<include "stage2-videoChat-video-cym">>
      <</replace>>
      <</timed>>
+      <<timed 5s>>
     <<include "stage2-videoChat-messages-eng">>
+     <</timed>>
 <</if>>
 
 
@@ -998,6 +1268,12 @@ cwEntryPageToStage5: {
          <div class="message-received">
         <span>Reply YES if you are.</span>
         </div>
+        <</append>>
+    <</timed>>
+
+<<timed 5s>>
+    <<append "#chatInputWrapper">>
+      <<include "codeword-chat">>
         <</append>>
     <</timed>>
 
@@ -1031,7 +1307,7 @@ cwEntryPageToStage5: {
 :: stage2-fullScreenChat [nobr]
 <<set $prevPassage to "stage2-videoChat">>
 <<set $passage to "stage2-fullScreenChat">>
-<<set $nextPassage to "stage2-dreamJar">>
+<<set $nextPassage to "stage2-BFGRecap">>
 <<include "_templateFullScreenChat">>
 <<if $userchoices.language is "eng">>
     <<include "stage2-fullScreenChat-messages-eng">>
@@ -1051,7 +1327,7 @@ cwEntryPageToStage5: {
 <<timed 2s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>I want us to understand what the BFG is asking for us to do. </span>
+        <span>I just realised - you might not have read the BFG 43 times and might be slightly confused.  </span>
         </div>
         <</append>>
     <</timed>>
@@ -1059,57 +1335,21 @@ cwEntryPageToStage5: {
 <<timed 4s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Before we share our Dreams - we need to understand what Dreams are. 
+        <span>Do you want me to summarise the book for you or just get on with the exercise? 
 </span>
         </div>
         <</append>>
     <</timed>>
 
 <<timed 6s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>
-Let’s start with how the BFG holds onto Dreams. 
-</span>
-        </div>
-        <</append>>
-    <</timed>>
-<<timed 8s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>
-Dream Jars. 
-</span>
-        </div>
-        <</append>>
-    <</timed>>
-<br/><br/>
-<<timed 11s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>
-I’ve sent over some templates we have here in the Library portal or you can use real jars if you’d like.
-</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 13s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>
-Once you have them ready I have some quotes from the BFG about Dream Jars to inspire your design. 
-</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 15s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>
-Just message me the word JAR and I’ll send over the quotes. 
-</span>
+    <<append "#chatInputWrapper">>
+         <div class="btn-option-wrapper">
+      <<button "BFG Recap">>
+        <<goto "stage2-BFGRecap">>
+        <</button>>
+         <<button "Get on">>
+            <<goto "stage2-DreamJarIntro-a">>
+        <</button>>
         </div>
         <</append>>
     <</timed>>
@@ -1140,15 +1380,394 @@ Just message me the word JAR and I’ll send over the quotes.
         <</append>>
     <</timed>>
 
-:: stage2-dreamJar [nobr]
-
+:: stage2-BFGRecap [nobr]
 <<set $prevPassage to "stage2-fullScreenChat">>
-<<set $passage to "stage2-dreamJar">>
-<<set $nextPassage to $userchoices.landingPage>>
+<<set $passage to "stage2-BFGRecap">>
+<<set $nextPassage to "stage2-DreamJarIntro-a">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+    <<include "stage2-BFGRecap-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage2-BFGRecap-messages-cym">>
+<</if>>
 
-<<include "header-logo">>
-<main>
+:: stage2-BFGRecap-messages-eng [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Ok - here’s a recap on the story of the BFG. </span>
+        </div>
+        <</append>>
+    <</timed>>
 
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-BFGRecap-vn-transcript-eng">>
+        <</append>>
+    <</timed>>
+
+<<timed 14s>>
+    <<append "#chatInputWrapper">>
+         <div class="btn-option-wrapper">
+         <<button "Get on">>
+            <<goto $nextPassage>>
+        <</button>>
+        </div>
+        <</append>>
+    <</timed>>
+
+:: stage2-BFGRecap-vn-transcript-eng [nobr]
+<p>Transcript:</p>
+<p>So, there’s a little girl called Sophie, who is snatched from her orphanage by the BFG, a friendly giant, who collects and delivers sweet dreams to children with a special trumpet. The BFG carries Sophie back to faraway Giant Country. Unlike the 9 other terrifying and enormous giants who eat humans, the BFG lives on Snozzcumbers. </p>
+
+<p>
+    Sophie and BFG form an unlikely friendship and BFG teaches Sophie about how he keeps dreams in jars. 
+    
+</p>
+<p>They hatch a brave plan to stop the human-eating giants by delivering a dream to the Queen that will help prove their existence. When the Queen wakes up, Sophie is in her bedroom, further confirming the truth of the dream. </p>
+
+<p>With the support of the army, they travel back to Giant Country and capture the man-eating ? giants with helicopters.The giants are taken away and the BFG is deemed the ‘Royal Dream-Blower’.</p>
+
+:: stage2-BFGRecap-messages-cym [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+:: stage2-DreamJarIntro-a [nobr]
+<<set $prevPassage to "stage2-BFGRecap">>
+<<set $passage to "stage2-DreamJarIntro-a">>
+<<set $nextPassage to "stage2-DreamJarIntro-b">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+    <<include "stage2-DreamJarIntro-a-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage2-DreamJarIntro-messages-cym">>
+<</if>>
+
+:: stage2-DreamJarIntro-a-messages-eng [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Ok - I want us to understand what the BFG is asking for us to do. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Before we share our Dreams - we need to understand what Dreams are.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Let’s start with how the BFG holds onto Dreams. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 6s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Dream Jars. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 8s>>
+    <<replace "#chatHistory">>
+         <div class="message-received">
+        <span>I’ve sent over some templates we have here in the Library portal or you can use real jars if you’d like.</span>
+        </div>
+        <</replace>>
+    <</timed>>
+
+<<timed 10s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Once you have them ready I have some quotes from the BFG about Dream Jars to inspire your design.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 12s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Just message me the word JAR and I’ll send over the quotes. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+<<timed 14s>>
+    <<append "#chatInputWrapper">>
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+
+:: stage2-DreamJarIntro-a-messages-cym [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+:: stage2-DreamJarIntro-b [nobr]
+<<set $prevPassage to "stage2-DreamJarIntro-a">>
+<<set $passage to "stage2-DreamJarIntro-b">>
+<<set $nextPassage to "stage2-exercise-dreamJar">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+    <<include "stage2-DreamJarIntro-b-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage2-DreamJarIntro-messages-cym">>
+<</if>>
+
+:: stage2-DreamJarIntro-b-messages-eng [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-DreamJarIntro-b-vn-transcript-eng">>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>So Dream Jars are colourful and vibrant - I’ll leave you to design yours and I’ll work on one here too.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 13s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Message me the word DESIGNED when you are ready for the next part. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 15s>>
+    <<append "#chatInputWrapper">>
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage2-DreamJarIntro-b-vn-transcript-eng [nobr]
+<p>‘She saw the faint translucent outline of something about the size of a hen’s egg. There was just a touch of colour in it, a pale sea-green, soft and shimmering and very beautiful. </p>
+<p>There it lay, this small oblong sea-green jellyfish thing, at the bottom of the jar, quite peaceful, but pulsing gently, the whole of it moving in and out ever so slightly, as though it was breathing.’ </p>
+
+
+:: stage2-DreamJarIntro-b-messages-cym [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+:: stage2-exercise-dreamJar [nobr]
+
+<<set $prevPassage to "stage2-DreamJarIntro-b">>
+<<set $passage to "stage2-exercise-dreamJar">>
+<<set $nextPassage to "stage2-DreamJarOutro">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "dreamJar">>
+    <</replace>>
+    <</timed>>
+     <<timed 5s>>
+    <<include "stage2-exercise-dreamJar-1-messages-eng">>
+     <</timed>>
+<<elseif $userchoices.language is "cym">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "dreamJar">>
+     <</replace>>
+     <</timed>>
+      <<timed 5s>>
+    <<include "stage2-exercise-dreamJar-1-messages-cym">>
+     <</timed>>
+<</if>>
+
+<<include "footer">>
+
+
+:: stage2-exercise-dreamJar-1-messages-eng [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I’ve uploaded my jar onto the portal - here it is. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Now, a beautiful Dream Jar is one thing - but it’s what’s inside that’s important. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 6s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I've done a bit of Dreamological research and it seems like there are 3 main types of dreams...</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 9s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <ul>
+        <li>NIGHT-TIME DREAMS - Where magical stories happen (RED)</li>
+        <li>DAY DREAMS - Where our imagination changes the world around us (BLUE)</li>
+        <li>FUTURE DREAMS - What we aspire to reach for ourselves. (GREEN)</li>
+        </ul>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 12s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I’ve given them different colours and put my examples on the board. Discuss each of them and then drag them into the jar to move on. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 15s>>
+    <<append "#chatInputWrapper">>
+         <div class="btn-option-wrapper">
+    <<button "Next">> 
+        /* Clear next button when pressed  */
+    <<replace "#chatInputWrapper">>
+           <</replace>>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<include "stage2-exercise-dreamJar-2-messages-eng">>
+     <</timed>>
+<<elseif $userchoices.language is "cym">>
+    <<timed 0.1s>>
+    <<include "stage2-exercise-dreamJar-2-messages-cym">>
+     <</timed>>
+<</if>>
+
+        <</button>>
+        </div>
+        <</append>>
+    <</timed>>
+
+:: stage2-exercise-dreamJar-2-messages-eng [nobr]
+<<timed 1s>>
+    <<replace "#chatHistory">>
+         <div class="message-received">
+        <span>So, they were my examples - but have you got any you’d like to add to your jar?  </span>
+        </div>
+        <</replace>>
+    <</timed>>
+
+<<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Teacher, I’ll leave you to hold these conversations and maybe add some dreams to your jars. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 9s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <ul>
+        <li>NIGHT-TIME DREAMS - Have you had any silly night-time dreams recently? </li>
+<li>DAY DREAMS - Have you ever imagined a different version of your classroom, school or town?</li>
+<li>FUTURE DREAMS - Have you got any dreams for your future? </li>
+</ul>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 9s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+       <span>Let me know when you have had the chance to FILL your Dream Jars. </span>
+       </div>
+        <</append>>
+    <</timed>>
+
+
+<<timed 15s>>
+    <<append "#chatInputWrapper">>
+     <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: dreamJar[nobr]
 <div id="dream-jar-container">
 
     <div id="dream-jar">
@@ -1159,35 +1778,81 @@ Just message me the word JAR and I’ll send over the quotes.
         <div id="dream-label-one"
              class="dream-jar-label label-one"
              draggable="false">
-            LABEL 1
+            Dreaming I’m flying like a bird 
         </div>
 
         <div id="dream-label-two"
              class="dream-jar-label label-two"
              draggable="false">
-            LABEL 2
+           Dreaming what Lionel would look like if he was a Turtle
         </div>
 
         <div id="dream-label-three"
              class="dream-jar-label label-three"
              draggable="false">
-            LABEL 3
+          Dreaming of doing a cartwheel
         </div>
     </div>
 
     <div id="dream-jar-message"></div>
 
 </div>
-</main>
-<<include "footer">>
-
 <<done>> <<run setup.dreamJarDrag()>>
     <</done>>
 
+:: stage2-DreamJarOutro [nobr]
+<<set $prevPassage to "stage2-exercise-dreamJar">>
+<<set $passage to "stage2-DreamJarOutro">>
+<<set $nextPassage to $userchoices.landingPage>>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+    <<include "stage2-DreamJarOutro-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage2-DreamJarOutro-messages-cym">>
+<</if>>
+
+:: stage2-DreamJarOutro-messages-eng [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-DreamJarOutro-vn-transcript-eng">>
+        <</append>>
+    <</timed>>
 
 
+<<timed 12s>>
+    <<append "#chatInputWrapper">>
+    <div class="btn-option-wrapper">
+       <<button "Finished">>
+        <<goto $userchoices.landingPage>>
+        <</button>>
+     </div>
+        <</append>>
+    <</timed>>
+
+:: stage2-DreamJarOutro-vn-transcript-eng [nobr]
+<p>Thank you for all of your hard work - I’m getting messages from people who are joining the Dream Team from across the UK - all stepping up to the challenge together. It’s incredibly inspiring but making me realise I need to know my stuff. I think what you have been exploring will help though - I’ve got to do some more investigating. </p>
+
+<p>Keep adding to your Dream Jar - maybe you’ll have a dream about Lionel flying kites with 2 Pink Hippotamuses called Denise. </p>
+
+<p>When you are ready to continue Dream Team - put BFG into the library portal and we can reconnect. See you soon.</p>
 
 
+:: stage2-DreamJarOutro-messages-cym [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
 
 /* STAGE 3  */
 
