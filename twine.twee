@@ -1635,6 +1635,8 @@ cwStage2DreamJartoDreamJarOutro: {
 <<include "_templateVideoChat">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
+    <<replace "#pageName">><h3>Dream Jar</h3><</replace>>
+    <<timed 0.1s>>
     <<replace "#videoWrapper">>
         <<include "dreamJar">>
     <</replace>>
@@ -1859,7 +1861,7 @@ cwStage2DreamJartoDreamJarOutro: {
 :: stage3-videoChat [nobr]
 <<set $prevPassage to "">>
 <<set $passage to "stage3-videoChat">>
-<<set $nextPassage to "stage3-fullScreenChat">>
+<<set $nextPassage to "stage3-tutorials-menu">>
 <<include "_templateVideoChat">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
@@ -1914,12 +1916,15 @@ cwStage2DreamJartoDreamJarOutro: {
     <</timed>>
 
 <<timed 6s>>
-    <<voicenote "assets/sound/ping1.mp3">>
+    <<append "#chatInputWrapper">>
+          <div class="btn-option-wrapper">
+     <<button "Next">>
+            <<goto $nextPassage>>
+        <</button>>
+               </div>
+               <</append>>
     <</timed>>
 
-<<timed 8s>>
-    <<pictureMessage "assets/img/placeholder.jpeg">>
-    <</timed>>
 
 :: stage3-videoChat-messages-cym [nobr]
 <<timed 0.1s>>
@@ -1946,24 +1951,15 @@ cwStage2DreamJartoDreamJarOutro: {
         <</append>>
     <</timed>>
 
-:: stage3-fullScreenChat [nobr]
-<<set $prevPassage to "stage3-videoChat">>
-<<set $passage to "stage3-fullScreenChat">>
-<<set $nextPassage to "stage3-tutorials-menu">>
-<<include "_templateFullScreenChat">>
-<<if $userchoices.language is "eng">>
-    <<include "stage3-videoChat-messages-eng">>
-<<elseif $userchoices.language is "cym">>
-    <<include "stage3-videoChat-messages-cym">>
-<</if>>
 
 
 :: stage3-tutorials-menu [nobr]
-<<set $prevPassage to "stage3-fullScreenChat">>
+<<set $prevPassage to "stage3-videoChat">>
 <<set $passage to "stage3-tutorials-menu">>
 <<set $nextPassage to "">>
 
 <<include "header-logo">>
+
 <<timed 0.1s>>
     <<replace "#pageName">><h3>Tutorials</h3><</replace>>
 <</timed>>
@@ -1974,7 +1970,9 @@ cwStage2DreamJartoDreamJarOutro: {
     <div class="bubble-btn one" role="listitem">
         <a class="bubble-link" data-passage="stage3-tutorial1-fullScreenVideo">Tutorial 1</a>
       <<if $userchoices.tutorialProgress.includes(1)>>
+            <<timed 0.1s>>
  <<addclass ".one" "completed">>
+  <</timed>>
       <div class="bubble-complete">✓</div><</if>>
     </div>
 
@@ -2012,6 +2010,7 @@ cwStage2DreamJartoDreamJarOutro: {
 <div class="clear-progress-container">
     <p>Or if you want to start again...</p>
     <<button "Clear progress">>
+        <<set $userchoices.tutorialProgress to []>>
         <<run setup.clearTutorialProgress()>>
         <<goto "stage3-tutorials-menu">>
     <</button>>
@@ -2023,7 +2022,7 @@ cwStage2DreamJartoDreamJarOutro: {
 :: stage3-tutorial1-fullScreenVideo [nobr]
 <<set $prevPassage to "stage3-tutorials-menu">>
 <<set $passage to "stage3-tutorial1-fullScreenVideo">>
-<<set $nextPassage to "stage3-tutorial1-fullScreenChat">>
+<<set $nextPassage to "stage3-tutorial1-videoChat">>
 <<include "_templateFullScreenVideo">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
@@ -2039,17 +2038,152 @@ cwStage2DreamJartoDreamJarOutro: {
      <</timed>>
 <</if>>
 
-:: stage3-tutorial1-fullScreenChat [nobr]
+:: stage3-tutorial1-videoChat [nobr]
 <<set $prevPassage to "stage3-tutorial1-fullScreenVideo">>
-<<set $passage to "stage3-tutorial1-fullScreenChat">>
-<<set $nextPassage to "stage3-tutorial1-task">>
-<<include "_templateFullScreenChat">>
+<<set $passage to "stage3-tutorial1-videoChat">>
+<<set $nextPassage to "stage3-tutorial1-outro">>
+<<include "_templateVideoChat">>
 <<if $userchoices.language is "eng">>
-    <<include "stage3-videoChat-messages-eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+    <</replace>>
+    <</timed>>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-videoChat-1-messages-eng">>
+     <</timed>>
 <<elseif $userchoices.language is "cym">>
-    <<include "stage3-videoChat-messages-cym">>
+<<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "dreamJar">>
+     <</replace>>
+     <</timed>>
+           <<timed 1s>>
+    <<include "stage3-tutorial1-videoChat-1-messages-cym">>
+    <</timed>>
 <</if>>
 
+
+:: stage3-tutorial1-videoChat-1-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I want to tap into our Night-Time Dreams.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Full of magic and mystery </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 5s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>To tell a story</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 7s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>A story that can fill the BFG’s Dream Jars.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 9s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>So, let’s take an Image from a Dream and make a story out of it. The story doesn’t need to be a retelling of a real dream you had, but perhaps your real dream can give you the starting image.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 12s>>
+     <<replace "#videoWrapper">>
+<<include "stage3-pictures">>
+    <</replace>>
+<</timed>>
+
+<<timed 16s>>
+    <<replace "#chatHistory">>
+        <<include "stage3-tutorial1-videoChat-2-messages-eng">>
+        <</replace>>
+    <</timed>>
+
+:: stage3-tutorial1-videoChat-1-messages-cym [nobr]
+
+
+:: stage3-tutorial1-videoChat-2-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>This is the image from my dream - a surprise present from Lionel</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Then, I’m going to make a story out of it. That is the start - or the Opening - the next part is the Mission where something changes and that could be ‘I open it and it is a Magic Book which has lots of spells in it’. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 7s>>
+    <<append "#pictureContainer">>
+         <img src="assets/img/book.jpg" alt="Book" style="width: 100%; max-width: 200px;">
+        <</append>>
+    <</timed>>
+
+<<timed 16s>>
+    <<replace "#chatHistory">>
+        <<include "stage3-tutorial1-videoChat-3-messages-eng">>
+        <</replace>>
+    <</timed>>
+
+:: stage3-tutorial1-videoChat-3-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>TThen a challenge or problem occurs. In mine it could be - an evil frog wants to steal the book. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+<<timed 4s>>
+    <<append "#pictureContainer">>
+         <img src="assets/img/frog.jpg" alt="Frog" style="width: 100%; max-width: 200px;">
+        <</append>>
+    <</timed>>
+
+<<timed 6s>>
+    <<append "#chatInputWrapper">>
+       <div class="btn-option-wrapper">
+      <<button "Finish">>
+         <<run setup.completeTutorial(1)>>
+        <<goto $nextPassage>>
+        <</button>>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+:: stage3-pictures [nobr]
+<div class="picture-container" id="pictureContainer">
+   <img src="assets/img/lionel.jpg" alt="Lionel" style="width: 100%; max-width: 200px;">
+    </div>
 
 
 :: stage3-tutorial1-task [nobr]
@@ -2062,7 +2196,7 @@ cwStage2DreamJartoDreamJarOutro: {
 
 <<button "I've finished">>
 
-    <<run setup.completeTutorial(1)>>
+   
 
     <<timed 2s>>
         <<goto "stage3-tutorials-menu">>
@@ -2072,6 +2206,52 @@ cwStage2DreamJartoDreamJarOutro: {
 
 </main>
 
+
+:: stage3-tutorial1-outro [nobr]
+<<set $prevPassage to "stage3-tutorial1-videoChat">>
+<<set $passage to "stage3-tutorial1-outro">>
+<<set $nextPassage to "stage3-tutorials-menu">>
+<<include "_templateFullScreenChat">>
+
+<<if $userchoices.language is "eng">>
+    <<include "stage3-tutorial1-outro-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+    <<include "stage3-tutorial1-outro-messages-cym">>
+<</if>>
+
+
+:: stage3-tutorial1-outro-messages-eng [nobr]
+<<timed 1s>>
+   
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-outro-vn-transcript-eng">>
+        <</append>>
+    <</timed>>
+
+<<timed 14s>>
+    <<append "#chatInputWrapper">>
+         <div class="btn-option-wrapper">
+         <<button "End">>
+            <<goto $nextPassage>>
+        <</button>>
+        </div>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial1-outro-vn-transcript-eng [nobr]
+<p>Wonderful work Dream Team I’m sure. </p>
+
+<p>I love stories - as I’m sure you have gathered - and so it is brilliant to know that you have created dream stories for the BFG to collect. </p>
+
+<p>Imagine, one of these Night-Time Dreams could be blown into someone’s ear when they sleep and experience it themselves. I wonder if you have someone who you’d like your dream to be experienced by? </p>
+
+<p>Right, as you have completed the Night-Time Dreams section you have the choice to move onto another section or submit to the BFG. Don’t worry if you can’t do anymore today. </p>
+
+<p>Haste makes waste - as they used to say. So take your time. </p>
+
+<p>Speak soon. </p>
+
+:: stage3-tutorial1-outro-messages-cym [nobr]
 
 :: stage3-tutorial2-fullScreenVideo [nobr]
 <<set $prevPassage to "stage3-tutorials-menu">>

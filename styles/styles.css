@@ -1147,3 +1147,15 @@ main.tutorials-menu {
   align-items: end;
   flex-direction: column;
 }
+
+/* STAGE 3 */
+
+.picture-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  width: 100%;
+  transform: rotate(-2deg);
+}
