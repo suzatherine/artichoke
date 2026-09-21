@@ -598,6 +598,24 @@ cwEntryPageToStage5: {
         eng: "DREAM", 
         cym: "DREAM"
     }, 
+    codeword2: {
+        startingPassage: "stage3-tutorial2-b",
+        destinationPassage: "stage3-tutorial2-c",
+        eng: "MAPPED", 
+        cym: "MAPPED"
+    }, 
+  codeword3: {
+        startingPassage: "stage3-tutorial2-c",
+        destinationPassage: "stage3-tutorial2-d",
+        eng: "SCRIBBLE", 
+        cym: "SCRIBBLE"
+    }, 
+codeword4: {
+        startingPassage: "stage3-tutorial2-e",
+        destinationPassage: "stage3-tutorial2-f",
+        eng: "POSTED", 
+        cym: "POSTED"
+    }
 }>>
 
 <<set $codewordsStage4 to {
@@ -2632,11 +2650,6 @@ Lorem Ipsum Welsh
     <</timed>>
 <</if>>
 
-<<timed 0.1s>>
-<<replace "#videoWrapper">>
-    <<include "scribble">>
-<</replace>>
-<</timed>>
 
 :: stage3-tutorial2-a-messages-eng [nobr]
 
@@ -2703,6 +2716,410 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
 
 :: stage3-tutorial2-a-messages-cym [nobr]
 Lorem Ipsum Welsh
+
+:: stage3-tutorial2-b [nobr]
+<<set $prevPassage to "stage3-tutorial2-a">>
+<<set $passage to "stage3-tutorial2-b">>
+<<set $nextPassage to "stage3-tutorial2-c">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+   <<timed 0.1s>>
+    <<replace "#pageName">><h3>Mapping</h3><</replace>>
+    <</timed>>
+<<timed 1s>>
+    <<include "stage3-tutorial2-b-messages-1-eng">>
+<</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+    <<replace "#pageName">><h3>Mapping</h3><</replace>>
+    <</timed>>
+<<timed 0.1s>>
+    <<include "stage3-tutorial2-b-messages-cym">>
+    <</timed>>
+<</if>>
+
+
+:: stage3-tutorial2-b-messages-1-eng [nobr]
+/* Clear chat input wrapper */
+ <<replace "#chatInputWrapper">> <</replace>>
+<<timed 1s>>
+    <<replace "#videoWrapper">>
+         <div class="mapping-question">
+        <span>Start with looking at buildings/places in your area (e.g. school, shops, libraries). </span>
+        <span>You might want to start with the school and then work out from there. </span>
+        </div>
+        <</replace>>
+    <</timed>>
+
+<<timed 5s>>
+    <<append "#chatInputWrapper">>
+   <<button "Next">>
+    <<include "stage3-tutorial2-b-messages-2-eng">>
+    <</button>>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial2-b-messages-1-cym
+
+:: stage3-tutorial2-b-messages-2-eng [nobr]
+/* Clear chat input & video wrapper */
+ <<replace "#videoWrapper">> <</replace>>
+ <<replace "#chatInputWrapper">> <</replace>>
+<<timed 1s>>
+    <<replace "#videoWrapper">>
+         <div class="mapping-question">
+        <span>Next let’s look at the community - what does community in this area mean to you? </span>
+        <span>Add to the community of the area - the people of this place, who make this place special, who are kind here.  </span>
+        </div>
+        <</replace>>
+    <</timed>>
+
+<<timed 5s>>
+    <<append "#chatInputWrapper">>
+
+   <<button "Next">>
+     <<include "stage3-tutorial2-b-messages-3-eng">>
+    <</button>>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial2-b-messages-2-cym
+
+:: stage3-tutorial2-b-messages-3-eng [nobr]
+/* Clear chat input & video wrapper */
+ <<replace "#videoWrapper">> <</replace>>
+ <<replace "#chatInputWrapper">> <</replace>>
+<<timed 1s>>
+    <<replace "#videoWrapper">>
+         <div class="mapping-question">
+       <span>What are your favourite parts of the area - What are your favourite places? </span>
+      <span> What makes this community happy here? </span>
+     <span>  What makes it welcoming? What brings them together? </span>
+
+        </div>
+        <</replace>>
+    <</timed>>
+
+<<timed 5s>>
+    <<append "#chatInputWrapper">>
+
+   <<button "Next">>
+     <<include "stage3-tutorial2-b-messages-4-eng">>
+    <</button>>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial2-b-messages-3-cym
+Lorem ipsum Welsh
+
+:: stage3-tutorial2-b-messages-4-eng [nobr]
+/* Clear chat input & video wrapper */
+ <<replace "#videoWrapper">> <</replace>>
+ <<replace "#chatInputWrapper">> <</replace>>
+<<timed 1s>>
+    <<replace "#videoWrapper">>
+         <div class="mapping-question">
+       <span>Now some important questions - what are the challenges of the area - what makes the community sad? </span>
+       <span>What area needs transforming?</span>
+
+        </div>
+        <</replace>>
+    <</timed>>
+
+<<timed 5s>>
+    <<append "#chatInputWrapper">>
+
+   <<button "Next">>
+     <<include "stage3-tutorial2-b-messages-5-eng">>
+    <</button>>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial2-b-messages-4-cym [nobr]
+Lorem ipsum Welsh
+
+:: stage3-tutorial2-b-messages-5-eng [nobr]
+/* Clear chat input & video wrapper */
+ <<replace "#videoWrapper">> <</replace>>
+ <<replace "#chatInputWrapper">> <</replace>>
+<<timed 1s>>
+    <<replace "#videoWrapper">>
+         <div class="mapping-question">
+       <span>Last part - what could be transformed to make the community happier? </span>
+       <span>What would make it more welcoming? </span>
+
+        </div>
+        <</replace>>
+    <</timed>>
+
+<<timed 5s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>When ready for the second part, message me MAPPED. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 7s>>
+    <<append "#chatInputWrapper">>
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial2-b-messages-5-cym [nobr]
+Lorem ipsum Welsh
+
+:: stage3-tutorial2-c [nobr]
+<<set $prevPassage to "stage3-tutorial2-video">>
+<<set $passage to "stage3-tutorial2-c">>
+<<set $nextPassage to "stage3-tutorial2-d">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+   
+<<timed 0.1s>>
+    <<include "stage3-tutorial2-c-messages-eng">>
+<</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial2-c-messages-cym">>
+    <</timed>>
+<</if>>
+
+:: stage3-tutorial2-c-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-c-vn-transcript-eng">>
+        <</append>>
+    <</timed>>
+
+
+<<timed 8s>>
+    <<append "#chatInputWrapper">>
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial2-c-vn-transcript-eng [nobr]
+
+<p>Well done - now the fun part. Let’s day dream about this place!</p>
+ 
+<p>Day dreaming takes place when our brains are given the space to float - much like drinking Frogscottle. </p>
+<p>
+    Daydreaming can be activated and I have made a DayDream Space. <br/>
+    All you need is a piece of paper and a single pencil. <br/>
+    And then we will SCRIBBLE. <br/>
+    That’s right SCRIBBLE. <br/>
+    SCRIBBLE just means you get free drawing. <br/>
+    Anything you draw is right. Nothing is wrong. <br/>
+    It’s all just a SCRIBBLE. <br/>
+    I love a SCRIBBLE. <br/>
+    I love to say the word too. <br/>
+    SCRIBBLE. <br/>
+</p>
+
+<p>So, get what you need and then enter the word SCRIBBLE and I’ll give you a prompt to start. </p>
+
+:: stage3-tutorial2-d [nobr]
+<<set $prevPassage to "stage3-tutorial2-c">>
+<<set $passage to "stage3-tutorial2-d">>
+<<set $nextPassage to "stage3-tutorial2-e">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+   
+<<timed 0.1s>>
+    <<include "stage3-tutorial2-d-messages-eng">>
+<</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial2-d-messages-cym">>
+    <</timed>>
+<</if>>
+
+:: stage3-tutorial2-d-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I want you to have 5 minutes to daydream about this place, and to dream about what it could be.
+        <br/>
+        You’ll scribble on your page about this question.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+/* PUT QUESTION INTO EXERCISE AREA  */
+<<timed 7s>>
+    <<replace "#videoWrapper">>
+         <div class="mapping-question">
+        <span>What could be added or changed in this place to make everyone in it happier? </span>
+        </div>
+        <</replace>>
+    <</timed>>
+
+<<timed 12s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>When you are ready to Daydream click</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+<<timed 13s>>
+    <<append "#chatInputWrapper">>
+     <<button "Daydream">>
+        <<replace "#chatInputWrapper">><</replace>>
+        <<replace "#videoWrapper">>
+            <<include "scribble">>
+        <</replace>>
+
+        <<timed 5s>>
+        <<append "#chatHistory">>
+            <div class="message-received">
+            <span>If you want another 5 minutes just click to SCRIBBLE or you can MOVE ON</span>
+            </div>
+            <</append>>
+        <<append "#chatInputWrapper">>
+       <<timed 2s>>
+            <<button "SCRIBBLE">>
+                <<replace "#videoWrapper">>
+                <<include "scribble">>
+                <</replace>>
+                <</button>>
+            <<button "MOVE ON">>
+                <<goto $nextPassage>>
+                    <</button>>
+         <</timed>>
+         <</append>>
+         <</timed>>
+    
+            <</button>>
+             <</append>>
+
+    <</timed>>
+
+
+
+
+:: stage3-tutorial2-e [nobr]
+<<set $prevPassage to "stage3-tutorial2-d">>
+<<set $passage to "stage3-tutorial2-e">>
+<<set $nextPassage to "stage3-tutorial2-f">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+   
+<<timed 0.1s>>
+    <<include "stage3-tutorial2-e-messages-eng">>
+<</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial2-e-messages-cym">>
+    <</timed>>
+<</if>>
+
+:: stage3-tutorial2-e-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Great scribbling! 
+        <br/>
+Now, you are going to take the scribble into our Dreams for the BFG.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I want you to let the BFG know what he might find if he comes nearby - and also what you dream about for this place. </span>
+        </div>
+        <</append>>
+    <</timed>>
+        
+
+<<timed 7s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I call it a Day Dreamers Visitor’s Guide. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>You might include some of your scribbles - or not - but it should cover what you’d like to see in this place- to help make your community better. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 15s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Teacher - you should have a template in your inbox. 
+When you have done send me the message POSTED</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 17s>>
+    <<append "#chatInputWrapper">>
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+
+:: stage3-tutorial2-f [nobr]
+<<set $prevPassage to "stage3-tutorial2-e">>
+<<set $passage to "stage3-tutorial2-f">>
+<<set $nextPassage to "stage3-tutorials-menu">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+   
+<<timed 1s>>
+    <<include "stage3-tutorial2-f-messages-eng">>
+<</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial2-f-messages-cym">>
+    <</timed>>
+<</if>>
+
+<<run setup.completeTutorial(2)>>
+
+:: stage3-tutorial2-f-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng">>
+        <</append>>
+    <</timed>>
+
+<<timed 9s>>
+    <<append "#chatInputWrapper">>
+     <<button "Dream Team Menu">>
+         <<goto $nextPassage>>
+        <</button>>
+        <</append>>
+    <</timed>>
+
+
+:: stage3-tutorial2-f-vn-transcript-eng [nobr]
+
+<p>I love the idea of Day Dreamers Visitor’s Guides - not just because I came up with it - but also because it gets us thinking about what we have around us - appreciating what makes it special and highlighting where it could improve to make everyone in that community happier. </p>
+
+<p>The first act of making our community happier is dreaming up the ideas - next it’s about making them become reality. That takes time and hard work.</p> 
+
+<p>Kindness is what makes my community at the library special  - we're all nice to one another here, everyone is welcome! Perhaps that’s something to hold onto in your community too. </p>
+
+<p> Keep your work as we’ll use them as part of what we share with the BFG. </p>
+<p>And it’s up to you, if you want to submit you can choose to do that now, or use one of my other tutorial videos if you’d like. Do it when you have the time - a job worth doing is worth doing well - rather than trying to rush everything through. </p>
+
+<p>I just hope these dreams will work and help the BFG. </p>
+
+<p>Well done again! </p>
 
 
 :: scribble [nobr]

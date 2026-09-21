@@ -670,6 +670,24 @@ cwEntryPageToStage5: {
         eng: &quot;DREAM&quot;, 
         cym: &quot;DREAM&quot;
     }, 
+    codeword2: {
+        startingPassage: &quot;stage3-tutorial2-b&quot;,
+        destinationPassage: &quot;stage3-tutorial2-c&quot;,
+        eng: &quot;MAPPED&quot;, 
+        cym: &quot;MAPPED&quot;
+    }, 
+  codeword3: {
+        startingPassage: &quot;stage3-tutorial2-c&quot;,
+        destinationPassage: &quot;stage3-tutorial2-d&quot;,
+        eng: &quot;SCRIBBLE&quot;, 
+        cym: &quot;SCRIBBLE&quot;
+    }, 
+codeword4: {
+        startingPassage: &quot;stage3-tutorial2-e&quot;,
+        destinationPassage: &quot;stage3-tutorial2-f&quot;,
+        eng: &quot;POSTED&quot;, 
+        cym: &quot;POSTED&quot;
+    }
 }&gt;&gt;
 
 &lt;&lt;set $codewordsStage4 to {
@@ -2346,13 +2364,7 @@ cwEntryPageToStage5: {
 &lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;include &quot;stage3-tutorial2-a-messages-cym&quot;&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;
-
-&lt;&lt;timed 0.1s&gt;&gt;
-&lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
-    &lt;&lt;include &quot;scribble&quot;&gt;&gt;
-&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="103" name="stage3-tutorial2-a-messages-eng" tags="nobr" position="350,1350" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="103" name="stage3-tutorial2-a-messages-eng" tags="nobr" position="350,1350" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Before we can imagine something - we need to start from what we know. &lt;/span&gt;
@@ -2409,7 +2421,338 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
             &lt;&lt;include &quot;nextBtn&quot;&gt;&gt;
         &lt;/div&gt;
     &lt;&lt;/replace&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="104" name="stage3-tutorial2-a-messages-cym" tags="nobr" position="475,1350" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="105" name="scribble" tags="nobr" position="600,1350" size="100,100">&lt;div class=&quot;scribble-window&quot; aria-label=&quot;Animated scribble&quot;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="104" name="stage3-tutorial2-a-messages-cym" tags="nobr" position="475,1350" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="105" name="stage3-tutorial2-b" tags="nobr" position="600,1350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-a&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;stage3-tutorial2-b&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage3-tutorial2-c&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+   &lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;&lt;h3&gt;Mapping&lt;/h3&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;include &quot;stage3-tutorial2-b-messages-1-eng&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;&lt;h3&gt;Mapping&lt;/h3&gt;&lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;include &quot;stage3-tutorial2-b-messages-cym&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="106" name="stage3-tutorial2-b-messages-1-eng" tags="nobr" position="725,1350" size="100,100">/* Clear chat input wrapper */
+ &lt;&lt;replace &quot;#chatInputWrapper&quot;&gt;&gt; &lt;&lt;/replace&gt;&gt;
+&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+         &lt;div class=&quot;mapping-question&quot;&gt;
+        &lt;span&gt;Start with looking at buildings/places in your area (e.g. school, shops, libraries). &lt;/span&gt;
+        &lt;span&gt;You might want to start with the school and then work out from there. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+   &lt;&lt;button &quot;Next&quot;&gt;&gt;
+    &lt;&lt;include &quot;stage3-tutorial2-b-messages-2-eng&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="107" name="stage3-tutorial2-b-messages-1-cym" tags="" position="850,1350" size="100,100"></tw-passagedata><tw-passagedata pid="108" name="stage3-tutorial2-b-messages-2-eng" tags="nobr" position="975,1350" size="100,100">/* Clear chat input &amp; video wrapper */
+ &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt; &lt;&lt;/replace&gt;&gt;
+ &lt;&lt;replace &quot;#chatInputWrapper&quot;&gt;&gt; &lt;&lt;/replace&gt;&gt;
+&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+         &lt;div class=&quot;mapping-question&quot;&gt;
+        &lt;span&gt;Next let’s look at the community - what does community in this area mean to you? &lt;/span&gt;
+        &lt;span&gt;Add to the community of the area - the people of this place, who make this place special, who are kind here.  &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+
+   &lt;&lt;button &quot;Next&quot;&gt;&gt;
+     &lt;&lt;include &quot;stage3-tutorial2-b-messages-3-eng&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="109" name="stage3-tutorial2-b-messages-2-cym" tags="" position="1100,1350" size="100,100"></tw-passagedata><tw-passagedata pid="110" name="stage3-tutorial2-b-messages-3-eng" tags="nobr" position="1225,1350" size="100,100">/* Clear chat input &amp; video wrapper */
+ &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt; &lt;&lt;/replace&gt;&gt;
+ &lt;&lt;replace &quot;#chatInputWrapper&quot;&gt;&gt; &lt;&lt;/replace&gt;&gt;
+&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+         &lt;div class=&quot;mapping-question&quot;&gt;
+       &lt;span&gt;What are your favourite parts of the area - What are your favourite places? &lt;/span&gt;
+      &lt;span&gt; What makes this community happy here? &lt;/span&gt;
+     &lt;span&gt;  What makes it welcoming? What brings them together? &lt;/span&gt;
+
+        &lt;/div&gt;
+        &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+
+   &lt;&lt;button &quot;Next&quot;&gt;&gt;
+     &lt;&lt;include &quot;stage3-tutorial2-b-messages-4-eng&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="111" name="stage3-tutorial2-b-messages-3-cym" tags="" position="100,1475" size="100,100">Lorem ipsum Welsh</tw-passagedata><tw-passagedata pid="112" name="stage3-tutorial2-b-messages-4-eng" tags="nobr" position="225,1475" size="100,100">/* Clear chat input &amp; video wrapper */
+ &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt; &lt;&lt;/replace&gt;&gt;
+ &lt;&lt;replace &quot;#chatInputWrapper&quot;&gt;&gt; &lt;&lt;/replace&gt;&gt;
+&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+         &lt;div class=&quot;mapping-question&quot;&gt;
+       &lt;span&gt;Now some important questions - what are the challenges of the area - what makes the community sad? &lt;/span&gt;
+       &lt;span&gt;What area needs transforming?&lt;/span&gt;
+
+        &lt;/div&gt;
+        &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+
+   &lt;&lt;button &quot;Next&quot;&gt;&gt;
+     &lt;&lt;include &quot;stage3-tutorial2-b-messages-5-eng&quot;&gt;&gt;
+    &lt;&lt;/button&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="113" name="stage3-tutorial2-b-messages-4-cym" tags="nobr" position="350,1475" size="100,100">Lorem ipsum Welsh</tw-passagedata><tw-passagedata pid="114" name="stage3-tutorial2-b-messages-5-eng" tags="nobr" position="475,1475" size="100,100">/* Clear chat input &amp; video wrapper */
+ &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt; &lt;&lt;/replace&gt;&gt;
+ &lt;&lt;replace &quot;#chatInputWrapper&quot;&gt;&gt; &lt;&lt;/replace&gt;&gt;
+&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+         &lt;div class=&quot;mapping-question&quot;&gt;
+       &lt;span&gt;Last part - what could be transformed to make the community happier? &lt;/span&gt;
+       &lt;span&gt;What would make it more welcoming? &lt;/span&gt;
+
+        &lt;/div&gt;
+        &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;When ready for the second part, message me MAPPED. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 7s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+      &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="115" name="stage3-tutorial2-b-messages-5-cym" tags="nobr" position="600,1475" size="100,100">Lorem ipsum Welsh</tw-passagedata><tw-passagedata pid="116" name="stage3-tutorial2-c" tags="nobr" position="725,1475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-video&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;stage3-tutorial2-c&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage3-tutorial2-d&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+   
+&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;include &quot;stage3-tutorial2-c-messages-eng&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;include &quot;stage3-tutorial2-c-messages-cym&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="117" name="stage3-tutorial2-c-messages-eng" tags="nobr" position="850,1475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial2-c-vn-transcript-eng&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+
+&lt;&lt;timed 8s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+      &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="118" name="stage3-tutorial2-c-vn-transcript-eng" tags="nobr" position="975,1475" size="100,100">&lt;p&gt;Well done - now the fun part. Let’s day dream about this place!&lt;/p&gt;
+ 
+&lt;p&gt;Day dreaming takes place when our brains are given the space to float - much like drinking Frogscottle. &lt;/p&gt;
+&lt;p&gt;
+    Daydreaming can be activated and I have made a DayDream Space. &lt;br/&gt;
+    All you need is a piece of paper and a single pencil. &lt;br/&gt;
+    And then we will SCRIBBLE. &lt;br/&gt;
+    That’s right SCRIBBLE. &lt;br/&gt;
+    SCRIBBLE just means you get free drawing. &lt;br/&gt;
+    Anything you draw is right. Nothing is wrong. &lt;br/&gt;
+    It’s all just a SCRIBBLE. &lt;br/&gt;
+    I love a SCRIBBLE. &lt;br/&gt;
+    I love to say the word too. &lt;br/&gt;
+    SCRIBBLE. &lt;br/&gt;
+&lt;/p&gt;
+
+&lt;p&gt;So, get what you need and then enter the word SCRIBBLE and I’ll give you a prompt to start. &lt;/p&gt;</tw-passagedata><tw-passagedata pid="119" name="stage3-tutorial2-d" tags="nobr" position="1100,1475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-c&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;stage3-tutorial2-d&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage3-tutorial2-e&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+   
+&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;include &quot;stage3-tutorial2-d-messages-eng&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;include &quot;stage3-tutorial2-d-messages-cym&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="120" name="stage3-tutorial2-d-messages-eng" tags="nobr" position="1225,1475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;I want you to have 5 minutes to daydream about this place, and to dream about what it could be.
+        &lt;br/&gt;
+        You’ll scribble on your page about this question.&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+/* PUT QUESTION INTO EXERCISE AREA  */
+&lt;&lt;timed 7s&gt;&gt;
+    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+         &lt;div class=&quot;mapping-question&quot;&gt;
+        &lt;span&gt;What could be added or changed in this place to make everyone in it happier? &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 12s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;When you are ready to Daydream click&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+
+&lt;&lt;timed 13s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+     &lt;&lt;button &quot;Daydream&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#chatInputWrapper&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+            &lt;&lt;include &quot;scribble&quot;&gt;&gt;
+        &lt;&lt;/replace&gt;&gt;
+
+        &lt;&lt;timed 5s&gt;&gt;
+        &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+            &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt;If you want another 5 minutes just click to SCRIBBLE or you can MOVE ON&lt;/span&gt;
+            &lt;/div&gt;
+            &lt;&lt;/append&gt;&gt;
+        &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+       &lt;&lt;timed 2s&gt;&gt;
+            &lt;&lt;button &quot;SCRIBBLE&quot;&gt;&gt;
+                &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+                &lt;&lt;include &quot;scribble&quot;&gt;&gt;
+                &lt;&lt;/replace&gt;&gt;
+                &lt;&lt;/button&gt;&gt;
+            &lt;&lt;button &quot;MOVE ON&quot;&gt;&gt;
+                &lt;&lt;goto $nextPassage&gt;&gt;
+                    &lt;&lt;/button&gt;&gt;
+         &lt;&lt;/timed&gt;&gt;
+         &lt;&lt;/append&gt;&gt;
+         &lt;&lt;/timed&gt;&gt;
+    
+            &lt;&lt;/button&gt;&gt;
+             &lt;&lt;/append&gt;&gt;
+
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="121" name="stage3-tutorial2-e" tags="nobr" position="100,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-d&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;stage3-tutorial2-e&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage3-tutorial2-f&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+   
+&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;include &quot;stage3-tutorial2-e-messages-eng&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;include &quot;stage3-tutorial2-e-messages-cym&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="122" name="stage3-tutorial2-e-messages-eng" tags="nobr" position="225,1600" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Great scribbling! 
+        &lt;br/&gt;
+Now, you are going to take the scribble into our Dreams for the BFG.&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 3s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;I want you to let the BFG know what he might find if he comes nearby - and also what you dream about for this place. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+        
+
+&lt;&lt;timed 7s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;I call it a Day Dreamers Visitor’s Guide. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 10s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;You might include some of your scribbles - or not - but it should cover what you’d like to see in this place- to help make your community better. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 15s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Teacher - you should have a template in your inbox. 
+When you have done send me the message POSTED&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 17s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+      &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="stage3-tutorial2-f" tags="nobr" position="350,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-e&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;stage3-tutorial2-f&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
+&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
+   
+&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;include &quot;stage3-tutorial2-f-messages-eng&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
+&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;include &quot;stage3-tutorial2-f-messages-cym&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;
+
+&lt;&lt;run setup.completeTutorial(2)&gt;&gt;</tw-passagedata><tw-passagedata pid="124" name="stage3-tutorial2-f-messages-eng" tags="nobr" position="475,1600" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial2-f-vn-transcript-eng&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 9s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+     &lt;&lt;button &quot;Dream Team Menu&quot;&gt;&gt;
+         &lt;&lt;goto $nextPassage&gt;&gt;
+        &lt;&lt;/button&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="stage3-tutorial2-f-vn-transcript-eng" tags="nobr" position="600,1600" size="100,100">&lt;p&gt;I love the idea of Day Dreamers Visitor’s Guides - not just because I came up with it - but also because it gets us thinking about what we have around us - appreciating what makes it special and highlighting where it could improve to make everyone in that community happier. &lt;/p&gt;
+
+&lt;p&gt;The first act of making our community happier is dreaming up the ideas - next it’s about making them become reality. That takes time and hard work.&lt;/p&gt; 
+
+&lt;p&gt;Kindness is what makes my community at the library special  - we&#39;re all nice to one another here, everyone is welcome! Perhaps that’s something to hold onto in your community too. &lt;/p&gt;
+
+&lt;p&gt; Keep your work as we’ll use them as part of what we share with the BFG. &lt;/p&gt;
+&lt;p&gt;And it’s up to you, if you want to submit you can choose to do that now, or use one of my other tutorial videos if you’d like. Do it when you have the time - a job worth doing is worth doing well - rather than trying to rush everything through. &lt;/p&gt;
+
+&lt;p&gt;I just hope these dreams will work and help the BFG. &lt;/p&gt;
+
+&lt;p&gt;Well done again! &lt;/p&gt;</tw-passagedata><tw-passagedata pid="126" name="scribble" tags="nobr" position="725,1600" size="100,100">&lt;div class=&quot;scribble-window&quot; aria-label=&quot;Animated scribble&quot;&gt;
     &lt;svg class=&quot;scribble-svg&quot;
          viewBox=&quot;0 0 800 450&quot;
          preserveAspectRatio=&quot;none&quot;
@@ -2427,7 +2770,7 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
         &lt;/g&gt;
 
     &lt;/svg&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="106" name="stage3-tutorial2-doodle" tags="nobr" position="725,1350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-fullScreenChat&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="127" name="stage3-tutorial2-doodle" tags="nobr" position="850,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial2-doodle&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 &lt;main&gt;
@@ -2444,7 +2787,7 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
 
 &lt;&lt;/button&gt;&gt;
 
-&lt;/main&gt;</tw-passagedata><tw-passagedata pid="107" name="stage3-tutorial3-fullScreenVideo" tags="nobr" position="850,1350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
+&lt;/main&gt;</tw-passagedata><tw-passagedata pid="128" name="stage3-tutorial3-fullScreenVideo" tags="nobr" position="975,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial3-fullScreenVideo&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial3-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
@@ -2460,7 +2803,7 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
         &lt;&lt;include &quot;stage3-videoChat-video-cym&quot;&gt;&gt;
      &lt;&lt;/replace&gt;&gt;
      &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="108" name="stage3-tutorial3-fullScreenChat" tags="nobr" position="975,1350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial3-fullScreenVideo&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="129" name="stage3-tutorial3-fullScreenChat" tags="nobr" position="1100,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial3-fullScreenVideo&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial3-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
@@ -2475,7 +2818,7 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
     &lt;&lt;timed 2s&gt;&gt;
         &lt;&lt;goto &quot;stage3-tutorials-menu&quot;&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="109" name="stage3-submit-videoChat" tags="nobr" position="1100,1350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
+&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="130" name="stage3-submit-videoChat" tags="nobr" position="1225,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submit-videoChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-submit-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
@@ -2493,7 +2836,7 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
      &lt;&lt;/replace&gt;&gt;
      &lt;&lt;/timed&gt;&gt;
     &lt;&lt;include &quot;stage2-videoChat-messages-eng&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="110" name="stage3-submit-fullScreenChat" tags="nobr" position="1225,1350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submit-videoChat&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="131" name="stage3-submit-fullScreenChat" tags="nobr" position="100,1725" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submit-videoChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submit-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
@@ -2504,7 +2847,7 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
 &lt;&lt;/if&gt;&gt;
 
 
-/* STAGE 4 */</tw-passagedata><tw-passagedata pid="111" name="stage4-videoChat" tags="nobr" position="100,1475" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+/* STAGE 4 */</tw-passagedata><tw-passagedata pid="132" name="stage4-videoChat" tags="nobr" position="225,1725" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage4-videoChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage4-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
@@ -2526,9 +2869,9 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
       &lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;include &quot;stage4-videoChat-messages-eng&quot;&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="112" name="stage4-videoChat-video-eng" tags="nobr" position="225,1475" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="113" name="stage4-videoChat-video-cym" tags="nobr" position="350,1475" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="114" name="stage4-videoChat-messages-eng" tags="nobr" position="475,1475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="133" name="stage4-videoChat-video-eng" tags="nobr" position="350,1725" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="134" name="stage4-videoChat-video-cym" tags="nobr" position="475,1725" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="135" name="stage4-videoChat-messages-eng" tags="nobr" position="600,1725" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Stage 4&lt;/span&gt;
@@ -2558,7 +2901,7 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
 
 &lt;&lt;timed 8s&gt;&gt;
     &lt;&lt;pictureMessage &quot;assets/img/placeholder.jpeg&quot;&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="115" name="stage4-videoChat-messages-cym" tags="nobr" position="600,1475" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="136" name="stage4-videoChat-messages-cym" tags="nobr" position="725,1725" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Stage 4&lt;/span&gt;
@@ -2580,7 +2923,7 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
         &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="116" name="stage4-fullScreenChat" tags="nobr" position="725,1475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-videoChat&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="137" name="stage4-fullScreenChat" tags="nobr" position="850,1725" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-videoChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage4-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage4-dreamJar&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
@@ -2588,12 +2931,12 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
     &lt;&lt;include &quot;stage4-videoChat-messages-eng&quot;&gt;&gt;
 &lt;&lt;elseif $userchoices.language is &quot;cym&quot;&gt;&gt;
     &lt;&lt;include &quot;stage4-videoChat-messages-cym&quot;&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="117" name="stage4-dreamJar" tags="nobr" position="850,1475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-fullScreenChat&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="138" name="stage4-dreamJar" tags="nobr" position="975,1725" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage4-dreamJar&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 DREAM JAR
 
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="118" name="stage4-fullScreenVideo" tags="nobr" position="975,1475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-videoChat&quot;&gt;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="139" name="stage4-fullScreenVideo" tags="nobr" position="1100,1725" size="100,100">&lt;&lt;set $prevPassage to &quot;stage4-videoChat&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage4-fullScreenVideo&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
@@ -2612,7 +2955,7 @@ DREAM JAR
 &lt;&lt;/if&gt;&gt;
 
 
-/* STAGE 5  */</tw-passagedata><tw-passagedata pid="119" name="stage5-videoChat" tags="nobr" position="1100,1475" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
+/* STAGE 5  */</tw-passagedata><tw-passagedata pid="140" name="stage5-videoChat" tags="nobr" position="1225,1725" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage5-videoChat&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage5-fullScreenChat&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
@@ -2634,9 +2977,9 @@ DREAM JAR
       &lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;include &quot;stage5-videoChat-messages-eng&quot;&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
-&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="120" name="stage5-videoChat-video-eng" tags="nobr" position="1225,1475" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="121" name="stage5-videoChat-video-cym" tags="nobr" position="100,1600" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="122" name="stage5-videoChat-messages-eng" tags="nobr" position="225,1600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+&lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="141" name="stage5-videoChat-video-eng" tags="nobr" position="100,1850" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="142" name="stage5-videoChat-video-cym" tags="nobr" position="225,1850" size="100,100">&lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="143" name="stage5-videoChat-messages-eng" tags="nobr" position="350,1850" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Stage 5&lt;/span&gt;
@@ -2666,7 +3009,7 @@ DREAM JAR
 
 &lt;&lt;timed 8s&gt;&gt;
     &lt;&lt;pictureMessage &quot;assets/img/placeholder.jpeg&quot;&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="stage5-videoChat-messages-cym" tags="nobr" position="350,1600" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="144" name="stage5-videoChat-messages-cym" tags="nobr" position="475,1850" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Stage 5&lt;/span&gt;
@@ -2688,7 +3031,7 @@ DREAM JAR
         &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="124" name="stage5-ending" tags="nobr" position="475,1600" size="100,100">&lt;&lt;set $passage to &quot;stage5-ending&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="145" name="stage5-ending" tags="nobr" position="600,1850" size="100,100">&lt;&lt;set $passage to &quot;stage5-ending&quot;&gt;&gt;
 &lt;div class=&quot;page-wrapper&quot;&gt;
     &lt;main class=&quot;main-content-center&quot;&gt;
         &lt;div class=&quot;bubbles-wrapper&quot;&gt;
@@ -2706,7 +3049,7 @@ DREAM JAR
 &lt;!-- Bubble CSS moved to styles/styles.css --&gt;
 &lt;&lt;done&gt;&gt;
 &lt;&lt;run setup.startBubbles()&gt;&gt;
-&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="video1" tags="nobr" position="600,1600" size="100,100">&lt;&lt;set $passage to &quot;video1&quot;&gt;&gt;
+&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="146" name="video1" tags="nobr" position="725,1850" size="100,100">&lt;&lt;set $passage to &quot;video1&quot;&gt;&gt;
 &lt;main&gt;
 &lt;p&gt;video 1&lt;/p&gt;
 &lt;&lt;button &quot;landing&quot;&gt;&gt;

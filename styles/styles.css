@@ -1251,6 +1251,19 @@ main.tutorials-menu {
   object-fit: contain;
 }
 
+/* MAPPING  */
+
+.mapping-question {
+  font-family: var(--font-headings), sans-serif;
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
 /* SCRIBBLE  */
 .scribble-window {
   width: 100%;
