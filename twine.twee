@@ -502,6 +502,10 @@ setup.dreamJarDrag = () => {
 /* Initialise codewords */
 <<include "codeword-storage">>
 
+/* Initialise mapping questions */
+<<include "mapping-questions">>
+
+
 
 
 <script>
@@ -2712,162 +2716,192 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
     <</replace>>
 <</timed>>
 
-
-
 :: stage3-tutorial2-a-messages-cym [nobr]
 Lorem Ipsum Welsh
 
+:: mapping-questions [nobr]
+<<set $mappingQuestionIndex = 0>>
+<<set $mappingQuestions = [
+    {
+        eng: [
+            "Start with looking at buildings/places in your area (e.g. school, shops, libraries).",
+            "You might want to start with the school and then work out from there."
+        ],
+        cym: [
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh"
+        ]
+    },
+    {
+        eng: [
+            "Next let’s look at the community — what does community in this area mean to you?",
+            "Add to the community of the area — the people of this place, who make this place special, who are kind here."
+        ],
+        cym: [
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh"
+        ]
+    },
+    {
+        eng: [
+            "What are your favourite parts of the area? What are your favourite places?",
+            "What makes this community happy here?",
+            "What makes it welcoming? What brings them together?"
+        ],
+        cym: [
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh"
+        ]
+    },
+    {
+        eng: [
+            "Now some important questions — what are the challenges of the area?",
+            "What makes the community sad? What area needs transforming?"
+        ],
+        cym: [
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh"
+        ]
+    },
+    {
+        eng: [
+            "Last part — what could be transformed to make the community happier?",
+            "What would make it more welcoming?"
+        ],
+        cym: [
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh"
+        ]
+    }
+]>>
+
 :: stage3-tutorial2-b [nobr]
+
 <<set $prevPassage to "stage3-tutorial2-a">>
 <<set $passage to "stage3-tutorial2-b">>
 <<set $nextPassage to "stage3-tutorial2-c">>
+
+<<set $mappingQuestionIndex = 0>>
+
 <<include "_templateVideoChat">>
-<<if $userchoices.language is "eng">>
-   <<timed 0.1s>>
-    <<replace "#pageName">><h3>Mapping</h3><</replace>>
-    <</timed>>
-<<timed 1s>>
-    <<include "stage3-tutorial2-b-messages-1-eng">>
+
+<<timed 0.1s>>
+    <<replace "#pageName">>
+        <h3>Mapping</h3>
+    <</replace>>
 <</timed>>
-<<elseif $userchoices.language is "cym">>
-<<timed 0.1s>>
-    <<replace "#pageName">><h3>Mapping</h3><</replace>>
+
+<<timed 1s>>
+
+    <<replace "#videoWrapper">>
+        <<include "stage3-tutorial2-b-question">>
+    <</replace>>
+
+<<timed 3s>>
+    <<append "#videoWrapper">>
+
+        <<include "stage3-tutorial2-b-navigation">>
+
+    <</append>>
     <</timed>>
-<<timed 0.1s>>
-    <<include "stage3-tutorial2-b-messages-cym">>
-    <</timed>>
+
+<</timed>>
+
+
+:: stage3-tutorial2-b-question [nobr]
+
+<<set _question = $mappingQuestions[$mappingQuestionIndex]>>
+
+<div class="mapping-question">
+
+    <<if $userchoices.language is "eng">>
+
+        <<for _line range _question.eng>>
+            <span><<= _line>></span>
+        <</for>>
+
+    <<elseif $userchoices.language is "cym">>
+
+        <<for _line range _question.cym>>
+            <span><<= _line>></span>
+        <</for>>
+
+    <</if>>
+
+</div>
+
+:: stage3-tutorial2-b-navigation [nobr]
+
+        <div class="mapping-navigation">
+<<if $mappingQuestionIndex > 0>>
+
+    <<button "Back">>
+
+        <<set $mappingQuestionIndex-->>
+
+        <<replace "#videoWrapper">>
+            <<include "stage3-tutorial2-b-question">>
+        <</replace>>
+
+        <<append "#videoWrapper">>
+            <<include "stage3-tutorial2-b-navigation">>
+        <</append>>
+
+    <</button>>
+
 <</if>>
 
+<span class="mapping-progress">
+    <<= $mappingQuestionIndex + 1>> / <<= $mappingQuestions.length>>
+</span>
 
-:: stage3-tutorial2-b-messages-1-eng [nobr]
-/* Clear chat input wrapper */
- <<replace "#chatInputWrapper">> <</replace>>
-<<timed 1s>>
-    <<replace "#videoWrapper">>
-         <div class="mapping-question">
-        <span>Start with looking at buildings/places in your area (e.g. school, shops, libraries). </span>
-        <span>You might want to start with the school and then work out from there. </span>
-        </div>
+<<if $mappingQuestionIndex < $mappingQuestions.length - 1>>
+
+    <<button "Next">>
+
+        <<set $mappingQuestionIndex++>>
+
+        <<replace "#videoWrapper">>
+            <<include "stage3-tutorial2-b-question">>
         <</replace>>
-    <</timed>>
 
-<<timed 5s>>
-    <<append "#chatInputWrapper">>
-   <<button "Next">>
-    <<include "stage3-tutorial2-b-messages-2-eng">>
+        <<append "#videoWrapper">>
+            <<include "stage3-tutorial2-b-navigation">>
+        <</append>>
+
     <</button>>
-        <</append>>
-    <</timed>>
 
-:: stage3-tutorial2-b-messages-1-cym
+<<else>>
 
-:: stage3-tutorial2-b-messages-2-eng [nobr]
-/* Clear chat input & video wrapper */
- <<replace "#videoWrapper">> <</replace>>
- <<replace "#chatInputWrapper">> <</replace>>
-<<timed 1s>>
-    <<replace "#videoWrapper">>
-         <div class="mapping-question">
-        <span>Next let’s look at the community - what does community in this area mean to you? </span>
-        <span>Add to the community of the area - the people of this place, who make this place special, who are kind here.  </span>
-        </div>
+
+        <<replace "#chatInputWrapper">>
         <</replace>>
-    <</timed>>
 
-<<timed 5s>>
-    <<append "#chatInputWrapper">>
+        <<timed 5s>>
 
-   <<button "Next">>
-     <<include "stage3-tutorial2-b-messages-3-eng">>
-    <</button>>
-        <</append>>
-    <</timed>>
+            <<append "#chatHistory">>
 
-:: stage3-tutorial2-b-messages-2-cym
+                <div class="message-received">
+                    <span>When ready for the second part, message me MAPPED.</span>
+                </div>
 
-:: stage3-tutorial2-b-messages-3-eng [nobr]
-/* Clear chat input & video wrapper */
- <<replace "#videoWrapper">> <</replace>>
- <<replace "#chatInputWrapper">> <</replace>>
-<<timed 1s>>
-    <<replace "#videoWrapper">>
-         <div class="mapping-question">
-       <span>What are your favourite parts of the area - What are your favourite places? </span>
-      <span> What makes this community happy here? </span>
-     <span>  What makes it welcoming? What brings them together? </span>
+            <</append>>
 
-        </div>
-        <</replace>>
-    <</timed>>
+        <</timed>>
 
-<<timed 5s>>
-    <<append "#chatInputWrapper">>
+        <<timed 7s>>
 
-   <<button "Next">>
-     <<include "stage3-tutorial2-b-messages-4-eng">>
-    <</button>>
-        <</append>>
-    <</timed>>
+            <<replace "#chatInputWrapper">>
+                <<include "codeword-chat">>
+            <</replace>>
 
-:: stage3-tutorial2-b-messages-3-cym
-Lorem ipsum Welsh
+        <</timed>>
 
-:: stage3-tutorial2-b-messages-4-eng [nobr]
-/* Clear chat input & video wrapper */
- <<replace "#videoWrapper">> <</replace>>
- <<replace "#chatInputWrapper">> <</replace>>
-<<timed 1s>>
-    <<replace "#videoWrapper">>
-         <div class="mapping-question">
-       <span>Now some important questions - what are the challenges of the area - what makes the community sad? </span>
-       <span>What area needs transforming?</span>
+<</if>>
+</div>
 
-        </div>
-        <</replace>>
-    <</timed>>
 
-<<timed 5s>>
-    <<append "#chatInputWrapper">>
-
-   <<button "Next">>
-     <<include "stage3-tutorial2-b-messages-5-eng">>
-    <</button>>
-        <</append>>
-    <</timed>>
-
-:: stage3-tutorial2-b-messages-4-cym [nobr]
-Lorem ipsum Welsh
-
-:: stage3-tutorial2-b-messages-5-eng [nobr]
-/* Clear chat input & video wrapper */
- <<replace "#videoWrapper">> <</replace>>
- <<replace "#chatInputWrapper">> <</replace>>
-<<timed 1s>>
-    <<replace "#videoWrapper">>
-         <div class="mapping-question">
-       <span>Last part - what could be transformed to make the community happier? </span>
-       <span>What would make it more welcoming? </span>
-
-        </div>
-        <</replace>>
-    <</timed>>
-
-<<timed 5s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>When ready for the second part, message me MAPPED. </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 7s>>
-    <<append "#chatInputWrapper">>
-      <<include "codeword-chat">>
-        <</append>>
-    <</timed>>
-
-:: stage3-tutorial2-b-messages-5-cym [nobr]
-Lorem ipsum Welsh
 
 :: stage3-tutorial2-c [nobr]
 <<set $prevPassage to "stage3-tutorial2-video">>
@@ -2969,6 +3003,7 @@ Lorem ipsum Welsh
 <<timed 13s>>
     <<append "#chatInputWrapper">>
      <<button "Daydream">>
+        <<replace "#chatHistory">><</replace>>
         <<replace "#chatInputWrapper">><</replace>>
         <<replace "#videoWrapper">>
             <<include "scribble">>
@@ -3143,25 +3178,44 @@ When you have done send me the message POSTED</span>
     </svg>
 </div>
 
-:: stage3-tutorial2-doodle [nobr]
-<<set $prevPassage to "stage3-tutorial2-fullScreenChat">>
-<<set $passage to "stage3-tutorial2-doodle">>
-<<set $nextPassage to "">>
-<main>
-
-<p>Tutorial 2 Doodle</p>
-
-<<button "I've finished">>
-
-    <<run setup.completeTutorial(2)>>
-
-    <<timed 2s>>
-        <<goto "stage3-tutorials-menu">>
+:: stage3-tutorial3-video [nobr]
+<<set $prevPassage to "stage3-tutorials-menu">>
+<<set $passage to "stage3-tutorial3-video">>
+<<set $nextPassage to "stage3-tutorial3-a">>
+<<include "_templateFullScreenVideo">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage3-tutorial3-video-video-eng">>
+    <</replace>>
     <</timed>>
+     <<timed 5s>>
+        <<replace "#footer-next">>
+            <<include "nextBtn">>
+        <</replace>>
+     <</timed>>
+<<elseif $userchoices.language is "cym">>
+     <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage3-tutorial3-video-video-cym">>
+     <</replace>>
+     <</timed>>
+      <<timed 5s>>
+        <<replace "#footer-next">>
+            <<include "nextBtn">>
+        <</replace>>
+     <</timed>>
+<</if>>
 
-<</button>>
 
-</main>
+:: stage3-tutorial3-video-video-eng [nobr]
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+:: stage3-tutorial3-video-video-cym [nobr]
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
 
 :: stage3-tutorial3-fullScreenVideo [nobr]
 <<set $prevPassage to "stage3-tutorials-menu">>

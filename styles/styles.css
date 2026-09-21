@@ -1264,6 +1264,13 @@ main.tutorials-menu {
   text-align: center;
 }
 
+.mapping-navigation {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
 /* SCRIBBLE  */
 .scribble-window {
   width: 100%;
