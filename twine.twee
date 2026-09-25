@@ -519,32 +519,32 @@ setup.dreamJarDrag = () => {
 
 :: codeword-storage [nobr]
 <<set $codewordsLanding to {
-    cwEntryPageToStage2: {
+    codeword1: {
         destinationPassage:"stage2-securityCheck-a",
         eng: "BEA", 
         cym: "BEA",
         stage: 2
     }, 
-cwEntryPageToStage3: {
+    codeword2: {
         destinationPassage: "stage3-securityCheck-a",
         eng: "BFG", 
         cym: "BFG", 
           stage: 3
     },
-cwEntryPageToStage3TutorialMenu: {
+    codeword3: {
         destinationPassage: "stage3-tutorials-menu",
         eng: "DREAMS", 
         cym: "DREAMS",
         stage: 3
     },
- cwEntryPageToStage4: {
-        destinationPassage: "stage4-videoChat",
+    codeword4: {
+        destinationPassage: "stage4-video",
         eng: "DELIVERED", 
         cym: "DELIVERED",
         stage: 4
     },
-cwEntryPageToStage5: {
-        destinationPassage: "stage5-videoChat",
+    codeword5: {
+        destinationPassage: "stage5-video",
         eng: "DREAM TEAM", 
         cym: "DREAM TEAM",
         stage: 5    
@@ -619,26 +619,51 @@ codeword4: {
         destinationPassage: "stage3-tutorial2-f",
         eng: "POSTED", 
         cym: "POSTED"
+    }, 
+codeword5: {
+        startingPassage: "stage3-tutorial3-a",
+        destinationPassage: "stage3-tutorial3-b",
+        eng: "DREAMING", 
+        cym: "DREAMING"
+    }, 
+codeword6: {
+        startingPassage: "stage3-tutorial3-b",
+        destinationPassage: "stage3-tutorial3-c",
+        eng: "FEET", 
+        cym: "FEET"
+    }, 
+codeword7: {
+        startingPassage: "stage3-tutorial3-d",
+        destinationPassage: "stage3-tutorial3-e",
+        eng: "READY", 
+        cym: "READY"
+    }, 
+codeword8: {
+        startingPassage: "stage3-tutorial3-e",
+        destinationPassage: "stage3-tutorial3-f",
+        eng: "BUNTING", 
+        cym: "BUNTING"
+    }, 
+codeword9: {
+        startingPassage: "stage3-tutorial3-f",
+        destinationPassage: "stage3-tutorial3-g",
+        eng: "LEAPED", 
+        cym: "LEAPED"
+    }, 
+codeword10: {
+        startingPassage: "stage3-submission-a",
+        destinationPassage: "stage3-submission-b",
+        eng: "BOOK", 
+        cym: "BOOK"
+    }, 
+codeword11: {
+        startingPassage: "stage3-submission-b",
+        destinationPassage: "stage3-submission-c",
+        eng: "READY", 
+        cym: "READY"
     }
 }>>
 
-<<set $codewordsStage4 to {
-     cwStage4ChatToVideo: {
-        startingPassage: "stage4-videoChat",
-        destinationPassage: "stage4-fullScreenChat",
-        eng: "CODEWORD", 
-        cym: "CODEWORD"
-    }
-}>>
-
-<<set $codewordsStage5 to {
-         cwStage5ChatToVideo: {
-        startingPassage: "stage5-videoChat",
-        destinationPassage: "stage5-ending",
-        eng: "CODEWORD", 
-        cym: "CODEWORD"
-    }
-}>>
 
 
 /* WIDGETS  */
@@ -756,6 +781,20 @@ codeword4: {
 </div>
 
 
+:: _templateContentCenter [nobr]
+<div class="page-wrapper full-screen-landing">
+   <<include "header-logo">>
+<div id="audio"></div>
+    <main class="main-content-center" id="mainContent">
+    <div class="hero-image" id="heroImage">
+    <img src="assets/img/portal-logo-w.png" alt="logo"/>
+    </div>
+        
+    </main>
+<<include "footer">>
+</div>
+
+
 :: _templateVideoChat [nobr]
 <div class="page-wrapper">
 <<include "header-logo">>
@@ -789,7 +828,7 @@ codeword4: {
 <div class="page-wrapper">
 <<include "header-logo">>
 <div id="audio"></div>
-<main class="full-screen-chat">
+<main class="full-screen-chat" id="fullScreenChatMain">
 
 <div class="chat-wrapper">
     <div class="chat-header">
@@ -1187,6 +1226,7 @@ codeword4: {
 <<include "_templateFullScreenVideo">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
+<<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
         <<include "stage2-video-video-eng">>
     <</replace>>
@@ -1198,6 +1238,7 @@ codeword4: {
      <</timed>>
 <<elseif $userchoices.language is "cym">>
     <<timed 0.1s>>
+<<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
         <<include "stage2-video-video-cym">>
      <</replace>>
@@ -1990,6 +2031,7 @@ Lorem Ipsum Welsh
 <<include "_templateFullScreenVideo">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
+    <<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
         <<include "stage3-video-video-eng">>
     <</replace>>
@@ -2001,6 +2043,7 @@ Lorem Ipsum Welsh
      <</timed>>
 <<elseif $userchoices.language is "cym">>
     <<timed 0.1s>>
+<<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
         <<include "stage3-video-video-cym">>
      <</replace>>
@@ -2063,7 +2106,7 @@ Lorem Ipsum Welsh
     </div>
 
     <div class="bubble-btn three" role="listitem">
-        <a class="bubble-link" data-passage="stage3-tutorial3-fullScreenVideo">Tutorial 3</a>
+        <a class="bubble-link" data-passage="stage3-tutorial3-video">Tutorial 3</a>
         <<if $userchoices.tutorialProgress.includes(3)>>
              <<timed 0.1s>>
             <<addclass ".three" "completed">>
@@ -2076,7 +2119,7 @@ Lorem Ipsum Welsh
     <h3>WHEN READY TO SUBMIT DREAMS TO THE BFG. </h3>
  <div class="tutorial-complete-btns">
      <<button "Submit">>
-         <<goto "stage3-submit-videoChat">>
+         <<goto "stage3-submission-call-bea">>
             <</button>>
         
       
@@ -2177,19 +2220,19 @@ Lorem Ipsum Welsh
 <</if>>
 
 :: tutorial1-picture1 [nobr]
-   <img src="assets/img/lionel.jpg" alt="Lionel" >
+   <img src="assets/img/stage3-tutorial1/picture1.jpg" alt="Lionel" >
 
 :: tutorial1-picture2 [nobr]
-   <img src="assets/img/book.jpg" alt="Book" >
+   <img src="assets/img/stage3-tutorial1/picture2.jpg" alt="Book" >
 
 :: tutorial1-picture3 [nobr]
-   <img src="assets/img/frog.jpg" alt="Frog" >
+   <img src="assets/img/stage3-tutorial1/picture3.jpg" alt="Frog" >
 
 :: tutorial1-picture4[nobr]
-   <img src="assets/img/frog.jpg" alt="Frog" >
+   <img src="assets/img/stage3-tutorial1/picture4.jpg" alt="Bea using Magic Book" >
 
 :: tutorial1-picture5 [nobr]
-   <img src="assets/img/frog.jpg" alt="Frog" >
+   <img src="assets/img/stage3-tutorial1/picture5.jpg" alt="Library" >
 
 :: stage3-tutorial1-a [nobr]
 <<set $prevPassage to "stage3-tutorial1-video">>
@@ -3217,339 +3260,920 @@ When you have done send me the message POSTED</span>
       src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
 
 
-:: stage3-tutorial3-fullScreenVideo [nobr]
+:: stage3-tutorial3-a [nobr]
+<<set $prevPassage to "stage3-tutorial3-video">>
+<<set $passage to "stage3-tutorial3-a">>
+<<set $nextPassage to "stage3-tutorial3-b">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+   
+<<timed 1s>>
+    <<include "stage3-tutorial3-a-messages-eng">>
+<</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial3-a-messages-cym">>
+    <</timed>>
+<</if>>
+
+
+:: stage3-tutorial3-a-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Ok - first things first. 
+        <br/>
+Can you think of something real you are dreaming for your future at the moment? 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 5s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>It might be something you want to learn, something you want to taste, somewhere you want to go or something you want to become.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 8s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Share your dream with someone in your class and ask them about theirs. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>When you’ve done let me know by putting in DREAMING in the chat. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+
+<<timed 15s>>
+    <<replace "#chatInputWrapper">>
+        <<include "codeword-chat">>
+    <</replace>>
+<</timed>>
+
+:: stage3-tutorial3-a-messages-cym [nobr]
+Lorem Ipsum Welsh
+
+:: stage3-tutorial3-b [nobr]
+<<set $prevPassage to "stage3-tutorial3-a">>
+<<set $passage to "stage3-tutorial3-b">>
+<<set $nextPassage to "stage3-tutorial3-c">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+   
+<<timed 0.1s>>
+    <<include "stage3-tutorial3-b-messages-eng">>
+<</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial3-b-messages-cym">>
+    <</timed>>
+<</if>>
+
+
+:: stage3-tutorial3-b-messages-eng [nobr]
+
+<<timed 1s>>
+     <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial3-b-vn-transcript-eng">>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>So, we need your feet. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 13s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Yes - your feet. You can draw around your own - no shoes or socks. Or, if you are worried about too many stinky feet being unleashed, you can use the template I have sent over.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 15s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Then I need you to make 5 copies of that foot!  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 18s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>When you have drawn around your feet then let me know by messaging me the word FEET. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+
+<<timed 22s>>
+    <<replace "#chatInputWrapper">>
+        <<include "codeword-chat">>
+    <</replace>>
+<</timed>>
+
+:: stage3-tutorial3-b-vn-transcript-eng [nobr]
+<p>OK - you should have a Future Dream now. Our dreams for the future change all the time - but great to have one for today. Now, I was trying to think about how we could present it to the BFG and help you to reach those dreams - like you are helping me to reach mine. And one thing occurred to me…When the BFG is trying to reach somewhere he </p>
+
+<p>
+    LEAPS. <br/>
+    LEAPS.  <br/>
+    Phenomenal leaps. 
+</p>
+
+<p>To get to your destination, and make your Future Dream come true, you’re going to need to make leaps too. The BFG has HUGE feet - he performs LEAPS. But great leaps start with small steps. And small steps start with a single foot - like the one at the end of your leg. </p>
+
+:: stage3-tutorial3-b-messages-cym [nobr]
+Lorem Ipsum Welsh
+
+
+:: tutorial3-picture1 [nobr]
+   <img src="assets/img/stage3-tutorial3/picture1.jpg" alt="Librarian" >
+
+:: tutorial3-picture2 [nobr]
+   <img src="assets/img/stage3-tutorial3/picture2.jpg" alt="To read books" >
+
+:: tutorial3-picture3 [nobr]
+   <img src="assets/img/stage3-tutorial3/picture3.jpg" alt="Determined" >
+
+:: tutorial3-picture4[nobr]
+   <img src="assets/img/stage3-tutorial3/picture4.jpg" alt="My teacher" >
+
+:: tutorial3-picture5 [nobr]
+   <img src="assets/img/stage3-tutorial3/picture5.jpg" alt="Join my local library" >
+
+:: stage3-tutorial3-c [nobr]
+<<set $prevPassage to "stage3-tutorial3-b">>
+<<set $passage to "stage3-tutorial3-c">>
+<<set $nextPassage to "stage3-tutorial3-d">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+   
+<<timed 0.1s>>
+    <<include "stage3-tutorial3-c-messages-eng">>
+<</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial3-c-messages-cym">>
+    <</timed>>
+<</if>>
+
+
+:: stage3-tutorial3-c-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I don’t know if any of your feet are as big as the BFGs - his are humongous!  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Now our feet are going to help us to work out our steps to our dream.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 8s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Inside one of your feet you are going to write that Future Dream you had. Here’s mine - with a huge font inspired by the BFG book! </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 13s>>
+    <<replace "#videoWrapper">>
+       <div class="picture-container" id="pictureContainer">
+       <img src="assets/img/stage3-tutorial3/picture-6.png" alt="My future dream is Librarian" >
+  </div>
+        <</replace>>
+    <</timed>>
+
+
+<<timed 13s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>You can design the foot to reflect that dream. 
+        <br/>
+And then, we need to think about how we get there. Click next when ready
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+
+<<timed 15s>>
+    <<replace "#chatInputWrapper">>
+      <<button "Next">>
+          <<goto $nextPassage>>
+      <</button>>
+    <</replace>>
+<</timed>>
+
+:: stage3-tutorial3-c-messages-cym [nobr]
+Lorem Ipsum Welsh
+
+:: stage3-tutorial3-d [nobr]
+
+<<set $prevPassage to "stage3-tutorial3-c">>
+<<set $passage to "stage3-tutorial3-d">>
+<<set $nextPassage to "stage3-tutorial3-e">>
+
+<<set $futureDreamIndex = 0>>
+<<set $futureDreamComplete = false>>
+
+<<include "_templateVideoChat">>
+
+<<timed 0.1s>>
+    <<addclass ".video-wrapper" "flex">>
+    <<replace "#pageName">>
+        <h3>Future Feet</h3>
+    <</replace>>
+<</timed>>
+
+<<timed 1s>>
+
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Each foot is different. Each one a different step. Write in pencil first and then you can design them afterwards if you’d like. Your first foot I want you to put…</span>
+        </div>
+        <</append>>
+
+<<timed 2s>>
+    <<replace "#videoWrapper">>
+        <<include "stage3-tutorial3-d-question">>
+    <</replace>>
+  
+
+    <<replace "#chatInputWrapper">>
+        <<include "stage3-tutorial3-d-navigation">>
+    <</replace>>
+      <</timed>>
+
+<</timed>>
+
+:: stage3-tutorial3-d-question [nobr]
+
+<<set _questions = [
+    "My Future Dream is...",
+    "Something I need to learn is...",
+    "Someone who can help me is...",
+    "To reach my Future Dream I need to be...",
+    "The first step I could take is..."
+]>>
+
+
+
+
+<div class="future-dream-question">
+    <span><<= _questions[$futureDreamIndex]>></span>
+</div>
+
+
+<div class="future-dream-feet" id="futureDreamFeet">
+    <<for _i = 0; _i <= $futureDreamIndex; _i++>>
+        <div class="future-dream-foot">
+            <img sc-eval:src="'assets/img/stage3-tutorial3/picture-' + (_i + 1) + '.png'" alt="Foot">
+        </div>
+    <</for>>
+</div>
+
+
+:: stage3-tutorial3-d-navigation [nobr]
+<<addclass ".chat-input-wrapper" "move">>
+
+
+    <<button "Back">>
+<<if $futureDreamIndex > 0>>
+        <<set $futureDreamIndex-->>
+
+        <<replace "#videoWrapper">>
+            
+            <<include "stage3-tutorial3-d-question">>
+        <</replace>>
+
+        <<replace "#chatInputWrapper">>
+            <<include "stage3-tutorial3-d-navigation">>
+        <</replace>>
+<</if>>
+    <</button>>
+
+
+
+<span class="mapping-progress">
+    <<= $futureDreamIndex + 1>> / 5
+</span>
+
+<<if $futureDreamIndex < 4>>
+
+    <<button "Next">>
+
+        <<set $futureDreamIndex++>>
+
+        <<replace "#videoWrapper">>
+            <<include "stage3-tutorial3-d-question">>
+        <</replace>>
+
+        <<replace "#chatInputWrapper">>
+            <<include "stage3-tutorial3-d-navigation">>
+        <</replace>>
+
+    <</button>>
+
+<<else>>
+
+    <<button "Finish">>
+
+        <<set $futureDreamComplete = true>>
+
+        <<replace "#videoWrapper">>
+
+            <div class="future-dream-question">
+                <span>My Future Dream</span>
+            </div>
+       
+  
+            <div class="future-dream-feet">
+                <<for _i = 0; _i < 5; _i++>>
+                    <div class="future-dream-foot">
+                     <img sc-eval:src="'assets/img/stage3-tutorial3/picture-' + (_i + 1) + '.png'" alt="Foot">
+                    </div>
+                <</for>>
+            </div>
+     
+
+        <</replace>>
+
+        <<replace "#chatInputWrapper">><</replace>>
+   <<replace "#chatHistory">><</replace>>
+        <<timed 1s>>
+            <<append "#chatHistory">>
+                <div class="message-received">
+                    <span>Now you have all 5 feet - it’s time to design them - here’s mine inspired by the BFG writing.</span>
+                </div>
+            <</append>>
+        <</timed>>
+
+        <<timed 5s>>
+            <<append "#chatHistory">>
+                <div class="message-received">
+                    <span>When done send me the word READY</span>
+                </div>
+            <</append>>
+        <</timed>>
+
+         <<timed 5s>>
+           <<append "#chatInputWrapper">>
+                <<include "codeword-chat">>
+            <</append>>
+        <</timed>>
+
+    <</button>>
+
+<</if>>
+
+:: stage3-tutorial3-e [nobr]
+
+<<set $prevPassage to "stage3-tutorial3-d">>
+<<set $passage to "stage3-tutorial3-e">>
+<<set $nextPassage to "stage3-tutorial3-f">>
+
+<<include "_templateFullScreenChat">>
+
+<<if $userchoices.language is "eng">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial3-e-messages-eng">>
+<</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial3-e-messages-cym">>
+    <</timed>>
+<</if>>
+
+:: stage3-tutorial3-e-messages-eng [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>So now we have the steps to our Future Dream. We can string them together - much like bunting - so we can see the leaps we need to make to get there. Teacher, I’ll hand over to you and send me the word BUNTING when you want to move on. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 7s>>
+    <<append "#chatInputWrapper">>
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial3-e-messages-cym [nobr]
+Lorem Ipsum Welsh
+
+
+:: stage3-tutorial3-f [nobr]
+
+<<set $prevPassage to "stage3-tutorial3-e">>
+<<set $passage to "stage3-tutorial3-f">>
+<<set $nextPassage to "stage3-tutorial3-g">>
+
+<<include "_templateFullScreenChat">>
+
+<<if $userchoices.language is "eng">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial3-f-messages-eng">>
+<</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial3-f-messages-cym">>
+    <</timed>>
+<</if>>
+
+:: stage3-tutorial3-f-messages-eng [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Ok, my friends, there is one more part of this that will help us to reach our Future Dreams. We need to tell the BFG our plans. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 5s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>He needs these to be shared so he can whisper them into the dreams of others. Your Future Dream might be an inspiration to someone else.
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>So, inspired by your footsteps, write about how you will reach your Future Dreams. You’ve done all the work already - now it’s time to let the BFG know your Future Dreams. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 15s>>
+    <<append "#chatInputWrapper">>
+        /* CODEWORD 9 */
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial3-f-messages-cym [nobr]
+Lorem Ipsum Welsh
+
+:: stage3-tutorial3-g [nobr]
+
+<<set $prevPassage to "stage3-tutorial3-f">>
+<<set $passage to "stage3-tutorial3-g">>
+<<set $nextPassage to "stage3-tutorials-menu">>
+
+<<include "_templateFullScreenChat">>
+
+<<if $userchoices.language is "eng">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial3-g-messages-eng">>
+<</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+    <<include "stage3-tutorial3-g-messages-cym">>
+    <</timed>>
+<</if>>
+
+:: stage3-tutorial3-g-messages-eng [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial3-g-transcript-eng">>
+        <</append>>
+    <</timed>>
+
+
+<<timed 10s>>
+    <<append "#chatInputWrapper">>
+       <div class="btn-option-wrapper">
+      <<button "Dream Team Menu">>
+        <<goto $nextPassage>>
+        <</button>>
+        </div>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial3-g-transcript-eng [nobr]
+<p>
+    You have leaped for your Future Dreams. <br/>
+    Or at least planned how to take that first step.  <br/>
+    It’s hard to say what you want to do so well done on working on something today. <br/>
+    It might change tomorrow, that’s ok. <br/>
+    Mine changes all the time too. <br/>
+    One time I dreamt I was going to be a Zoo Keeper, but now I just want to go to the Zoo! <br/>
+    But at least we have made something now that holds our potential Future Dreams. <br/>
+    I think the BFG will love to read these and they will inspire others too. <br/>
+    So, what next? It’s up to you. You can choose to submit or try another tutorial video? <br/><br/>
+    If you want to come back to complete that is A OK. <br/>
+    It’s always important to remember not to rush as it is better to do it right than to do it twice.<br/>
+</p>
+
+<p>Speak soon. </p>
+
+
+:: stage3-tutorial3-g-messages-cym [nobr]
+Lorem Ipsum Welsh
+
+
+
+
+
+
+
+
+
+:: stage3-submission-call-bea [nobr]
 <<set $prevPassage to "stage3-tutorials-menu">>
-<<set $passage to "stage3-tutorial3-fullScreenVideo">>
-<<set $nextPassage to "stage3-tutorial3-fullScreenChat">>
+<<set $passage to "stage3-submission-call-bea">>
+<<set $nextPassage to "stage3-submission-video">>
+<<include "_templateContentCenter">>
+
+<<timed 0.1s>>
+    <<if $userchoices.language is "eng">>
+        <<include "stage3-submission-call-bea-messages-eng">>
+    <<elseif $userchoices.language is "cym">>
+        <<include "stage3-submission-call-bea-messages-cym">>
+    <</if>>
+<</timed>>
+
+
+
+:: stage3-submission-call-bea-messages-eng [nobr]
+
+<<replace "#heroImage">>
+<<button "Call Bea">>
+    <<goto $nextPassage>>
+<</button>>
+<</replace>>
+
+:: stage3-submission-call-bea-messages-cym [nobr]
+
+<<button "Call Bea Welsh">>
+    <<goto $nextpass>>
+<</button>>
+
+:: stage3-submission-video [nobr]
+<<set $prevPassage to "stage3-submission-call-bea">>
+<<set $passage to "stage3-submission-video">>
+<<set $nextPassage to "stage3-submission-a">>
 <<include "_templateFullScreenVideo">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
     <<replace "#videoWrapper">>
-        <<include "stage3-videoChat-video-eng">>
+        <<include "stage3-submission-video-video-eng">>
     <</replace>>
     <</timed>>
+     <<timed 5s>>
+        <<replace "#footer-next">>
+            <<include "nextBtn">>
+        <</replace>>
+     <</timed>>
 <<elseif $userchoices.language is "cym">>
-     <<timed 0.1s>>
+    <<timed 0.1s>>
     <<replace "#videoWrapper">>
-        <<include "stage3-videoChat-video-cym">>
+        <<include "stage3-submission-video-video-cym">>
      <</replace>>
+     <</timed>>
+       <<timed 5s>>
+        <<replace "#footer-next">>
+            <<include "nextBtn">>
+        <</replace>>
      <</timed>>
 <</if>>
 
-:: stage3-tutorial3-fullScreenChat [nobr]
-<<set $prevPassage to "stage3-tutorial3-fullScreenVideo">>
-<<set $passage to "stage3-tutorial3-fullScreenChat">>
-<<set $nextPassage to "">>
-<<include "_templateFullScreenChat">>
-<<if $userchoices.language is "eng">>
-    <<include "stage3-videoChat-messages-eng">>
-<<elseif $userchoices.language is "cym">>
-    <<include "stage3-videoChat-messages-cym">>
-<</if>>
+:: stage3-submission-video-video-eng[nobr]    
+/* Video 7 -  SUBMISSION */
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
 
-<<button "I've finished">>
-    <<run setup.completeTutorial(3)>>
-    <<timed 2s>>
-        <<goto "stage3-tutorials-menu">>
-    <</timed>>
-<</button>>
+:: stage3-submission-video-video-cym[nobr]
+/* Video 7 -  SUBMISSION */
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
 
 
 
 
-:: stage3-submit-videoChat [nobr]
-<<set $prevPassage to "stage3-tutorials-menu">>
-<<set $passage to "stage3-submit-videoChat">>
-<<set $nextPassage to "stage3-submit-fullScreenChat">>
+
+:: stage3-submission-a [nobr]
+<<set $prevPassage to "stage3-submission-video">>
+<<set $passage to "stage3-submission-a">>
+<<set $nextPassage to "stage3-submission-b">>
 <<include "_templateVideoChat">>
 <<if $userchoices.language is "eng">>
-    <<timed 0.1s>>
-    <<replace "#videoWrapper">>
-        <<include "stage2-videoChat-video-eng">>
-    <</replace>>
-    <</timed>>
-    <<include "stage2-videoChat-messages-eng">>
-<<elseif $userchoices.language is "cym">>
-    <<timed 0.1s>>
-    <<replace "#videoWrapper">>
-        <<include "stage2-videoChat-video-cym">>
-     <</replace>>
+   
+      <<timed 1s>>
+    <<include "stage3-submission-a-messages-eng">>
      <</timed>>
-    <<include "stage2-videoChat-messages-eng">>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+ 
+    <<include "stage3-submission-a-messages-cym">>
+    <</timed>>
 <</if>>
 
-:: stage3-submit-fullScreenChat [nobr]
-<<set $prevPassage to "stage3-submit-videoChat">>
-<<set $passage to "stage3-submit-fullScreenChat">>
-<<set $nextPassage to "">>
+:: stage3-submission-a-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Discuss what you want to put forward as your dream to the BFG and then when ready send me the word BOOK</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+<<timed 5s>>
+    <<append "#chatInputWrapper">>
+        /* CODEWORD 10 */
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage3-submission-a-messages-cym [nobr]
+Lorem Ipsum Welsh
+
+
+:: stage3-submission-b [nobr]
+<<set $prevPassage to "stage3-submission-a">>
+<<set $passage to "stage3-submission-b">>
+<<set $nextPassage to "stage3-tutorial1-c">>
+<<include "_templateVideoChat">>
+<<if $userchoices.language is "eng">>
+   
+      <<timed 1s>>
+    <<include "stage3-submission-b-messages-eng">>
+     <</timed>>
+<<elseif $userchoices.language is "cym">>
+<<timed 0.1s>>
+ 
+    <<include "stage3-submission-b-messages-cym">>
+    <</timed>>
+<</if>>
+
+
+:: stage3-submission-b-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Time to put your book together. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Teacher, I’ve sent some suggestions on how you might make the book. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 7s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Importantly, there’s a front cover to design - unique to your Dream Team Dream Book. It should have your class name on it definitely - but other than that it is over to you! I’ve sent over a design but I need you to add to it. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+ <<timed 12s>>
+    <<replace "#videoWrapper">>
+        <div class="picture-container" id="pictureContainer">
+      <img src="assets/img/book.png" class="" alt="Book cover"/>
+          </div>
+    <</replace>>
+    <</timed>>
+
+    <<timed 14s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Then when you are ready to deliver it message me READY </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+<<timed 16s>>
+    <<append "#chatInputWrapper">>
+        /* CODEWORD 11 */
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage3-submission-b-messages-cym [nobr]
+
+
+:: stage3-submission-c [nobr]
+<<set $prevPassage to "stage3-submission-b">>
+<<set $passage to "stage3-submission-c">>
+<<set $nextPassage to "stage3-tutorial1-c">>
 <<include "_templateFullScreenChat">>
 <<if $userchoices.language is "eng">>
-    <<include "stage3-videoChat-messages-eng">>
+   
+      <<timed 0.11s>>
+    <<include "stage3-submission-c-messages-eng">>
+     <</timed>>
 <<elseif $userchoices.language is "cym">>
-    <<include "stage3-videoChat-messages-cym">>
+<<timed 0.1s>>
+ 
+    <<include "stage3-submission-c-messages-cym">>
+    <</timed>>
 <</if>>
+
+
+:: stage3-submission-c-messages-eng [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-submission-c-vn-transcript-eng">>
+        <</append>>
+    <</timed>>
+
+
+
+
+<<timed 16s>>
+    <<append "#chatInputWrapper">>
+        <<button "Finish">>
+            <<append "#fullScreenChatMain">>
+                <div class="bubbles-wrapper">
+            <div id="bubbles"></div>
+        
+        </div>
+                <</append>>
+  
+<<run setup.startBubbles()>>
+
+            <</button>>
+     
+        <</append>>
+    <</timed>>
+
+
+:: stage3-submission-c-messages-cym [nobr]
+
+
+:: stage3-submission-c-vn-transcript-eng [nobr]
+<p>You’re ready - amazing news. </p>
+
+<p>I’m getting ready myself -  I’ve been thinking about the Dream Team. I mean do they have a moto? A headquarters? Do they wear hats? Do they all have to eat Snozzcumbers for breakfast?</p>
+
+<p>Sorry - a bit over excited. I’m so excited to see your Dream Book. 
+<br/>It seems like it is all coming together now. </p>
+
+<p>I think the BFG is going to be so impressed with all of the work we have done. </p>
+
+<p>We are his Dream Team. </p>
+
+<p>I’ll message you when he has come to pick them up!</p>
+
+<p>Until then my friends, Dream Team out.</p>
+
+
+:: stage3-submission-c-vn-transcript-cym [nobr]
 
 
 /* STAGE 4 */
 
-:: stage4-videoChat [nobr]
-<<set $prevPassage to "">>
-<<set $passage to "stage4-videoChat">>
-<<set $nextPassage to "stage4-fullScreenChat">>
-<<include "_templateVideoChat">>
-<<if $userchoices.language is "eng">>
-    <<timed 0.1s>>
-    <<replace "#videoWrapper">>
-        <<include "stage4-videoChat-video-eng">>
-    <</replace>>
-    <</timed>>
-    <<timed 1s>>
-    <<include "stage4-videoChat-messages-eng">>
-    <</timed>>
-<<elseif $userchoices.language is "cym">>
-    <<timed 0.1s>>
-    <<replace "#videoWrapper">>
-        <<include "stage4-videoChat-video-cym">>
-     <</replace>>
-     <</timed>>
-      <<timed 1s>>
-    <<include "stage4-videoChat-messages-eng">>
-    <</timed>>
-<</if>>
 
-
-
-
-:: stage4-videoChat-video-eng[nobr]
-<iframe width='800px' height='450px' 
-      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
-
-:: stage4-videoChat-video-cym[nobr]
-<iframe width='800px' height='450px' 
-      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
-
-:: stage4-videoChat-messages-eng [nobr]
-<<timed 0.1s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Stage 4</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 2s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum English</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 4s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum English</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 6s>>
-    <<voicenote "assets/sound/ping1.mp3">>
-    <</timed>>
-
-<<timed 8s>>
-    <<pictureMessage "assets/img/placeholder.jpeg">>
-    <</timed>>
-
-:: stage4-videoChat-messages-cym [nobr]
-<<timed 0.1s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Stage 4</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 2s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum Welsh</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 4s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum Welsh</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-
-:: stage4-fullScreenChat [nobr]
-<<set $prevPassage to "stage4-videoChat">>
-<<set $passage to "stage4-fullScreenChat">>
-<<set $nextPassage to "stage4-dreamJar">>
-<<include "_templateFullScreenChat">>
-<<if $userchoices.language is "eng">>
-    <<include "stage4-videoChat-messages-eng">>
-<<elseif $userchoices.language is "cym">>
-    <<include "stage4-videoChat-messages-cym">>
-<</if>>
-
-:: stage4-dreamJar [nobr]
-<<set $prevPassage to "stage4-fullScreenChat">>
-<<set $passage to "stage4-dreamJar">>
-<<set $nextPassage to "">>
-DREAM JAR
-
-<<include "footer">>
-:: stage4-fullScreenVideo [nobr]
-<<set $prevPassage to "stage4-videoChat">>
-<<set $passage to "stage4-fullScreenVideo">>
-<<set $nextPassage to "">>
+:: stage4-video [nobr]
+<<set $prevPassage to $userchoices.landingPage>>
+<<set $passage to "stage4-video">>
+<<set $nextPassage to $userchoices.landingPage>>
 <<include "_templateFullScreenVideo">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
+    <<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
-        <<include "stage4-videoChat-video-eng">>
+        <<include "stage4-video-video-eng">>
     <</replace>>
     <</timed>>
+     <<timed 5s>>
+        <<replace "#footer-next">>
+            <<include "nextBtn">>
+        <</replace>>
+     <</timed>>
 <<elseif $userchoices.language is "cym">>
-     <<timed 0.1s>>
+    <<timed 0.1s>>
+    <<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
-        <<include "stage4-videoChat-video-cym">>
+        <<include "stage4-video-video-cym">>
      <</replace>>
      <</timed>>
+       <<timed 5s>>
+        <<replace "#footer-next">>
+            <<include "nextBtn">>
+        <</replace>>
+     <</timed>>
 <</if>>
+
+
+
+
+:: stage4-video-video-eng[nobr]
+/* VIDEO 8 */
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+      <<button "Replay">>
+        <<goto $passage>>
+        <</button>>
+
+:: stage4-video-video-cym[nobr]
+/* VIDEO 8 */
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+<<button "Replay">>
+        <<goto $passage>>
+        <</button>>
 
 
 /* STAGE 5  */
 
-
-:: stage5-videoChat [nobr]
-<<set $prevPassage to "">>
-<<set $passage to "stage5-videoChat">>
-<<set $nextPassage to "stage5-fullScreenChat">>
-<<include "_templateVideoChat">>
+:: stage5-video [nobr]
+<<set $prevPassage to $userchoices.landingPage>>
+<<set $passage to "stage5-video">>
+<<set $nextPassage to $userchoices.landingPage>>
+<<include "_templateFullScreenVideo">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
+    <<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
-        <<include "stage5-videoChat-video-eng">>
+        <<include "stage5-video-video-eng">>
     <</replace>>
     <</timed>>
-    <<timed 1s>>
-    <<include "stage5-videoChat-messages-eng">>
-    <</timed>>
+     <<timed 5s>>
+        <<replace "#footer-next">>
+            <<include "nextBtn">>
+        <</replace>>
+     <</timed>>
 <<elseif $userchoices.language is "cym">>
     <<timed 0.1s>>
+     <<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
-        <<include "stage5-videoChat-video-cym">>
+        <<include "stage5-video-video-cym">>
      <</replace>>
      <</timed>>
-      <<timed 1s>>
-    <<include "stage5-videoChat-messages-eng">>
-    <</timed>>
+       <<timed 5s>>
+        <<replace "#footer-next">>
+            <<include "nextBtn">>
+        <</replace>>
+     <</timed>>
 <</if>>
 
 
 
 
-:: stage5-videoChat-video-eng[nobr]
+:: stage5-video-video-eng[nobr]
+/* VIDEO 9 */
 <iframe width='800px' height='450px' 
       src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
 
-:: stage5-videoChat-video-cym[nobr]
+      <<button "Replay">>
+        <<goto $passage>>
+        <</button>>
+
+:: stage5-video-video-cym[nobr]
+/* VIDEO 9 */
 <iframe width='800px' height='450px' 
       src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
 
-:: stage5-videoChat-messages-eng [nobr]
-<<timed 0.1s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Stage 5</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 2s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum English</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 4s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum English</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 6s>>
-    <<voicenote "assets/sound/ping1.mp3">>
-    <</timed>>
-
-<<timed 8s>>
-    <<pictureMessage "assets/img/placeholder.jpeg">>
-    <</timed>>
-
-:: stage5-videoChat-messages-cym [nobr]
-<<timed 0.1s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Stage 5</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 2s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum Welsh</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 4s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum Welsh</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-
-:: stage5-ending [nobr]
-<<set $passage to "stage5-ending">>
-<div class="page-wrapper">
-    <main class="main-content-center">
-        <div class="bubbles-wrapper">
-            <div id="bubbles"></div>
-            <div class="content">
-                <h1>Stage 5</h1>
-           
-             
-            </div>
-        </div>
-    </main>
-</div>
-<<include "footer">>
-
-<!-- Bubble CSS moved to styles/styles.css -->
-<<done>>
-<<run setup.startBubbles()>>
-<</done>>
-
-:: video1 [nobr]
-<<set $passage to "video1">>
-<main>
-<p>video 1</p>
-<<button "landing">>
-    <<goto "landing-ks1-eng">>
-    <</button>>
-</main>
+<<button "Replay">>
+        <<goto $passage>>
+        <</button>>
 
