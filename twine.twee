@@ -39,6 +39,40 @@ $(document.head).find('#style-ui-bar').remove();
 
 setup.buildID = "ks1-eng";
 
+// Glowing map spots. Coordinates are pixels on the 300x512 uk-map.jpg.
+setup.mapSpotPoints = [
+	[130,150],[110,175],[150,185],[120,210],[170,215],[95,230],[140,235],[160,160],[180,200],[100,155],
+	[150,260],[185,265],[205,280],[165,285],[215,300],[190,310],[220,320],
+	[110,330],[130,355],[100,375],[95,400],[140,375],
+	[170,330],[190,345],[165,365],[205,360],[185,385],[220,375],[245,355],[260,365],
+	[150,410],[130,425],[110,440],[100,455],[80,465],[175,400],[210,405],
+	[235,400],[250,390],[200,415],[170,425],
+	[60,270],[30,290],[45,320],[25,350]
+];
+
+setup.animateMapSpots = function (wrapperId, intervalMs) {
+	intervalMs = intervalMs || 120;
+	var points = setup.mapSpotPoints.slice();
+	for (var i = points.length - 1; i > 0; i--) {
+		var j = Math.floor(Math.random() * (i + 1));
+		var t = points[i]; points[i] = points[j]; points[j] = t;
+	}
+	// Wait for the include to be inserted into the DOM.
+	setTimeout(function () {
+		var wrapper = document.getElementById(wrapperId);
+		if (!wrapper) return;
+		points.forEach(function (pt, n) {
+			setTimeout(function () {
+				var spot = document.createElement('span');
+				spot.className = 'map-spot';
+				spot.style.left = (pt[0] / 300 * 100) + '%';
+				spot.style.top = (pt[1] / 512 * 100) + '%';
+				wrapper.appendChild(spot);
+			}, n * intervalMs);
+		});
+	}, 100);
+};
+
 
 // /* Google Tag */
 // setup.JSLoaded = false;
@@ -250,239 +284,97 @@ setup.startBubbles = () => {
 
 setup.dreamJarDrag = () => {
 
-    const jar = document.getElementById("dream-jar");
-    const jarImage = document.getElementById("dream-jar-image");
-    const message = document.getElementById("dream-jar-message");
-
-    if (!jar || !jarImage) {
+    const container = document.getElementById("dream-jars");
+    if (!container) {
         return;
     }
 
-    const labels = [
-        document.getElementById("dream-label-one"),
-        document.getElementById("dream-label-two"),
-        document.getElementById("dream-label-three")
-    ];
+    const jars = Array.from(container.querySelectorAll(".dream-jar-item"));
+    const labels = Array.from(document.querySelectorAll(".dream-jar-label"));
+    let placedCount = 0;
 
-    let completed = new Set();
-
-    /*
-     * Make each label draggable.
-     */
     labels.forEach((label) => {
 
-        if (!label) {
-            return;
-        }
-
         let dragging = false;
-        let offsetX = 0;
-        let offsetY = 0;
+        let startX = 0;
+        let startY = 0;
 
-        /*
-         * Start dragging
-         */
         label.addEventListener("pointerdown", (e) => {
-
-            // Don't allow a correctly placed label to be moved again
             if (label.classList.contains("placed")) {
                 return;
             }
-
             e.preventDefault();
-
             dragging = true;
-
-            const labelRect = label.getBoundingClientRect();
-
-            offsetX = e.clientX - labelRect.left;
-            offsetY = e.clientY - labelRect.top;
-
+            startX = e.clientX;
+            startY = e.clientY;
             label.classList.add("dragging");
-
-            // Keep receiving pointer events even if the pointer moves
-            // outside the label.
             label.setPointerCapture(e.pointerId);
         });
 
-
-        /*
-         * Move the label
-         */
         label.addEventListener("pointermove", (e) => {
-
             if (!dragging) {
                 return;
             }
-
             e.preventDefault();
-
-            const jarRect = jar.getBoundingClientRect();
-
-            let x = e.clientX - jarRect.left - offsetX;
-            let y = e.clientY - jarRect.top - offsetY;
-
-            label.style.left = `${x}px`;
-            label.style.top = `${y}px`;
+            label.style.transform =
+                `translate(${e.clientX - startX}px, ${e.clientY - startY}px)`;
         });
 
-
-        /*
-         * Finish dragging
-         */
-        label.addEventListener("pointerup", (e) => {
-
+        const finish = (e) => {
             if (!dragging) {
                 return;
             }
-
             dragging = false;
-
             label.classList.remove("dragging");
-
             try {
                 label.releasePointerCapture(e.pointerId);
             } catch (error) {
                 // Pointer capture may already have been released.
             }
-
             checkDrop(label);
-        });
-
-
-        /*
-         * Also handle the pointer being cancelled
-         */
-        label.addEventListener("pointercancel", () => {
-
-            if (!dragging) {
-                return;
-            }
-
-            dragging = false;
-
-            label.classList.remove("dragging");
-
-            checkDrop(label);
-        });
-
-    });
-
-
-    /*
-     * Check whether a label has been dropped onto the jar.
-     */
-    function checkDrop(label) {
-
-        const labelRect = label.getBoundingClientRect();
-        const jarRect = jarImage.getBoundingClientRect();
-
-        /*
-         * Find the centre point of the label.
-         */
-        const labelCentreX =
-            labelRect.left + (labelRect.width / 2);
-
-        const labelCentreY =
-            labelRect.top + (labelRect.height / 2);
-
-        /*
-         * The label counts as being on the jar when its centre
-         * is inside the jar image.
-         */
-        const insideJar =
-            labelCentreX >= jarRect.left &&
-            labelCentreX <= jarRect.right &&
-            labelCentreY >= jarRect.top &&
-            labelCentreY <= jarRect.bottom;
-
-
-        if (insideJar) {
-
-            placeLabel(label);
-
-        } else {
-
-            /*
-             * If the label wasn't dropped on the jar,
-             * return it to its original position.
-             */
-            label.classList.remove("placed");
-
-            label.style.left = "";
-            label.style.top = "";
-
-        }
-    }
-
-
-    /*
-     * Lock a label onto the jar.
-     */
-    function placeLabel(label) {
-
-        if (label.classList.contains("placed")) {
-            return;
-        }
-
-        label.classList.add("placed");
-
-        /*
-         * Record that this label has been successfully placed.
-         */
-        completed.add(label.id);
-
-        /*
-         * Put the label roughly in the centre of the jar.
-         *
-         * Each label gets a slightly different position so they
-         * don't all sit directly on top of one another.
-         */
-        const positions = {
-            "dream-label-one": {
-                left: "57%",
-                top: "36%"
-            },
-
-            "dream-label-two": {
-                left: "50%",
-                top: "50%"
-            },
-
-            "dream-label-three": {
-                left: "44%",
-                top: "68%"
-            }
         };
 
-        const position = positions[label.id];
+        label.addEventListener("pointerup", finish);
+        label.addEventListener("pointercancel", finish);
+    });
 
-        if (position) {
-            label.style.left = position.left;
-            label.style.top = position.top;
+    // A label is only accepted by the jar it belongs to.
+    function checkDrop(label) {
+
+        const rect = label.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+
+        const targetJar = jars.find((jar) => jar.dataset.jar === label.dataset.jar);
+        const jarRect = targetJar.getBoundingClientRect();
+
+        const insideCorrectJar =
+            cx >= jarRect.left && cx <= jarRect.right &&
+            cy >= jarRect.top && cy <= jarRect.bottom;
+
+        if (insideCorrectJar) {
+            placeLabel(label, targetJar);
+        } else {
+            label.style.transform = "";
+            const wrongJar = jars.some((jar) => {
+                const r = jar.getBoundingClientRect();
+                return cx >= r.left && cx <= r.right && cy >= r.top && cy <= r.bottom;
+            });
+            if (wrongJar) {
+                label.classList.add("wrong");
+                setTimeout(() => label.classList.remove("wrong"), 500);
+            }
         }
-
-
-        /*
-         * Check whether all labels have been placed.
-         */
-        checkComplete();
     }
 
+    function placeLabel(label, jar) {
+        label.classList.add("placed");
+        label.style.transform = "";
+        jar.querySelector(".dream-jar-slot").appendChild(label);
+        placedCount++;
 
-    /*
-     * Check whether the player has completed the activity.
-     */
-    function checkComplete() {
-
-        if (completed.size === labels.length) {
-
-            Engine.play(State.variables.nextPassage);
-
-        } else {
-
-            message.textContent = "";
-            message.classList.remove("show");
+        if (placedCount === labels.length) {
+            setTimeout(() => Engine.play(State.variables.nextPassage), 1200);
         }
     }
 };
@@ -505,6 +397,9 @@ setup.dreamJarDrag = () => {
 /* Initialise mapping questions */
 <<include "mapping-questions">>
 
+/* Initialise future feet questions */
+<<include "futureFeet-questions">>
+
 
 
 
@@ -521,7 +416,7 @@ setup.dreamJarDrag = () => {
 <<set $codewordsLanding to {
     codeword1: {
         destinationPassage:"stage2-securityCheck-a",
-        eng: "BEA", 
+        eng: ["BEA", "BEE"],
         cym: "BEA",
         stage: 2
     }, 
@@ -584,14 +479,14 @@ setup.dreamJarDrag = () => {
       codeword3: {
         startingPassage: "stage2-exercise-dreamJar-b",
         destinationPassage: "stage2-exercise-dreamJar-c",
-        eng: "DESIGNED", 
-        cym: "DESIGNED"
+        eng: "COLOURFUL", 
+        cym: "COLOURFUL"
     }, 
     codeword4: {
         startingPassage: "stage2-exercise-dreamJar-d",
         destinationPassage: "stage2-exercise-dreamJar-outro",
-        eng: "FILL", 
-        cym: "FILL"
+        eng: "FILLED", 
+        cym: "FILLED"
     }, 
 }>>
 
@@ -611,8 +506,8 @@ setup.dreamJarDrag = () => {
   codeword3: {
         startingPassage: "stage3-tutorial2-c",
         destinationPassage: "stage3-tutorial2-d",
-        eng: "SCRIBBLE", 
-        cym: "SCRIBBLE"
+        eng: "DOODLE", 
+        cym: "DOODLE"
     }, 
 codeword4: {
         startingPassage: "stage3-tutorial2-e",
@@ -672,6 +567,7 @@ codeword11: {
     <<set _soundFile to _args[0]>>
     <<set _transcriptDelay to _args[1]>>
     <<set _transcriptPassage to _args[2]>>
+    <<set _triggeredPassage to _args[3]>>
   <<audio "ping" "play">>
     <<append "#chatHistory">>
  <div class="voicenote">
@@ -682,15 +578,25 @@ codeword11: {
     </audio>
   <</replace>>
   <<replace "#status">><em>Playing...</em><</replace>>
-  <<timed _transcriptDelay>>
-        <<append "#chatHistory">>
-            <div class="transcript">
-                <<include _transcriptPassage>>
-            </div>
-        <</append>>
+  <<if _triggeredPassage>>
+    <<include _triggeredPassage>>
+  <</if>>
+  <<timed 3s>>
+        <<replace "#transcriptLink">>
+            <<link "Show Transcript">>
+                <<replace "#transcriptLink">><</replace>>
+                <<append "#chatHistory">>
+                    <div class="transcript">
+                        <<include _transcriptPassage>>
+                    </div>
+                <</append>>
+            <</link>>
+        <</replace>>
     <</timed>>
 <</link>> 
-<span id="status">Voice note </span></div>
+<span id="status">Voice note </span>
+</div>
+<div class="voicenote-transcript-link" id="transcriptLink"></div>
     <</append>>
     
     
@@ -753,14 +659,14 @@ codeword11: {
 
         /* Correct */
         <<if $codeword is $correctCodeword>>
-            <<replace "#coderesult">><span>Correct!</span>
+            <<replace "#coderesult">><span>Confirmed!</span>
                 <<audio "success" play>>
             <</replace>>
      
             <<timed 3s>><<goto $nextpass>><</timed>>
         <<elseif $codeword isnot "">>
             /* Incorrect (non-empty) */
-            <<replace "#coderesult">><span>Try again.</span><</replace>>
+            <<replace "#coderesult">><span class="incorrect-label">Try again.</span><</replace>>
             <<timed 1.5s>><<replace "#coderesult">><</replace>><</timed>>
         <</if>>
     <</button>>
@@ -800,15 +706,10 @@ codeword11: {
 <<include "header-logo">>
 <div id="audio"></div>
 <main class="video-chat">
-
-<div class="video-wrapper" id="videoWrapper">
-/* IFRAME  */
-<<include "solologo">>
-</div>
 <div class="chat-wrapper">
     <div class="chat-header">
         <img src="assets/img/portal-logo-b.png" alt="avatar"/>
-        <span>Theo</span>
+        <span>Bea</span>
     </div>
     <div class="chat-history" id="chatHistory">
     
@@ -818,6 +719,11 @@ codeword11: {
    
     </div>
 </div>
+<div class="video-wrapper" id="videoWrapper">
+/* IFRAME  */
+<<include "solologo">>
+</div>
+
 
 </main>
 
@@ -833,7 +739,7 @@ codeword11: {
 <div class="chat-wrapper">
     <div class="chat-header">
         <img src="assets/img/user-round-black.png" alt="avatar"/>
-        <span>Theo</span>
+        <span>Bea</span>
     </div>
     <div class="chat-history" id="chatHistory">
    
@@ -1002,13 +908,13 @@ codeword11: {
 
             /* Search every codeword entry */
             <<for _key, _entry range $codewordsLanding>>
-
-                <<if $codeword is _entry[$userchoices.language]>><<set $nextPassage to _entry.destinationPassage>><<break>><</if>>
+                <<set _acceptedCodewords to _entry[$userchoices.language]>>
+                <<if _acceptedCodewords is $codeword or (Array.isArray(_acceptedCodewords) and _acceptedCodewords.includes($codeword))>><<set $nextPassage to _entry.destinationPassage>><<break>><</if>>
             <</for>>
 
             <<if $nextPassage isnot "">>
                  <<replace "#codeword-input-btn">>
-                    <<type 70ms>> <span class="correct-label">Correct!</span><</type>>
+                    <<type 70ms>> <span class="correct-label">Confirmed!</span><</type>>
                     <<audio "success" play>>
                 <</replace>>
                 <<set $userchoices.stage to _entry.stage>>
@@ -1018,7 +924,7 @@ codeword11: {
 
             <<elseif $codeword isnot "">>
                 <<replace "#coderesult">>
-                    <span>Try again.</span>
+                    <span class="incorrect-label".</span>
                 <</replace>>
 
                 <<timed 1.5s>>
@@ -1061,7 +967,7 @@ codeword11: {
 
             <<if $nextPassage isnot "">>
                 <<replace "#codeword-input-btn">>
-                   <<type 70ms>> <span class="correct-label">Correct!</span><</type>>
+                   <<type 70ms>> <span class="correct-label">Confirmed!</span><</type>>
                     <<audio "success" play>>
                 <</replace>>
         /* If we are at the end of the security check, go to connecting, otherwise go to the next passage in the security check. */
@@ -1075,7 +981,7 @@ codeword11: {
 
             <<elseif $codeword isnot "">>
                 <<replace "#coderesult">>
-                    <span>Try again.</span>
+                    <span class="incorrect-label">Try again.</span>
                 <</replace>>
 
                 <<timed 1.5s>>
@@ -1121,7 +1027,7 @@ codeword11: {
 
             <<if $nextPassage isnot "">>
                 <<replace "#codeword-input-btn">>
-                   <<type 70ms>> <span class="correct-label">Correct!</span><</type>>
+                   <<type 70ms>> <span class="correct-label">Confirmed!</span><</type>>
                     <<audio "success" play>>
                 <</replace>>
 
@@ -1131,7 +1037,7 @@ codeword11: {
 
             <<elseif $codeword isnot "">>
                 <<replace "#coderesult">>
-                    <span>Try again.</span>
+                    <span class="incorrect-label">Try again.</span>
                 <</replace>>
 
                 <<timed 1.5s>>
@@ -1226,7 +1132,6 @@ codeword11: {
 <<include "_templateFullScreenVideo">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
-<<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
         <<include "stage2-video-video-eng">>
     <</replace>>
@@ -1238,7 +1143,35 @@ codeword11: {
      <</timed>>
 <<elseif $userchoices.language is "cym">>
     <<timed 0.1s>>
-<<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
+    <<replace "#videoWrapper">>
+        <<include "stage2-video-video-cym">>
+     <</replace>>
+     <</timed>>
+       <<timed 5s>>
+        <<replace "#footer-next">>
+            <<include "nextBtn">>
+        <</replace>>
+     <</timed>>
+<</if>>
+
+:: stage2-video-rewatch [nobr]
+<<set $prevPassage to "stage2-intro-b">>
+<<set $passage to "stage2-video-rewatch">>
+<<set $nextPassage to "stage2-intro-b">>
+<<include "_templateFullScreenVideo">>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <<include "stage2-video-video-eng">>
+    <</replace>>
+    <</timed>>
+     <<timed 5s>>
+        <<replace "#footer-next">>
+            <<include "nextBtn">>
+        <</replace>>
+     <</timed>>
+<<elseif $userchoices.language is "cym">>
+    <<timed 0.1s>>
     <<replace "#videoWrapper">>
         <<include "stage2-video-video-cym">>
      <</replace>>
@@ -1346,7 +1279,7 @@ codeword11: {
     <<append "#chatHistory">>
          <div class="message-received">
         <span>If you need to rewatch my livefeed - the video transmission is available to <<button "rewatch">>
-            <<goto "stage2-video">>
+            <<goto "stage2-video-rewatch">>
             <</button>></span>
         </div>
         <</append>>
@@ -1355,7 +1288,7 @@ codeword11: {
 <<timed 4s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Oh, also, I just realised - you might not have read the BFG 43 times and might be slightly confused. Do you want me to summarise the book for you or just get on with the exercise? 
+        <span>Oh, also, I just realised - you might not have read the BFG 43 times and might be slightly confused. Do you want me to summarise the book for you or do you want to just get on with the exercise? 
 </span>
         </div>
         <</append>>
@@ -1368,7 +1301,7 @@ codeword11: {
         <<goto "stage2-BFGRecap">>
         <</button>>
          <<button "Get on">>
-            <<goto "stage2-DreamJarIntro-a">>
+            <<goto "stage2-exercise-dreamJar-a">>
         <</button>>
         </div>
         <</append>>
@@ -1464,17 +1397,18 @@ codeword11: {
 
 :: stage2-BFGRecap-vn-transcript-eng [nobr]
 <p>Transcript:</p>
-<p>So, there’s a little girl called Sophie, who is taken from her orphanage by the BFG - BFG stands for Big Friendly Giant. He collects and delivers sweet dreams to children with a special trumpet. </p>
+<p>A recap- sure thing. </p>
 
-<p>
-    Then the BFG carries Sophie back to faraway Giant Country and there are other giants there. However, unlike the 9 other terrifying and enormous giants who eat humans, the BFG lives on Snozzcumbers. Remember the stain on the letter? 
-    
-</p>
-<p>Sophie and BFG become friends and BFG teaches Sophie about how he keeps dreams in jars!</p>  
+<p>So, there’s a little girl called Sophie, who meets the BFG - BFG stands for Big Friendly Giant. The BFG collects and delivers sweet dreams to children with a special dream-blower trumpet. </p>
 
-<p>However, the human-eating giants are planning to go eat so the BFG and Sophie hatch a brave plan to stop the human-eating giants by delivering a dream to the Queen (yes the Queen!) that will help prove their existence. When the Queen wakes up, Sophie is in her bedroom, further confirming the truth of the dream and she introduces the Queen to the BFG.</p> 
+<p>The BFG carries Sophie off to faraway Giant Country and there are other giants there. However, unlike the 9 other terrifying and enormous giants who eat humans, the BFG lives on Snozzcumbers. Remember the stain on the letter? </p>
 
-<p>The Queen agrees to help and, with the support of the army, the BFG and Sophie travel back to Giant Country and capture the man-eating giants with helicopters. The giants are taken away and the BFG is given a special title from the Queen - the ‘Royal Dream-Blower’.</p>
+<p>Sophie and the BFG become friends and the BFG takes Sophie to see Dream Country, the home of all the dreams! Here she learns about Dreams and they collect some, in the BFG’s net, and then put them into the BFG’s Dream Jars! </p>
+
+<p>However, one night the human-eating giants are planning to go eat, so the BFG and Sophie hatch a brave plan to stop the human-eating giants by delivering a special dream to the Queen (yes the Queen!) that will help prove the existence of Giants and show her their horrible plan. When the Queen wakes up, Sophie is in her bedroom and The Queen realises her dream was actually true, and Sophie introduces the Queen to the BFG. </p>
+
+<p>After talking with the BFG, The Queen agrees to help and, with the support of the army, the BFG and Sophie travel back to Giant Country and capture the man-eating giants with helicopters. The giants are taken away and the BFG is given a special title from the Queen - the ‘Royal Dream-Blower’. </p>
+
 
 
 :: stage2-BFGRecap-messages-cym-2 [nobr]
@@ -1509,22 +1443,16 @@ codeword11: {
 <<set $prevPassage to "stage2-BFGRecap">>
 <<set $passage to "stage2-exercise-dreamJar-a">>
 <<set $nextPassage to "stage2-exercise-dreamJar-b">>
-<<include "_templateVideoChat">>
+<<include "_templateFullScreenChat">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
     <<replace "#pageName">><h3>Dream Jar</h3><</replace>>
     <</timed>>
     <<timed 0.1s>>
-    <<replace "#videoWrapper">>
-   <<include "solologo">>
-    <</replace>>
 <<include "stage2-exercise-dreamJar-a-messages-eng">>
     <</timed>>
 <<elseif $userchoices.language is "cym">>
     <<timed 0.1s>>
-    <<replace "#videoWrapper">>
-   <<include "solologo">>
-     <</replace>>
      <<include "stage2-exercise-dreamJar-a-messages-cym">>
      <</timed>>
 <</if>>
@@ -1532,9 +1460,12 @@ codeword11: {
 <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Ok - I want us to understand what the BFG is asking for us to do.
+        <span>Before we share our Dreams - we need to understand what Dreams are. 
         <br/>
-        Before we share our Dreams - we need to understand what Dreams are.   </span>
+        Let’s start with how the BFG holds onto Dreams. 
+      <br/>
+        Dream Jars. 
+ </span>
         </div>
         <</append>>
     <</timed>>
@@ -1544,9 +1475,7 @@ codeword11: {
 <<timed 7s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Let’s start with how the BFG holds onto Dreams. 
-        <br/>
-        Dream Jars. 
+        <span>I’ve sent over some templates we have here in the Library portal or you can use real jars if you’d like.
 </span>
         </div>
         <</append>>
@@ -1555,7 +1484,7 @@ codeword11: {
 <<timed 12s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>I’ve sent over some templates we have here in the Library portal or you can use real jars if you’d like.</span>
+        <span>Once you have them ready I have some quotes from the BFG about Dream Jars to inspire your design. </span>
         </div>
         <</append>>
     <</timed>>
@@ -1563,22 +1492,13 @@ codeword11: {
 <<timed 20s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Once you have them ready I have some quotes from the BFG about Dream Jars to inspire your design.  </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 28s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Just message me the word JAR and I’ll send over the quotes. 
-</span>
+        <span>Just message me the word <span class="codeword-text">JAR</span> and I’ll send over the quotes.  </span>
         </div>
         <</append>>
     <</timed>>
 
 
-<<timed 28s>>
+<<timed 24s>>
     <<append "#chatInputWrapper">>
       <<include "codeword-chat">>
         <</append>>
@@ -1630,22 +1550,33 @@ codeword11: {
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng" "stage2-exercise-dreamJar-b-vn-triggered-content">>
         <</append>>
+    <</timed>>
+
+
+:: stage2-exercise-dreamJar-b-vn-transcript-eng [nobr]
+<p>Hello - I’ve found some quotes in the BFG book about one of the Dream Jars - obviously you can design your own but this might inspire your ideas - </p>
+<p>...</p>
+<p>So Dream Jars when filled are colourful and vibrant and Dreams are alive!  Each of them are unique. Discuss the quotes and then I’ll leave you to design yours. </p>
+<p>Message me the word <span class="codeword-text">COLOURFUL</span> when you are ready for the next part. 
+</p>
+
+:: stage2-exercise-dreamJar-b-vn-triggered-content [nobr]
+<<timed 7s>>
+    <<replace "#videoWrapper">>
+        /* QUOTE SHOWING IN EXERCISE SPACE */
+         <div class="accented-quote">
+        <span>‘There was just a touch of colour in it, a pale sea-green, soft and shimmering and very beautiful.’ </span>
+        </div>
+        <</replace>>
     <</timed>>
 
 <<timed 10s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>So Dream Jars are colourful and vibrant - I’ll leave you to design yours and I’ll work on one here too.  </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 13s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Message me the word DESIGNED when you are ready for the next part. </span>
+    <<append "#videoWrapper">>
+        /* QUOTE SHOWING IN EXERCISE SPACE */
+         <div class="accented-quote">
+        <span>‘There it lay, this small oblong sea-green jellyfish thing, at the bottom of the jar, quite peaceful, but pulsing gently, the whole of it moving in and out ever so slightly, as though it was breathing.’ </span>
         </div>
         <</append>>
     <</timed>>
@@ -1655,12 +1586,6 @@ codeword11: {
       <<include "codeword-chat">>
         <</append>>
     <</timed>>
-
-:: stage2-exercise-dreamJar-b-vn-transcript-eng [nobr]
-<p>Hello - I’ve found that quote from Sophie in the BFG book -</p>
-<p><i>‘She saw the faint translucent outline of something about the size of a hen’s egg. There was just a touch of colour in it, a pale sea-green, soft and shimmering and very beautiful.</i> </p>
-<p><i>There it lay, this small oblong sea-green jellyfish thing, at the bottom of the jar, quite peaceful, but pulsing gently, the whole of it moving in and out ever so slightly, as though it was breathing.’ </i></p>
-
 
 :: stage2-exercise-dreamJar-b-messages-cym [nobr]
 <<timed 0.1s>>
@@ -1691,25 +1616,16 @@ codeword11: {
 
 <<set $prevPassage to "stage2-exercise-dreamJar-b">>
 <<set $passage to "stage2-exercise-dreamJar-c">>
-<<set $nextPassage to "stage2-exercise-dreamJar-d">>
+<<set $nextPassage to "stage2-exercise-dreamJar-c2">>
 <<include "_templateVideoChat">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
-    <<replace "#pageName">><h3>Dream Jar</h3><</replace>>
-    <</timed>>
-    <<timed 0.1s>>
-    <<replace "#videoWrapper">>
-        <<include "dreamJar">>
         <<include "stage2-exercise-dreamJar-c-messages-eng">>
-    <</replace>>
     <</timed>>
-
 <<elseif $userchoices.language is "cym">>
     <<timed 0.1s>>
-    <<replace "#videoWrapper">>
-        <<include "dreamJar">>
         <<include "stage2-exercise-dreamJar-c-messages-cym">>
-     <</replace>>
+
      <</timed>>
 
 <</if>>
@@ -1725,6 +1641,14 @@ codeword11: {
         </div>
         <</append>>
     <</timed>>
+
+ <<timed 3s>>
+    <<replace "#videoWrapper">>
+         <div class="picture-container">
+      <<include "dreamJar-Bea">>
+      </div>
+        <</replace>>
+    <</timed>>   
 
 <<timed 5s>>
     <<append "#chatHistory">>
@@ -1742,61 +1666,73 @@ codeword11: {
         <</append>>
     <</timed>>
 
-<<timed 17s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-      • NIGHT-TIME DREAMS - Where magical stories happen (BLUE)
-        </div>
-        <</append>>
-    <</timed>>
+ <<timed 17s>>
+    <<replace "#videoWrapper">>
+         <div class="picture-container">
+      <<include "dreamJar-example">>
+      </div>
+        <</replace>>
+    <</timed>>   
 
-<<timed 20s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-      • DAY DREAMS - Where our imagination changes the world around us (RED)
-        </div>
-        <</append>>
-    <</timed>>
 
-    <<timed 23s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-      • FUTURE DREAMS - What we aspire to reach for ourselves. (GREEN)
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 27s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>I’ve given them different colours and put my examples on the board. Discuss each of them and then drag them into the jar to move on.  </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 15s>>
+<<timed 24s>>
     <<append "#chatInputWrapper">>
-         <div class="btn-option-wrapper">
+     <div class="btn-option-wrapper">
     <<button "Next">> 
-        /* Clear next button when pressed  */
-    <<replace "#chatInputWrapper">>
-           <</replace>>
-<<if $userchoices.language is "eng">>
-    <<timed 0.1s>>
-    <<include "stage2-exercise-dreamJar-2-messages-eng">>
-     <</timed>>
-<<elseif $userchoices.language is "cym">>
-    <<timed 0.1s>>
-    <<include "stage2-exercise-dreamJar-2-messages-cym">>
-     <</timed>>
-<</if>>
-
+     <<goto $nextPassage>>
         <</button>>
         </div>
         <</append>>
     <</timed>>
 
 :: stage2-exercise-dreamJar-c-messages-cym [nobr]
+Lorem ipsum Welsh
+
+
+:: stage2-exercise-dreamJar-c2 [nobr]
+
+<<set $prevPassage to "stage2-exercise-dreamJar-c">>
+<<set $passage to "stage2-exercise-dreamJar-c2">>
+<<set $nextPassage to "stage2-exercise-dreamJar-d">>
+<<include "_templateVideoChat">>
+<<timed 0.1s>>
+    <<addclass ".video-wrapper" "full-height">>
+<</timed>>
+<<if $userchoices.language is "eng">>
+    <<timed 0.1s>>
+        <<include "stage2-exercise-dreamJar-c2-messages-eng">>
+    <</timed>>
+<<elseif $userchoices.language is "cym">>
+    <<timed 0.1s>>
+        <<include "stage2-exercise-dreamJar-c2-messages-cym">>
+
+     <</timed>>
+
+<</if>>
+
+<<include "footer">>
+
+
+:: stage2-exercise-dreamJar-c2-messages-eng [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Here are some examples. Discuss each of them and then drag them into the jar to move on. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+ <<timed 3s>>
+    <<replace "#videoWrapper">>
+         <div class="picture-container">
+      <<include "dreamJar-drag">>
+      </div>
+        <</replace>>
+    <</timed>>   
+
+
+
+:: stage2-exercise-dreamJar-c2-messages-cym [nobr]
 Lorem ipsum Welsh
 
 
@@ -1837,40 +1773,25 @@ Lorem ipsum Welsh
         </div>
         <</replace>>
     <</timed>>
-<<timed 10s>>
+
+ <<timed 3s>>
+    <<replace "#videoWrapper">>
+
+      <<include "dreamJar-yourTurn">>
+      
+        <</replace>>
+    <</timed>>   
+
+<<timed 15s>>
     <<append "#chatHistory">>
          <div class="message-received">
-      • NIGHT-TIME DREAMS - Have you had any silly night-time dreams recently? 
+        <span>Let me know when you have filled your Dream Jars then send me the word FILLED</span>
         </div>
         <</append>>
     <</timed>>
 
-<<timed 13s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-      • DAY DREAMS - Have you ever imagined a different version of your classroom, school or town?
-        </div>
-        <</append>>
-    <</timed>>
 
-    <<timed 16s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-      • FUTURE DREAMS - Have you got any dreams for your future? 
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 19s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-       <span>Let me know when you have had the chance to FILL your Dream Jars. </span>
-       </div>
-        <</append>>
-    <</timed>>
-
-
-<<timed 19s>>
+<<timed 17s>>
     <<append "#chatInputWrapper">>
      <<include "codeword-chat">>
         <</append>>
@@ -1879,44 +1800,117 @@ Lorem ipsum Welsh
 :: stage2-exercise-dreamJar-d-messages-cym [nobr]
 Lorem Ipsum Welsh
 
-:: dreamJar[nobr]
+:: dreamJar-Bea [nobr]
 <div id="dream-jar-container">
-
-    <div id="dream-jar">
-        <img id="dream-jar-image"
+ <img id="dream-jar-image"
              src="assets/img/jar.png"
              alt="Dream jar">
-
-        <div id="dream-label-one"
-             class="dream-jar-label label-one"
-             draggable="false">
-            Dreaming I’m flying like a bird 
-        </div>
-
-        <div id="dream-label-two"
-             class="dream-jar-label label-two"
-             draggable="false">
-           Dreaming what Lionel would look like if he was a Turtle
-        </div>
-
-        <div id="dream-label-three"
-             class="dream-jar-label label-three"
-             draggable="false">
-          Dreaming of doing a cartwheel
-        </div>
-    </div>
-
-    <div id="dream-jar-message"></div>
-
 </div>
-<<done>> <<run setup.dreamJarDrag()>>
-    <</done>>
+:: dreamJar-example [nobr]
+<div id="dream-jars">
+<div class="dream-jar-item" data-jar="night">
+<img class="dream-jar-image" src="assets/img/jar.png" alt="Dream jar">
+<div class="dream-jar-slot"></div>
+<<timed 1s>>
+<div class="dream-jar-static-label label-blue">
+<span>NIGHT-TIME DREAMS</span>
+<span>Where magical stories happen</span>
+</div>
+<</timed>>
+</div>
+<div class="dream-jar-item" data-jar="day">
+<img class="dream-jar-image" src="assets/img/jar.png" alt="Dream jar">
+<div class="dream-jar-slot"></div>
+<<timed 3s>>
+<div class="dream-jar-static-label label-red">
+<span>DAY DREAMS</span>
+<span>Where our imagination changes the world around us</span>
+</div>
+<</timed>>
+</div>
+<div class="dream-jar-item" data-jar="future">
+<img class="dream-jar-image" src="assets/img/jar.png" alt="Dream jar">
+<div class="dream-jar-slot"></div>
+<<timed 5s>>
+<div class="dream-jar-static-label label-green">
+<span>FUTURE DREAMS</span>
+<span>What we dream of achieving</span>
+</div>
+<</timed>>
+</div>
+</div>
+
+:: dreamJar-drag [nobr]
+<div id="dream-jars">
+<div class="dream-jar-item" data-jar="night">
+<img class="dream-jar-image" src="assets/img/jar.png" alt="Dream jar">
+<div class="dream-jar-slot"></div>
+<div class="dream-jar-static-label label-blue">
+<span>NIGHT-TIME DREAMS</span>
+<span>Where magical stories happen</span>
+</div>
+</div>
+<div class="dream-jar-item" data-jar="day">
+<img class="dream-jar-image" src="assets/img/jar.png" alt="Dream jar">
+<div class="dream-jar-slot"></div>
+<div class="dream-jar-static-label label-red">
+<span>DAY DREAMS</span>
+<span>Where our imagination changes the world around us</span>
+</div>
+</div>
+<div class="dream-jar-item" data-jar="future">
+<img class="dream-jar-image" src="assets/img/jar.png" alt="Dream jar">
+<div class="dream-jar-slot"></div>
+<div class="dream-jar-static-label label-green">
+<span>FUTURE DREAMS</span>
+<span>What we dream of achieving</span>
+</div>
+</div>
+</div>
+<div id="dream-jar-draggable-labels-container">
+<div id="dream-label-draggable-one" class="dream-jar-label " data-jar="day">Dreaming your classroom is made of jelly.</div>
+<div id="dream-label-draggable-two" class="dream-jar-label" data-jar="night">Dreaming you are flying like a bird.</div>
+<div id="dream-label-draggable-three" class="dream-jar-label " data-jar="future">Dreaming of doing a cartwheel.</div>
+</div>
+<<done>><<run setup.dreamJarDrag()>><</done>>
+
+
+:: dreamJar-yourTurn [nobr]
+<div id="dream-jar-your-turn">
+<div class="your-turn-labels">
+<<timed 1s>>
+<div class="dream-jar-static-label label-blue">
+<span>NIGHT-TIME DREAMS</span>
+<span>Have you had any silly night-time dreams recently?</span>
+</div>
+<</timed>>
+<<timed 3s>>
+<div class="dream-jar-static-label label-red">
+<span>DAY DREAMS</span>
+<span>Have you ever imagined a different version of your classroom, school or town?</span>
+</div>
+<</timed>>
+<<timed 5s>>
+<div class="dream-jar-static-label label-green">
+<span>FUTURE DREAMS</span>
+<span>Have you got any dreams for your future?</span>
+</div>
+<</timed>>
+</div>
+<div class="your-turn-jar">
+<img class="dream-jar-image" src="assets/img/jar.png" alt="Dream jar">
+</div>
+</div>
+
+:: map-img [nobr]
+<div class="uk-map-wrapper" id="uk-map-wrapper"><img src="assets/img/uk-map.jpg" alt="UK Map" id="uk-map"></div>
+
 
 :: stage2-exercise-dreamJar-outro  [nobr]
 <<set $prevPassage to "stage2-exercise-dreamJar-d">>
 <<set $passage to "stage2-exercise-dreamJar-outro">>
 <<set $nextPassage to $userchoices.landingPage>>
-<<include "_templateFullScreenChat">>
+<<include "_templateVideoChat">>
 <<if $userchoices.language is "eng">>
     <<include "stage2-exercise-dreamJar-outro-messages-eng">>
 <<elseif $userchoices.language is "cym">>
@@ -1925,12 +1919,17 @@ Lorem Ipsum Welsh
 
 :: stage2-exercise-dreamJar-outro-messages-eng [nobr]
 <<timed 1s>>
-    <<pictureMessage "assets/img/uk-map.jpg">>
+    <<replace "#videoWrapper">>
+        <div id="picture-container">
+        <<include "map-img">>
+        </div>
+    <</replace>>
     <</timed>>
 
 <<timed 2s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-outro-vn-transcript-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-outro-vn-transcript-eng"
+         "stage2-exercise-dreamJar-outro-vn-triggered-content">>
         <</append>>
     <</timed>>
 
@@ -1949,12 +1948,16 @@ Lorem Ipsum Welsh
 :: stage2-exercise-dreamJar-outro-vn-transcript-eng [nobr]
 <p>Thank you for all of your hard work - I’m getting messages from people who are joining the Dream Team from across the UK - all stepping up to the challenge together. It’s incredibly inspiring but making me realise I need to know my stuff. I think what you have been exploring will help though - I’ve got to do some more investigating. </p>
 
-<p>Keep adding to your Dream Jar - maybe you’ll have a dream about Lionel flying kites with 2 Pink Hippotamuses called Denise. </p>
+<p>Keep adding to your Dream Jar - maybe you’ll have a dream about flying kites with 2 Pink Hippotamuses both called Denise. Or daydream about what your park would look like if it had the world’s largest water slide in it. Or dream about learning how to make pancakes. Mmmm pancakes. </p>
 
-<p>I won’t stand by and let the BFG lose his job as Royal Dream-Blower. </p>
+<p>We all need dreams. </p>
 
-<p>When you are ready to continue Dream Team - put BFG into the library portal and we can reconnect. See you soon.</p>
+<p>I won’t stand by whilst the BFG, and the UK, is out of them.</p>
 
+:: stage2-exercise-dreamJar-outro-vn-triggered-content [nobr]
+<<timed 3s>>
+<<run setup.animateMapSpots("uk-map-wrapper")>>
+<</timed>>
 
 :: stage2-exercise-dreamJar-outro-messages-cym [nobr]
 <<timed 0.1s>>
@@ -1992,7 +1995,7 @@ Lorem Ipsum Welsh
 <<timed 1s>> 
      <<append "#chatHistory">>
          <div class="message-received">
-        <span>Sorry before you continue - I need to check you are actually humans. </span>
+        <span>Sorry - I need to confirm you are real.  </span>
         </div>
         <</append>>
     <</timed>>
@@ -2220,25 +2223,25 @@ Lorem Ipsum Welsh
 <</if>>
 
 :: tutorial1-picture1 [nobr]
-   <img src="assets/img/stage3-tutorial1/picture1.jpg" alt="Lionel" >
+   <img src="assets/img/stage3-tutorial1/picture-1.png" alt="Lionel" >
 
 :: tutorial1-picture2 [nobr]
-   <img src="assets/img/stage3-tutorial1/picture2.jpg" alt="Book" >
+   <img src="assets/img/stage3-tutorial1/picture-2.png" alt="Book" >
 
 :: tutorial1-picture3 [nobr]
-   <img src="assets/img/stage3-tutorial1/picture3.jpg" alt="Frog" >
+   <img src="assets/img/stage3-tutorial1/picture-3.png" alt="Frog" >
 
 :: tutorial1-picture4[nobr]
-   <img src="assets/img/stage3-tutorial1/picture4.jpg" alt="Bea using Magic Book" >
+   <img src="assets/img/stage3-tutorial1/picture-4.png" alt="Bea using Magic Book" >
 
 :: tutorial1-picture5 [nobr]
-   <img src="assets/img/stage3-tutorial1/picture5.jpg" alt="Library" >
+   <img src="assets/img/stage3-tutorial1/picture-5.png" alt="Library" >
 
 :: stage3-tutorial1-a [nobr]
 <<set $prevPassage to "stage3-tutorial1-video">>
 <<set $passage to "stage3-tutorial1-a">>
 <<set $nextPassage to "stage3-tutorial1-b">>
-<<include "_templateVideoChat">>
+<<include "_templateFullScreenChat">>
 <<if $userchoices.language is "eng">>
    
       <<timed 1s>>
@@ -2290,7 +2293,8 @@ Lorem Ipsum Welsh
 <<timed 12s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>So, let’s take an Image from a Dream and make a story out of it. The story doesn’t need to be a retelling of a real dream you had, but perhaps your real dream can give you the starting image.</span>
+        <span>So, let’s take an Image from a Dream and make a story out of it. <br/>
+        The story of the Surprise Present. </span>
         </div>
         <</append>>
     <</timed>>
@@ -2633,15 +2637,14 @@ Lorem Ipsum Welsh
 :: stage3-tutorial1-g-transcript-eng [nobr]
 <p>Wonderful work Dream Team I’m sure. </p>
 
-<p>I love stories - as I’m sure you have gathered - and so it is brilliant to know that you have created dream stories for the BFG to collect. </p>
+<p>I love stories - as I’m sure you have gathered - and so it is brilliant to know that you have created Night-Time Dreams for the BFG to collect. They might be bizarre, silly or mad but that is brilliant - all dreams are unique and we never know what or who they’ll inspire.  </p>
 
-<p>Imagine, one of these Night-Time Dreams could be blown into someone’s ear when they sleep and experience it themselves. I wonder if you have someone who you’d like your dream to be experienced by? </p>
+<p>Imagine, one of these Night-Time Dreams could be blown into someone’s bedroom by the BFG’s dream-blower trumpet when they sleep and experience it themselves. I wonder if you have someone who you’d like your dream to be experienced by? </p>
 
-<p>Right, as you have completed the Night-Time Dreams section you have the choice to move onto another section or submit to the BFG. Don’t worry if you can’t do anymore today. </p>
-
-<p>Haste makes waste - as they used to say. So take your time. </p>
+<p>Right, as you have completed the Night-Time Dreams section you have the choice to move onto another section or submit to the BFG. Don’t worry if you can’t do anymore today - continue when you are ready. </p>
 
 <p>Speak soon. </p>
+
 
 
 :: stage3-tutorial2-video [nobr]
@@ -2685,7 +2688,7 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial2-video">>
 <<set $passage to "stage3-tutorial2-a">>
 <<set $nextPassage to "stage3-tutorial2-b">>
-<<include "_templateVideoChat">>
+<<include "_templateFullScreenChat">>
 <<if $userchoices.language is "eng">>
    
 <<timed 1s>>
@@ -2703,55 +2706,27 @@ Lorem Ipsum Welsh
 <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Before we can imagine something - we need to start from what we know. </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 5s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>And you are experts in your area. </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 8s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>More than me</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 10s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>More than the BFG </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 12s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>So - what is there? </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 13s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Decide how you want to map and then I’ll send you some prompts. 
-        <br/>
-Teacher, I’ve sent you some thoughts on how you could map the area.
+        <span>Before we can transform an area - we need to start from what we know. <br/>
+And you are experts in your area. <br/>
+More than me<br/>
+More than the BFG<br/>
+So - what is there? <br/>
 </span>
         </div>
         <</append>>
     <</timed>>
 
-<<timed 15s>>
+<<timed 9s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Decide how you want to map and then I’ll send you some prompts. <br/>
+Teacher, I’ve sent you some thoughts on how you could map the area. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 13s>>
     <<replace "#chatInputWrapper">>
         <div class="btn-option-wrapper">
             <<include "nextBtn">>
@@ -2767,8 +2742,8 @@ Lorem Ipsum Welsh
 <<set $mappingQuestions = [
     {
         eng: [
-            "Start with looking at buildings/places in your area (e.g. school, shops, libraries).",
-            "You might want to start with the school and then work out from there."
+            "Start with looking at buildings/places in your area (e.g. school, shops, libraries) and adding them to your map. ",
+            "You might want to start with the school and then work out from there. "
         ],
         cym: [
             "Lorem ipsum Welsh",
@@ -2777,8 +2752,8 @@ Lorem Ipsum Welsh
     },
     {
         eng: [
-            "Next let’s look at the community — what does community in this area mean to you?",
-            "Add to the community of the area — the people of this place, who make this place special, who are kind here."
+            "Next let’s look at the community - what does community in this area mean to you? ",
+            "Add in the community of the area - the people of this place, those who make this place special, those who are helpful, those who look after it."
         ],
         cym: [
             "Lorem ipsum Welsh",
@@ -2787,9 +2762,7 @@ Lorem Ipsum Welsh
     },
     {
         eng: [
-            "What are your favourite parts of the area? What are your favourite places?",
-            "What makes this community happy here?",
-            "What makes it welcoming? What brings them together?"
+            "What are your favourite parts of the area - What are your favourite places? What makes this community happy here? What makes it welcoming? What brings them together?"
         ],
         cym: [
             "Lorem ipsum Welsh",
@@ -2799,8 +2772,7 @@ Lorem Ipsum Welsh
     },
     {
         eng: [
-            "Now some important questions — what are the challenges of the area?",
-            "What makes the community sad? What area needs transforming?"
+            "Now some important questions - what are the challenges of the area - what makes the community sad? What area needs transforming?"
         ],
         cym: [
             "Lorem ipsum Welsh",
@@ -2809,8 +2781,7 @@ Lorem Ipsum Welsh
     },
     {
         eng: [
-            "Last part — what could be transformed to make the community happier?",
-            "What would make it more welcoming?"
+            "Last part - what could be transformed to make the community happier? What would make it more welcoming? "
         ],
         cym: [
             "Lorem ipsum Welsh",
@@ -2829,11 +2800,7 @@ Lorem Ipsum Welsh
 
 <<include "_templateVideoChat">>
 
-<<timed 0.1s>>
-    <<replace "#pageName">>
-        <h3>Mapping</h3>
-    <</replace>>
-<</timed>>
+
 
 <<timed 1s>>
 
@@ -2926,7 +2893,7 @@ Lorem Ipsum Welsh
             <<append "#chatHistory">>
 
                 <div class="message-received">
-                    <span>When ready for the second part, message me MAPPED.</span>
+                    <span>When ready for the second part, message me <span class="codeword-text">MAPPED</span>.</span>
                 </div>
 
             <</append>>
@@ -2979,23 +2946,25 @@ Lorem Ipsum Welsh
 
 :: stage3-tutorial2-c-vn-transcript-eng [nobr]
 
-<p>Well done - now the fun part. Let’s day dream about this place!</p>
+<p>Well done - now the fun part. Let’s daydream about this place!</p>
  
-<p>Day dreaming takes place when our brains are given the space to float - much like drinking Frogscottle. </p>
+<p>Daydreaming takes place when our brains are given the space to float - much like drinking the BFG’s Frobscottle. </p>
+
 <p>
-    Daydreaming can be activated and I have made a DayDream Space. <br/>
+    Daydreaming can be activated. <br/>
     All you need is a piece of paper and a single pencil. <br/>
-    And then we will SCRIBBLE. <br/>
-    That’s right SCRIBBLE. <br/>
-    SCRIBBLE just means you get free drawing. <br/>
+    And then we will DOODLE. <br/>
+    That’s right, DOODLE. <br/>
+    DOODLE just means you get free drawing. <br/>
     Anything you draw is right. Nothing is wrong. <br/>
-    It’s all just a SCRIBBLE. <br/>
-    I love a SCRIBBLE. <br/>
+    It’s all just a DOODLE. <br/>
+    I love a DOODLE. <br/>
     I love to say the word too. <br/>
-    SCRIBBLE. <br/>
+    DOODLE. <br/>
 </p>
 
-<p>So, get what you need and then enter the word SCRIBBLE and I’ll give you a prompt to start. </p>
+<p>So, get what you need and then enter the word DOODLE and I’ll give you a prompt to start. </p>
+
 
 :: stage3-tutorial2-d [nobr]
 <<set $prevPassage to "stage3-tutorial2-c">>
@@ -3048,6 +3017,7 @@ Lorem Ipsum Welsh
      <<button "Daydream">>
         <<replace "#chatHistory">><</replace>>
         <<replace "#chatInputWrapper">><</replace>>
+        <<replace "#pageName">><h3>Daydream Doodling</h3><</replace>>
         <<replace "#videoWrapper">>
             <<include "scribble">>
         <</replace>>
@@ -3078,15 +3048,15 @@ Lorem Ipsum Welsh
     <</timed>>
 
 
-
+:: day-dreamers-guide-img [nobr]
+<img src="assets/img/placeholder.jpeg" alt="Day Dreamers Guide">
 
 :: stage3-tutorial2-e [nobr]
 <<set $prevPassage to "stage3-tutorial2-d">>
 <<set $passage to "stage3-tutorial2-e">>
 <<set $nextPassage to "stage3-tutorial2-f">>
-<<include "_templateFullScreenChat">>
+<<include "_templateVideoChat">>
 <<if $userchoices.language is "eng">>
-   
 <<timed 0.1s>>
     <<include "stage3-tutorial2-e-messages-eng">>
 <</timed>>
@@ -3096,14 +3066,21 @@ Lorem Ipsum Welsh
     <</timed>>
 <</if>>
 
+<<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <div id="picture-container">
+        <<include "day-dreamers-guide-img">>
+        </div>
+    <</replace>>
+    <</timed>>
 :: stage3-tutorial2-e-messages-eng [nobr]
 
 <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Great scribbling! 
+        <span>Great doodling
         <br/>
-Now, you are going to take the scribble into our Dreams for the BFG.</span>
+Now, you are going to take the doodle into our Dreams for the BFG.</span>
         </div>
         <</append>>
     <</timed>>
@@ -3111,7 +3088,7 @@ Now, you are going to take the scribble into our Dreams for the BFG.</span>
 <<timed 3s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>I want you to let the BFG know what he might find if he comes nearby - and also what you dream about for this place. </span>
+        <span>I want you to share your Daydreams about your area. </span>
         </div>
         <</append>>
     <</timed>>
@@ -3128,7 +3105,7 @@ Now, you are going to take the scribble into our Dreams for the BFG.</span>
 <<timed 10s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>You might include some of your scribbles - or not - but it should cover what you’d like to see in this place- to help make your community better. </span>
+        <span>You might include some of your doodles - or not - but it should cover what you’d like to see in this place- to help make your community happier.  </span>
         </div>
         <</append>>
     <</timed>>
@@ -3136,8 +3113,8 @@ Now, you are going to take the scribble into our Dreams for the BFG.</span>
 <<timed 15s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Teacher - you should have a template in your inbox. 
-When you have done send me the message POSTED</span>
+        <span>Teacher - you should have a template in your inbox. <br/>
+When you have done send me the message <span class="codeword-text">POSTED</span></span>
         </div>
         <</append>>
     <</timed>>
@@ -3148,6 +3125,8 @@ When you have done send me the message POSTED</span>
         <</append>>
     <</timed>>
 
+:: stage3-tutorial2-e-messages-cym [nobr]
+Lorem Ipsum Welsh
 
 :: stage3-tutorial2-f [nobr]
 <<set $prevPassage to "stage3-tutorial2-e">>
@@ -3188,16 +3167,36 @@ When you have done send me the message POSTED</span>
 
 <p>I love the idea of Day Dreamers Visitor’s Guides - not just because I came up with it - but also because it gets us thinking about what we have around us - appreciating what makes it special and highlighting where it could improve to make everyone in that community happier. </p>
 
-<p>The first act of making our community happier is dreaming up the ideas - next it’s about making them become reality. That takes time and hard work.</p> 
+<p>All of our communities are special in their own way - and they've got to being that way thanks to the people who are part of those communities. People like you who come up with bold, brilliant and slightly outrageous ideas to make the community happier. </p>
 
-<p>Kindness is what makes my community at the library special  - we're all nice to one another here, everyone is welcome! Perhaps that’s something to hold onto in your community too. </p>
+<p>
+    Lionel is always on the reception desk of our library, he is always thinking of ways to make our community feel welcome. It's a never ending vision we all commit to in the Library - a space for all. We all can play our part in making a community feel welcoming to others. 
+    Even small acts can make a big difference. <br/>
+    Lionel knows how to say hello in 26 languages and I’m trying to learn too!
+</p>
 
-<p> Keep your work as we’ll use them as part of what we share with the BFG. </p>
-<p>And it’s up to you, if you want to submit you can choose to do that now, or use one of my other tutorial videos if you’d like. Do it when you have the time - a job worth doing is worth doing well - rather than trying to rush everything through. </p>
+<p>
+    It’s small but it means the world to our community. <br/>
+    I mean, I don’t even know how you say hello in your area. 
+</p>
 
-<p>I just hope these dreams will work and help the BFG. </p>
+<p>
+    In England some say Hello. <br/>
+    In Welsh - It's Shwmae!<br/>
+    You may hear someone in Scotland say " Madainn Mhath" which is good morning in Scottish Gaelic.<br/>
+    In Northern Ireland, some people speak Irish or Ulster Scots and say Dia Duit!<br/>
+</p>
 
-<p>Well done again! </p>
+<p>Then I know, Czesc, Assalam-o-alaikum, Ola, Buna, Ciao, Sat Sri Akal. Languages are wonderful. </p>
+
+<p> Maybe you have lots of different ways of saying hello - try them out!  
+</p>
+<p>Right, you’ve probably got lots to get on with, so come back when you want another Dream Team video or if you are ready to send your Dreams to the BFG. </p>
+
+<p>In the meantime, why not try to learn a new way to say hello whilst I say goodbye. </p>
+
+<p>Well done again!</p>
+
 
 
 :: scribble [nobr]
@@ -3264,7 +3263,7 @@ When you have done send me the message POSTED</span>
 <<set $prevPassage to "stage3-tutorial3-video">>
 <<set $passage to "stage3-tutorial3-a">>
 <<set $nextPassage to "stage3-tutorial3-b">>
-<<include "_templateVideoChat">>
+<<include "_templateFullScreenChat">>
 <<if $userchoices.language is "eng">>
    
 <<timed 1s>>
@@ -3282,8 +3281,7 @@ When you have done send me the message POSTED</span>
 <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Ok - first things first. 
-        <br/>
+        <span>Ok - first things first.<br/>
 Can you think of something real you are dreaming for your future at the moment? 
 </span>
         </div>
@@ -3301,7 +3299,7 @@ Can you think of something real you are dreaming for your future at the moment?
 <<timed 8s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Share your dream with someone in your class and ask them about theirs. </span>
+        <span>Share your dream with someone in your class and ask them about theirs.  </span>
         </div>
         <</append>>
     <</timed>>
@@ -3309,7 +3307,8 @@ Can you think of something real you are dreaming for your future at the moment?
 <<timed 10s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>When you’ve done let me know by putting in DREAMING in the chat. </span>
+        <span>When you’ve done let me know by putting in <span class="codeword-text">DREAMING</span> in the chat. 
+</span>
         </div>
         <</append>>
     <</timed>>
@@ -3324,6 +3323,132 @@ Can you think of something real you are dreaming for your future at the moment?
 
 :: stage3-tutorial3-a-messages-cym [nobr]
 Lorem Ipsum Welsh
+
+:: futureFeet-questions [nobr]
+<<set $futureFeetQuestionIndex = 0>>
+<<set $futureFeetQuestions = [
+    {
+        eng: [
+            "To reach my Future Dream, something I need to learn is... "
+        ],
+        cym: [
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh"
+        ]
+    },
+    {
+        eng: [
+            "To reach my Future Dream, someone who can help me is..."
+        ],
+        cym: [
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh"
+        ]
+    },
+    {
+        eng: [
+            "To reach my Future Dream I need to be..."
+        ],
+        cym: [
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh"
+        ]
+    },
+    {
+        eng: [
+            "The first step I could take, perhaps this week, to reach my Future Dream is..."
+        ],
+        cym: [
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh",
+            "Lorem ipsum Welsh"
+        ]
+    },
+    
+]>>
+
+:: stage3-tutorial3-b-question [nobr]
+
+<<set _question = $futureFeetQuestions[$futureFeetQuestionIndex]>>
+
+<div class="mapping-question">
+
+    <<if $userchoices.language is "eng">>
+
+        <<for _line range _question.eng>>
+            <span><<= _line>></span>
+        <</for>>
+
+    <<elseif $userchoices.language is "cym">>
+
+        <<for _line range _question.cym>>
+            <span><<= _line>></span>
+        <</for>>
+
+    <</if>>
+
+</div>
+
+:: stage3-tutorial3-b-navigation [nobr]
+
+        <div class="mapping-navigation">
+<<if $futureFeetQuestionIndex > 0>>
+
+    <<button "Back">>
+
+        <<set $futureFeetQuestionIndex-->>
+
+        <<replace "#videoWrapper">>
+            <<include "stage3-tutorial3-b-question">>
+        <</replace>>
+
+        <<append "#videoWrapper">>
+            <<include "stage3-tutorial3-b-navigation">>
+        <</append>>
+
+    <</button>>
+
+<</if>>
+
+<span class="mapping-progress">
+    <<= $futureFeetQuestionIndex + 1>> / <<= $futureFeetQuestions.length>>
+</span>
+
+<<if $futureFeetQuestionIndex < $futureFeetQuestions.length - 1>>
+
+    <<button "Next">>
+
+        <<set $futureFeetQuestionIndex ++>>
+
+        <<replace "#videoWrapper">>
+            <<include "stage3-tutorial3-b-question">>
+        <</replace>>
+
+        <<append "#videoWrapper">>
+            <<include "stage3-tutorial3-b-navigation">>
+        <</append>>
+
+    <</button>>
+
+<<else>>
+
+
+        <<replace "#chatInputWrapper">>
+        <</replace>>
+
+
+        <<timed 5s>>
+            <<replace "#chatInputWrapper">>
+      <<button "Next">>
+          <<goto $nextPassage>>
+      <</button>>
+    <</replace>>
+
+        <</timed>>
+
+<</if>>
+</div>
 
 :: stage3-tutorial3-b [nobr]
 <<set $prevPassage to "stage3-tutorial3-a">>
@@ -3345,12 +3470,42 @@ Lorem Ipsum Welsh
 :: stage3-tutorial3-b-messages-eng [nobr]
 
 <<timed 1s>>
-     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial3-b-vn-transcript-eng">>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>OK - you should have shared a Future Dream now. Our dreams for the future change all the time - but great to have one for today.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+<<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Now, we are going to work out our Phenomenal Leap to get there. <br/>
+Well, as I said, more like smaller steps for us humans. <br/>
+I’ll send you some sentences to help you work out these steps. <br/>
+ </span>
+        </div>
         <</append>>
     <</timed>>
 
-<<timed 10s>>
+<<timed 7s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Answer this sentence... You might want to discuss in pairs before you write it down. 
+ </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+    <<timed 9s>>
+         <<replace "#videoWrapper">>
+        <<include "stage3-tutorial3-b-question">>
+    <</replace>>
+    <<append "#videoWrapper">>
+            <<include "stage3-tutorial3-b-navigation">>
+        <</append>>
+        <</timed>>
+
+/* <<timed 10s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>So, we need your feet. </span>
@@ -3380,7 +3535,7 @@ Lorem Ipsum Welsh
         <span>When you have drawn around your feet then let me know by messaging me the word FEET. </span>
         </div>
         <</append>>
-    <</timed>>
+    <</timed>> */
 
 
 
@@ -3390,19 +3545,7 @@ Lorem Ipsum Welsh
     <</replace>>
 <</timed>>
 
-:: stage3-tutorial3-b-vn-transcript-eng [nobr]
-<p>OK - you should have a Future Dream now. Our dreams for the future change all the time - but great to have one for today. Now, I was trying to think about how we could present it to the BFG and help you to reach those dreams - like you are helping me to reach mine. And one thing occurred to me…When the BFG is trying to reach somewhere he </p>
 
-<p>
-    LEAPS. <br/>
-    LEAPS.  <br/>
-    Phenomenal leaps. 
-</p>
-
-<p>To get to your destination, and make your Future Dream come true, you’re going to need to make leaps too. The BFG has HUGE feet - he performs LEAPS. But great leaps start with small steps. And small steps start with a single foot - like the one at the end of your leg. </p>
-
-:: stage3-tutorial3-b-messages-cym [nobr]
-Lorem Ipsum Welsh
 
 
 :: tutorial3-picture1 [nobr]
@@ -3655,104 +3798,12 @@ Lorem Ipsum Welsh
 
 <</if>>
 
+
+
 :: stage3-tutorial3-e [nobr]
 
 <<set $prevPassage to "stage3-tutorial3-d">>
 <<set $passage to "stage3-tutorial3-e">>
-<<set $nextPassage to "stage3-tutorial3-f">>
-
-<<include "_templateFullScreenChat">>
-
-<<if $userchoices.language is "eng">>
-<<timed 0.1s>>
-    <<include "stage3-tutorial3-e-messages-eng">>
-<</timed>>
-<<elseif $userchoices.language is "cym">>
-<<timed 0.1s>>
-    <<include "stage3-tutorial3-e-messages-cym">>
-    <</timed>>
-<</if>>
-
-:: stage3-tutorial3-e-messages-eng [nobr]
-<<timed 1s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>So now we have the steps to our Future Dream. We can string them together - much like bunting - so we can see the leaps we need to make to get there. Teacher, I’ll hand over to you and send me the word BUNTING when you want to move on. 
-</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 7s>>
-    <<append "#chatInputWrapper">>
-      <<include "codeword-chat">>
-        <</append>>
-    <</timed>>
-
-:: stage3-tutorial3-e-messages-cym [nobr]
-Lorem Ipsum Welsh
-
-
-:: stage3-tutorial3-f [nobr]
-
-<<set $prevPassage to "stage3-tutorial3-e">>
-<<set $passage to "stage3-tutorial3-f">>
-<<set $nextPassage to "stage3-tutorial3-g">>
-
-<<include "_templateFullScreenChat">>
-
-<<if $userchoices.language is "eng">>
-<<timed 0.1s>>
-    <<include "stage3-tutorial3-f-messages-eng">>
-<</timed>>
-<<elseif $userchoices.language is "cym">>
-<<timed 0.1s>>
-    <<include "stage3-tutorial3-f-messages-cym">>
-    <</timed>>
-<</if>>
-
-:: stage3-tutorial3-f-messages-eng [nobr]
-<<timed 1s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Ok, my friends, there is one more part of this that will help us to reach our Future Dreams. We need to tell the BFG our plans. 
-</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 5s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>He needs these to be shared so he can whisper them into the dreams of others. Your Future Dream might be an inspiration to someone else.
-</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 10s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>So, inspired by your footsteps, write about how you will reach your Future Dreams. You’ve done all the work already - now it’s time to let the BFG know your Future Dreams. 
-</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 15s>>
-    <<append "#chatInputWrapper">>
-        /* CODEWORD 9 */
-      <<include "codeword-chat">>
-        <</append>>
-    <</timed>>
-
-:: stage3-tutorial3-f-messages-cym [nobr]
-Lorem Ipsum Welsh
-
-:: stage3-tutorial3-g [nobr]
-
-<<set $prevPassage to "stage3-tutorial3-f">>
-<<set $passage to "stage3-tutorial3-g">>
 <<set $nextPassage to "stage3-tutorials-menu">>
 
 <<include "_templateFullScreenChat">>
@@ -3766,6 +3817,8 @@ Lorem Ipsum Welsh
     <<include "stage3-tutorial3-g-messages-cym">>
     <</timed>>
 <</if>>
+
+<<run setup.completeTutorial(3)>>
 
 :: stage3-tutorial3-g-messages-eng [nobr]
 <<timed 1s>>
@@ -3787,17 +3840,16 @@ Lorem Ipsum Welsh
 
 :: stage3-tutorial3-g-transcript-eng [nobr]
 <p>
-    You have leaped for your Future Dreams. <br/>
-    Or at least planned how to take that first step.  <br/>
-    It’s hard to say what you want to do so well done on working on something today. <br/>
+    You have leapt for your Future Dreams. <br/>
+    Or at least planned how to take that first step. <br/>
+    It’s hard to say what you want to do so well done for finding something today. <br/>
     It might change tomorrow, that’s ok. <br/>
     Mine changes all the time too. <br/>
     One time I dreamt I was going to be a Zoo Keeper, but now I just want to go to the Zoo! <br/>
     But at least we have made something now that holds our potential Future Dreams. <br/>
     I think the BFG will love to read these and they will inspire others too. <br/>
-    So, what next? It’s up to you. You can choose to submit or try another tutorial video? <br/><br/>
+    So, what next? It’s up to you. You can choose to submit or try another tutorial video? <br/>
     If you want to come back to complete that is A OK. <br/>
-    It’s always important to remember not to rush as it is better to do it right than to do it twice.<br/>
 </p>
 
 <p>Speak soon. </p>
@@ -3840,9 +3892,11 @@ Lorem Ipsum Welsh
 
 :: stage3-submission-call-bea-messages-cym [nobr]
 
+<<replace "#heroImage">>
 <<button "Call Bea Welsh">>
-    <<goto $nextpass>>
+    <<goto $nextPassage>>
 <</button>>
+<</replace>>
 
 :: stage3-submission-video [nobr]
 <<set $prevPassage to "stage3-submission-call-bea">>
@@ -3891,7 +3945,7 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-submission-video">>
 <<set $passage to "stage3-submission-a">>
 <<set $nextPassage to "stage3-submission-b">>
-<<include "_templateVideoChat">>
+<<include "_templateFullScreenChat">>
 <<if $userchoices.language is "eng">>
    
       <<timed 1s>>
@@ -3965,7 +4019,7 @@ Lorem Ipsum Welsh
 <<timed 7s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Importantly, there’s a front cover to design - unique to your Dream Team Dream Book. It should have your class name on it definitely - but other than that it is over to you! I’ve sent over a design but I need you to add to it. </span>
+        <span>Importantly, there’s a front cover to design - unique to your Dream Team Dream Book. I’ve sent over a design but I need you to add to it. </span>
         </div>
         <</append>>
     <</timed>>
@@ -4000,11 +4054,10 @@ Lorem Ipsum Welsh
 :: stage3-submission-c [nobr]
 <<set $prevPassage to "stage3-submission-b">>
 <<set $passage to "stage3-submission-c">>
-<<set $nextPassage to "stage3-tutorial1-c">>
+<<set $nextPassage to $userchoices.landingPage>>
 <<include "_templateFullScreenChat">>
 <<if $userchoices.language is "eng">>
-   
-      <<timed 0.11s>>
+   <<timed 0.1s>>
     <<include "stage3-submission-c-messages-eng">>
      <</timed>>
 <<elseif $userchoices.language is "cym">>
@@ -4019,6 +4072,7 @@ Lorem Ipsum Welsh
 
 <<timed 1s>>
     <<append "#chatHistory">>
+  
          <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-submission-c-vn-transcript-eng">>
         <</append>>
     <</timed>>
@@ -4030,17 +4084,19 @@ Lorem Ipsum Welsh
     <<append "#chatInputWrapper">>
         <<button "Finish">>
             <<append "#fullScreenChatMain">>
-                <div class="bubbles-wrapper">
-            <div id="bubbles"></div>
-        
-        </div>
+            <div class="bubbles-wrapper">
+              <div id="bubbles"></div>
+            </div>
                 <</append>>
-  
-<<run setup.startBubbles()>>
-
-            <</button>>
-     
-        <</append>>
+  /* RUN BUBBLES  */
+        <<run setup.startBubbles()>>
+        <<timed 10s>>
+            <<goto $nextPassage>>
+        <</timed>>
+        <</button>>
+     <</append>>
+/* GO BACK TO LANDING  */
+   
     <</timed>>
 
 
@@ -4050,10 +4106,12 @@ Lorem Ipsum Welsh
 :: stage3-submission-c-vn-transcript-eng [nobr]
 <p>You’re ready - amazing news. </p>
 
-<p>I’m getting ready myself -  I’ve been thinking about the Dream Team. I mean do they have a moto? A headquarters? Do they wear hats? Do they all have to eat Snozzcumbers for breakfast?</p>
+<p>I’m getting ready myself -  I’ve been thinking about the Dream Team. I mean do they have a motto? A headquarters? Do they wear hats? Do they all have to drink Frobscottle for breakfast!? It is delicious but it does make you toot.  </p>
 
-<p>Sorry - a bit over excited. I’m so excited to see your Dream Book. 
-<br/>It seems like it is all coming together now. </p>
+<p>
+    Sorry - a bit over excited. I’m so excited to see your Dream Book. <br/>
+    It seems like it is all coming together now. 
+</p>
 
 <p>I think the BFG is going to be so impressed with all of the work we have done. </p>
 
@@ -4061,7 +4119,7 @@ Lorem Ipsum Welsh
 
 <p>I’ll message you when he has come to pick them up!</p>
 
-<p>Until then my friends, Dream Team out.</p>
+<p>Until then my friends, Dream Team out.  </p>
 
 
 :: stage3-submission-c-vn-transcript-cym [nobr]
@@ -4077,10 +4135,11 @@ Lorem Ipsum Welsh
 <<include "_templateFullScreenVideo">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
-    <<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
         <<include "stage4-video-video-eng">>
+       
     <</replace>>
+
     <</timed>>
      <<timed 5s>>
         <<replace "#footer-next">>
@@ -4089,10 +4148,11 @@ Lorem Ipsum Welsh
      <</timed>>
 <<elseif $userchoices.language is "cym">>
     <<timed 0.1s>>
-    <<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
         <<include "stage4-video-video-cym">>
+      
      <</replace>>
+
      <</timed>>
        <<timed 5s>>
         <<replace "#footer-next">>
@@ -4109,9 +4169,7 @@ Lorem Ipsum Welsh
 <iframe width='800px' height='450px' 
       src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
 
-      <<button "Replay">>
-        <<goto $passage>>
-        <</button>>
+    
 
 :: stage4-video-video-cym[nobr]
 /* VIDEO 8 */
@@ -4132,9 +4190,9 @@ Lorem Ipsum Welsh
 <<include "_templateFullScreenVideo">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
-    <<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
         <<include "stage5-video-video-eng">>
+    
     <</replace>>
     <</timed>>
      <<timed 5s>>
@@ -4147,6 +4205,7 @@ Lorem Ipsum Welsh
      <<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
     <<replace "#videoWrapper">>
         <<include "stage5-video-video-cym">>
+     
      <</replace>>
      <</timed>>
        <<timed 5s>>
@@ -4164,8 +4223,8 @@ Lorem Ipsum Welsh
 <iframe width='800px' height='450px' 
       src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
 
-      <<button "Replay">>
-        <<goto $passage>>
+   <<button "Replay">>
+         <<goto $passage>>
         <</button>>
 
 :: stage5-video-video-cym[nobr]
@@ -4176,4 +4235,3 @@ Lorem Ipsum Welsh
 <<button "Replay">>
         <<goto $passage>>
         <</button>>
-
