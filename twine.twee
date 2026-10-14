@@ -492,8 +492,8 @@ setup.dreamJarDrag = () => {
 
 <<set $codewordsStage3 to {
    codeword1: {
-        startingPassage: "stage3-tutorial1-f",
-        destinationPassage: "stage3-tutorial1-g",
+        startingPassage: "stage3-tutorial1-g",
+        destinationPassage: "stage3-tutorial1-h",
         eng: "DREAM", 
         cym: "DREAM"
     }, 
@@ -2191,25 +2191,35 @@ Lorem Ipsum Welsh
 :: stage3-tutorial1-pictures-container [nobr]
 <<if $passage is "stage3-tutorial1-b">>
 <div class="picture-container" id="pictureContainer">
-    <<include "tutorial1-picture1">>
+     <<include "tutorial1-empty-picture">>
+    <<include "tutorial1-empty-picture">>
+    <<include "tutorial1-empty-picture">>
+    <<include "tutorial1-empty-picture">>
+    <<include "tutorial1-empty-picture">>
     </div>
 <<elseif $passage is "stage3-tutorial1-c">>
     <div class="picture-container" id="pictureContainer">
-    <<include "tutorial1-picture1">>
-    <<include "tutorial1-picture2">>
+        <<include "tutorial1-picture1">>
+       <<include "tutorial1-empty-picture">>
+        <<include "tutorial1-empty-picture">>
+        <<include "tutorial1-empty-picture">>
+        <<include "tutorial1-empty-picture">>
     </div>
 <<elseif $passage is "stage3-tutorial1-d">>
     <div class="picture-container" id="pictureContainer">
     <<include "tutorial1-picture1">>
     <<include "tutorial1-picture2">>
-    <<include "tutorial1-picture3">>
+    <<include "tutorial1-empty-picture">>
+    <<include "tutorial1-empty-picture">>
+    <<include "tutorial1-empty-picture">>
     </div>
 <<elseif $passage is "stage3-tutorial1-e">>
     <div class="picture-container" id="pictureContainer">
     <<include "tutorial1-picture1">>
     <<include "tutorial1-picture2">>
     <<include "tutorial1-picture3">>
-    <<include "tutorial1-picture4">>
+    <<include "tutorial1-empty-picture">>
+    <<include "tutorial1-empty-picture">>
     </div>
 <<elseif $passage is "stage3-tutorial1-f">>
     <div class="picture-container" id="pictureContainer">
@@ -2217,10 +2227,13 @@ Lorem Ipsum Welsh
     <<include "tutorial1-picture2">>
     <<include "tutorial1-picture3">>
     <<include "tutorial1-picture4">>
-    <<include "tutorial1-picture5">>
+    <<include "tutorial1-empty-picture">>
     </div>
 
 <</if>>
+
+:: tutorial1-empty-picture [nobr]
+   <img src="assets/img/stage3-tutorial1/empty-picture.png" alt="Empty picture" >
 
 :: tutorial1-picture1 [nobr]
    <img src="assets/img/stage3-tutorial1/picture-1.png" alt="Lionel" >
@@ -2342,39 +2355,38 @@ Lorem Ipsum Welsh
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <div class="message-received">
-        <span>This is the image from my dream - a surprise present from Lionel</span>
-        </div>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-b-vn-transcript-eng"
+         "stage3-tutorial1-b-vn-triggered-content">>
         <</append>>
     <</timed>>
+    
 
-<<timed 5s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Then, I’m going to make a story out of it. That is the start - or the Opening - the next part is the Mission where something changes and that could be ‘I open it and it is a Magic Book which has lots of spells in it’. 
-</span>
-        </div>
-        <</append>>
+
+
+:: stage3-tutorial1-b-messages-cym [nobr]
+Lorem ipsum Welsh
+
+:: stage3-tutorial1-b-vn-transcript-eng [nobr]
+I’m going to make a full Night-Time Dream out of the image I can remember from my dream - the surprise present. This will be the <span class="codeword-text">OPENING</span> to the story I’m creating for the BFG. 
+
+:: stage3-tutorial1-b-vn-triggered-content [nobr]
+<<timed 4s>>
+    <<replace "#pictureContainer">>
+      <<include "tutorial1-picture1">>
+         <<include "tutorial1-empty-picture">>
+        <<include "tutorial1-empty-picture">>
+        <<include "tutorial1-empty-picture">>
+        <<include "tutorial1-empty-picture">>
+        <</replace>>
     <</timed>>
 
-<<timed 17s>>
-    <<append "#pictureContainer">>
-      <<include "tutorial1-picture2">>
-        <</append>>
-    <</timed>>
-
-<<timed 20s>>
+<<timed 10s>>
     <<replace "#chatInputWrapper">>
         <div class="btn-option-wrapper">
             <<include "nextBtn">>
         </div>
     <</replace>>
 <</timed>>
-
-:: stage3-tutorial1-b-messages-cym [nobr]
-Lorem ipsum Welsh
-
-
 :: stage3-tutorial1-c [nobr]
 <<set $prevPassage to "stage3-tutorial1-b">>
 <<set $passage to "stage3-tutorial1-c">>
@@ -2398,23 +2410,28 @@ Lorem ipsum Welsh
 
 
 :: stage3-tutorial1-c-messages-eng [nobr]
-
 <<timed 1s>>
     <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Then a challenge or problem occurs. In mine it could be - an evil frog wants to steal the book. </span>
-        </div>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-c-vn-transcript-eng"
+         "stage3-tutorial1-c-vn-triggered-content">>
         <</append>>
     <</timed>>
+    
+:: stage3-tutorial1-c-vn-transcript-eng [nobr]
+The next part is the <span class="codeword-text">MISSION</span>  where something changes and that could be ‘I open the present inside is a Magic Book, which is full of spells in it’.  
 
-
-<<timed 6s>>
-    <<append "#pictureContainer">>
-      <<include "tutorial1-picture3">>
-        <</append>>
+:: stage3-tutorial1-c-vn-triggered-content [nobr]
+<<timed 4s>>
+    <<replace "#pictureContainer">>
+      <<include "tutorial1-picture1">>
+        <<include "tutorial1-picture2">>
+        <<include "tutorial1-empty-picture">>
+        <<include "tutorial1-empty-picture">>
+        <<include "tutorial1-empty-picture">>
+        <</replace>>
     <</timed>>
 
-<<timed 8s>>
+<<timed 10s>>
     <<replace "#chatInputWrapper">>
         <div class="btn-option-wrapper">
             <<include "nextBtn">>
@@ -2449,31 +2466,34 @@ Lorem Ipsum Welsh
  <</timed>>
 
 :: stage3-tutorial1-d-messages-eng [nobr]
-
 <<timed 1s>>
     <<append "#chatHistory">>
-         <div class="message-received">
-        <span>After the Problem there is a Solution - in my story Bea uses the magic book to scare the frog away.</span>
-        </div>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-d-vn-transcript-eng"
+         "stage3-tutorial1-d-vn-triggered-content">>
         <</append>>
     <</timed>>
+    
+:: stage3-tutorial1-d-vn-transcript-eng [nobr]
+Then a <span class="codeword-text">CHALLENGE</span>  or <span class="codeword-text">PROBLEM</span>  occurs. In mine it could be - an evil frog wants to steal the book. 
 
-
-<<timed 7s>>
-    <<append "#pictureContainer">>
-      <<include "tutorial1-picture4">>
-        <</append>>
+:: stage3-tutorial1-d-vn-triggered-content [nobr]
+<<timed 4s>>
+    <<replace "#pictureContainer">>
+      <<include "tutorial1-picture1">>
+        <<include "tutorial1-picture2">>
+          <<include "tutorial1-picture3">>
+        <<include "tutorial1-empty-picture">>
+        <<include "tutorial1-empty-picture">>
+        <</replace>>
     <</timed>>
 
-<<timed 8s>>
+<<timed 10s>>
     <<replace "#chatInputWrapper">>
         <div class="btn-option-wrapper">
             <<include "nextBtn">>
         </div>
     <</replace>>
 <</timed>>
-
-
 :: stage3-tutorial1-d-messages-cym [nobr]
 Lorem Ipsum Welsh
 
@@ -2500,23 +2520,29 @@ Lorem Ipsum Welsh
  <</timed>>
 
 :: stage3-tutorial1-e-messages-eng [nobr]
-
 <<timed 1s>>
     <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Then an Ending - Bea hides the book in the library.</span>
-        </div>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-e-vn-transcript-eng"
+         "stage3-tutorial1-e-vn-triggered-content">>
         <</append>>
     <</timed>>
+    
+:: stage3-tutorial1-e-vn-transcript-eng [nobr]
 
+After the <span class="codeword-text">PROBLEM</span>  there is a <span class="codeword-text">SOLUTION</span>  - in my story I use the magic book to scare the frog away
 
-<<timed 5s>>
-    <<append "#pictureContainer">>
-      <<include "tutorial1-picture5">>
-        <</append>>
+:: stage3-tutorial1-e-vn-triggered-content [nobr]
+<<timed 4s>>
+    <<replace "#pictureContainer">>
+      <<include "tutorial1-picture1">>
+        <<include "tutorial1-picture2">>
+          <<include "tutorial1-picture3">>
+        <<include "tutorial1-picture4">>
+        <<include "tutorial1-empty-picture">>
+        <</replace>>
     <</timed>>
 
-<<timed 6s>>
+<<timed 10s>>
     <<replace "#chatInputWrapper">>
         <div class="btn-option-wrapper">
             <<include "nextBtn">>
@@ -2550,55 +2576,40 @@ Lorem Ipsum welsh
  <</timed>>
 
 :: stage3-tutorial1-f-messages-eng [nobr]
-
 <<timed 1s>>
     <<append "#chatHistory">>
-         <div class="message-received">
-        <span>It’s a story totally made up from my imagination from one image from my Night-Time Dream. </span>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-f-vn-transcript-eng"
+         "stage3-tutorial1-f-vn-triggered-content">>
+        <</append>>
+    <</timed>>
+    
+:: stage3-tutorial1-f-vn-transcript-eng [nobr]
+
+Then an <span class="codeword-text">ENDING</span> - I hide the book in the library so no evil frogs can ever find it! 
+
+:: stage3-tutorial1-f-vn-triggered-content [nobr]
+<<timed 4s>>
+    <<replace "#pictureContainer">>
+      <<include "tutorial1-picture1">>
+        <<include "tutorial1-picture2">>
+          <<include "tutorial1-picture3">>
+        <<include "tutorial1-picture4">>
+         <<include "tutorial1-picture5">>
+        <</replace>>
+    <</timed>>
+
+<<timed 10s>>
+    <<replace "#chatInputWrapper">>
+        <div class="btn-option-wrapper">
+            <<include "nextBtn">>
         </div>
-        <</append>>
-    <</timed>>
-
-<<timed 7s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Now over to you, I’ve made a Night-Time Dream Sequence resource that you can use. </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 11s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>You can choose to use my first image OR you could use your own NIGHT-TIME DREAM image. 
-        <br/>
-        You might have some in your Dream Jar. </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 20s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>When you are finished, send me the word DREAM. </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 22s>>
-    <<append "#chatInputWrapper">>
-      <<include "codeword-chat">>
-        <</append>>
-    <</timed>>
-
-
-:: stage3-tutorial1-f-messages-cym [nobr]
-Lorem Ipsum Welsh
+    <</replace>>
+<</timed>>
 
 :: stage3-tutorial1-g [nobr]
 <<set $prevPassage to "stage3-tutorial1-f">>
 <<set $passage to "stage3-tutorial1-g">>
-<<set $nextPassage to "stage3-tutorials-menu">>
+<<set $nextPassage to "stage3-tutorial1-h">>
 <<include "_templateFullScreenChat">>
 <<if $userchoices.language is "eng">>
      <<timed 1s>>
@@ -2610,13 +2621,74 @@ Lorem Ipsum Welsh
     <</timed>>
 <</if>>
 
+:: stage3-tutorial1-g-messages-eng [nobr]
+<<timed 1s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>It’s a story totally made up from my imagination from one image from my dream to make a full Night-time Dream for the BFG.   </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Now over to you, I’ve made a Night-Time Dream Sequence resource that you can use. <br/>
+You can choose to use my first image from my Dream OR you could use your own starter Night-time dream image from your Dream Jar. 
+  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Remember, the BFG is looking for exciting, fun stories with happy endings that can go into his Dream Jar and we want these to be the best they can be for him. 
+  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 15s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>When you are finished, send me the word DREAM. 
+  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+ <<timed 17s>>
+  <<replace "#chatInputWrapper">>
+      <<include "codeword-chat">>
+  <</replace>>
+        <</timed>>
+
+:: stage3-tutorial1-g-messages-cym [nobr]
+Lorem Ipsum Welsh
+
+:: stage3-tutorial1-h [nobr]
+<<set $prevPassage to "stage3-tutorial1-g">>
+<<set $passage to "stage3-tutorial1-h">>
+<<set $nextPassage to "stage3-tutorials-menu">>
+<<include "_templateFullScreenChat">>
+<<if $userchoices.language is "eng">>
+     <<timed 1s>>
+    <<include "stage3-tutorial1-h-messages-eng">>
+     <</timed>>
+<<elseif $userchoices.language is "cym">>
+    <<timed 1s>>
+    <<include "stage3-tutorial1-h-messages-cym">>
+    <</timed>>
+<</if>>
+
 <<run setup.completeTutorial(1)>>
 
-:: stage3-tutorial1-g-messages-eng [nobr]
+:: stage3-tutorial1-h-messages-eng [nobr]
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-g-transcript-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-h-vn-transcript-eng">>
         <</append>>
     <</timed>>
 
@@ -2631,10 +2703,10 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
 
-:: stage3-tutorial1-g-messages-cym [nobr]
+:: stage3-tutorial1-h-messages-cym [nobr]
 Lorem Ipsum Welsh
 
-:: stage3-tutorial1-g-transcript-eng [nobr]
+:: stage3-tutorial1-h-vn-transcript-eng [nobr]
 <p>Wonderful work Dream Team I’m sure. </p>
 
 <p>I love stories - as I’m sure you have gathered - and so it is brilliant to know that you have created Night-Time Dreams for the BFG to collect. They might be bizarre, silly or mad but that is brilliant - all dreams are unique and we never know what or who they’ll inspire.  </p>
