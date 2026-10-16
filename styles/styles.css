@@ -59,9 +59,12 @@
 @font-face {
   font-family: 'Fantastic Mr Font';
   src:
-    url('/assets/font/FantasticMrFont.woff2') format('woff2'),
-    url('/assets/font/FantasticMrFont.woff') format('woff'),
-    url('/assets/font/FantasticMrFont.ttf') format('truetype');
+    url('/assets/font/FantasticMrFont/FantasticMrFont-Black.woff2')
+      format('woff2'),
+    url('/assets/font/FantasticMrFont/FantasticMrFont-Black.woff')
+      format('woff'),
+    url('/assets/font/FantasticMrFont/FantasticMrFont-Black.ttf')
+      format('truetype');
   font-weight: 400 700;
   font-style: normal;
   font-display: swap;
@@ -196,6 +199,20 @@ footer {
   padding: 1rem 2rem;
   background: var(--palette-slate);
 }
+
+footer > .footer-back-button > a > img,
+footer > .footer-next-button > a > img,
+footer > #footer-next > .footer-next-button > a > img {
+  content: '';
+  display: block;
+  width: 3.2rem;
+  height: 2.5rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  filter: brightness(0) invert(1);
+}
+
 footer > a > img {
   max-width: 50px;
 }
@@ -221,10 +238,6 @@ header .logo-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.page-wrapper.full-screen-landing {
-  padding-bottom: 10rem;
 }
 
 /* TYPOGRAPHY  */
@@ -392,7 +405,7 @@ input[type='text']::placeholder {
   flex: 1;
   width: 100%;
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 2fr 1fr;
   justify-items: center;
   padding: 2rem;
   text-align: center;
@@ -414,6 +427,13 @@ input[type='text']::placeholder {
 .main-landing button {
   justify-self: center;
   margin-top: 2rem;
+}
+
+.hero-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* VIDEO & CHAT  */
@@ -516,10 +536,39 @@ input[type='text']::placeholder {
   margin-bottom: 0;
 }
 
-#chatHistory > .voicenote > a > img {
-  max-width: 40px;
+.voicenote-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  padding: 0;
   margin-right: 2rem;
-  filter: invert();
+  background: white;
+  border: 0;
+  border-radius: 50%;
+  color: black;
+  cursor: pointer;
+}
+
+.voicenote-toggle svg {
+  width: 60%;
+  height: 60%;
+}
+
+.voicenote-toggle:hover,
+.voicenote-toggle:focus {
+  background: var(--palette-pink);
+}
+
+.voicenote .icon-pause,
+.voicenote.is-playing .icon-play {
+  display: none;
+}
+
+.voicenote.is-playing .icon-pause {
+  display: block;
 }
 
 #chatHistory > .voicenote-transcript-link {
@@ -739,8 +788,7 @@ input[type='text']::placeholder {
   border-radius: 8px;
 }
 
-.full-screen-chat .voicenote a img {
-  width: 40px;
+.full-screen-chat .voicenote .voicenote-toggle {
   margin-right: 1rem;
 }
 
@@ -1037,6 +1085,11 @@ input[type='text']::placeholder {
 }
 
 /* CONNECTING  */
+.connecting > .main-content-center {
+  grid-template-rows: inherit;
+  margin-block-end: 0;
+}
+
 .connecting-image-wrapper {
   display: grid;
   place-items: center;
@@ -1360,6 +1413,19 @@ main.tutorials-menu {
   text-align: center;
 }
 
+.mapping-question {
+  animation: mapping-question-fade-in 0.35s ease 0.2s both;
+}
+
+@keyframes mapping-question-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .mapping-navigation {
   display: flex;
   gap: 2rem;
@@ -1581,19 +1647,42 @@ main.tutorials-menu {
   height: 0.9rem;
   margin: -0.45rem 0 0 -0.45rem;
   border-radius: 50%;
-  background: radial-gradient(circle, #fff 0%, #ffe45c 40%, rgba(255, 200, 0, 0) 100%);
+  background: radial-gradient(
+    circle,
+    #fff 0%,
+    #ffe45c 40%,
+    rgba(255, 200, 0, 0) 100%
+  );
   box-shadow: 0 0 0.6rem 0.25rem rgba(255, 220, 60, 0.8);
   pointer-events: none;
-  animation: map-spot-pop 0.5s ease-out both, map-spot-pulse 1.6s ease-in-out 0.5s infinite;
+  animation:
+    map-spot-pop 0.5s ease-out both,
+    map-spot-pulse 1.6s ease-in-out 0.5s infinite;
 }
 
 @keyframes map-spot-pop {
-  from { transform: scale(0); opacity: 0; }
-  60% { transform: scale(2); opacity: 1; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(2);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes map-spot-pulse {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.3); opacity: 0.7; }
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.7;
+  }
 }
