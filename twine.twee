@@ -321,6 +321,65 @@ setup.scrollIntoView = (id) => {
   });
 };
 
+// Auto-scroll #chatHistory whenever a message is added, on every passage
+setup.chatObserver = null;
+$(document).on(':passagedisplay', () => {
+  if (setup.chatObserver) {
+    setup.chatObserver.disconnect();
+    setup.chatObserver = null;
+  }
+  if (!document.getElementById("scribbleTimer")) {
+    setup.stopScribbleTimer();
+  }
+  const chat = document.getElementById("chatHistory");
+  if (!chat) return;
+  setup.chatObserver = new MutationObserver(() => setup.scrollIntoView("chatHistory"));
+  setup.chatObserver.observe(chat, { childList: true });
+});
+
+setup.scribbleTimerInterval = null;
+setup.scribbleTimerFrame = null;
+setup.stopScribbleTimer = () => {
+  if (setup.scribbleTimerInterval !== null) {
+    clearInterval(setup.scribbleTimerInterval);
+    setup.scribbleTimerInterval = null;
+  }
+  if (setup.scribbleTimerFrame !== null) {
+    cancelAnimationFrame(setup.scribbleTimerFrame);
+    setup.scribbleTimerFrame = null;
+  }
+};
+
+setup.startScribbleTimer = (durationSeconds = 300) => {
+  setup.stopScribbleTimer();
+
+  const endTime = Date.now() + durationSeconds * 1000;
+  setup.scribbleTimerFrame = requestAnimationFrame(() => {
+    setup.scribbleTimerFrame = null;
+    const timer = document.getElementById("scribbleTimer");
+    if (!timer) {
+      console.error("Scribble countdown element with ID 'scribbleTimer' not found.");
+      return;
+    }
+
+    const updateTimer = () => {
+      const secondsRemaining = Math.max(0, Math.ceil((endTime - Date.now()) / 1000));
+      const minutes = Math.floor(secondsRemaining / 60);
+      const seconds = secondsRemaining % 60;
+
+      timer.textContent = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+      timer.setAttribute("aria-label", `${minutes} minutes ${seconds} seconds remaining`);
+
+      if (secondsRemaining === 0) {
+        setup.stopScribbleTimer();
+      }
+    };
+
+    updateTimer();
+    setup.scribbleTimerInterval = setInterval(updateTimer, 1000);
+  });
+};
+
 /* Start bubble animation by injecting bubble elements into #bubbles */
 setup.startBubbles = () => {
 
@@ -461,8 +520,6 @@ setup.dreamJarDrag = () => {
 
 /* Initialise future feet questions */
 <<include "futureFeet-questions">>
-
-
 
 :: codeword-storage [nobr]
 <<set $codewordsLanding to {
@@ -867,15 +924,15 @@ codeword11: {
 
 :: choose-video-language [nobr]
 <<if $userchoices.language is "eng">>
-     <<timed 0.1s>>
-    <<set $videoToShow to $passage + "-video-eng">>
-     <</timed>>
+  <<set $videoToShow to $passage + "-video-eng">>
 <<elseif $userchoices.language is "cym">>
- <<timed 0.1s>>
     <<set $videoToShow to $passage + "-video-cym">>
-     <</timed>>
 <</if>>
-<<include $videoToShow>>
+<<timed 0.1s>>
+<<replace "#videoWrapper">>
+    <<include $videoToShow>>
+<</replace>>
+<</timed>>
 
 :: landing-text [nobr]
 <p>landing KS$userchoices.keyStage $userchoices.language</p>
@@ -1198,13 +1255,6 @@ codeword11: {
 <<include "_templateFullScreenVideo">>
 <<include "choose-video-language">>
 
-:: stage2-video-rewatch [nobr]
-<<set $prevPassage to "stage2-intro-b">>
-<<set $passage to "stage2-video-rewatch">>
-<<set $nextPassage to "stage2-intro-b">>
-<<include "_templateFullScreenVideo">>
-<<include "choose-video-language">>
-
 
 :: stage2-video-video-eng[nobr]
 /* VIDEO 2: BEA ‘LIVE’ */
@@ -1212,6 +1262,23 @@ codeword11: {
       src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
 
 :: stage2-video-video-cym[nobr]
+/* VIDEO 2: BEA ‘LIVE’ */
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+:: stage2-video-rewatch [nobr]
+<<set $prevPassage to "stage2-intro-b">>
+<<set $passage to "stage2-video-rewatch">>
+<<set $nextPassage to "stage2-intro-b">>
+<<include "_templateFullScreenVideo">>
+<<include "choose-video-language">>
+
+:: stage2-video-rewatch-video-eng[nobr]
+/* VIDEO 2: BEA ‘LIVE’ */
+<iframe width='800px' height='450px' 
+      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+:: stage2-video-rewatch-video-cym[nobr]
 /* VIDEO 2: BEA ‘LIVE’ */
 <iframe width='800px' height='450px' 
       src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
@@ -1430,9 +1497,7 @@ codeword11: {
 <<include "_templateFullScreenChat">>
 <<include "choose-messages-language">>
 :: stage2-exercise-dreamJar-a-messages-eng [nobr]
- <<timed 0.1s>>
-    <<replace "#pageName">><h3>Dream Jar</h3><</replace>>
-    <</timed>>
+
 <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
@@ -1517,9 +1582,7 @@ codeword11: {
 
 
 :: stage2-exercise-dreamJar-b-messages-eng [nobr]
-<<timed 0.1s>>
-    <<replace "#pageName">><h3>Dream Jar</h3><</replace>>
-    <</timed>>
+
 <<timed 1s>>
     <<append "#chatHistory">>
          <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng" "stage2-exercise-dreamJar-b-vn-triggered-content-eng">>
@@ -1700,9 +1763,7 @@ Lorem ipsum Welsh
 <<include "footer">>
 
 :: stage2-exercise-dreamJar-d-messages-eng [nobr]
- <<timed 0.1s>>
-    <<replace "#pageName">><h3>Dream Jar</h3><</replace>>
-    <</timed>>
+
      <<replace "#videoWrapper">>
     <</replace>>
 <<timed 1s>>
@@ -1968,7 +2029,7 @@ Lorem Ipsum Welsh
 <<include "_templateFullScreenVideo">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
-    <<replace "#pageName">><h3>Stage $userchoices.stage</h3><</replace>>
+   
     <<replace "#videoWrapper">>
         <<include "stage3-video-video-eng">>
     <</replace>>
@@ -2730,11 +2791,7 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial2-b">>
 <<set $nextPassage to "stage3-tutorial2-c">>
 
-<<set $mappingQuestionIndex = 0>>
-
 <<include "_templateVideoChat">>
-
-
 
 <<timed 1s>>
 
@@ -2759,15 +2816,9 @@ Lorem Ipsum Welsh
 
 <div class="mapping-question">
 
-    <<if $userchoices.language is "eng">>
-
-        <span><<= _question.eng.question>></span>
-
-    <<elseif $userchoices.language is "cym">>
-
-        <span><<= _question.cym.question>></span>
-
-    <</if>>
+    <<for _line range _question[$userchoices.language]>>
+        <span><<= _line>></span>
+    <</for>>
 
 </div>
 
@@ -2833,6 +2884,7 @@ Lorem Ipsum Welsh
         <<timed 7s>>
 
             <<replace "#chatInputWrapper">>
+                /* $codewordsStage3.codeword2 */
                 <<include "codeword-chat">>
             <</replace>>
 
@@ -2930,9 +2982,9 @@ Lorem Ipsum Welsh
      <<button "Daydream">>
         <<replace "#chatHistory">><</replace>>
         <<replace "#chatInputWrapper">><</replace>>
-        <<replace "#pageName">><h3>Daydream Doodling</h3><</replace>>
         <<replace "#videoWrapper">>
             <<include "scribble">>
+            <<run setup.startScribbleTimer()>>
         <</replace>>
 
         <<timed 5s>>
@@ -2946,7 +2998,11 @@ Lorem Ipsum Welsh
             <<button "SCRIBBLE">>
                 <<replace "#videoWrapper">>
                 <<include "scribble">>
-                <</replace>>
+                   <<run setup.startScribbleTimer()>>
+                   <</replace>>
+                   <<timed 300s>>
+                       <<goto $nextPassage>>
+                    <</timed>>
                 <</button>>
             <<button "MOVE ON">>
                 <<goto $nextPassage>>
@@ -3098,24 +3154,91 @@ Lorem Ipsum Welsh
 
 
 :: scribble [nobr]
-<div class="scribble-window" aria-label="Animated scribble">
-    <svg class="scribble-svg"
-         viewBox="0 0 800 450"
-         preserveAspectRatio="none"
-         xmlns="http://www.w3.org/2000/svg">
+<div class="neon-scene">
 
-        <rect width="800" height="450" class="scribble-bg"/>
+    <div class="scribble-timer" id="scribbleTimer" role="timer" aria-label="5 minutes remaining" aria-live="off">05:00</div>
 
-        <g class="scribble-lines">
-            <path d="M-50,120 C100,20 180,250 300,120 S500,20 850,180"/>
-            <path d="M-50,300 C100,180 220,400 350,250 S600,120 850,300"/>
-            <path d="M-50,220 C120,350 220,80 400,220 S650,380 850,150"/>
-            <path d="M-50,380 C100,280 180,430 320,320 S600,200 850,380"/>
-            <path d="M-50,60 C100,180 240,20 380,100 S620,250 850,50"/>
-            <path d="M-50,170 C100,300 250,100 420,190 S650,350 850,180"/>
+    <!-- Background video -->
+   <div class="neon-background-image"></div>
+    <!-- Optional dark overlay for contrast -->
+    <div class="neon-shade"></div>
+
+    <!-- Animated neon scribbles -->
+    <svg class="neon-overlay"
+         viewBox="0 0 1000 650"
+         preserveAspectRatio="xMidYMid slice"
+         xmlns="http://www.w3.org/2000/svg"
+         aria-hidden="true">
+
+        <defs>
+            <filter id="neon-glow" x="-60%" y="-60%"
+                    width="220%" height="220%">
+                <feGaussianBlur stdDeviation="4"
+                                result="blur"/>
+                <feMerge>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="blur"/>
+                    <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+            </filter>
+        </defs>
+
+        <g class="neon-drift">
+
+            <!-- Cyan scribble -->
+            <path class="neon-line neon-cyan"
+                  pathLength="1"
+                  d="M 80,330
+                     C 150,160 270,190 210,310
+                     S 100,470 245,430
+                     S 350,210 410,300
+                     S 300,490 190,390
+                     S 300,160 430,250
+                     S 490,430 370,400"/>
+
+            <!-- Pink scribble -->
+            <path class="neon-line neon-pink"
+                  pathLength="1"
+                  d="M 510,130
+                     C 650,40 750,210 640,260
+                     S 480,160 590,100
+                     S 820,120 750,260
+                     S 550,340 600,210
+                     S 840,80 880,220"/>
+
+            <!-- Purple scribble -->
+            <path class="neon-line neon-purple"
+                  pathLength="1"
+                  d="M 520,500
+                     C 430,390 620,350 690,450
+                     S 830,590 740,500
+                     S 570,380 550,510
+                     S 760,610 870,460
+                     S 690,390 640,500"/>
+
+            <!-- Yellow energetic strokes -->
+            <path class="neon-line neon-yellow"
+                  pathLength="1"
+                  d="M 100,100
+                     Q 190,30 260,100
+                     T 350,100
+                     M 800,350
+                     Q 900,300 920,380
+                     T 840,420"/>
+
+            <!-- Green scribble -->
+            <path class="neon-line neon-green"
+                  pathLength="1"
+                  d="M 330,550
+                     Q 260,450 350,430
+                     T 430,520
+                     Q 380,590 310,520
+                     T 420,450"/>
+
         </g>
-
     </svg>
+
+
 </div>
 
 :: stage3-tutorial3-video [nobr]
@@ -3257,7 +3380,6 @@ Lorem Ipsum Welsh
             question: "Lorem ipsum Welsh"
         }
     },
-    
 ]>>
 
 :: stage3-tutorial3-b-question [nobr]
