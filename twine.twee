@@ -1243,6 +1243,7 @@ codeword11: {
 
 <<timed 5s>>
     <<append "#chatInputWrapper">>
+        /* $codewordsStage2.codeword1 */
       <<include "codeword-chat">>
         <</append>>
     <</timed>>
@@ -1475,6 +1476,7 @@ codeword11: {
 
 <<timed 24s>>
     <<append "#chatInputWrapper">>
+        /* $codewordsStage2.codeword2 */
       <<include "codeword-chat">>
         <</append>>
     <</timed>>
@@ -1520,7 +1522,7 @@ codeword11: {
     <</timed>>
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng" "stage2-exercise-dreamJar-b-vn-triggered-content">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng" "stage2-exercise-dreamJar-b-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
 
@@ -1532,7 +1534,7 @@ codeword11: {
 <p>Message me the word <span class="codeword-text">COLOURFUL</span> when you are ready for the next part. 
 </p>
 
-:: stage2-exercise-dreamJar-b-vn-triggered-content [nobr]
+:: stage2-exercise-dreamJar-b-vn-triggered-content-eng [nobr]
 <<timed 7s>>
     <<replace "#videoWrapper">>
         /* QUOTE SHOWING IN EXERCISE SPACE */
@@ -1553,6 +1555,7 @@ codeword11: {
 
 <<timed 15s>>
     <<append "#chatInputWrapper">>
+        /* $codewordsStage2.codeword3 */
       <<include "codeword-chat">>
         <</append>>
     <</timed>>
@@ -1731,6 +1734,7 @@ Lorem ipsum Welsh
 
 <<timed 17s>>
     <<append "#chatInputWrapper">>
+        /* $codewordsStage2.codeword4 */
      <<include "codeword-chat">>
         <</append>>
     <</timed>>
@@ -2268,20 +2272,19 @@ Lorem Ipsum Welsh
 <<timed 1s>>
     <<append "#chatHistory">>
          <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-b-vn-transcript-eng"
-         "stage3-tutorial1-b-vn-triggered-content">>
+         "stage3-tutorial1-b-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
     
 
 
 
-:: stage3-tutorial1-b-messages-cym [nobr]
-Lorem ipsum Welsh
+
 
 :: stage3-tutorial1-b-vn-transcript-eng [nobr]
 I’m going to make a full Night-Time Dream out of the image I can remember from my dream - the surprise present. This will be the <span class="codeword-text">OPENING</span> to the story I’m creating for the BFG. 
 
-:: stage3-tutorial1-b-vn-triggered-content [nobr]
+:: stage3-tutorial1-b-vn-triggered-content-eng [nobr]
 <<timed 4s>>
     <<replace "#pictureContainer">>
       <<include "tutorial1-picture1">>
@@ -2299,6 +2302,11 @@ I’m going to make a full Night-Time Dream out of the image I can remember from
         </div>
     <</replace>>
 <</timed>>
+
+:: stage3-tutorial1-b-messages-cym [nobr]
+Lorem ipsum Welsh
+
+
 :: stage3-tutorial1-c [nobr]
 <<set $prevPassage to "stage3-tutorial1-b">>
 <<set $passage to "stage3-tutorial1-c">>
@@ -2325,14 +2333,14 @@ I’m going to make a full Night-Time Dream out of the image I can remember from
 <<timed 1s>>
     <<append "#chatHistory">>
          <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-c-vn-transcript-eng"
-         "stage3-tutorial1-c-vn-triggered-content">>
+         "stage3-tutorial1-c-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
     
 :: stage3-tutorial1-c-vn-transcript-eng [nobr]
 The next part is the <span class="codeword-text">MISSION</span>  where something changes and that could be ‘I open the present inside is a Magic Book, which is full of spells in it’.  
 
-:: stage3-tutorial1-c-vn-triggered-content [nobr]
+:: stage3-tutorial1-c-vn-triggered-content-eng [nobr]
 <<timed 4s>>
     <<replace "#pictureContainer">>
       <<include "tutorial1-picture1">>
@@ -2388,7 +2396,7 @@ Lorem Ipsum Welsh
 :: stage3-tutorial1-d-vn-transcript-eng [nobr]
 Then a <span class="codeword-text">CHALLENGE</span>  or <span class="codeword-text">PROBLEM</span>  occurs. In mine it could be - an evil frog wants to steal the book. 
 
-:: stage3-tutorial1-d-vn-triggered-content [nobr]
+:: stage3-tutorial1-d-vn-triggered-content-eng [nobr]
 <<timed 4s>>
     <<replace "#pictureContainer">>
       <<include "tutorial1-picture1">>
@@ -2427,7 +2435,7 @@ Lorem Ipsum Welsh
 <<timed 1s>>
     <<append "#chatHistory">>
          <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-e-vn-transcript-eng"
-         "stage3-tutorial1-e-vn-triggered-content">>
+         "stage3-tutorial1-e-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
     
@@ -2435,7 +2443,7 @@ Lorem Ipsum Welsh
 
 After the <span class="codeword-text">PROBLEM</span>  there is a <span class="codeword-text">SOLUTION</span>  - in my story I use the magic book to scare the frog away
 
-:: stage3-tutorial1-e-vn-triggered-content [nobr]
+:: stage3-tutorial1-e-vn-triggered-content-eng [nobr]
 <<timed 4s>>
     <<replace "#pictureContainer">>
       <<include "tutorial1-picture1">>
@@ -2550,6 +2558,7 @@ You can choose to use my first image from my Dream OR you could use your own sta
 
  <<timed 17s>>
   <<replace "#chatInputWrapper">>
+    /* $codewordsStage3.codeword1 */
       <<include "codeword-chat">>
   <</replace>>
         <</timed>>
@@ -2852,6 +2861,7 @@ Lorem Ipsum Welsh
 
 <<timed 8s>>
     <<append "#chatInputWrapper">>
+        /* $codewordsStage3.codeword3 */
       <<include "codeword-chat">>
         <</append>>
     <</timed>>
@@ -3017,6 +3027,7 @@ When you have done send me the message <span class="codeword-text">POSTED</span>
 
 <<timed 17s>>
     <<append "#chatInputWrapper">>
+        /* $codewordsStage3.codeword4 */
       <<include "codeword-chat">>
         <</append>>
     <</timed>>
@@ -3175,6 +3186,7 @@ Can you think of something real you are dreaming for your future at the moment?
 
 <<timed 15s>>
     <<replace "#chatInputWrapper">>
+        /* $codewordsStage3.codeword5 */
         <<include "codeword-chat">>
     <</replace>>
 <</timed>>
@@ -3387,7 +3399,7 @@ I’ll send you some sentences to help you work out these steps. <br/>
 <<timed 1s>>
     <<append "#chatHistory">>
          <<voicenote "assets/sound/ticker.mp3" "3s" "stage3-tutorial3-c-vn-transcript-eng"
-         "stage3-tutorial3-c-vn-triggered-content">>
+         "stage3-tutorial3-c-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
 
@@ -3415,7 +3427,7 @@ I’ll send you some sentences to help you work out these steps. <br/>
 
 <p>When you have drawn around your foot then let me know by messaging me the word <span class="codeword-text">FOOTSTEP</span>.  </p>
 
-:: stage3-tutorial3-c-vn-triggered-content [nobr]
+:: stage3-tutorial3-c-vn-triggered-content-eng [nobr]
 <<timed 5s>>
   <<replace "#videoWrapper">>
        <div class="picture-container" id="pictureContainer">
@@ -3622,7 +3634,7 @@ Lorem Ipsum Welsh
 
 <<timed 5s>>
     <<append "#chatInputWrapper">>
-        /* CODEWORD 10 */
+      /* $codewordsStage3.codeword10 */
       <<include "codeword-chat">>
         <</append>>
     <</timed>>
