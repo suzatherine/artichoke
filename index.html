@@ -1886,9 +1886,8 @@ codeword11: {
         &lt;/a&gt;
 &lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;if $userchoices.tutorialProgress.includes(1)&gt;&gt;
-    &lt;&lt;timed 0.1s&gt;&gt;
         &lt;&lt;append &quot;#bubble-link-1&quot;&gt;&gt;&lt;span&gt;Complete!&lt;/span&gt;&lt;&lt;/append&gt;&gt;
-            &lt;&lt;/timed&gt;&gt;
+    
             &lt;&lt;addclass &quot;.one&quot; &quot;completed&quot;&gt;&gt;
       &lt;div class=&quot;bubble-complete&quot;&gt;✓&lt;/div&gt;&lt;&lt;/if&gt;&gt;
         &lt;&lt;/timed&gt;&gt;
@@ -1896,21 +1895,23 @@ codeword11: {
 
 
     &lt;div class=&quot;bubble-btn two&quot; role=&quot;listitem&quot;&gt;
-        &lt;a class=&quot;bubble-link&quot; data-passage=&quot;stage3-tutorial2-video&quot;&gt;Tutorial 2&lt;/a&gt;
+        &lt;a class=&quot;bubble-link&quot; id=&quot;bubble-link-2&quot; data-passage=&quot;stage3-tutorial2-video&quot;&gt;Tutorial 2&lt;/a&gt;
+        &lt;&lt;timed 0.1s&gt;&gt;
         &lt;&lt;if $userchoices.tutorialProgress.includes(2)&gt;&gt;
-            &lt;&lt;timed 0.1s&gt;&gt;
+                &lt;&lt;append &quot;#bubble-link-2&quot;&gt;&gt;&lt;span&gt;Complete!&lt;/span&gt;&lt;&lt;/append&gt;&gt;
             &lt;&lt;addclass &quot;.two&quot; &quot;completed&quot;&gt;&gt;
-            &lt;&lt;/timed&gt;&gt;
         &lt;div class=&quot;bubble-complete&quot;&gt;✓&lt;/div&gt;&lt;&lt;/if&gt;&gt;
+           &lt;&lt;/timed&gt;&gt;
     &lt;/div&gt;
 
     &lt;div class=&quot;bubble-btn three&quot; role=&quot;listitem&quot;&gt;
-        &lt;a class=&quot;bubble-link&quot; data-passage=&quot;stage3-tutorial3-video&quot;&gt;Tutorial 3&lt;/a&gt;
+        &lt;a class=&quot;bubble-link&quot; id=&quot;bubble-link-3&quot; data-passage=&quot;stage3-tutorial3-video&quot;&gt;Tutorial 3&lt;/a&gt;
+            &lt;&lt;timed 0.1s&gt;&gt;
         &lt;&lt;if $userchoices.tutorialProgress.includes(3)&gt;&gt;
-             &lt;&lt;timed 0.1s&gt;&gt;
+                &lt;&lt;append &quot;#bubble-link-3&quot;&gt;&gt;&lt;span&gt;Complete!&lt;/span&gt;&lt;&lt;/append&gt;&gt;    
             &lt;&lt;addclass &quot;.three&quot; &quot;completed&quot;&gt;&gt;
-            &lt;&lt;/timed&gt;&gt;
         &lt;div class=&quot;bubble-complete&quot;&gt;✓&lt;/div&gt;&lt;&lt;/if&gt;&gt;
+            &lt;&lt;/timed&gt;&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;br/&gt;

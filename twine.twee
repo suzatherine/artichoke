@@ -2087,9 +2087,8 @@ Lorem Ipsum Welsh
         </a>
 <<timed 0.1s>>
     <<if $userchoices.tutorialProgress.includes(1)>>
-    <<timed 0.1s>>
         <<append "#bubble-link-1">><span>Complete!</span><</append>>
-            <</timed>>
+    
             <<addclass ".one" "completed">>
       <div class="bubble-complete">✓</div><</if>>
         <</timed>>
@@ -2097,21 +2096,23 @@ Lorem Ipsum Welsh
 
 
     <div class="bubble-btn two" role="listitem">
-        <a class="bubble-link" data-passage="stage3-tutorial2-video">Tutorial 2</a>
+        <a class="bubble-link" id="bubble-link-2" data-passage="stage3-tutorial2-video">Tutorial 2</a>
+        <<timed 0.1s>>
         <<if $userchoices.tutorialProgress.includes(2)>>
-            <<timed 0.1s>>
+                <<append "#bubble-link-2">><span>Complete!</span><</append>>
             <<addclass ".two" "completed">>
-            <</timed>>
         <div class="bubble-complete">✓</div><</if>>
+           <</timed>>
     </div>
 
     <div class="bubble-btn three" role="listitem">
-        <a class="bubble-link" data-passage="stage3-tutorial3-video">Tutorial 3</a>
+        <a class="bubble-link" id="bubble-link-3" data-passage="stage3-tutorial3-video">Tutorial 3</a>
+            <<timed 0.1s>>
         <<if $userchoices.tutorialProgress.includes(3)>>
-             <<timed 0.1s>>
+                <<append "#bubble-link-3">><span>Complete!</span><</append>>    
             <<addclass ".three" "completed">>
-            <</timed>>
         <div class="bubble-complete">✓</div><</if>>
+            <</timed>>
     </div>
 </div>
 <br/>
