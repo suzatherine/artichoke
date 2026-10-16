@@ -2450,9 +2450,9 @@ Lorem Ipsum Welsh
 <<timed 1s>>
     <<append "#chatHistory">>
          <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-d-vn-transcript-eng"
-         "stage3-tutorial1-d-vn-triggered-content">>
+         "stage3-tutorial1-d-vn-triggered-content-eng">>
         <</append>>
-    <</timed>>
+    <</timed>>  
     
 :: stage3-tutorial1-d-vn-transcript-eng [nobr]
 Then a <span class="codeword-text">CHALLENGE</span>  or <span class="codeword-text">PROBLEM</span>  occurs. In mine it could be - an evil frog wants to steal the book. 
