@@ -3769,7 +3769,7 @@ Lorem Ipsum Welsh
 :: stage3-submission-b [nobr]
 <<set $prevPassage to "stage3-submission-a">>
 <<set $passage to "stage3-submission-b">>
-<<set $nextPassage to "stage3-tutorial1-c">>
+<<set $nextPassage to "stage3-submission-c">>
 <<include "_templateVideoChat">>
 <<include "choose-messages-language">>
 
