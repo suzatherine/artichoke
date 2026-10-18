@@ -444,7 +444,7 @@ input[type='text']::placeholder {
   width: 100%;
   min-width: 0;
   min-height: 0;
-  max-height: 70vh;
+  max-height: 80vh;
 
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 2.5fr);
@@ -466,8 +466,7 @@ input[type='text']::placeholder {
   height: 100%;
   display: grid;
   place-items: center;
-  max-height: 70vh;
-  overflow: scroll;
+
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -493,6 +492,63 @@ input[type='text']::placeholder {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+/* Scattered words fading in one by one */
+.scatter-words {
+  width: 100%;
+  min-height: 60vh;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+  gap: 0.5rem 1rem;
+  container-type: inline-size;
+}
+
+.scatter-words span {
+  opacity: 0;
+  align-self: center;
+  font-family: var(--font-headings);
+  font-size: clamp(1.5rem, 8cqw, 4.5rem);
+  line-height: 1.1;
+  overflow-wrap: break-word;
+  animation: scatterFadeIn 1.5s ease forwards;
+}
+
+.scatter-words span:nth-child(1) { grid-column: 1; grid-row: 1; justify-self: start; animation-delay: 0s; }
+.scatter-words span:nth-child(2) { grid-column: 2; grid-row: 2; justify-self: end; animation-delay: 2s; }
+.scatter-words span:nth-child(3) { grid-column: 1; grid-row: 3; justify-self: center; animation-delay: 4s; }
+.scatter-words span:nth-child(4) { grid-column: 2; grid-row: 4; justify-self: start; animation-delay: 6s; }
+.scatter-words span:nth-child(5) { grid-column: 1; grid-row: 5; justify-self: end; animation-delay: 8s; }
+.scatter-words span:nth-child(6) { grid-column: 2; grid-row: 6; justify-self: center; animation-delay: 10s; }
+.scatter-words span:nth-child(7) { grid-column: 1; grid-row: 7; justify-self: start; animation-delay: 12s; }
+
+@media (min-width: 900px) {
+  .scatter-words {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .scatter-words span {
+    font-size: clamp(1.5rem, 5cqw, 4.5rem);
+  }
+
+  .scatter-words span:nth-child(1) { grid-column: 1 / span 2; justify-self: start; }
+  .scatter-words span:nth-child(2) { grid-column: 3 / span 2; justify-self: start; }
+  .scatter-words span:nth-child(3) { grid-column: 2 / span 2; justify-self: start; }
+  .scatter-words span:nth-child(4) { grid-column: 3 / span 2; justify-self: start; }
+  .scatter-words span:nth-child(5) { grid-column: 1 / span 2; justify-self: start; }
+  .scatter-words span:nth-child(6) { grid-column: 3 / span 2; justify-self: start; }
+  .scatter-words span:nth-child(7) { grid-column: 2 / span 2; justify-self: start; }
+}
+
+@keyframes scatterFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* CHAT  */

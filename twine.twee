@@ -913,10 +913,27 @@ codeword11: {
 
 /* REUSABLE FUNCTIONALITY  */
 :: choose-messages-language [nobr]
+/* This is for passages where the content DOESN'T change depending on KS choice */
 <<if $userchoices.language is "eng">>
     <<set $messagesToShow to $passage + "-messages-eng">>
 <<elseif $userchoices.language is "cym">>
     <<set $messagesToShow to $passage + "-messages-cym">>
+<</if>>
+<<timed 1s>>
+<<include $messagesToShow>>
+<</timed>>
+
+:: choose-messages-language-ks-specific [nobr]
+
+/* This is for passages where the content DOES change depending on KS choice */
+<<if $userchoices.language is "eng" && $userchoices.keyStage is 1>>
+    <<set $messagesToShow to $passage + "-messages-eng-ks1">>
+<<elseif $userchoices.language is "eng" && $userchoices.keyStage is 2>>
+    <<set $messagesToShow to $passage + "-messages-eng-ks2">>
+<<elseif $userchoices.language is "cym" && $userchoices.keyStage is 1>>
+    <<set $messagesToShow to $passage + "-messages-cym-ks1">>
+<<elseif $userchoices.language is "cym" && $userchoices.keyStage is 2>>
+    <<set $messagesToShow to $passage + "-messages-cym-ks2">>
 <</if>>
 <<timed 1s>>
 <<include $messagesToShow>>
@@ -1495,8 +1512,60 @@ codeword11: {
 <<set $passage to "stage2-exercise-dreamJar-a">>
 <<set $nextPassage to "stage2-exercise-dreamJar-b">>
 <<include "_templateFullScreenChat">>
-<<include "choose-messages-language">>
-:: stage2-exercise-dreamJar-a-messages-eng [nobr]
+/* Contains KS-specific content */
+<<include "choose-messages-language-ks-specific">>
+
+:: stage2-exercise-dreamJar-a-messages-eng-ks1 [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Before we share our Dreams - we need to understand what Dreams are. 
+        <br/>
+        Let’s start with how the BFG holds onto Dreams. 
+      <br/>
+        Dream Jars. 
+ </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+
+<<timed 7s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I’ve sent over some templates we have here in the Library portal or you can use real jars if you’d like.
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 12s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Once you have them ready I have some words from the BFG about Dream Jars to inspire your design. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 20s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Just message me the word <span class="codeword-text">JAR</span> and I’ll send over the quotes.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+<<timed 24s>>
+    <<append "#chatInputWrapper">>
+        /* $codewordsStage2.codeword2 */
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage2-exercise-dreamJar-a-messages-eng-ks2 [nobr]
 
 <<timed 1s>>
     <<append "#chatHistory">>
@@ -1547,11 +1616,11 @@ codeword11: {
     <</timed>>
 
 
-:: stage2-exercise-dreamJar-a-messages-cym [nobr]
+:: stage2-exercise-dreamJar-a-messages-cym-ks1 [nobr]
 <<timed 0.1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Lorem Ipsum Welsh</span>
+        <span>Lorem Ipsum Welsh KS1</span>
         </div>
         <</append>>
     <</timed>>
@@ -1572,32 +1641,86 @@ codeword11: {
         <</append>>
     <</timed>>
 
+:: stage2-exercise-dreamJar-a-messages-cym-ks2
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh KS2</span>
+        </div>
+        <</append>>
+    <</timed>>
+
 :: stage2-exercise-dreamJar-b [nobr]
 <<set $prevPassage to "stage2-exercise-dreamJar-a">>
 <<set $passage to "stage2-exercise-dreamJar-b">>
 <<set $nextPassage to "stage2-exercise-dreamJar-c">>
 <<include "_templateVideoChat">>
-<<include "choose-messages-language">>
+<<include "choose-messages-language-ks-specific">>
 
 
-
-:: stage2-exercise-dreamJar-b-messages-eng [nobr]
+:: stage2-exercise-dreamJar-b-messages-eng-ks1 [nobr]
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng" "stage2-exercise-dreamJar-b-vn-triggered-content-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng-ks1" "stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks1">>
+        <</append>>
+    <</timed>>
+
+:: stage2-exercise-dreamJar-b-messages-eng-ks2 [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng-ks2" "stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks2">>
         <</append>>
     <</timed>>
 
 
-:: stage2-exercise-dreamJar-b-vn-transcript-eng [nobr]
+:: stage2-exercise-dreamJar-b-vn-transcript-eng-ks1 [nobr]
+<p>Hello - I’ve found some words in the BFG book about one of the Dreams & Dreams Jars - </p>
+
+<p>Some of these words are the BFG’s own language - Gobblefunk. </p>
+
+<p>
+    Dream Jars when filled are colourful and vibrant and Dreams are alive!  <br/>
+    Each of them are unique. <br/>
+    Discuss the words and then I’ll leave you to design your Dream Jar. 
+</p>
+
+<p>Message me the word <span class="codeword-text">COLOURFUL</span> when you are ready for the next part. 
+</p>
+
+:: stage2-exercise-dreamJar-b-vn-transcript-eng-ks2  [nobr]
 <p>Hello - I’ve found some quotes in the BFG book about one of the Dream Jars - obviously you can design your own but this might inspire your ideas - </p>
 <p>...</p>
 <p>So Dream Jars when filled are colourful and vibrant and Dreams are alive!  Each of them are unique. Discuss the quotes and then I’ll leave you to design yours. </p>
 <p>Message me the word <span class="codeword-text">COLOURFUL</span> when you are ready for the next part. 
 </p>
 
-:: stage2-exercise-dreamJar-b-vn-triggered-content-eng [nobr]
+:: stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks1 [nobr]
+<<timed 5s>>
+    <<replace "#videoWrapper">>
+        /* WORDS SHOWING IN EXERCISE SPACE */
+        <div class="scatter-words ">
+            <span>Soft</span>
+            <span>Shimmering</span>
+            <span>Beautiful</span>
+            <span>Peaceful</span>
+            <span>Pulsing</span>
+            <span>Winksquiffler</span>
+            <span>Golden Phizzwizard</span>
+        </div>
+        <</replace>>
+    <</timed>>
+
+
+<<timed 15s>>
+    <<append "#chatInputWrapper">>
+        /* $codewordsStage2.codeword3 */
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks2 [nobr]
 <<timed 7s>>
     <<replace "#videoWrapper">>
         /* QUOTE SHOWING IN EXERCISE SPACE */
@@ -1654,12 +1777,64 @@ codeword11: {
 <<set $passage to "stage2-exercise-dreamJar-c">>
 <<set $nextPassage to "stage2-exercise-dreamJar-c2">>
 <<include "_templateVideoChat">>
-<<include "choose-messages-language">>
+<<include "choose-messages-language-ks-specific">>
 
 
 <<include "footer">>
 
-:: stage2-exercise-dreamJar-c-messages-eng [nobr]
+:: stage2-exercise-dreamJar-c-messages-eng-ks1 [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I’ve uploaded my jar onto the portal - here it is. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+ <<timed 3s>>
+    <<replace "#videoWrapper">>
+         <div class="picture-container">
+      <<include "dreamJar-Bea">>
+      </div>
+        <</replace>>
+    <</timed>>   
+
+<<timed 5s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Now, a beautiful Dream Jar is one thing - but it’s what’s inside that’s important. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 11s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I've done a bit of research and it seems like there are 3 main types of dreams...</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+ <<timed 17s>>
+    <<replace "#videoWrapper">>
+         <div class="picture-container">
+      <<include "dreamJar-example">>
+      </div>
+        <</replace>>
+    <</timed>>   
+
+
+<<timed 24s>>
+    <<append "#chatInputWrapper">>
+     <div class="btn-option-wrapper">
+    <<button "Next">> 
+     <<goto $nextPassage>>
+        <</button>>
+        </div>
+        <</append>>
+    <</timed>>
+
+:: stage2-exercise-dreamJar-c-messages-eng-ks2 [nobr]
 <<timed 0.1s>>
     <<append "#chatHistory">>
          <div class="message-received">
@@ -1711,8 +1886,12 @@ codeword11: {
         <</append>>
     <</timed>>
 
-:: stage2-exercise-dreamJar-c-messages-cym [nobr]
-Lorem ipsum Welsh
+:: stage2-exercise-dreamJar-c-messages-cym-ks1 [nobr]
+Lorem ipsum Welsh KS1
+
+
+:: stage2-exercise-dreamJar-c-messages-cym-ks2 [nobr]
+Lorem ipsum Welsh KS2
 
 
 :: stage2-exercise-dreamJar-c2 [nobr]
@@ -3027,7 +3206,7 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial2-e">>
 <<set $nextPassage to "stage3-tutorial2-f">>
 <<include "_templateVideoChat">>
-<<include "choose-messages-language">>
+<<include "choose-messages-language-ks-specific">>
 
 <<timed 0.1s>>
     <<replace "#videoWrapper">>
@@ -3036,7 +3215,76 @@ Lorem Ipsum Welsh
         </div>
     <</replace>>
     <</timed>>
-:: stage3-tutorial2-e-messages-eng [nobr]
+:: stage3-tutorial2-e-messages-eng-ks1 [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Great doodling
+        <br/>
+Now, you are going to take the doodle into our Dreams for the BFG.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I want you to share your Daydreams about your area. </span>
+        </div>
+        <</append>>
+    <</timed>>
+        
+
+<<timed 7s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>By creating a Dream Postcard.   </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Postcards normally tell someone about an area they have visited. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 13s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span> I think we should show an image of your town and then something you dream was there - to help make your community happier.   </span>
+        </div>
+        <</append>>
+    <</timed>>
+<<timed 18s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span> On the back you can write about it to explain why you have drawn that for the BFG.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+<<timed 22s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Teacher - you should have a template in your inbox. <br/>
+When you have done send me the message <span class="codeword-text">POSTED</span></span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 17s>>
+    <<append "#chatInputWrapper">>
+        /* $codewordsStage3.codeword4 */
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial2-e-messages-eng-ks2 [nobr]
 
 <<timed 1s>>
     <<append "#chatHistory">>
@@ -3089,23 +3337,41 @@ When you have done send me the message <span class="codeword-text">POSTED</span>
         <</append>>
     <</timed>>
 
-:: stage3-tutorial2-e-messages-cym [nobr]
-Lorem Ipsum Welsh
+:: stage3-tutorial2-e-messages-cym-ks1 [nobr]
+Lorem Ipsum Welsh KS1
+:: stage3-tutorial2-e-messages-cym-ks2 [nobr]
+Lorem Ipsum Welsh KS2
 
 :: stage3-tutorial2-f [nobr]
 <<set $prevPassage to "stage3-tutorial2-e">>
 <<set $passage to "stage3-tutorial2-f">>
 <<set $nextPassage to "stage3-tutorials-menu">>
 <<include "_templateFullScreenChat">>
-<<include "choose-messages-language">>
+<<include "choose-messages-language-ks-specific">>
 
 <<run setup.completeTutorial(2)>>
 
-:: stage3-tutorial2-f-messages-eng [nobr]
+:: stage3-tutorial2-f-messages-eng-ks1 [nobr]
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng-ks1">>
+        <</append>>
+    <</timed>>
+
+<<timed 9s>>
+    <<append "#chatInputWrapper">>
+     <<button "Dream Team Menu">>
+         <<goto $nextPassage>>
+        <</button>>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial2-f-messages-eng-ks2 [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng-ks2">>
         <</append>>
     <</timed>>
 
@@ -3118,7 +3384,42 @@ Lorem Ipsum Welsh
     <</timed>>
 
 
-:: stage3-tutorial2-f-vn-transcript-eng [nobr]
+:: stage3-tutorial2-f-vn-transcript-eng-ks1 [nobr]
+
+<p>I love postcards about our local area because it gets us thinking about what we have around us - appreciating what makes it special and highlighting where it could improve to make everyone in that community happier. </p>
+
+<p>All of our communities are special in their own way - and they've got to being that way thanks to the people who are part of those communities. People like you who come up with bold, brilliant and slightly silly ideas to make the community happier. </p>
+
+
+<p>
+    Lionel is always on the reception desk of our library, he is always thinking of ways to make our community feel welcome. It's a never ending vision we all commit to in the Library - a space for all. We all can play our part in making a community feel welcoming to others. 
+    Even small acts can make a big difference. <br/>
+    Lionel knows how to say hello in 26 languages and I’m trying to learn too!
+</p>
+
+<p>
+    It’s small but it means the world to our community. <br/>
+    I mean, I don’t even know how you say hello in your area. 
+</p>
+
+<p>
+    In England some say Hello. <br/>
+    In Welsh - It's Shwmae!<br/>
+    You may hear someone in Scotland say " Madainn Mhath" which is good morning in Scottish Gaelic.<br/>
+    In Northern Ireland, some people speak Irish or Ulster Scots and say Dia Duit!<br/>
+</p>
+
+<p>Then I know, Czesc, Assalam-o-alaikum, Ola, Buna, Ciao, Sat Sri Akal. Languages are wonderful. </p>
+
+<p> Maybe you have lots of different ways of saying hello - try them out!  
+</p>
+<p>Right, you’ve probably got lots to get on with, so come back when you want another Dream Team video or if you are ready to send your Dreams to the BFG. </p>
+
+<p>In the meantime, why not try to learn a new way to say hello whilst I say goodbye. </p>
+
+<p>Well done again!</p>
+
+:: stage3-tutorial2-f-vn-transcript-eng-ks2 [nobr]
 
 <p>I love the idea of Day Dreamers Visitor’s Guides - not just because I came up with it - but also because it gets us thinking about what we have around us - appreciating what makes it special and highlighting where it could improve to make everyone in that community happier. </p>
 
@@ -3152,8 +3453,14 @@ Lorem Ipsum Welsh
 
 <p>Well done again!</p>
 
-
-
+:: stage3-tutorial2-f-messages-cym-ks1 [nobr]
+Lorem Ipsum Welsh KS1
+:: stage3-tutorial2-f-messages-cym-ks2 [nobr]
+Lorem Ipsum Welsh KS2
+:: stage3-tutorial2-f-vn-transcript-cym-ks1 [nobr]
+Lorem Ipsum Welsh KS1
+:: stage3-tutorial2-f-vn-transcript-cym-ks2 [nobr]
+Lorem Ipsum Welsh KS2
 :: scribble [nobr]
 <div class="neon-scene">
 
@@ -3266,10 +3573,57 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial3-a">>
 <<set $nextPassage to "stage3-tutorial3-b">>
 <<include "_templateFullScreenChat">>
-<<include "choose-messages-language">>
+<<include "choose-messages-language-ks-specific">>
 
 
-:: stage3-tutorial3-a-messages-eng [nobr]
+:: stage3-tutorial3-a-messages-eng-ks1 [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Ok - first things first.<br/>
+Can you think of something real you are dreaming for your future at the moment? 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 5s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>It might be something you want to learn, something you want to taste, somewhere you want to go or something you want to become.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 8s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Share your dream with someone in your class and ask them about theirs.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>When you have found a dream click next.
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+
+<<timed 15s>>
+  <<replace "#chatInputWrapper">>
+        <div class="btn-option-wrapper">
+            <<include "nextBtn">>
+        </div>
+    <</replace>>
+<</timed>>
+
+:: stage3-tutorial3-a-messages-eng-ks2 [nobr]
 
 <<timed 1s>>
     <<append "#chatHistory">>
@@ -3325,18 +3679,7 @@ Lorem Ipsum Welsh
 <<include "_templateVideoChat">>
 <<set $futureFeetQuestionIndex = 0>>
 <<set $futureFeetMessagesShown = []>>
-
-
-<<if $userchoices.language is "eng">>
-
-<<timed 0.1s>>
-    <<include "stage3-tutorial3-b-messages-eng">>
-<</timed>>
-<<elseif $userchoices.language is "cym">>
-<<timed 0.1s>>
-    <<include "stage3-tutorial3-b-messages-cym">>
-    <</timed>>
-<</if>>
+<<include "choose-messages-language-ks-specific">>
 
 
 :: futureFeet-questions [nobr]
@@ -3469,7 +3812,37 @@ Lorem Ipsum Welsh
 <</if>>
 </div>
 
-:: stage3-tutorial3-b-messages-eng [nobr]
+:: stage3-tutorial3-b-messages-eng-ks1 [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Now, you have one dream, discuss together what you might need to reach your dream?<br/>
+Do you need determination?<br/>
+Do you need to learn anything?<br/>
+Do you need someone to help you?<br/>
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>When you’ve done let me know by putting in <span class="codeword-text">DREAMING</span> in the chat. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 15s>>
+    <<replace "#chatInputWrapper">>
+        /* $codewordsStage3.codeword5 */
+        <<include "codeword-chat">>
+    <</replace>>
+<</timed>>
+
+:: stage3-tutorial3-b-messages-eng-ks2 [nobr]
 
 <<timed 1s>>
     <<append "#chatHistory">>
@@ -3509,20 +3882,19 @@ I’ll send you some sentences to help you work out these steps. <br/>
 
 
 
-
 :: stage3-tutorial3-c [nobr]
 <<set $prevPassage to "stage3-tutorial3-b">>
 <<set $passage to "stage3-tutorial3-c">>
 <<set $nextPassage to "stage3-tutorial3-d">>
 <<include "_templateVideoChat">>
-<<include "choose-messages-language">>
+<<include "choose-messages-language-ks-specific">>
 
 
-:: stage3-tutorial3-c-messages-eng [nobr]
+:: stage3-tutorial3-c-messages-eng-ks1 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ticker.mp3" "3s" "stage3-tutorial3-c-vn-transcript-eng"
-         "stage3-tutorial3-c-vn-triggered-content-eng">>
+         <<voicenote "assets/sound/ticker.mp3" "3s" "stage3-tutorial3-c-vn-transcript-eng-ks1"
+         "stage3-tutorial3-c-vn-triggered-content-eng-ks1">>
         <</append>>
     <</timed>>
 
@@ -3534,7 +3906,39 @@ I’ll send you some sentences to help you work out these steps. <br/>
         <</append>>
     <</timed>>
 
-:: stage3-tutorial3-c-vn-transcript-eng [nobr]
+
+:: stage3-tutorial3-c-messages-eng-ks2 [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ticker.mp3" "3s" "stage3-tutorial3-c-vn-transcript-eng-ks2"
+         "stage3-tutorial3-c-vn-triggered-content-eng-ks2">>
+        <</append>>
+    <</timed>>
+
+
+<<timed 10s>>
+    <<append "#chatInputWrapper">>
+        /* $codewordsStage3.codeword6 */
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial3-c-vn-transcript-eng-ks1 [nobr]
+<p>OK - you should have shared a Future Dream now. Our dreams for the future change all the time - but great to have one for today. </p>
+
+<p>
+    Now, the BFG can leap as he has Giant Feet!<br/>
+    Whilst we take steps as we have Human Feet. 
+</p>
+
+<p>So, we need a human foot. </p>
+
+<p>Yes - a foot. You can draw around your own - no shoes or socks. Or, if you are worried about too many stinky feet being unleashed, you can use the template I have sent over. </p>
+
+
+<p>When you have drawn around your foot then let me know by messaging me the word <span class="codeword-text">FOOTSTEP</span>.  </p>
+
+:: stage3-tutorial3-c-vn-transcript-eng-ks2 [nobr]
 <p>Excellent work - you’ve worked out some steps that might help you reach your Future Dreams. </p>
 
 <p>Now we can put these together to show the BFG. </p>
@@ -3550,7 +3954,7 @@ I’ll send you some sentences to help you work out these steps. <br/>
 
 <p>When you have drawn around your foot then let me know by messaging me the word <span class="codeword-text">FOOTSTEP</span>.  </p>
 
-:: stage3-tutorial3-c-vn-triggered-content-eng [nobr]
+:: stage3-tutorial3-c-vn-triggered-content-eng-ks1 [nobr]
 <<timed 5s>>
   <<replace "#videoWrapper">>
        <div class="picture-container" id="pictureContainer">
@@ -3559,9 +3963,28 @@ I’ll send you some sentences to help you work out these steps. <br/>
         <</replace>>
  <</timed>>
 
-:: stage3-tutorial3-c-messages-cym [nobr]
-Lorem Ipsum Welsh
+:: stage3-tutorial3-c-vn-triggered-content-eng-ks2 [nobr]
+<<timed 5s>>
+  <<replace "#videoWrapper">>
+       <div class="picture-container" id="pictureContainer">
+       <img src="assets/img/stage3-tutorial3/empty-foot.png" alt="Empty footprint" >
+        </div>
+        <</replace>>
+ <</timed>>
 
+:: stage3-tutorial3-c-messages-cym-ks1 [nobr]
+Lorem Ipsum Welsh KS1
+
+:: stage3-tutorial3-c-messages-cym-ks2 [nobr]
+Lorem Ipsum Welsh KS2
+
+:: stage3-tutorial3-c-vn-transcript-eng-ks1
+Lorem Ipsum Welsh KS1
+:: stage3-tutorial3-c-vn-transcript-eng-ks2
+Lorem Ipsum Welsh KS2
+:: stage3-tutorial3-c-vn-triggered-content-eng-ks1
+Lorem Ipsum Welsh KS1
+:: stage3-tutorial3-c-vn-triggered-content-eng-ks2
 
 :: stage3-tutorial3-d [nobr]
 <<set $prevPassage to "stage3-tutorial3-c">>
@@ -3569,9 +3992,75 @@ Lorem Ipsum Welsh
 <<set $nextPassage to "stage3-tutorial3-e">>
 <<include "_templateVideoChat">>
    
-<<include "choose-messages-language">>
+<<include "choose-messages-language-ks-specific">>
 
-:: stage3-tutorial3-d-messages-eng [nobr]
+:: stage3-tutorial3-d-messages-eng-ks1 [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I don’t know if any of your feet are as big as the BFGs - I don’t know exactly, but if he is 24 feet tall so his feet might be around 3 ½ feet long - that’s over a meter - that is GIANT!  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Imagine finding one of his footsteps in your park. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 8s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Your drawing is going to be your footstep to your Future Dream. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 11s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Now our feet are going to help us to work out our steps to our dream. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 14s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span> Inside your foot, you are going to write that Future Dream you had – and design it to show what you might need to reach that dream. Here’s mine - with a huge font inspired by the BFG book! </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+<<timed 16s>>
+    <<replace "#videoWrapper">>
+       <div class="picture-container" id="pictureContainer">
+       <img src="assets/img/stage3-tutorial3/picture-6.png" alt="My future dream is Librarian" >
+  </div>
+        <</replace>>
+    <</timed>>
+
+<<timed 18s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>When done send me the word <span class="codeword-text">LEAP</span></span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 20s>>
+    <<append "#chatInputWrapper">>
+        /* $codewordsStage3.codeword7 */
+      <<include "codeword-chat">>
+        <</append>>
+    <</timed>>
+
+:: stage3-tutorial3-d-messages-eng-ks2 [nobr]
 
 <<timed 1s>>
     <<append "#chatHistory">>
@@ -3628,7 +4117,12 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
 
-:: stage3-tutorial3-d-messages-cym [nobr]
+:: stage3-tutorial3-d-messages-cym-ks1 [nobr]
+Lorem Ipsum Welsh KS1
+
+:: stage3-tutorial3-d-messages-cym-ks2 [nobr]
+Lorem Ipsum Welsh KS2
+
 
 
 
@@ -3636,6 +4130,7 @@ Lorem Ipsum Welsh
 
 <<set $prevPassage to "stage3-tutorial3-d">>
 <<set $passage to "stage3-tutorial3-e">>
+
 <<set $nextPassage to "stage3-tutorials-menu">>
 
 <<include "_templateFullScreenChat">>
