@@ -1057,7 +1057,7 @@ codeword11: {
 
             <<elseif $codeword isnot "">>
                 <<replace "#coderesult">>
-                    <span class="incorrect-label".</span>
+                    <span class="incorrect-label">Incorrect.</span>
                 <</replace>>
 
                 <<timed 1.5s>>
@@ -2345,7 +2345,29 @@ Lorem Ipsum Welsh
 <iframe width='800px' height='450px' 
       src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
 
-:: stage3-tutorial1-pictures-container [nobr]
+:: stage3-tutorial1-pictures-container-ks1 [nobr]
+<<if $passage is "stage3-tutorial1-b">>
+<div class="picture-container" id="pictureContainer">
+     <<include "tutorial1-empty-picture">>
+    <<include "tutorial1-empty-picture">>
+    <<include "tutorial1-empty-picture">>
+    </div>
+<<elseif $passage is "stage3-tutorial1-c">>
+    <div class="picture-container" id="pictureContainer">
+        <<include "tutorial1-picture1-ks1">>
+       <<include "tutorial1-empty-picture">>
+        <<include "tutorial1-empty-picture">>
+    </div>
+<<elseif $passage is "stage3-tutorial1-d">>
+    <div class="picture-container" id="pictureContainer">
+    <<include "tutorial1-picture1-ks1">>
+    <<include "tutorial1-picture2-ks1">>
+    <<include "tutorial1-empty-picture">>
+    </div>
+<</if>>
+
+
+:: stage3-tutorial1-pictures-container-ks2 [nobr]
 <<if $passage is "stage3-tutorial1-b">>
 <div class="picture-container" id="pictureContainer">
      <<include "tutorial1-empty-picture">>
@@ -2356,7 +2378,7 @@ Lorem Ipsum Welsh
     </div>
 <<elseif $passage is "stage3-tutorial1-c">>
     <div class="picture-container" id="pictureContainer">
-        <<include "tutorial1-picture1">>
+        <<include "tutorial1-picture1-ks2">>
        <<include "tutorial1-empty-picture">>
         <<include "tutorial1-empty-picture">>
         <<include "tutorial1-empty-picture">>
@@ -2364,26 +2386,26 @@ Lorem Ipsum Welsh
     </div>
 <<elseif $passage is "stage3-tutorial1-d">>
     <div class="picture-container" id="pictureContainer">
-    <<include "tutorial1-picture1">>
-    <<include "tutorial1-picture2">>
+    <<include "tutorial1-picture1-ks2">>
+    <<include "tutorial1-picture2-ks2">>
     <<include "tutorial1-empty-picture">>
     <<include "tutorial1-empty-picture">>
     <<include "tutorial1-empty-picture">>
     </div>
 <<elseif $passage is "stage3-tutorial1-e">>
     <div class="picture-container" id="pictureContainer">
-    <<include "tutorial1-picture1">>
-    <<include "tutorial1-picture2">>
-    <<include "tutorial1-picture3">>
+    <<include "tutorial1-picture1-ks2">>
+    <<include "tutorial1-picture2-ks2">>
+    <<include "tutorial1-picture3-ks2">>
     <<include "tutorial1-empty-picture">>
     <<include "tutorial1-empty-picture">>
     </div>
 <<elseif $passage is "stage3-tutorial1-f">>
     <div class="picture-container" id="pictureContainer">
-    <<include "tutorial1-picture1">>
-    <<include "tutorial1-picture2">>
-    <<include "tutorial1-picture3">>
-    <<include "tutorial1-picture4">>
+    <<include "tutorial1-picture1-ks2">>
+    <<include "tutorial1-picture2-ks2">>
+    <<include "tutorial1-picture3-ks2">>
+    <<include "tutorial1-picture4-ks2">>
     <<include "tutorial1-empty-picture">>
     </div>
 
@@ -2391,20 +2413,28 @@ Lorem Ipsum Welsh
 
 :: tutorial1-empty-picture [nobr]
    <img src="assets/img/stage3-tutorial1/empty-picture.png" alt="Empty picture" >
+:: tutorial1-picture1-ks1 [nobr]
+   <img src="assets/img/stage3-tutorial1/picture-1-ks1.png" alt="Present" >
 
-:: tutorial1-picture1 [nobr]
+:: tutorial1-picture2-ks1 [nobr]
+   <img src="assets/img/stage3-tutorial1/picture-2-ks1.png" alt="Elephant" >
+
+:: tutorial1-picture3-ks1 [nobr]
+   <img src="assets/img/stage3-tutorial1/picture-3-ks1.png" alt="Ride" >
+
+:: tutorial1-picture1-ks2 [nobr]
    <img src="assets/img/stage3-tutorial1/picture-1.png" alt="Lionel" >
 
-:: tutorial1-picture2 [nobr]
+:: tutorial1-picture2-ks2 [nobr]
    <img src="assets/img/stage3-tutorial1/picture-2.png" alt="Book" >
 
-:: tutorial1-picture3 [nobr]
+:: tutorial1-picture3-ks2 [nobr]
    <img src="assets/img/stage3-tutorial1/picture-3.png" alt="Frog" >
 
-:: tutorial1-picture4[nobr]
+:: tutorial1-picture4-ks2 [nobr]
    <img src="assets/img/stage3-tutorial1/picture-4.png" alt="Bea using Magic Book" >
 
-:: tutorial1-picture5 [nobr]
+:: tutorial1-picture5-ks2 [nobr]
    <img src="assets/img/stage3-tutorial1/picture-5.png" alt="Library" >
 
 :: stage3-tutorial1-a [nobr]
@@ -2487,29 +2517,75 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial1-b">>
 <<set $nextPassage to "stage3-tutorial1-c">>
 <<include "_templateVideoChat">>
-<<if $userchoices.language is "eng">>
-<<timed 0.1s>>
+
+/* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
+<<if $userchoices.keyStage is 1>>
+    <<timed 0.1s>>
     <<replace "#videoWrapper">>
-     <<include "stage3-tutorial1-pictures-container">>
+     <<include "stage3-tutorial1-pictures-container-ks1">>
     <</replace>>
  <</timed>>
+    /* CHOOSE CORRECT LANG CONTAINER FOR KS1  */
+    <<if $userchoices.language is "eng">>
       <<timed 1s>>
-    <<include "stage3-tutorial1-b-messages-eng">>
+    <<include "stage3-tutorial1-b-messages-eng-ks1">>
      <</timed>>
-<<elseif $userchoices.language is "cym">>
-<<timed 0.1s>>
-   <<replace "#videoWrapper">>
-    <<include "stage3-tutorial1-pictures-container">>
-<</replace>>
+     <<elseif $userchoices.language is "cym">>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-b-messages-cym-ks1">>
      <</timed>>
-           <<timed 1s>>
-    <<include "stage3-tutorial1-b-messages-cym">>
+     <</if>>
+/* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
+ <<elseif $userchoices.keyStage is 2>>
+ <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+     <<include "stage3-tutorial1-pictures-container-ks2">>
+    <</replace>>
+ <</timed>>
+    /* CHOOSE CORRECT LANG CONTAINER FOR KS2  */
+    <<if $userchoices.language is "eng">>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-b-messages-eng-ks2">>
+     <</timed>>
+     <<elseif $userchoices.language is "cym">>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-b-messages-cym-ks2">>
+     <</timed>>
+     <</if>>
+ <</if>>
+    
+:: stage3-tutorial1-b-messages-eng-ks1 [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-b-vn-transcript-eng-ks1"
+         "stage3-tutorial1-b-vn-triggered-content-eng-ks1">>
+        <</append>>
     <</timed>>
-<</if>>
+    
+    
+:: stage3-tutorial1-b-vn-transcript-eng-ks1 [nobr]
+I’m going to make a full Night-Time Dream out of the image I can remember from my dream - the surprise present. This will be the <span class="codeword-text">BEGINNING</span> to the story I’m creating for the BFG. 
+
+:: stage3-tutorial1-b-vn-triggered-content-eng-ks1 [nobr]
+<<timed 4s>>
+    <<replace "#pictureContainer">>
+      <<include "tutorial1-picture1-ks1">>
+         <<include "tutorial1-empty-picture">>
+        <<include "tutorial1-empty-picture">>
+        <</replace>>
+    <</timed>>
+
+<<timed 10s>>
+    <<replace "#chatInputWrapper">>
+        <div class="btn-option-wrapper">
+            <<include "nextBtn">>
+        </div>
+    <</replace>>
+<</timed>>
 
 
-:: stage3-tutorial1-b-messages-eng [nobr]
-
+:: stage3-tutorial1-b-messages-eng-ks2 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
          <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-b-vn-transcript-eng"
@@ -2518,17 +2594,13 @@ Lorem Ipsum Welsh
     <</timed>>
     
 
-
-
-
-
-:: stage3-tutorial1-b-vn-transcript-eng [nobr]
+:: stage3-tutorial1-b-vn-transcript-eng-ks2 [nobr]
 I’m going to make a full Night-Time Dream out of the image I can remember from my dream - the surprise present. This will be the <span class="codeword-text">OPENING</span> to the story I’m creating for the BFG. 
 
-:: stage3-tutorial1-b-vn-triggered-content-eng [nobr]
+:: stage3-tutorial1-b-vn-triggered-content-eng-ks2 [nobr]
 <<timed 4s>>
     <<replace "#pictureContainer">>
-      <<include "tutorial1-picture1">>
+      <<include "tutorial1-picture1-ks2">>
          <<include "tutorial1-empty-picture">>
         <<include "tutorial1-empty-picture">>
         <<include "tutorial1-empty-picture">>
@@ -2544,48 +2616,111 @@ I’m going to make a full Night-Time Dream out of the image I can remember from
     <</replace>>
 <</timed>>
 
-:: stage3-tutorial1-b-messages-cym [nobr]
-Lorem ipsum Welsh
 
+:: stage3-tutorial1-b-messages-cym-ks1 [nobr]
+Lorem ipsum Welsh KS1
+
+:: stage3-tutorial1-b-vn-transcript-cym-ks1 [nobr]
+Lorem ipsum Welsh KS1
+:: stage3-tutorial1-b-vn-triggered-content-cym-ks1 [nobr]
+Lorem ipsum Welsh KS1
+
+:: stage3-tutorial1-b-messages-cym-ks2 [nobr]
+Lorem ipsum Welsh KS2
+
+:: stage3-tutorial1-b-vn-transcript-cym-ks2 [nobr]
+Lorem ipsum Welsh KS2
+:: stage3-tutorial1-b-vn-triggered-content-cym-ks2 [nobr]
+Lorem ipsum Welsh KS2
 
 :: stage3-tutorial1-c [nobr]
 <<set $prevPassage to "stage3-tutorial1-b">>
 <<set $passage to "stage3-tutorial1-c">>
 <<set $nextPassage to "stage3-tutorial1-d">>
 <<include "_templateVideoChat">>
-<<if $userchoices.language is "eng">>
-      <<timed 1s>>
-    <<include "stage3-tutorial1-c-messages-eng">>
-     <</timed>>
-<<elseif $userchoices.language is "cym">>
- <<timed 1s>>
-    <<include "stage3-tutorial1-c-messages-cym">>
-    <</timed>>
-<</if>>
-
-<<timed 0.1s>>
+/* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
+<<if $userchoices.keyStage is 1>>
+    <<timed 0.1s>>
     <<replace "#videoWrapper">>
-     <<include "stage3-tutorial1-pictures-container">>
+     <<include "stage3-tutorial1-pictures-container-ks1">>
     <</replace>>
  <</timed>>
+    /* CHOOSE CORRECT LANG CONTAINER FOR KS1  */
+    <<if $userchoices.language is "eng">>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-c-messages-eng-ks1">>
+     <</timed>>
+     <<elseif $userchoices.language is "cym">>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-c-messages-cym-ks1">>
+     <</timed>>
+     <</if>>
+/* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
+ <<elseif $userchoices.keyStage is 2>>
+ <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+     <<include "stage3-tutorial1-pictures-container-ks2">>
+    <</replace>>
+ <</timed>>
+    /* CHOOSE CORRECT LANG CONTAINER FOR KS2  */
+    <<if $userchoices.language is "eng">>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-c-messages-eng-ks2">>
+     <</timed>>
+     <<elseif $userchoices.language is "cym">>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-c-messages-cym-ks2">>
+     <</timed>>
+     <</if>>
+ <</if>>
 
-
-:: stage3-tutorial1-c-messages-eng [nobr]
+:: stage3-tutorial1-c-messages-eng-ks1 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-c-vn-transcript-eng"
-         "stage3-tutorial1-c-vn-triggered-content-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-c-vn-transcript-eng-ks1"
+         "stage3-tutorial1-c-vn-triggered-content-eng-ks1">>
         <</append>>
     <</timed>>
     
-:: stage3-tutorial1-c-vn-transcript-eng [nobr]
-The next part is the <span class="codeword-text">MISSION</span>  where something changes and that could be ‘I open the present inside is a Magic Book, which is full of spells in it’.  
+:: stage3-tutorial1-c-vn-transcript-eng-ks1 [nobr]
 
-:: stage3-tutorial1-c-vn-triggered-content-eng [nobr]
+The next part is the <span class="codeword-text">MIDDLE</span> of the story - something that happens after the Beginning. So, what would be inside my Surprise Present? Let’s say... Inside was a baby Elephant! 
+
+
+:: stage3-tutorial1-c-vn-triggered-content-eng-ks1 [nobr]
 <<timed 4s>>
     <<replace "#pictureContainer">>
-      <<include "tutorial1-picture1">>
-        <<include "tutorial1-picture2">>
+      <<include "tutorial1-picture1-ks1">>
+        <<include "tutorial1-picture2-ks1">>
+        <<include "tutorial1-empty-picture">>
+     
+        <</replace>>
+    <</timed>>
+
+<<timed 10s>>
+    <<replace "#chatInputWrapper">>
+        <div class="btn-option-wrapper">
+            <<include "nextBtn">>
+        </div>
+    <</replace>>
+<</timed>>
+
+:: stage3-tutorial1-c-messages-eng-ks2 [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-c-vn-transcript-eng-ks2"
+         "stage3-tutorial1-c-vn-triggered-content-eng-ks2">>
+        <</append>>
+    <</timed>>
+    
+:: stage3-tutorial1-c-vn-transcript-eng-ks2 [nobr]
+The next part is the <span class="codeword-text">MISSION</span>  where something changes and that could be ‘I open the present inside is a Magic Book, which is full of spells in it’.  
+
+:: stage3-tutorial1-c-vn-triggered-content-eng-ks2 [nobr]
+<<timed 4s>>
+    <<replace "#pictureContainer">>
+      <<include "tutorial1-picture1-ks2">>
+        <<include "tutorial1-picture2-ks2">>
         <<include "tutorial1-empty-picture">>
         <<include "tutorial1-empty-picture">>
         <<include "tutorial1-empty-picture">>
@@ -2601,48 +2736,112 @@ The next part is the <span class="codeword-text">MISSION</span>  where something
 <</timed>>
 
 
-:: stage3-tutorial1-c-messages-cym [nobr]
-Lorem Ipsum Welsh
+:: stage3-tutorial1-c-messages-cym-ks1 [nobr]
+Lorem ipsum Welsh KS1
+
+:: stage3-tutorial1-c-vn-transcript-cym-ks1 [nobr]
+Lorem ipsum Welsh KS1
+:: stage3-tutorial1-c-vn-triggered-content-cym-ks1 [nobr]
+Lorem ipsum Welsh KS1
+
+:: stage3-tutorial1-c-messages-cym-ks2 [nobr]
+Lorem ipsum Welsh KS2
+
+:: stage3-tutorial1-c-vn-transcript-cym-ks2 [nobr]
+Lorem ipsum Welsh KS2
+:: stage3-tutorial1-c-vn-triggered-content-cym-ks2 [nobr]
+Lorem ipsum Welsh KS2
 
 
 :: stage3-tutorial1-d [nobr]
 <<set $prevPassage to "stage3-tutorial1-c">>
 <<set $passage to "stage3-tutorial1-d">>
 <<set $nextPassage to "stage3-tutorial1-e">>
-<<include "_templateVideoChat">>
-<<if $userchoices.language is "eng">>
-      <<timed 1s>>
-    <<include "stage3-tutorial1-d-messages-eng">>
-     <</timed>>
-<<elseif $userchoices.language is "cym">>
-           <<timed 1s>>
-    <<include "stage3-tutorial1-d-messages-cym">>
-    <</timed>>
-<</if>>
 
-<<timed 0.1s>>
+<<include "_templateVideoChat">>
+
+/* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
+<<if $userchoices.keyStage is 1>>
+    <<timed 0.1s>>
     <<replace "#videoWrapper">>
-     <<include "stage3-tutorial1-pictures-container">>
+     <<include "stage3-tutorial1-pictures-container-ks1">>
     <</replace>>
  <</timed>>
+    /* CHOOSE CORRECT LANG CONTAINER FOR KS1  */
+    <<if $userchoices.language is "eng">>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-d-messages-eng-ks1">>
+     <</timed>>
+     <<elseif $userchoices.language is "cym">>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-d-messages-cym-ks1">>
+     <</timed>>
+     <</if>>
+/* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
+ <<elseif $userchoices.keyStage is 2>>
+ <<timed 0.1s>>
+    <<replace "#videoWrapper">>
+     <<include "stage3-tutorial1-pictures-container-ks2">>
+    <</replace>>
+ <</timed>>
+    /* CHOOSE CORRECT LANG CONTAINER FOR KS2  */
+    <<if $userchoices.language is "eng">>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-d-messages-eng-ks2">>
+     <</timed>>
+     <<elseif $userchoices.language is "cym">>
+      <<timed 1s>>
+    <<include "stage3-tutorial1-d-messages-cym-ks2">>
+     <</timed>>
+     <</if>>
+ <</if>>
 
-:: stage3-tutorial1-d-messages-eng [nobr]
+:: stage3-tutorial1-d-messages-eng-ks1 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-d-vn-transcript-eng"
-         "stage3-tutorial1-d-vn-triggered-content-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-d-vn-transcript-eng-ks1"
+         "stage3-tutorial1-d-vn-triggered-content-eng-ks1">>
         <</append>>
     <</timed>>  
     
-:: stage3-tutorial1-d-vn-transcript-eng [nobr]
-Then a <span class="codeword-text">CHALLENGE</span>  or <span class="codeword-text">PROBLEM</span>  occurs. In mine it could be - an evil frog wants to steal the book. 
+:: stage3-tutorial1-d-vn-transcript-eng-ks1 [nobr]
 
-:: stage3-tutorial1-d-vn-triggered-content-eng [nobr]
+Then the <span class="codeword-text">END</span> of the story might show what happens after The Middle - so, in my story after the Surprise Present had a Baby Elephant it, the End might be that I ride the Elephant to the Library. The End! 
+
+:: stage3-tutorial1-d-vn-triggered-content-eng-ks1 [nobr]
 <<timed 4s>>
     <<replace "#pictureContainer">>
-      <<include "tutorial1-picture1">>
-        <<include "tutorial1-picture2">>
-          <<include "tutorial1-picture3">>
+      <<include "tutorial1-picture1-ks1">>
+        <<include "tutorial1-picture2-ks1">>
+          <<include "tutorial1-picture3-ks1">>
+        <</replace>>
+    <</timed>>
+
+<<timed 10s>>
+    <<replace "#chatInputWrapper">>
+        <div class="btn-option-wrapper">
+            <<include "nextBtn">>
+        </div>
+    <</replace>>
+<</timed>>
+
+:: stage3-tutorial1-d-messages-eng-ks2 [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-d-vn-transcript-eng-ks2"
+         "stage3-tutorial1-d-vn-triggered-content-eng-ks2">>
+        <</append>>
+    <</timed>>  
+    
+:: stage3-tutorial1-d-vn-transcript-eng-ks2 [nobr]
+Then a <span class="codeword-text">CHALLENGE</span>  or <span class="codeword-text">PROBLEM</span>  occurs. In mine it could be - an evil frog wants to steal the book. 
+
+:: stage3-tutorial1-d-vn-triggered-content-eng-ks2 [nobr]
+<<timed 4s>>
+    <<replace "#pictureContainer">>
+      <<include "tutorial1-picture1-ks2">>
+        <<include "tutorial1-picture2-ks2">>
+          <<include "tutorial1-picture3-ks2">>
         <<include "tutorial1-empty-picture">>
         <<include "tutorial1-empty-picture">>
         <</replace>>
@@ -2655,24 +2854,73 @@ Then a <span class="codeword-text">CHALLENGE</span>  or <span class="codeword-te
         </div>
     <</replace>>
 <</timed>>
-:: stage3-tutorial1-d-messages-cym [nobr]
-Lorem Ipsum Welsh
+:: stage3-tutorial1-d-messages-cym-ks1 [nobr]
+Lorem ipsum Welsh KS1
+
+:: stage3-tutorial1-d-vn-transcript-cym-ks1 [nobr]
+Lorem ipsum Welsh KS1
+:: stage3-tutorial1-d-vn-triggered-content-cym-ks1 [nobr]
+Lorem ipsum Welsh KS1
+
+:: stage3-tutorial1-d-messages-cym-ks2 [nobr]
+Lorem ipsum Welsh KS2
+
+:: stage3-tutorial1-d-vn-transcript-cym-ks2 [nobr]
+Lorem ipsum Welsh KS2
+:: stage3-tutorial1-d-vn-triggered-content-cym-ks2 [nobr]
+Lorem ipsum Welsh KS2
 
 
 :: stage3-tutorial1-e [nobr]
 <<set $prevPassage to "stage3-tutorial1-d">>
 <<set $passage to "stage3-tutorial1-e">>
-<<set $nextPassage to "stage3-tutorial1-f">>
+<<if $userchoices.keyStage is 1>>
+ <<set $nextPassage to "stage3-tutorial1-g">>
+ <<elseif $userchoices.keyStage is 2>>
+  <<set $nextPassage to "stage3-tutorial1-f">>
+<</if>>
 <<include "_templateVideoChat">>
-<<include "choose-messages-language">>
+<<include "choose-messages-language-ks-specific">>
 
+:: stage3-tutorial1-e-messages-eng-ks1 [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-e-vn-transcript-eng-ks1">>
+        <</append>>
+    <</timed>>
+
+
+
+ <<timed 5s>>
+   <<replace "#chatInputWrapper">>
+        <div class="btn-option-wrapper">
+            <<include "nextBtn">>
+        </div>
+    <</replace>>
+        <</timed>>
+
+:: stage3-tutorial1-e-vn-transcript-eng-ks1 [nobr]
+<p>That’s my story. </p>
+<p>
+    
+    It’s a story totally made up from my imagination from one image from my dream to make a full Night-time Dream for the BFG. 
+</p>
+
+<p>Now over to you, I’ve made a Night-Time Dream comic strip that you can use. </p>
+
+
+<p>You can choose to use my first image if you’d like - the Surprise Present! </p>
+
+<p>So, to kick off your imaginations, have a discussion about what could come out of Surprise Present? </p>
+
+
+:: stage3-tutorial1-e-messages-eng-ks2 [nobr]
 <<timed 0.1s>>
     <<replace "#videoWrapper">>
      <<include "stage3-tutorial1-pictures-container">>
     <</replace>>
  <</timed>>
 
-:: stage3-tutorial1-e-messages-eng [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
          <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-e-vn-transcript-eng"
@@ -2680,17 +2928,17 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
     
-:: stage3-tutorial1-e-vn-transcript-eng [nobr]
+:: stage3-tutorial1-e-vn-transcript-eng-ks2 [nobr]
 
 After the <span class="codeword-text">PROBLEM</span>  there is a <span class="codeword-text">SOLUTION</span>  - in my story I use the magic book to scare the frog away
 
-:: stage3-tutorial1-e-vn-triggered-content-eng [nobr]
+:: stage3-tutorial1-e-vn-triggered-content-eng-ks2 [nobr]
 <<timed 4s>>
     <<replace "#pictureContainer">>
-      <<include "tutorial1-picture1">>
-        <<include "tutorial1-picture2">>
-          <<include "tutorial1-picture3">>
-        <<include "tutorial1-picture4">>
+      <<include "tutorial1-picture1-ks2">>
+        <<include "tutorial1-picture2-ks2">>
+          <<include "tutorial1-picture3-ks2">>
+        <<include "tutorial1-picture4-ks2">>
         <<include "tutorial1-empty-picture">>
         <</replace>>
     <</timed>>
@@ -2703,9 +2951,19 @@ After the <span class="codeword-text">PROBLEM</span>  there is a <span class="co
     <</replace>>
 <</timed>>
 
-:: stage3-tutorial1-e-messages-cym [nobr]
-Lorem Ipsum welsh
+:: stage3-tutorial1-e-messages-cym-ks2 [nobr]
+Lorem Ipsum welsh KS2
+<<timed 0.1s>>
+    <<replace "#videoWrapper">>
+     <<include "stage3-tutorial1-pictures-container">>
+    <</replace>>
+ <</timed>>
 
+:: stage3-tutorial1-e-vn-transcript-cym-ks2 [nobr]
+Lorem Ipsum welsh KS2
+
+:: stage3-tutorial1-e-vn-triggered-content-cym-ks2 [nobr]
+Lorem Ipsum welsh KS2
 :: stage3-tutorial1-f [nobr]
 <<set $prevPassage to "stage3-tutorial1-e">>
 <<set $passage to "stage3-tutorial1-f">>
@@ -2734,11 +2992,11 @@ Then an <span class="codeword-text">ENDING</span> - I hide the book in the libra
 :: stage3-tutorial1-f-vn-triggered-content-eng [nobr]
 <<timed 4s>>
     <<replace "#pictureContainer">>
-      <<include "tutorial1-picture1">>
-        <<include "tutorial1-picture2">>
-          <<include "tutorial1-picture3">>
-        <<include "tutorial1-picture4">>
-         <<include "tutorial1-picture5">>
+      <<include "tutorial1-picture1-ks2">>
+        <<include "tutorial1-picture2-ks2">>
+          <<include "tutorial1-picture3-ks2">>
+        <<include "tutorial1-picture4-ks2">>
+         <<include "tutorial1-picture5-ks2">>
         <</replace>>
     <</timed>>
 
@@ -2754,13 +3012,52 @@ Then an <span class="codeword-text">ENDING</span> - I hide the book in the libra
 Lorem Ipsum Welsh
 
 :: stage3-tutorial1-g [nobr]
-<<set $prevPassage to "stage3-tutorial1-f">>
+<<if $userchoices.keyStage is 1>>
+    <<set $prevPassage to "stage3-tutorial1-e">>
+<<elseif $userchoices.keyStage is 2>>
+     <<set $prevPassage to "stage3-tutorial1-f">>
+<</if>>
+
 <<set $passage to "stage3-tutorial1-g">>
 <<set $nextPassage to "stage3-tutorial1-h">>
 <<include "_templateFullScreenChat">>
-<<include "choose-messages-language">>
+<<include "choose-messages-language-ks-specific">>
 
-:: stage3-tutorial1-g-messages-eng [nobr]
+:: stage3-tutorial1-g-messages-eng-ks1 [nobr]
+<<timed 1s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>IOk - I imagine you have some ideas now on what your Night-Time Dream story might be about.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Remember, the BFG is looking for exciting, fun stories with happy endings that can go into his Dream Jars and we want these to be the best they can be for him. 
+  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>> 
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>When you are finished, send me the word DREAM.
+  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+ <<timed 13s>>
+  <<replace "#chatInputWrapper">>
+    /* $codewordsStage3.codeword1 */
+      <<include "codeword-chat">>
+  <</replace>>
+        <</timed>>
+
+:: stage3-tutorial1-g-messages-eng-ks2 [nobr]
 <<timed 1s>> 
      <<append "#chatHistory">>
          <div class="message-received">
@@ -2804,8 +3101,11 @@ You can choose to use my first image from my Dream OR you could use your own sta
   <</replace>>
         <</timed>>
 
-:: stage3-tutorial1-g-messages-cym [nobr]
-Lorem Ipsum Welsh
+:: stage3-tutorial1-g-messages-cym-ks1 [nobr]
+Lorem Ipsum Welsh KS1
+
+:: stage3-tutorial1-g-messages-cym-ks2 [nobr]
+Lorem Ipsum Welsh KS2
 
 :: stage3-tutorial1-h [nobr]
 <<set $prevPassage to "stage3-tutorial1-g">>
@@ -3978,13 +4278,13 @@ Lorem Ipsum Welsh KS1
 :: stage3-tutorial3-c-messages-cym-ks2 [nobr]
 Lorem Ipsum Welsh KS2
 
-:: stage3-tutorial3-c-vn-transcript-eng-ks1
+:: stage3-tutorial3-c-vn-transcript-cym-ks1
 Lorem Ipsum Welsh KS1
-:: stage3-tutorial3-c-vn-transcript-eng-ks2
+:: stage3-tutorial3-c-vn-transcript-cym-ks2
 Lorem Ipsum Welsh KS2
-:: stage3-tutorial3-c-vn-triggered-content-eng-ks1
+:: stage3-tutorial3-c-vn-triggered-content-cym-ks1
 Lorem Ipsum Welsh KS1
-:: stage3-tutorial3-c-vn-triggered-content-eng-ks2
+:: stage3-tutorial3-c-vn-triggered-content-cym-ks2
 
 :: stage3-tutorial3-d [nobr]
 <<set $prevPassage to "stage3-tutorial3-c">>
