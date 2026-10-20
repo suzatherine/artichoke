@@ -7,7 +7,7 @@ Artichoke Templating
 	"ifid": "D0D58254-464A-48E7-BEBF-156628EC9A0C",
 	"format": "SugarCube",
 	"format-version": "2.36.1",
-	"start": "landing-ks1-eng",
+	"start": "landing-ks2-eng",
 	"zoom": 1
 }
 
@@ -516,7 +516,8 @@ setup.dreamJarDrag = () => {
 <<include "codeword-storage">>
 
 /* Initialise mapping questions */
-<<include "mapping-questions">>
+<<include "mapping-questions-ks1">>
+<<include "mapping-questions-ks2">>
 
 /* Initialise future feet questions */
 <<include "futureFeet-questions">>
@@ -679,6 +680,62 @@ codeword11: {
     <</append>>
     <<run setup.initVoicenote(_transcriptDelay, _transcriptPassage, _triggeredPassage)>>
 <</widget>>>>
+
+<<widget "mappingShowQuestion">>
+    /* _args[0]: true to clear the chat history before showing messages */
+    <<set _idx to $mappingQuestionIndex>>
+    <<set _msgs to $mappingQuestions[_idx][$userchoices.language].message>>
+    <<if _msgs is null or $mappingMessagesShown.includes(_idx)>>
+        <<set _msgs to []>>
+    <<elseif typeof _msgs is "string">>
+        <<set _msgs to [_msgs]>>
+    <</if>>
+    <<if _msgs.length > 0>>
+        <<run $mappingMessagesShown.push(_idx)>>
+        <<replace "#videoWrapper">><</replace>>
+        <<if _args[0]>>
+            <<replace "#chatHistory">><</replace>>
+        <</if>>
+    <</if>>
+    <<for _i, _m range _msgs>>
+        <<if _i is 0>>
+            <<append "#chatHistory">>
+                <div class="message-received"><span><<= _m>></span></div>
+            <</append>>
+        <<else>>
+            <<timed `(_i * 3) + "s"`>>
+                <<append "#chatHistory">>
+                    <div class="message-received"><span><<= _m>></span></div>
+                <</append>>
+            <</timed>>
+        <</if>>
+    <</for>>
+    <<if _msgs.length is 0>>
+       
+            <<replace "#videoWrapper">>
+                <<include "stage3-tutorial2-b-question">>
+            <</replace>>
+   
+        <<timed 2s>>
+        <<append "#videoWrapper">>
+            <<include "stage3-tutorial2-b-navigation">>
+        <</append>>
+        <</timed>>
+    <<else>>
+        <<timed `(_msgs.length * 3) + "s"`>>
+           
+                <<replace "#videoWrapper">>
+                    <<include "stage3-tutorial2-b-question">>
+                <</replace>>
+      
+            <<timed 2s>>
+            <<append "#videoWrapper">>
+                <<include "stage3-tutorial2-b-navigation">>
+            <</append>>
+            <</timed>>
+        <</timed>>
+    <</if>>
+<</widget>>
 
 <<widget "pictureMessage">>
     <<set _imgFile to _args[0]>>
@@ -2820,7 +2877,11 @@ Then the <span class="codeword-text">END</span> of the story might show what hap
 <<timed 10s>>
     <<replace "#chatInputWrapper">>
         <div class="btn-option-wrapper">
+            <<button "Replay">>
+                <<goto "stage3-tutorial1-b">>
+            <</button>>
             <<include "nextBtn">>
+           
         </div>
     <</replace>>
 <</timed>>
@@ -2917,14 +2978,14 @@ Lorem ipsum Welsh KS2
 :: stage3-tutorial1-e-messages-eng-ks2 [nobr]
 <<timed 0.1s>>
     <<replace "#videoWrapper">>
-     <<include "stage3-tutorial1-pictures-container">>
+     <<include "stage3-tutorial1-pictures-container-ks2">>
     <</replace>>
  <</timed>>
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-e-vn-transcript-eng"
-         "stage3-tutorial1-e-vn-triggered-content-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-e-vn-transcript-eng-ks2"
+         "stage3-tutorial1-e-vn-triggered-content-eng-ks2">>
         <</append>>
     <</timed>>
     
@@ -2955,7 +3016,7 @@ After the <span class="codeword-text">PROBLEM</span>  there is a <span class="co
 Lorem Ipsum welsh KS2
 <<timed 0.1s>>
     <<replace "#videoWrapper">>
-     <<include "stage3-tutorial1-pictures-container">>
+     <<include "stage3-tutorial1-pictures-container-ks2">>
     <</replace>>
  <</timed>>
 
@@ -2970,10 +3031,10 @@ Lorem Ipsum welsh KS2
 <<set $nextPassage to "stage3-tutorial1-g">>
 <<include "_templateVideoChat">>
 <<include "choose-messages-language">>
-
+/* NO KS1 CONTENT  */
 <<timed 0.1s>>
     <<replace "#videoWrapper">>
-     <<include "stage3-tutorial1-pictures-container">>
+     <<include "stage3-tutorial1-pictures-container-ks2">>
     <</replace>>
  <</timed>>
 
@@ -3027,7 +3088,7 @@ Lorem Ipsum Welsh
 <<timed 1s>> 
      <<append "#chatHistory">>
          <div class="message-received">
-        <span>IOk - I imagine you have some ideas now on what your Night-Time Dream story might be about.  </span>
+        <span>Ok - I imagine you have some ideas now on what your Night-Time Dream story might be about.  </span>
         </div>
         <</append>>
     <</timed>>
@@ -3212,82 +3273,204 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
 :: stage3-tutorial2-a-messages-cym [nobr]
 Lorem Ipsum Welsh
 
-:: mapping-questions [nobr]
-<<set $mappingQuestionIndex = 0>>
-<<set $mappingQuestions = [
+:: mapping-questions-ks1 [nobr]
+<<set $mappingQuestionsKs1 = [
     {
-        eng: [
-            "Start with looking at buildings/places in your area (e.g. school, shops, libraries) and adding them to your map. ",
-            "You might want to start with the school and then work out from there. "
-        ],
-        cym: [
-            "Lorem ipsum Welsh",
-            "Lorem ipsum Welsh"
-        ]
+        eng: {
+            message: [
+                "Start with looking at buildings/places in your area (e.g. school, shops, libraries) and putting them on your map.", 
+                 "You might want to start with the school and then work out from there."],
+            question: [
+                "What buildings or places are around your school?"
+            ]
+        },
+        cym: {
+            message: null,
+            question: [
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh"
+            ]
+        }
     },
     {
-        eng: [
-            "Next let’s look at the community - what does community in this area mean to you? ",
-            "Add in the community of the area - the people of this place, those who make this place special, those who are helpful, those who look after it."
-        ],
-        cym: [
-            "Lorem ipsum Welsh",
-            "Lorem ipsum Welsh"
-        ]
+        eng: {
+            message: [
+                "Next, let’s look at the people of the area. They are the community. Add them to your map.  ",
+            ],
+            question: [
+                "Who are the people who are in your area?",
+                "Who makes this place special?",
+                "Who are kind people here?"
+,
+            ]
+        },
+        cym: {
+            message: null,
+            question: [
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh"
+            ]
+        }
     },
     {
-        eng: [
-            "What are your favourite parts of the area - What are your favourite places? What makes this community happy here? What makes it welcoming? What brings them together?"
-        ],
-        cym: [
-            "Lorem ipsum Welsh",
-            "Lorem ipsum Welsh",
-            "Lorem ipsum Welsh"
-        ]
+        eng: {
+            message: "Let’s add your favourite parts of the area",
+            question: [
+                "What are your favourite places?",
+                "What makes people happy here?",
+                "Where do people have fun? ",
+                "Where do people relax?"
+            ]
+        },
+        cym: {
+            message: null,
+            question: [
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh"
+            ]
+        }
     },
     {
-        eng: [
-            "Now some important questions - what are the challenges of the area - what makes the community sad? What area needs transforming?"
-        ],
-        cym: [
-            "Lorem ipsum Welsh",
-            "Lorem ipsum Welsh"
-        ]
+        eng: {
+            message: "Now some important questions",
+            question: [
+                "Are there any areas that make people sad? ",
+                "Are there any areas that aren't so nice? "
+            ]
+        },
+        cym: {
+            message: null,
+            question: [
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh"
+            ]
+        }
     },
     {
-        eng: [
-            "Last part - what could be transformed to make the community happier? What would make it more welcoming? "
-        ],
-        cym: [
-            "Lorem ipsum Welsh",
-            "Lorem ipsum Welsh"
-        ]
+        eng: {
+            message: "Last part.",
+            question: [
+               "What could you add or change here to make it nicer for everyone? ",
+               "What would make it more welcoming? "
+            ]
+        },
+        cym: {
+            message: null,
+            question: [
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh"
+            ]
+        }
     }
 ]>>
+
+:: mapping-questions-ks2 [nobr]
+<<set $mappingQuestionsKs2 = [
+    {
+        eng: {
+            message: "Let's map!",
+            question: [
+                "Start with looking at buildings/places in your area (e.g. school, shops, libraries) and adding them to your map. ",
+                "You might want to start with the school and then work out from there. "
+            ]
+        },
+        cym: {
+            message: null,
+            question: [
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh"
+            ]
+        }
+    },
+    {
+        eng: {
+            message: null,
+            question: [
+                "Next let’s look at the community - what does community in this area mean to you? ",
+                "Add in the community of the area - the people of this place, those who make this place special, those who are helpful, those who look after it."
+            ]
+        },
+        cym: {
+            message: null,
+            question: [
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh"
+            ]
+        }
+    },
+    {
+        eng: {
+            message: null,
+            question: [
+                "What are your favourite parts of the area - What are your favourite places? What makes this community happy here? What makes it welcoming? What brings them together?"
+            ]
+        },
+        cym: {
+            message: null,
+            question: [
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh"
+            ]
+        }
+    },
+    {
+        eng: {
+            message: null,
+            question: [
+                "Now some important questions - what are the challenges of the area - what makes the community sad? What area needs transforming?"
+            ]
+        },
+        cym: {
+            message: null,
+            question: [
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh"
+            ]
+        }
+    },
+    {
+        eng: {
+            message: null,
+            question: [
+                "Last part - what could be transformed to make the community happier? What would make it more welcoming? "
+            ]
+        },
+        cym: {
+            message: null,
+            question: [
+                "Lorem ipsum Welsh",
+                "Lorem ipsum Welsh"
+            ]
+        }
+    }
+]>>
+
+
 
 :: stage3-tutorial2-b [nobr]
 
 <<set $prevPassage to "stage3-tutorial2-a">>
 <<set $passage to "stage3-tutorial2-b">>
 <<set $nextPassage to "stage3-tutorial2-c">>
+<<set $mappingQuestionIndex = 0>>
+<<set $mappingMessagesShown = []>>
+<<if $userchoices.keyStage is 1>>
+    <<set $mappingQuestions = $mappingQuestionsKs1>>
+<<else>>
+    <<set $mappingQuestions = $mappingQuestionsKs2>>
+<</if>>
 
 <<include "_templateVideoChat">>
 
+
 <<timed 1s>>
-
-    <<replace "#videoWrapper">>
-        <<include "stage3-tutorial2-b-question">>
-    <</replace>>
-
-<<timed 3s>>
-    <<append "#videoWrapper">>
-
-        <<include "stage3-tutorial2-b-navigation">>
-
-    <</append>>
-    <</timed>>
-
+    /* SHOW MAPPING QUESTION WIDGET */
+    <<mappingShowQuestion false>>
 <</timed>>
+
+
 
 
 :: stage3-tutorial2-b-question [nobr]
@@ -3296,7 +3479,7 @@ Lorem Ipsum Welsh
 
 <div class="mapping-question">
 
-    <<for _line range _question[$userchoices.language]>>
+    <<for _line range _question[$userchoices.language].question>>
         <span><<= _line>></span>
     <</for>>
 
@@ -3304,7 +3487,7 @@ Lorem Ipsum Welsh
 
 :: stage3-tutorial2-b-navigation [nobr]
 
-        <div class="mapping-navigation">
+<div class="mapping-navigation">
 <<if $mappingQuestionIndex > 0>>
 
     <<button "Back">>
@@ -3332,14 +3515,7 @@ Lorem Ipsum Welsh
     <<button "Next">>
 
         <<set $mappingQuestionIndex++>>
-
-        <<replace "#videoWrapper">>
-            <<include "stage3-tutorial2-b-question">>
-        <</replace>>
-
-        <<append "#videoWrapper">>
-            <<include "stage3-tutorial2-b-navigation">>
-        <</append>>
+        <<mappingShowQuestion true>>
 
     <</button>>
 
@@ -3351,13 +3527,13 @@ Lorem Ipsum Welsh
 
         <<timed 5s>>
 
-            <<append "#chatHistory">>
+            <<replace "#chatHistory">>
 
                 <div class="message-received">
                     <span>When ready for the second part, message me <span class="codeword-text">MAPPED</span>.</span>
                 </div>
 
-            <</append>>
+            <</replace>>
 
         <</timed>>
 
