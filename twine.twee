@@ -1343,7 +1343,7 @@ codeword11: {
 :: stage2-video-rewatch [nobr]
 <<set $prevPassage to "stage2-intro-b">>
 <<set $passage to "stage2-video-rewatch">>
-<<set $nextPassage to "stage2-intro-b">>
+<<set $nextPassage to "stage2-intro-b-post-rewatch">>
 <<include "_templateFullScreenVideo">>
 <<include "choose-video-language">>
 
@@ -1391,29 +1391,8 @@ codeword11: {
 
 
 :: stage2-intro-a-messages-cym [nobr]
-<<timed 0.1s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum Welsh</span>
-        </div>
-        <</append>>
-    <</timed>>
+Lorem Ipsum Welsh
 
-<<timed 2s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum Welsh</span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 4s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Lorem Ipsum Welsh</span>
-        </div>
-        <</append>>
-    <</timed>>
 
 
 :: stage2-intro-b [nobr]
@@ -1489,6 +1468,64 @@ codeword11: {
         </div>
         <</append>>
     <</timed>>
+
+
+:: stage2-intro-b-post-rewatch [nobr]
+<<set $prevPassage to "stage2-video-rewatch">>
+<<set $passage to "stage2-intro-b-post-rewatch">>
+<<set $nextPassage to "stage2-BFGRecap">>
+<<include "_templateFullScreenChat">>
+<<include "choose-messages-language">>
+
+:: stage2-intro-b-post-rewatch-messages-eng [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Oh, also, I just realised - you might not have read the BFG 43 times and might be slightly confused. Do you want me to summarise the book for you or do you want to just get on with the exercise? 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatInputWrapper">>
+         <div class="btn-option-wrapper">
+      <<button "BFG Recap">>
+        <<goto "stage2-BFGRecap">>
+        <</button>>
+         <<button "Get on">>
+            <<goto "stage2-exercise-dreamJar-a">>
+        <</button>>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+:: stage2-intro-b-post-rewatch-messages-cym [nobr]
+<<timed 0.1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Lorem Ipsum Welsh</span>
+        </div>
+        <</append>>
+    <</timed>>
+
 
 :: stage2-BFGRecap [nobr]
 <<set $prevPassage to "stage2-intro-b">>
@@ -3610,7 +3647,7 @@ Lorem Ipsum Welsh
          <div class="message-received">
         <span>I want you to have 5 minutes to daydream about this place, and to dream about what it could be.
         <br/>
-        You’ll scribble on your page about this question.</span>
+        You’ll doodle on your page about this question.</span>
         </div>
         <</append>>
     <</timed>>
@@ -3646,12 +3683,12 @@ Lorem Ipsum Welsh
         <<timed 5s>>
         <<append "#chatHistory">>
             <div class="message-received">
-            <span>If you want another 5 minutes just click to SCRIBBLE or you can MOVE ON</span>
+            <span>If you want another 5 minutes just click to DOODLE or you can MOVE ON</span>
             </div>
             <</append>>
         <<append "#chatInputWrapper">>
        <<timed 2s>>
-            <<button "SCRIBBLE">>
+            <<button "DOODLE">>
                 <<replace "#videoWrapper">>
                 <<include "scribble">>
                    <<run setup.startScribbleTimer()>>
