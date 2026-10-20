@@ -495,7 +495,34 @@ setup.dreamJarDrag = () => {
         placedCount++;
 
         if (placedCount === labels.length) {
-            setTimeout(() => Engine.play(State.variables.nextPassage), 1200);
+            showCompletion();
+        }
+    }
+
+    function showCompletion() {
+        const chatHistory = document.getElementById("chatHistory");
+        if (chatHistory) {
+            const message = document.createElement("div");
+            message.className = "message-received";
+            const text = document.createElement("span");
+            text.textContent = "Great work!";
+            message.appendChild(text);
+            chatHistory.appendChild(message);
+            chatHistory.scrollTop = chatHistory.scrollHeight;
+        }
+
+        const inputWrapper = document.getElementById("chatInputWrapper");
+        if (inputWrapper) {
+            const wrapper = document.createElement("div");
+            wrapper.className = "btn-option-wrapper";
+            const button = document.createElement("button");
+            button.className = "macro-button";
+            button.textContent = "Move on";
+            button.addEventListener("click", () => {
+                Engine.play(State.variables.nextPassage);
+            });
+            wrapper.appendChild(button);
+            inputWrapper.appendChild(wrapper);
         }
     }
 };
@@ -781,6 +808,26 @@ codeword11: {
 
 </footer>
 
+:: footer-tutorial [nobr]
+<footer>
+<div class="footer-back-button">
+[img[assets/img/back-sharp-b.png][$prevPassage]]
+    </div>
+
+    
+      [img[assets/img/home-icon.png][$userchoices.landingPage]]
+
+        <<link "Reset tutorials">>
+            <<set $userchoices.tutorialProgress to []>>
+            <<run setup.clearTutorialProgress()>>
+            <<goto "stage3-tutorials-menu">>
+        <</link>>
+<div class="footer-next-button" id="footer-next">
+      [img[assets/img/for-sharp-b.png][$nextPassage]]
+</div>    
+
+</footer>
+
 
 
 
@@ -968,6 +1015,18 @@ codeword11: {
         
          </div>
 
+:: stamp1 [nobr]
+<img src="assets/img/stamp1.png" alt="Stamp 1"/>
+
+:: stamp2 [nobr]
+<img src="assets/img/stamp2.png" alt="Stamp 2"/>
+
+:: stamp3 [nobr]
+<img src="assets/img/stamp3.png" alt="Stamp 3"/>
+
+:: stamp4 [nobr]
+<img src="assets/img/stamp4.png" alt="Stamp 4"/>
+
 /* REUSABLE FUNCTIONALITY  */
 :: choose-messages-language [nobr]
 /* This is for passages where the content DOESN'T change depending on KS choice */
@@ -1125,9 +1184,10 @@ codeword11: {
 
         <</button>>
   </div>
+  <div id="coderesult" class="white"></div>
 </div>
 
-<div id="coderesult" class="white"></div>
+
 
 <<done>><<set $e to setup.addPlaceholder()>><</done>>
 
@@ -2346,81 +2406,116 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorials-menu">>
 <<set $nextPassage to "">>
 
-<<include "header-logo">>
 
-<<timed 0.1s>>
-    <<replace "#pageName">><h3>Tutorials</h3><</replace>>
-<</timed>>
 <main class="tutorials-menu">
 <h2>PICK A DREAM TEAM VIDEO TO COMPLETE</h2>
 
 <div class="bubble-grid" role="list">
     <div class="bubble-btn one" role="listitem">
-        <a class="bubble-link" id="bubble-link-1" data-passage="stage3-tutorial1-video">Tutorial 1
-        </a>
+        <div class="bubble-link" id="bubble-link-1" >
+    <<link [img[assets/img/bubble-blue.png]]>>
+        <<set $nextPassage to "stage3-tutorial1-video">>
+        <<goto "loading-tutorial">>
+
+        <</link>>
+     <span>Night-time Dreams</span>
+        </div>
 <<timed 0.1s>>
     <<if $userchoices.tutorialProgress.includes(1)>>
-        <<append "#bubble-link-1">><span>Complete!</span><</append>>
+      /* REMOVED COMPLETE */
     
-            <<addclass ".one" "completed">>
-      <div class="bubble-complete">✓</div><</if>>
+           <</if>>
         <</timed>>
     </div>
 
 
-    <div class="bubble-btn two" role="listitem">
-        <a class="bubble-link" id="bubble-link-2" data-passage="stage3-tutorial2-video">Tutorial 2</a>
+    <div class="bubble-btn " role="listitem">
+    <div class="bubble-link" id="bubble-link-2" >
+    <<link [img[assets/img/bubble-pink.png]]>>
+        <<set $nextPassage to "stage3-tutorial2-video">>
+        <<goto "loading-tutorial">>
+        <</link>>
+         <span>Day Dreams</span>
+        </div>
         <<timed 0.1s>>
         <<if $userchoices.tutorialProgress.includes(2)>>
-                <<append "#bubble-link-2">><span>Complete!</span><</append>>
-            <<addclass ".two" "completed">>
-        <div class="bubble-complete">✓</div><</if>>
+                <</if>>
            <</timed>>
     </div>
 
-    <div class="bubble-btn three" role="listitem">
-        <a class="bubble-link" id="bubble-link-3" data-passage="stage3-tutorial3-video">Tutorial 3</a>
+    <div class="bubble-btn " role="listitem">
+    
+        <div class="bubble-link" id="bubble-link-3" >
+        <<link [img[assets/img/bubble-green.png]]>>
+        <<set $nextPassage to "stage3-tutorial3-video">>
+        <<goto "loading-tutorial">>
+       
+        <</link>>
+         <span>Future Dreams</span>
+        </div>
             <<timed 0.1s>>
         <<if $userchoices.tutorialProgress.includes(3)>>
-                <<append "#bubble-link-3">><span>Complete!</span><</append>>    
-            <<addclass ".three" "completed">>
-        <div class="bubble-complete">✓</div><</if>>
+                <</if>>
             <</timed>>
     </div>
 </div>
-<br/>
 <div class="tutorial-complete">
-    <h3>WHEN READY TO SEND DREAMS TO THE BFG. </h3>
+    <h3>READY TO SEND DREAMS TO THE BFG? </h3>
  <div class="tutorial-complete-btns">
-     <<button "Send">>
+     <<link [img[assets/img/bubble.png]]>>
          <<goto "stage3-submission-call-bea">>
-            <</button>>
-        
+    <</link>>
+     <span>SEND</span>
       
  </div>
 </div>
 
 <div class="tutorial-options">
-    <div class="">
         <p>If you want to rewatch my video transmission then click here</p>
         <<button "Rewatch">>
            <<goto "stage3-video">>
         <</button>>
-        </div>
-    
-    
-    <div class="clear-progress-container">
-        <p>Or if you want to start again...</p>
-        <<button "Clear progress">>
-            <<set $userchoices.tutorialProgress to []>>
-            <<run setup.clearTutorialProgress()>>
-            <<goto "stage3-tutorials-menu">>
-        <</button>>
-        </div>
+</div>
+
+<div class="stamp-1-container">
+    <<include "stamp1">>
+</div>
+<div class="stamp-2-container">
+    <<include "stamp2">>
+</div>
+<div class="stamp-3-container">
+    <<include "stamp3">>
 </div>
 
 </main>
-<<include "footer">>
+<<include "footer-tutorial">>
+
+:: loading-tutorial [nobr]
+
+ <div class="page-wrapper full-screen-landing connecting">
+     <main class="main-content-center">
+        <div class="connecting-image-wrapper">
+        <<if $nextPassage is "stage3-tutorial1-video">>
+         <img src="assets/img/bubble-blue.png" class="spinning" alt="logo"/>
+         <span>Night Dreams</span>
+         <<elseif $nextPassage is "stage3-tutorial2-video">>
+         <img src="assets/img/bubble-pink.png" class="spinning" alt="logo"/>
+          <span>Day Dreams</span>
+         <<elseif $nextPassage is "stage3-tutorial3-video">>
+         <img src="assets/img/bubble-green.png" class="spinning" alt="logo"/>
+         <span>Future Dreams</span>
+         <</if>>
+        
+         
+         </div>
+
+        </main>
+ </div>
+
+
+   <<timed 6s>>
+        <<goto $nextPassage>>
+        <</timed>>
 
 :: stage3-tutorial1-video [nobr]
 <<set $prevPassage to "stage3-tutorials-menu">>
@@ -2428,6 +2523,8 @@ Lorem Ipsum Welsh
 <<set $nextPassage to "stage3-tutorial1-a">>
 <<include "_templateFullScreenVideo">>
 <<include "choose-video-language">>
+
+<<addclass "body" "blue-bubble-bg">>
 
 :: stage3-tutorial1-video-video-eng [nobr]
 /* VIDEO 4  */
@@ -2536,13 +2633,23 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial1-a">>
 <<set $nextPassage to "stage3-tutorial1-b">>
 <<include "_templateFullScreenChat">>
+<<addclass "body" "blue-bubble-bg">>
 <<if $userchoices.language is "eng">>
-   
+    <<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Night-time Dreams</h2>
+    <</replace>>
+    <</timed>>
       <<timed 1s>>
     <<include "stage3-tutorial1-a-messages-eng">>
      <</timed>>
 <<elseif $userchoices.language is "cym">>
 <<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Night-time Dreams</h2>
+    <</replace>>
+    <</timed>>
+<<timed 1s>>
  
     <<include "stage3-tutorial1-a-messages-cym">>
     <</timed>>
@@ -2611,6 +2718,12 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial1-b">>
 <<set $nextPassage to "stage3-tutorial1-c">>
 <<include "_templateVideoChat">>
+<<addclass "body" "blue-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Night-time Dreams</h2>
+    <</replace>>
+<</timed>>
 
 /* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
 <<if $userchoices.keyStage is 1>>
@@ -2732,6 +2845,12 @@ Lorem ipsum Welsh KS2
 <<set $passage to "stage3-tutorial1-c">>
 <<set $nextPassage to "stage3-tutorial1-d">>
 <<include "_templateVideoChat">>
+<<addclass "body" "blue-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Night-time Dreams</h2>
+    <</replace>>
+<</timed>>
 /* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
 <<if $userchoices.keyStage is 1>>
     <<timed 0.1s>>
@@ -2853,6 +2972,12 @@ Lorem ipsum Welsh KS2
 <<set $nextPassage to "stage3-tutorial1-e">>
 
 <<include "_templateVideoChat">>
+<<addclass "body" "blue-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Night-time Dreams</h2>
+    <</replace>>
+<</timed>>
 
 /* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
 <<if $userchoices.keyStage is 1>>
@@ -2978,6 +3103,12 @@ Lorem ipsum Welsh KS2
   <<set $nextPassage to "stage3-tutorial1-f">>
 <</if>>
 <<include "_templateVideoChat">>
+<<addclass "body" "blue-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Night-time Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language-ks-specific">>
 
 :: stage3-tutorial1-e-messages-eng-ks1 [nobr]
@@ -3067,6 +3198,12 @@ Lorem Ipsum welsh KS2
 <<set $passage to "stage3-tutorial1-f">>
 <<set $nextPassage to "stage3-tutorial1-g">>
 <<include "_templateVideoChat">>
+<<addclass "body" "blue-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Night-time Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language">>
 /* NO KS1 CONTENT  */
 <<timed 0.1s>>
@@ -3119,6 +3256,12 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial1-g">>
 <<set $nextPassage to "stage3-tutorial1-h">>
 <<include "_templateFullScreenChat">>
+<<addclass "body" "blue-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Night-time Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language-ks-specific">>
 
 :: stage3-tutorial1-g-messages-eng-ks1 [nobr]
@@ -3210,6 +3353,12 @@ Lorem Ipsum Welsh KS2
 <<set $passage to "stage3-tutorial1-h">>
 <<set $nextPassage to "stage3-tutorials-menu">>
 <<include "_templateFullScreenChat">>
+<<addclass "body" "blue-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Night-time Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language">>
 
 <<run setup.completeTutorial(1)>>
@@ -3254,6 +3403,7 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial2-video">>
 <<set $nextPassage to "stage3-tutorial2-a">>
 <<include "_templateFullScreenVideo">>
+<<addclass "body" "pink-bubble-bg">>
 <<include "choose-video-language">>
 
 :: stage3-tutorial2-video-video-eng [nobr]
@@ -3271,6 +3421,12 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial2-a">>
 <<set $nextPassage to "stage3-tutorial2-b">>
 <<include "_templateFullScreenChat">>
+<<addclass "body" "pink-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Day Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language">>
 
 
@@ -3500,6 +3656,12 @@ Lorem Ipsum Welsh
 <</if>>
 
 <<include "_templateVideoChat">>
+<<addclass "body" "pink-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Day Dreams</h2>
+    <</replace>>
+<</timed>>
 
 
 <<timed 1s>>
@@ -3593,6 +3755,12 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial2-c">>
 <<set $nextPassage to "stage3-tutorial2-d">>
 <<include "_templateFullScreenChat">>
+<<addclass "body" "pink-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Day Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language">>
 
 :: stage3-tutorial2-c-messages-eng [nobr]
@@ -3638,6 +3806,12 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial2-d">>
 <<set $nextPassage to "stage3-tutorial2-e">>
 <<include "_templateVideoChat">>
+<<addclass "body" "pink-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Day Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language">>
 
 :: stage3-tutorial2-d-messages-eng [nobr]
@@ -3719,6 +3893,12 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial2-e">>
 <<set $nextPassage to "stage3-tutorial2-f">>
 <<include "_templateVideoChat">>
+<<addclass "body" "pink-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Day Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language-ks-specific">>
 
 <<timed 0.1s>>
@@ -3860,6 +4040,12 @@ Lorem Ipsum Welsh KS2
 <<set $passage to "stage3-tutorial2-f">>
 <<set $nextPassage to "stage3-tutorials-menu">>
 <<include "_templateFullScreenChat">>
+<<addclass "body" "pink-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Day Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language-ks-specific">>
 
 <<run setup.completeTutorial(2)>>
@@ -4067,6 +4253,7 @@ Lorem Ipsum Welsh KS2
 <<set $passage to "stage3-tutorial3-video">>
 <<set $nextPassage to "stage3-tutorial3-a">>
 <<include "_templateFullScreenVideo">>
+<<addclass "body" "green-bubble-bg">>
 <<include "choose-video-language">>
 
 
@@ -4086,6 +4273,12 @@ Lorem Ipsum Welsh KS2
 <<set $passage to "stage3-tutorial3-a">>
 <<set $nextPassage to "stage3-tutorial3-b">>
 <<include "_templateFullScreenChat">>
+<<addclass "body" "green-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Future Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language-ks-specific">>
 
 
@@ -4190,6 +4383,12 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial3-b">>
 <<set $nextPassage to "stage3-tutorial3-c">>
 <<include "_templateVideoChat">>
+<<addclass "body" "green-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Future Dreams</h2>
+    <</replace>>
+<</timed>>
 <<set $futureFeetQuestionIndex = 0>>
 <<set $futureFeetMessagesShown = []>>
 <<include "choose-messages-language-ks-specific">>
@@ -4400,6 +4599,12 @@ I’ll send you some sentences to help you work out these steps. <br/>
 <<set $passage to "stage3-tutorial3-c">>
 <<set $nextPassage to "stage3-tutorial3-d">>
 <<include "_templateVideoChat">>
+<<addclass "body" "green-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Future Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language-ks-specific">>
 
 
@@ -4504,6 +4709,12 @@ Lorem Ipsum Welsh KS1
 <<set $passage to "stage3-tutorial3-d">>
 <<set $nextPassage to "stage3-tutorial3-e">>
 <<include "_templateVideoChat">>
+<<addclass "body" "green-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Future Dreams</h2>
+    <</replace>>
+<</timed>>
    
 <<include "choose-messages-language-ks-specific">>
 
@@ -4647,6 +4858,12 @@ Lorem Ipsum Welsh KS2
 <<set $nextPassage to "stage3-tutorials-menu">>
 
 <<include "_templateFullScreenChat">>
+<<addclass "body" "green-bubble-bg">>
+<<timed 0.1s>>
+   <<replace "#pageName">>
+    <h2>Future Dreams</h2>
+    <</replace>>
+<</timed>>
 <<include "choose-messages-language">>
 
 <<run setup.completeTutorial(3)>>
