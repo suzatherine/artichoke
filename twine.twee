@@ -536,6 +536,7 @@ setup.dreamJarDrag = () => {
     language: null,
     keyStage: null,
     stage: null,
+    bsl: null,
     audioOn: true,
     tutorialProgress: setup.loadTutorialProgress()
 }>>
@@ -587,7 +588,7 @@ setup.dreamJarDrag = () => {
 <<set $codewordsSecurityCheck to {
     codeword1: {
         startingPassage: "stage2-securityCheck-a",
-        destinationPassage: "stage2-video",
+        destinationPassage: "loadingBea",
         eng: "WHIZZPOPPER", 
         cym: "WHIZZPOPPER"
     },
@@ -782,9 +783,9 @@ codeword11: {
 <header class="logo-left">
 <div class="logo-container">
     <div class="logo-wrapper">
-    <img src="assets/img/portal-logo-w.png" alt="logo"/>
+    <img src="assets/img/portal-logo-w-header.png" alt="logo"/>
     </div>
-        <h2>Library Portal</h2>
+        /* <h2>Library Portal</h2> */
 </div>
 
 
@@ -802,9 +803,14 @@ codeword11: {
     <</button>>
     
       [img[assets/img/home-icon.png][$userchoices.landingPage]]
+<<if $nextPassage is not "">>
 <div class="footer-next-button" id="footer-next">
       [img[assets/img/for-sharp-b.png][$nextPassage]]
-</div>    
+</div> 
+<<else>>
+    <div>
+</div> 
+<</if>>
 
 </footer>
 
@@ -822,9 +828,14 @@ codeword11: {
             <<run setup.clearTutorialProgress()>>
             <<goto "stage3-tutorials-menu">>
         <</link>>
+<<if $nextPassage is not "">>
 <div class="footer-next-button" id="footer-next">
       [img[assets/img/for-sharp-b.png][$nextPassage]]
-</div>    
+</div> 
+<<else>>
+    <div>
+</div> 
+<</if>>
 
 </footer>
 
@@ -860,7 +871,8 @@ codeword11: {
 
 :: _templateLandingPage [nobr]
 <div class="page-wrapper full-screen-landing">
-    <header></header>
+    <header>
+    <h2>KS$userchoices.keyStage, $userchoices.language</h2></header>
     <main class="main-content-center">
     <div class="hero-image">
     <img src="assets/img/portal-logo-w.png" alt="logo"/>
@@ -885,8 +897,9 @@ codeword11: {
     </div>
         
     </main>
-<<include "footer">>
+
 </div>
+<<include "footer">>
 
 
 :: _templateVideoChat [nobr]
@@ -912,11 +925,9 @@ codeword11: {
 <<include "solologo">>
 </div>
 
-
 </main>
-
-<<include "footer">>
 </div>
+<<include "footer">>
 
 :: _templateFullScreenChat [nobr]
 <div class="page-wrapper">
@@ -940,9 +951,8 @@ codeword11: {
 </div>
 
 </main>
-
-<<include "footer">>
 </div>
+<<include "footer">>
 
 
 :: _templateSecurityCheck [nobr]
@@ -954,6 +964,7 @@ codeword11: {
 
 <div class="chat-wrapper">
     <div class="chat-header">
+        <img src="assets/img/security-icon.png" alt="Security"/>
         <span>Security Check</span>
     </div>
     <div class="chat-history" id="chatHistory">
@@ -982,9 +993,8 @@ codeword11: {
  <img src="assets/img/placeholder.jpeg"/>
 </div>
 </main>
-
-<<include "footerFullScreenVideo">>
 </div>
+<<include "footerFullScreenVideo">>
 
 /* PAGE ELEMENTS  */
 
@@ -1096,6 +1106,7 @@ codeword11: {
 
 <<set $userchoices.language to "eng">>
 <<set $userchoices.keyStage to 2>>
+<<set $userchoices.landingPage to "landing-ks2-eng">>
 
 <<include "_templateLandingPage">>
 
@@ -1107,6 +1118,7 @@ codeword11: {
 
 <<set $userchoices.language to "cym">>
 <<set $userchoices.keyStage to 1>>
+<<set $userchoices.landingPage to "landing-ks1-cym">>
 <<include "_templateLandingPage">>
 
 :: landing-ks2-cym [nobr]
@@ -1115,6 +1127,7 @@ codeword11: {
 <<set $nextPassage to "entry-page">>
 
 <<set $userchoices.language to "cym">>
+<<set $userchoices.landingPage to "landing-ks2-cym">>
 <<set $userchoices.keyStage to 2>>
 
 <<include "_templateLandingPage">>
@@ -1124,21 +1137,35 @@ codeword11: {
 <<set $passage to "entry-page">>
 <<set $nextPassage to "">>
  <div class="page-wrapper">
-     <main class="main-content-center">
+     <main class="entry-page-content">
         <div class="hero-image">
         <img src="assets/img/portal-logo-w.png"/>
         </div>
         <div class="hero-text-wrapper">
             <div class="hero-text">
-            <p>Welcome to the Library Portal</p>
-            <p>To gain entry please enter the codeword from the Library Assistant</p>
+           <<if $userchoices.language is "eng">>
+               <<include "entry-page-messages-eng">>
+           <<elseif $userchoices.language is "cym">>
+               <<include "entry-page-messages-cym">>
+           <</if>>
             </div>    
                 <<include "codeword-landing">>
                 </div>
             </main>
         </div>
 <<include "footer">>
- </div>
+
+
+:: entry-page-messages-eng [nobr]
+            <p>Welcome to the Library Portal</p>
+            <p>To gain entry please enter the codeword from the Library Assistant</p>
+          
+
+:: entry-page-messages-cym [nobr]
+
+            <p>Lorem Ipsum welsh</p>
+         
+
 :: codeword-landing [nobr]
 /* Not using template because there are two options of journey  */
 <<set $codeword to "">>  /* ensure it's blank so the placeholder shows */
@@ -1366,20 +1393,88 @@ codeword11: {
 
 <<timed 0.1s>>
     <<replace "#heroText">>
-             <span><<type 60ms>>Connecting...<</type>>
-        </span>
+             <h2><<type 60ms>>Connecting...<</type>>
+        </h2>
     <</replace>>
 <</timed>>
 
 <<timed 3s>>
     <<replace "#heroText">>
-             <span><<type 60ms>>Connecting...<</type>>
-        </span>
+             <h2><<type 60ms>>Connecting...<</type>>
+        </h2>
     <</replace>>
 <</timed>>
 
    <<timed 6s>>
         <<goto $nextPassage>>
+        <</timed>>
+
+:: calling [nobr]
+
+ <div class="page-wrapper full-screen-landing connecting">
+     <main class="main-content-center">
+        <div class="connecting-image-wrapper">
+         <img src="assets/img/portal-logo-w.png" class="spinning" alt="logo"/>
+         <img src="assets/img/user-round-white.png" alt="user icon" class="user-icon"/>
+         
+         </div>
+     <div class="hero-text" id="heroText">
+   
+        </div>  
+        </main>
+ </div>
+
+<<timed 0.1s>>
+    <<replace "#heroText">>
+             <h2><<type 60ms>>Calling Bea...<</type>>
+        </h2>
+    <</replace>>
+<</timed>>
+
+<<timed 3s>>
+    <<replace "#heroText">>
+             <h2><<type 60ms>>Calling Bea...<</type>>
+        </h2>
+    <</replace>>
+<</timed>>
+
+   <<timed 6s>>
+        <<goto $nextPassage>>
+        <</timed>>
+
+
+:: loadingBea [nobr]
+/* NB Had to make this a separate passage from "connecting" because using "connecting as a destination in the template codeword functionality cause a connecting loop */
+
+ <div class="page-wrapper full-screen-landing connecting">
+     <main class="main-content-center">
+        <div class="connecting-image-wrapper">
+         <img src="assets/img/portal-logo-w.png" class="spinning" alt="logo"/>
+         <img src="assets/img/user-round-white.png" alt="user icon" class="user-icon"/>
+         
+         </div>
+     <div class="hero-text" id="heroText">
+   
+        </div>  
+        </main>
+ </div>
+
+<<timed 0.1s>>
+    <<replace "#heroText">>
+             <h2><<type 60ms>>Loading Bea...<</type>>
+        </h2>
+    <</replace>>
+<</timed>>
+
+<<timed 3s>>
+    <<replace "#heroText">>
+             <h2><<type 60ms>>Loading Bea...<</type>>
+        </h2>
+    <</replace>>
+<</timed>>
+
+   <<timed 6s>>
+        <<goto "stage2-video">>
         <</timed>>
 
 :: stage2-video [nobr]
@@ -1394,6 +1489,7 @@ codeword11: {
 /* VIDEO 2: BEA ‘LIVE’ */
 <iframe width='800px' height='450px' 
       src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
 
 :: stage2-video-video-cym[nobr]
 /* VIDEO 2: BEA ‘LIVE’ */
@@ -1844,7 +1940,7 @@ Lorem Ipsum Welsh
 </p>
 
 :: stage2-exercise-dreamJar-b-vn-transcript-eng-ks2  [nobr]
-<p>Hello - I’ve found some quotes in the BFG book about one of the Dream Jars - obviously you can design your own but this might inspire your ideas - </p>
+<p>Hello - I’ve found some quotes in the BFG book about one of the Dream Jars - obviously you can design your own but this might inspire your ideas --> </p>
 <p>...</p>
 <p>So Dream Jars when filled are colourful and vibrant and Dreams are alive!  Each of them are unique. Discuss the quotes and then I’ll leave you to design yours. </p>
 <p>Message me the word <span class="codeword-text">COLOURFUL</span> when you are ready for the next part. 
@@ -1933,8 +2029,6 @@ Lorem Ipsum Welsh
 <<include "_templateVideoChat">>
 <<include "choose-messages-language-ks-specific">>
 
-
-<<include "footer">>
 
 :: stage2-exercise-dreamJar-c-messages-eng-ks1 [nobr]
 <<timed 0.1s>>
@@ -2059,7 +2153,7 @@ Lorem ipsum Welsh KS2
 <</timed>>
 <<include "choose-messages-language">>
 
-<<include "footer">>
+
 
 
 :: stage2-exercise-dreamJar-c2-messages-eng [nobr]
@@ -2093,7 +2187,7 @@ Lorem ipsum Welsh
 <<include "_templateVideoChat">>
 <<include "choose-messages-language">>
 
-<<include "footer">>
+
 
 :: stage2-exercise-dreamJar-d-messages-eng [nobr]
 
@@ -2358,7 +2452,7 @@ Lorem Ipsum Welsh
 :: stage3-video [nobr]
 <<set $prevPassage to $userchoices.landingPage>>
 <<set $passage to "stage3-video">>
-<<set $nextPassage to "stage3-tutorials-menu">>
+<<set $nextPassage to "loading-tutorial-menu">>
 <<include "_templateFullScreenVideo">>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
@@ -2398,6 +2492,20 @@ Lorem Ipsum Welsh
 /* VIDEO 3 */
 <iframe width='800px' height='450px' 
       src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+
+
+:: loading-tutorial-menu [nobr]
+
+ <div class="page-wrapper full-screen-landing connecting">
+     <main class="main-content-center">
+        <div class="connecting-image-wrapper">
+         <img src="assets/img/stamp3.png" class="spinning" alt="logo"/>
+          </div>
+        </main>
+ </div>
+   <<timed 6s>>
+        <<goto "stage3-tutorials-menu">>
+        <</timed>>
 
 
 
@@ -2462,7 +2570,7 @@ Lorem Ipsum Welsh
 <div class="tutorial-complete">
     <h3>READY TO SEND DREAMS TO THE BFG? </h3>
  <div class="tutorial-complete-btns">
-     <<link [img[assets/img/bubble.png]]>>
+     <<link [img[assets/img/bubble-multi.png]]>>
          <<goto "stage3-submission-call-bea">>
     <</link>>
      <span>SEND</span>
@@ -3612,7 +3720,7 @@ Lorem Ipsum Welsh
         eng: {
             message: null,
             question: [
-                "Now some important questions - what are the challenges of the area - what makes the community sad? What area needs transforming?"
+                "Now some important questions - what are the challenges of the area? What makes the community sad? What area needs transforming?"
             ]
         },
         cym: {
@@ -3660,11 +3768,14 @@ Lorem Ipsum Welsh
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Day Dreams</h2>
+        <h3>Mapping</h3>
+
     <</replace>>
 <</timed>>
 
 
 <<timed 1s>>
+
     /* SHOW MAPPING QUESTION WIDGET */
     <<mappingShowQuestion false>>
 <</timed>>
@@ -3854,7 +3965,7 @@ Lorem Ipsum Welsh
             <<run setup.startScribbleTimer()>>
         <</replace>>
 
-        <<timed 5s>>
+        <<timed 120s>>
         <<append "#chatHistory">>
             <div class="message-received">
             <span>If you want another 5 minutes just click to DOODLE or you can MOVE ON</span>
@@ -4245,6 +4356,9 @@ Lorem Ipsum Welsh KS2
         </g>
     </svg>
 
+    <div class="neon-caption">
+        <span>What could be added or changed in this place to make everyone in it happier?</span>
+    </div>
 
 </div>
 
@@ -4928,8 +5042,9 @@ Lorem Ipsum Welsh
 :: stage3-submission-call-bea-messages-eng [nobr]
 
 <<replace "#heroImage">>
+     <img src="assets/img/user-round-white.png" alt="avatar"/>
 <<button "Call Bea">>
-    <<goto $nextPassage>>
+    <<goto "calling">>
 <</button>>
 <</replace>>
 
@@ -4937,7 +5052,7 @@ Lorem Ipsum Welsh
 
 <<replace "#heroImage">>
 <<button "Call Bea Welsh">>
-    <<goto $nextPassage>>
+    <<goto "calling">>
 <</button>>
 <</replace>>
 
@@ -4947,6 +5062,8 @@ Lorem Ipsum Welsh
 <<set $nextPassage to "stage3-submission-a">>
 <<include "_templateFullScreenVideo">>
 <<include "choose-video-language">>
+
+<<addclass "body" "submission-gradient">>
 
 :: stage3-submission-video-video-eng[nobr]    
 /* Video 7 -  SUBMISSION */
@@ -4968,6 +5085,7 @@ Lorem Ipsum Welsh
 <<set $nextPassage to "stage3-submission-b">>
 <<include "_templateFullScreenChat">>
 <<include "choose-messages-language">>
+<<addclass "body" "submission-gradient">>
 
 :: stage3-submission-a-messages-eng [nobr]
 
@@ -4997,6 +5115,7 @@ Lorem Ipsum Welsh
 <<set $nextPassage to "stage3-submission-c">>
 <<include "_templateVideoChat">>
 <<include "choose-messages-language">>
+<<addclass "body" "submission-gradient">>
 
 
 :: stage3-submission-b-messages-eng [nobr]
@@ -5059,6 +5178,7 @@ Lorem Ipsum welsh
 <<set $nextPassage to $userchoices.landingPage>>
 <<include "_templateFullScreenChat">>
 <<include "choose-messages-language">>
+<<addclass "body" "submission-gradient">>
 
 :: stage3-submission-c-messages-eng [nobr]
 
