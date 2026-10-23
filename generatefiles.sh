@@ -1,9 +1,14 @@
 #!/bin/bash
+set -e
 
 # EVERYTHING TO START AS KS1 ENG 
 
-# Set the story title per generated version
-sed -i '' 's/Artichoke Templating/Artichoke Templating - KS1 Eng/' twine.twee
+# Explicitly reset the source before the first build, even if a previous run
+# stopped before restoring the KS1 Eng settings.
+sed -E -i '' 's/"start": "landing-ks[12]-(eng|cym)",/"start": "landing-ks1-eng",/' twine.twee
+sed -E -i '' 's/"ifid": "[^"]*",/"ifid": "D0D58254-464A-48E7-BEBF-156628EC9A0C",/' twine.twee
+sed -E -i '' 's/setup.buildID = "[^"]*";/setup.buildID = "ks1-eng";/' twine.twee
+sed -E -i '' 's/^Artichoke Templating( - KS[12] (Eng|Cym))*$/Artichoke Templating - KS1 Eng/' twine.twee
 
 # Compile the Twine file
 tweego twine.twee -o ks1-eng.html
