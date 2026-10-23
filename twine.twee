@@ -380,27 +380,57 @@ setup.startScribbleTimer = (durationSeconds = 300) => {
   });
 };
 
-/* Start bubble animation by injecting bubble elements into #bubbles */
-setup.startBubbles = () => {
+/* Shared bubble runner. Bubbles keep spawning for `seconds`, then stop;
+   those already rising finish their animation and are removed.
+   `colours` is an optional list of CSS colours picked at random per bubble. */
+setup.runBubbles = (seconds = 10, colours = null) => {
+console.log("running bubbles normal")
+    const container = document.getElementById('bubbles');
+    if (!container) return;
 
-        const container = document.getElementById('bubbles');
-        if (!container) return;
-        // clear any existing bubbles
-        container.innerHTML = '';
-        const count = 36;
-        for (let i = 0; i < count; i++) {
-       
-                const b = document.createElement('div');
-                b.className = 'bubble';
-                const size = Math.round(Math.random() * 60 + 20);
-                b.style.width = size + 'px';
-                b.style.height = size + 'px';
-                b.style.left = Math.random() * 100 + '%';
-                b.style.animationDuration = (Math.random() * 6 + 6).toFixed(2) + 's';
-                b.style.animationDelay = (Math.random() * 4).toFixed(2) + 's';
-                b.style.opacity = (Math.random() * 0.6 + 0.25).toFixed(2);
-                container.appendChild(b);
+    if (setup.bubbleTimer) clearInterval(setup.bubbleTimer);
+    container.innerHTML = '';
+
+    const spawn = () => {
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const size = Math.round(Math.random() * 60 + 20);
+        b.style.width = size + 'px';
+        b.style.height = size + 'px';
+        b.style.left = Math.random() * 100 + '%';
+        b.style.animationDuration = (Math.random() * 6 + 6).toFixed(2) + 's';
+        b.style.opacity = (Math.random() * 0.6 + 0.25).toFixed(2);
+        if (colours && colours.length) {
+            b.style.background = colours[Math.floor(Math.random() * colours.length)];
         }
+        b.addEventListener('animationend', () => b.remove());
+        container.appendChild(b);
+    };
+
+    const endTime = Date.now() + seconds * 1000;
+    for (let i = 0; i < 12; i++) spawn();
+    setup.bubbleTimer = setInterval(() => {
+        if (Date.now() >= endTime || !document.body.contains(container)) {
+            clearInterval(setup.bubbleTimer);
+            setup.bubbleTimer = null;
+            return;
+        }
+        spawn();
+    }, 300);
+};
+
+/* Start bubble animation by injecting bubble elements into #bubbles */
+setup.startBubbles = (seconds = 10) => setup.runBubbles(seconds);
+
+/* As startBubbles, but each bubble is a random colour from the CSS palette variables */
+setup.startBubblesColourful = (seconds = 10) => {
+    console.log("running bubbles with colourful setup")
+    const names = ['pink', 'sky', 'blush', 'green', 'mint', 'light-sky', 'cream-rose'];
+    const styles = getComputedStyle(document.documentElement);
+    const colours = names
+        .map(n => styles.getPropertyValue('--palette-' + n).trim())
+        .filter(Boolean);
+    setup.runBubbles(seconds, colours);
 };
 
 setup.dreamJarDrag = () => {
@@ -907,7 +937,7 @@ codeword11: {
 <<include "header-logo">>
 <div id="audio"></div>
 <main class="video-chat">
-<div class="chat-wrapper">
+<div class="chat-wrapper" id="chatWrapper">
     <div class="chat-header">
         <img src="assets/img/portal-logo-b.png" alt="avatar"/>
         <span>Bea</span>
@@ -935,7 +965,7 @@ codeword11: {
 <div id="audio"></div>
 <main class="full-screen-chat" id="fullScreenChatMain">
 
-<div class="chat-wrapper">
+<div class="chat-wrapper" id="chatWrapper">
     <div class="chat-header">
         <img src="assets/img/user-round-black.png" alt="avatar"/>
         <span>Bea</span>
@@ -962,7 +992,7 @@ codeword11: {
 <div id="audio"></div>
 <main class="full-screen-chat security-check">
 
-<div class="chat-wrapper">
+<div class="chat-wrapper" id="chatWrapper">
     <div class="chat-header">
         <img src="assets/img/security-icon.png" alt="Security"/>
         <span>Security Check</span>
@@ -3475,7 +3505,8 @@ Lorem Ipsum Welsh KS2
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-h-vn-transcript-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-h-vn-transcript-eng"
+         "stage3-tutorial1-h--vn-triggered-content-eng">>
         <</append>>
     <</timed>>
 
@@ -3494,6 +3525,7 @@ Lorem Ipsum Welsh KS2
 Lorem Ipsum Welsh
 
 :: stage3-tutorial1-h-vn-transcript-eng [nobr]
+
 <p>Wonderful work Dream Team I’m sure. </p>
 
 <p>I love stories - as I’m sure you have gathered - and so it is brilliant to know that you have created Night-Time Dreams for the BFG to collect. They might be bizarre, silly or mad but that is brilliant - all dreams are unique and we never know what or who they’ll inspire.  </p>
@@ -3504,7 +3536,30 @@ Lorem Ipsum Welsh
 
 <p>Speak soon. </p>
 
+:: stage3-tutorial1-h-vn-transcript-cym [nobr]
 
+:: stage3-tutorial1-h-vn-triggered-content-eng [nobr]
+  /* RUN BUBBLES  */
+  <<timed 7s>>
+    <<append "#fullScreenChatMain">>
+        <div class="bubbles-wrapper">
+         <div id="bubbles"></div>
+            </div>
+       <</append>>
+    <<run setup.startBubbles(60)>>
+<</timed>>
+
+
+:: stage3-tutorial1-h-vn-triggered-content-cym [nobr]
+  /* RUN BUBBLES  */
+  <<timed 7s>>
+    <<append "#fullScreenChatMain">>
+        <div class="bubbles-wrapper">
+         <div id="bubbles"></div>
+            </div>
+       <</append>>
+    <<run setup.startBubbles(60)>>
+<</timed>>
 
 :: stage3-tutorial2-video [nobr]
 <<set $prevPassage to "stage3-tutorials-menu">>
@@ -4165,7 +4220,8 @@ Lorem Ipsum Welsh KS2
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng-ks1">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng-ks1"
+         "stage3-tutorial2-f-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
 
@@ -4181,7 +4237,8 @@ Lorem Ipsum Welsh KS2
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng-ks2">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng-ks2"
+         "stage3-tutorial2-f-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
 
@@ -4229,6 +4286,7 @@ Lorem Ipsum Welsh KS2
 
 <p>Well done again!</p>
 
+
 :: stage3-tutorial2-f-vn-transcript-eng-ks2 [nobr]
 
 <p>I love the idea of Day Dreamers Visitor’s Guides - not just because I came up with it - but also because it gets us thinking about what we have around us - appreciating what makes it special and highlighting where it could improve to make everyone in that community happier. </p>
@@ -4263,6 +4321,17 @@ Lorem Ipsum Welsh KS2
 
 <p>Well done again!</p>
 
+:: stage3-tutorial2-f-vn-triggered-content-eng [nobr]
+  /* RUN BUBBLES  */
+  <<timed 7s>>
+    <<append "#fullScreenChatMain">>
+        <div class="bubbles-wrapper">
+         <div id="bubbles"></div>
+            </div>
+       <</append>>
+    <<run setup.startBubbles(60)>>
+<</timed>>
+
 :: stage3-tutorial2-f-messages-cym-ks1 [nobr]
 Lorem Ipsum Welsh KS1
 :: stage3-tutorial2-f-messages-cym-ks2 [nobr]
@@ -4271,6 +4340,17 @@ Lorem Ipsum Welsh KS2
 Lorem Ipsum Welsh KS1
 :: stage3-tutorial2-f-vn-transcript-cym-ks2 [nobr]
 Lorem Ipsum Welsh KS2
+
+:: stage3-tutorial2-f-vn-triggered-content-cym [nobr]
+  /* RUN BUBBLES  */
+  <<timed 7s>>
+    <<append "#fullScreenChatMain">>
+        <div class="bubbles-wrapper">
+         <div id="bubbles"></div>
+            </div>
+       <</append>>
+    <<run setup.startBubbles(60)>>
+<</timed>>
 :: scribble [nobr]
 <div class="neon-scene">
 
@@ -4985,7 +5065,8 @@ Lorem Ipsum Welsh KS2
 :: stage3-tutorial3-e-messages-eng [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial3-e-vn-transcript-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial3-e-vn-transcript-eng"
+         "stage3-tutorial3-e-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
 
@@ -5016,9 +5097,34 @@ Lorem Ipsum Welsh KS2
 
 <p>Speak soon. </p>
 
+:: stage3-tutorial3-e-vn-triggered-content-eng [nobr]
+/* RUN BUBBLES  */
+  <<timed 7s>>
+    <<append "#fullScreenChatMain">>
+        <div class="bubbles-wrapper">
+         <div id="bubbles"></div>
+            </div>
+       <</append>>
+    <<run setup.startBubbles(60)>>
+<</timed>>
 
 :: stage3-tutorial3-e-messages-cym [nobr]
 Lorem Ipsum Welsh
+
+
+:: stage3-tutorial3-e-vn-transcript-cym [nobr]
+Lorem Ipsum Welsh
+
+:: stage3-tutorial3-e-vn-triggered-content-cym
+/* RUN BUBBLES  */
+  <<timed 7s>>
+    <<append "#fullScreenChatMain">>
+        <div class="bubbles-wrapper">
+         <div id="bubbles"></div>
+            </div>
+       <</append>>
+    <<run setup.startBubbles(60)>>
+<</timed>>
 
 
 
@@ -5187,7 +5293,7 @@ Lorem Ipsum welsh
          <<voicenote "assets/sound/ping1.mp3" 
          "3s" 
          "stage3-submission-c-vn-transcript-eng"
-         "stage3-submission-c-vn-triggered-content-eng">>
+         >>
         <</append>>
     <</timed>>
 
@@ -5195,7 +5301,20 @@ Lorem Ipsum welsh
 <<timed 16s>>
     <<append "#chatInputWrapper">>
         <<button "Finish">> 
+        <<run $("#chatWrapper").addClass("fade-out")>>
         <<timed 1s>>
+            <<append "#fullScreenChatMain">>
+            <div class="bubbles-wrapper">
+            <div id="bubbles"></div>
+                </div>
+            <</append>>
+            <<run setup.startBubblesColourful(20)>>
+            <<run $("#chatWrapper").hide()>>
+            <<append "#fullScreenChatMain">>
+            <div id="stampCollection" class="fade-up"><<include "stamp-collection">></div>
+            <</append>>
+        <</timed>>
+        <<timed 20s>>
             <<goto $nextPassage>>
         <</timed>>
         <</button>>
@@ -5222,20 +5341,22 @@ Lorem Ipsum welsh
 
 <p>Until then my friends, Dream Team out.  </p>
 
-:: stage3-submission-c-vn-triggered-content-eng [nobr]
-  /* RUN BUBBLES  */
-  <<timed 7s>>
-    <<append "#fullScreenChatMain">>
-        <div class="bubbles-wrapper">
-         <div id="bubbles"></div>
-            </div>
-       <</append>>
-    <<run setup.startBubbles()>>
-<</timed>>
+:
 
 :: stage3-submission-c-messages-cym [nobr]
 Lorem ipsum welsh
 :: stage3-submission-c-vn-transcript-cym [nobr]
+
+
+:: stamp-collection [nobr]
+
+<div class="stamp-collection-wrapper">
+<<include "stamp1">>
+<<include "stamp2">>
+<<include "stamp3">>
+<<include "stamp4">>
+</div>
+
 
 
 /* STAGE 4 */

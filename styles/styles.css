@@ -224,7 +224,7 @@ footer > a > img {
 header.logo-left {
   display: flex;
   justify-content: space-between;
-  align-items: end;
+  align-items: center;
   padding-bottom: 0;
 }
 header .logo-container {
@@ -637,7 +637,7 @@ input[type='text']::placeholder {
   border-radius: 8px;
   width: fit-content;
   line-height: 1.4;
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -736,7 +736,7 @@ input[type='text']::placeholder {
 .chat-header span {
   font-weight: bold;
   font-family: var(--font-headings);
-  font-size: 2.2rem;
+  font-size: 2.6rem;
 }
 
 /* Chat messages */
@@ -1201,13 +1201,14 @@ input[type='text']::placeholder {
    ========================================================= */
 
 #dream-jar-container {
-  width: 100%;
-  max-width: 30rem;
+  width: min(100%, 58vh);
   margin: 0 auto;
 }
 
 #dream-jar-container img {
+  display: block;
   width: 100%;
+  height: auto;
 }
 
 /* Three jars in a row */
@@ -1217,10 +1218,9 @@ input[type='text']::placeholder {
 
 #dream-jars {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  width: 100%;
-  max-width: 900px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 3rem);
+  width: min(100%, 175vh);
   margin: 0 auto;
 }
 
@@ -1234,6 +1234,10 @@ input[type='text']::placeholder {
   width: 100%;
   height: auto;
   pointer-events: none;
+}
+
+#dream-jars .dream-jar-image {
+  height: auto;
 }
 
 /* Where a correctly placed label sits inside the jar */
@@ -1255,7 +1259,7 @@ input[type='text']::placeholder {
   border-radius: 8px;
   color: black;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: clamp(1.7rem, calc(1.2rem + 0.6vw), 2.4rem);
   line-height: 1.2;
   display: flex;
   flex-direction: column;
@@ -1267,7 +1271,7 @@ input[type='text']::placeholder {
 .dream-jar-static-label span:first-child {
   font-family: var(--font-headings);
   font-weight: bold;
-  font-size: 1.8rem;
+  font-size: clamp(1.9rem, calc(1.4rem + 0.7vw), 2.8rem);
 }
 
 .label-blue {
@@ -1293,7 +1297,15 @@ input[type='text']::placeholder {
 
 /* Your turn: labels left, jar right */
 .your-turn-jar img {
-  max-width: 300px;
+  width: 100%;
+  max-width: none;
+  max-height: 80vh;
+  height: auto;
+  object-fit: contain;
+}
+
+#dream-jar-your-turn .dream-jar-image {
+  height: auto;
 }
 
 #dream-jar-your-turn {
@@ -1331,9 +1343,8 @@ input[type='text']::placeholder {
   left: auto;
   right: auto;
   top: auto;
-  font-size: 1rem;
   width: fit-content;
-  font-size: 1.6rem;
+  font-size: clamp(1.7rem, calc(1.2rem + 0.6vw), 2.4rem);
   text-align: left;
 }
 
@@ -1351,14 +1362,14 @@ input[type='text']::placeholder {
   flex: 1;
   max-width: 220px;
   height: fit-content;
-  padding: 0.6rem;
+  padding: 0.8rem;
   box-sizing: border-box;
   border-radius: 8px;
   color: black;
   font-weight: bold;
   text-align: center;
   font-family: var(--font-headings);
-  font-size: 1.6rem;
+  font-size: clamp(1.7rem, calc(1.2rem + 0.6vw), 2.4rem);
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
@@ -2139,4 +2150,46 @@ main.entry-page-content {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+/* Stamp collection reveal */
+#chatWrapper.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#stampCollection {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stamp-collection-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.stamp-collection-wrapper img {
+  max-width: 20vw;
+  height: auto;
+}
+
+.fade-up {
+  animation: fadeUp 1.5s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
