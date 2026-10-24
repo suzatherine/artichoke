@@ -683,7 +683,13 @@ codeword4: {
         eng: "POSTED", 
         cym: "POSTED"
     }, 
-codeword5: {
+codeword5KS1: {
+        startingPassage: "stage3-tutorial3-b",
+        destinationPassage: "stage3-tutorial3-c",
+        eng: "DREAMING", 
+        cym: "DREAMING"
+    }, 
+codeword5KS2: {
         startingPassage: "stage3-tutorial3-a",
         destinationPassage: "stage3-tutorial3-b",
         eng: "DREAMING", 
@@ -3506,7 +3512,7 @@ Lorem Ipsum Welsh KS2
 <<timed 1s>>
     <<append "#chatHistory">>
          <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-h-vn-transcript-eng"
-         "stage3-tutorial1-h--vn-triggered-content-eng">>
+         "stage3-tutorial1-h-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
 
@@ -4564,7 +4570,7 @@ Can you think of something real you are dreaming for your future at the moment?
 
 <<timed 15s>>
     <<replace "#chatInputWrapper">>
-        /* $codewordsStage3.codeword5 */
+        /* $codewordsStage3.codeword5KS2 */
         <<include "codeword-chat">>
     <</replace>>
 <</timed>>
@@ -4743,7 +4749,7 @@ Do you need someone to help you?<br/>
 
 <<timed 15s>>
     <<replace "#chatInputWrapper">>
-        /* $codewordsStage3.codeword5 */
+        /* $codewordsStage3.codeword5KS1 */ */
         <<include "codeword-chat">>
     <</replace>>
 <</timed>>

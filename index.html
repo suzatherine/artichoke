@@ -756,7 +756,13 @@ codeword4: {
         eng: &quot;POSTED&quot;, 
         cym: &quot;POSTED&quot;
     }, 
-codeword5: {
+codeword5KS1: {
+        startingPassage: &quot;stage3-tutorial3-b&quot;,
+        destinationPassage: &quot;stage3-tutorial3-c&quot;,
+        eng: &quot;DREAMING&quot;, 
+        cym: &quot;DREAMING&quot;
+    }, 
+codeword5KS2: {
         startingPassage: &quot;stage3-tutorial3-a&quot;,
         destinationPassage: &quot;stage3-tutorial3-b&quot;,
         eng: &quot;DREAMING&quot;, 
@@ -2972,7 +2978,7 @@ You can choose to use my first image from my Dream OR you could use your own sta
 &lt;&lt;run setup.completeTutorial(1)&gt;&gt;</tw-passagedata><tw-passagedata pid="180" name="stage3-tutorial1-h-messages-eng" tags="nobr" position="1225,2225" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial1-h-vn-transcript-eng&quot;
-         &quot;stage3-tutorial1-h--vn-triggered-content-eng&quot;&gt;&gt;
+         &quot;stage3-tutorial1-h-vn-triggered-content-eng&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
@@ -3869,7 +3875,7 @@ Can you think of something real you are dreaming for your future at the moment?
 
 &lt;&lt;timed 15s&gt;&gt;
     &lt;&lt;replace &quot;#chatInputWrapper&quot;&gt;&gt;
-        /* $codewordsStage3.codeword5 */
+        /* $codewordsStage3.codeword5KS2 */
         &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
     &lt;&lt;/replace&gt;&gt;
 &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="227" name="stage3-tutorial3-a-messages-cym" tags="nobr" position="850,2850" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="228" name="stage3-tutorial3-b" tags="nobr" position="975,2850" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial3-a&quot;&gt;&gt;
@@ -4026,7 +4032,7 @@ Do you need someone to help you?&lt;br/&gt;
 
 &lt;&lt;timed 15s&gt;&gt;
     &lt;&lt;replace &quot;#chatInputWrapper&quot;&gt;&gt;
-        /* $codewordsStage3.codeword5 */
+        /* $codewordsStage3.codeword5KS1 */ */
         &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
     &lt;&lt;/replace&gt;&gt;
 &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="233" name="stage3-tutorial3-b-messages-eng-ks2" tags="nobr" position="350,2975" size="100,100">&lt;&lt;timed 1s&gt;&gt;
