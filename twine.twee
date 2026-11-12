@@ -1292,15 +1292,6 @@ codeword11: {
 <<set $userchoices.keyStage to 2>>
 <<set $userchoices.landingPage to "landing-ks2-eng">>
 
-<<set _sortingActivity to {
-    title: "Put the morning routine in order",
-    instructions: "Drag the sentences to reorder them, or focus a sentence and use the arrow keys.",
-    titles: ["Beginning", "Middle", "End"],
-    sentences: ["I ate breakfast.", "The alarm rang.", "I got out of bed."],
-    correctOrder: ["The alarm rang.", "I got out of bed.", "I ate breakfast."]
-}>>
-<<sortingActivity _sortingActivity>>
-
 <<include "_templateLandingPage">>
 
 
