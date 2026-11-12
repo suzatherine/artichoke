@@ -26,33 +26,23 @@ Artichoke Templating
 $('#ui-bar').remove();
 $(document.head).find('#style-ui-bar').remove();
 
-// Sorting activity widgets accept an activity object with title, instructions, and items.
+// Sorting activity widgets use a supplied starting order and separate correct order.
 var sortingActivityDraggedItem = null;
 
-setup.shuffleSortingActivitySentences = function (sentences) {
-    var items = sentences.map(function (sentence, index) {
-        return {
-            sentence: sentence,
-            correctPosition: index + 1
-        };
+setup.createSortingActivityItems = function (sentences, correctOrder) {
+    if (!Array.isArray(sentences) || !Array.isArray(correctOrder)
+        || sentences.length === 0 || sentences.length !== correctOrder.length) {
+        return null;
+    }
+
+    var items = sentences.map(function (sentence) {
+        var correctPosition = correctOrder.indexOf(sentence) + 1;
+        return correctPosition > 0
+            ? { sentence: sentence, correctPosition: correctPosition }
+            : null;
     });
 
-    for (var i = items.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var item = items[i];
-        items[i] = items[j];
-        items[j] = item;
-    }
-
-    if (items.length > 1 && items.every(function (item, index) {
-        return item.correctPosition === index + 1;
-    })) {
-        var firstItem = items[0];
-        items[0] = items[1];
-        items[1] = firstItem;
-    }
-
-    return items;
+    return items.every(Boolean) ? items : null;
 };
 
 function updateSortingActivityCorrectness(list) {
@@ -936,13 +926,16 @@ codeword11: {
 <</widget>>
 
 <<widget "sortingActivity">>
-    /* _args[0]: title, instructions, position titles, and sentences in correct order */
+    /* _args[0]: title, instructions, titles, starting sentences, and sentences in correct order */
     <<set _sortingActivity to _args[0]>>
     <<if _sortingActivity and Array.isArray(_sortingActivity.titles)
         and Array.isArray(_sortingActivity.sentences)
+        and Array.isArray(_sortingActivity.correctOrder)
         and _sortingActivity.titles.length > 0
-        and _sortingActivity.titles.length is _sortingActivity.sentences.length>>
-        <<set _sortingItems to setup.shuffleSortingActivitySentences(_sortingActivity.sentences)>>
+        and _sortingActivity.titles.length is _sortingActivity.sentences.length
+        and _sortingActivity.titles.length is _sortingActivity.correctOrder.length>>
+        <<set _sortingItems to setup.createSortingActivityItems(_sortingActivity.sentences, _sortingActivity.correctOrder)>>
+        <<if _sortingItems>>
         <section class="sorting-activity" aria-label="Sorting activity">
             <h2><<= _sortingActivity.title>></h2>
             <p><<= _sortingActivity.instructions>></p>
@@ -956,8 +949,11 @@ codeword11: {
                 <</for>>
             </div>
         </section>
+        <<else>>
+            <p class="sorting-activity-error">Each starting sentence must appear in the correct order list.</p>
+        <</if>>
     <<else>>
-        <p class="sorting-activity-error">Sorting activity data is missing or has no items.</p>
+        <p class="sorting-activity-error">Sorting activity titles, starting sentences, and correct order must be matching non-empty lists.</p>
     <</if>>
 <</widget>>>>
 
@@ -1062,6 +1058,9 @@ codeword11: {
     <div class="hero-image">
     <img src="assets/img/portal-logo-w.png" alt="logo"/>
     </div>
+      <<if $passage is "landing-ks2-cym">>
+          <<include "sorting-activity">>
+      <</if>>
       <div class="enter-button-wrapper">
             <<button "Enter">>
                 <<goto $nextPassage>>
@@ -1293,6 +1292,15 @@ codeword11: {
 <<set $userchoices.keyStage to 2>>
 <<set $userchoices.landingPage to "landing-ks2-eng">>
 
+<<set _sortingActivity to {
+    title: "Put the morning routine in order",
+    instructions: "Drag the sentences to reorder them, or focus a sentence and use the arrow keys.",
+    titles: ["Beginning", "Middle", "End"],
+    sentences: ["I ate breakfast.", "The alarm rang.", "I got out of bed."],
+    correctOrder: ["The alarm rang.", "I got out of bed.", "I ate breakfast."]
+}>>
+<<sortingActivity _sortingActivity>>
+
 <<include "_templateLandingPage">>
 
 
@@ -1322,7 +1330,8 @@ codeword11: {
     title: "Put the morning routine in order",
     instructions: "Drag the sentences to reorder them, or focus a sentence and use the arrow keys.",
     titles: ["Beginning", "Middle", "End"],
-    sentences: ["The alarm rang.", "I got out of bed.", "I ate breakfast."]
+    sentences: ["I ate breakfast.", "The alarm rang.", "I got out of bed."],
+    correctOrder: ["The alarm rang.", "I got out of bed.", "I ate breakfast."]
 }>>
 <<sortingActivity _sortingActivity>>
 

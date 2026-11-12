@@ -109,33 +109,23 @@ var LZString={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234
 $('#ui-bar').remove();
 $(document.head).find('#style-ui-bar').remove();
 
-// Sorting activity widgets accept an activity object with title, instructions, and items.
+// Sorting activity widgets use a supplied starting order and separate correct order.
 var sortingActivityDraggedItem = null;
 
-setup.shuffleSortingActivitySentences = function (sentences) {
-    var items = sentences.map(function (sentence, index) {
-        return {
-            sentence: sentence,
-            correctPosition: index + 1
-        };
+setup.createSortingActivityItems = function (sentences, correctOrder) {
+    if (!Array.isArray(sentences) || !Array.isArray(correctOrder)
+        || sentences.length === 0 || sentences.length !== correctOrder.length) {
+        return null;
+    }
+
+    var items = sentences.map(function (sentence) {
+        var correctPosition = correctOrder.indexOf(sentence) + 1;
+        return correctPosition > 0
+            ? { sentence: sentence, correctPosition: correctPosition }
+            : null;
     });
 
-    for (var i = items.length - 1; i > 0; i--) {
-        var j = Math.floor(Math.random() * (i + 1));
-        var item = items[i];
-        items[i] = items[j];
-        items[j] = item;
-    }
-
-    if (items.length > 1 && items.every(function (item, index) {
-        return item.correctPosition === index + 1;
-    })) {
-        var firstItem = items[0];
-        items[0] = items[1];
-        items[1] = firstItem;
-    }
-
-    return items;
+    return items.every(Boolean) ? items : null;
 };
 
 function updateSortingActivityCorrectness(list) {
@@ -1011,13 +1001,16 @@ codeword11: {
 &lt;&lt;/widget&gt;&gt;
 
 &lt;&lt;widget &quot;sortingActivity&quot;&gt;&gt;
-    /* _args[0]: title, instructions, position titles, and sentences in correct order */
+    /* _args[0]: title, instructions, titles, starting sentences, and sentences in correct order */
     &lt;&lt;set _sortingActivity to _args[0]&gt;&gt;
     &lt;&lt;if _sortingActivity and Array.isArray(_sortingActivity.titles)
         and Array.isArray(_sortingActivity.sentences)
+        and Array.isArray(_sortingActivity.correctOrder)
         and _sortingActivity.titles.length &gt; 0
-        and _sortingActivity.titles.length is _sortingActivity.sentences.length&gt;&gt;
-        &lt;&lt;set _sortingItems to setup.shuffleSortingActivitySentences(_sortingActivity.sentences)&gt;&gt;
+        and _sortingActivity.titles.length is _sortingActivity.sentences.length
+        and _sortingActivity.titles.length is _sortingActivity.correctOrder.length&gt;&gt;
+        &lt;&lt;set _sortingItems to setup.createSortingActivityItems(_sortingActivity.sentences, _sortingActivity.correctOrder)&gt;&gt;
+        &lt;&lt;if _sortingItems&gt;&gt;
         &lt;section class=&quot;sorting-activity&quot; aria-label=&quot;Sorting activity&quot;&gt;
             &lt;h2&gt;&lt;&lt;= _sortingActivity.title&gt;&gt;&lt;/h2&gt;
             &lt;p&gt;&lt;&lt;= _sortingActivity.instructions&gt;&gt;&lt;/p&gt;
@@ -1031,8 +1024,11 @@ codeword11: {
                 &lt;&lt;/for&gt;&gt;
             &lt;/div&gt;
         &lt;/section&gt;
+        &lt;&lt;else&gt;&gt;
+            &lt;p class=&quot;sorting-activity-error&quot;&gt;Each starting sentence must appear in the correct order list.&lt;/p&gt;
+        &lt;&lt;/if&gt;&gt;
     &lt;&lt;else&gt;&gt;
-        &lt;p class=&quot;sorting-activity-error&quot;&gt;Sorting activity data is missing or has no items.&lt;/p&gt;
+        &lt;p class=&quot;sorting-activity-error&quot;&gt;Sorting activity titles, starting sentences, and correct order must be matching non-empty lists.&lt;/p&gt;
     &lt;&lt;/if&gt;&gt;
 &lt;&lt;/widget&gt;&gt;&gt;&gt;
 
@@ -1122,6 +1118,9 @@ codeword11: {
     &lt;div class=&quot;hero-image&quot;&gt;
     &lt;img src=&quot;assets/img/portal-logo-w.png&quot; alt=&quot;logo&quot;/&gt;
     &lt;/div&gt;
+      &lt;&lt;if $passage is &quot;landing-ks2-cym&quot;&gt;&gt;
+          &lt;&lt;include &quot;sorting-activity&quot;&gt;&gt;
+      &lt;&lt;/if&gt;&gt;
       &lt;div class=&quot;enter-button-wrapper&quot;&gt;
             &lt;&lt;button &quot;Enter&quot;&gt;&gt;
                 &lt;&lt;goto $nextPassage&gt;&gt;
@@ -1295,6 +1294,15 @@ codeword11: {
 &lt;&lt;set $userchoices.keyStage to 2&gt;&gt;
 &lt;&lt;set $userchoices.landingPage to &quot;landing-ks2-eng&quot;&gt;&gt;
 
+&lt;&lt;set _sortingActivity to {
+    title: &quot;Put the morning routine in order&quot;,
+    instructions: &quot;Drag the sentences to reorder them, or focus a sentence and use the arrow keys.&quot;,
+    titles: [&quot;Beginning&quot;, &quot;Middle&quot;, &quot;End&quot;],
+    sentences: [&quot;I ate breakfast.&quot;, &quot;The alarm rang.&quot;, &quot;I got out of bed.&quot;],
+    correctOrder: [&quot;The alarm rang.&quot;, &quot;I got out of bed.&quot;, &quot;I ate breakfast.&quot;]
+}&gt;&gt;
+&lt;&lt;sortingActivity _sortingActivity&gt;&gt;
+
 &lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="27" name="landing-ks1-cym" tags="nobr" position="850,350" size="100,100">&lt;&lt;set $prevPassage to &quot;&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;landing-ks1-cym&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;entry-page&quot;&gt;&gt;
@@ -1314,7 +1322,8 @@ codeword11: {
     title: &quot;Put the morning routine in order&quot;,
     instructions: &quot;Drag the sentences to reorder them, or focus a sentence and use the arrow keys.&quot;,
     titles: [&quot;Beginning&quot;, &quot;Middle&quot;, &quot;End&quot;],
-    sentences: [&quot;The alarm rang.&quot;, &quot;I got out of bed.&quot;, &quot;I ate breakfast.&quot;]
+    sentences: [&quot;I ate breakfast.&quot;, &quot;The alarm rang.&quot;, &quot;I got out of bed.&quot;],
+    correctOrder: [&quot;The alarm rang.&quot;, &quot;I got out of bed.&quot;, &quot;I ate breakfast.&quot;]
 }&gt;&gt;
 &lt;&lt;sortingActivity _sortingActivity&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="entry-page" tags="nobr" position="1225,350" size="100,100">&lt;&lt;set $passage to &quot;entry-page&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
