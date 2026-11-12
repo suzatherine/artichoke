@@ -1,7 +1,6 @@
 :: StoryTitle
 Artichoke Templating
 
-
 :: StoryData
 {
 	"ifid": "D0D58254-464A-48E7-BEBF-156628EC9A0C",
@@ -1606,9 +1605,11 @@ Lorem Ipsum Welsh
 <<timed 2s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>If you need to rewatch my livefeed - the video transmission is available to <<button "rewatch">>
+        <span>If you need to rewatch my livefeed - the video transmission is available to <<button "rewatch here">>
             <<goto "stage2-video-rewatch">>
             <</button>></span>
+            <br>
+            <span>I’ve uploaded a copy of the BFG’s letter to us here as well - if you want to read it again together.</span>
         </div>
         <</append>>
     <</timed>>
@@ -2300,7 +2301,7 @@ Lorem Ipsum Welsh
 <<timed 5s>>
 <div class="dream-jar-static-label label-green">
 <span>FUTURE DREAMS</span>
-<span>What we dream of achieving</span>
+<span>Where we dream of what we want to achieve</span>
 </div>
 <</timed>>
 </div>
@@ -2939,8 +2940,8 @@ I’m going to make a full Night-Time Dream out of the image I can remember from
 :: stage3-tutorial1-b-messages-eng-ks2 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-b-vn-transcript-eng"
-         "stage3-tutorial1-b-vn-triggered-content-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-b-vn-transcript-eng-ks2"
+         "stage3-tutorial1-b-vn-triggered-content-eng-ks2">>
         <</append>>
     <</timed>>
     
@@ -3071,7 +3072,7 @@ The next part is the <span class="codeword-text">MIDDLE</span> of the story - so
     <</timed>>
     
 :: stage3-tutorial1-c-vn-transcript-eng-ks2 [nobr]
-The next part is the <span class="codeword-text">MISSION</span>  where something changes and that could be ‘I open the present inside is a Magic Book, which is full of spells in it’.  
+The next part is the <span class="codeword-text">MISSION</span>  where something changes and that could be ‘I open the present inside is a Magic Book, which is full of spells’.  
 
 :: stage3-tutorial1-c-vn-triggered-content-eng-ks2 [nobr]
 <<timed 4s>>
@@ -3363,10 +3364,18 @@ Lorem Ipsum welsh KS2
          "stage3-tutorial1-f-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
-    
+<<timed 5s>>
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Well, that’s my story - it’s very simple now but I’ll add more exciting words like Magnificent, Forever, Unique or even a gobble funk word like Scrumdiddlyumptious!</span>
+        </div>
+        <</append>>
+    <</timed>>
+
 :: stage3-tutorial1-f-vn-transcript-eng [nobr]
 
 Then an <span class="codeword-text">ENDING</span> - I hide the book in the library so no evil frogs can ever find it! 
+
 
 :: stage3-tutorial1-f-vn-triggered-content-eng [nobr]
 <<timed 4s>>
@@ -3454,8 +3463,8 @@ Lorem Ipsum Welsh
 <<timed 4s>> 
      <<append "#chatHistory">>
          <div class="message-received">
-        <span>Now over to you, I’ve made a Night-Time Dream Sequence resource that you can use. <br/>
-You can choose to use my first image from my Dream OR you could use your own starter Night-time dream image from your Dream Jar. 
+        <span>Now over to you, I made my Night-Time Dream from my dream image. <br/>
+You can choose to use my first image but you need to imagine something else that comes out of the box. What else could come out of the box?  
   </span>
         </div>
         <</append>>
@@ -4173,7 +4182,7 @@ Now, you are going to take the doodle into our Dreams for the BFG.</span>
 <<timed 7s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>I call it a Day Dreamers Visitor’s Guide. </span>
+        <span>I call it a Daydreamers Guide. </span>
         </div>
         <</append>>
     <</timed>>
@@ -4189,13 +4198,22 @@ Now, you are going to take the doodle into our Dreams for the BFG.</span>
 <<timed 15s>>
     <<append "#chatHistory">>
          <div class="message-received">
+        <span>You need to explain to the BFG why this is part of your Guide and what you Dream for your area.</span>
+        </div>
+        <</append>>
+    <</timed>>    
+
+<<timed 20s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
         <span>Teacher - you should have a template in your inbox. <br/>
+        <span>Here's my example.</span>
 When you have done send me the message <span class="codeword-text">POSTED</span></span>
         </div>
         <</append>>
     <</timed>>
 
-<<timed 17s>>
+<<timed 22s>>
     <<append "#chatInputWrapper">>
         /* $codewordsStage3.codeword4 */
       <<include "codeword-chat">>
@@ -4295,7 +4313,7 @@ Lorem Ipsum Welsh KS2
 
 :: stage3-tutorial2-f-vn-transcript-eng-ks2 [nobr]
 
-<p>I love the idea of Day Dreamers Visitor’s Guides - not just because I came up with it - but also because it gets us thinking about what we have around us - appreciating what makes it special and highlighting where it could improve to make everyone in that community happier. </p>
+<p>I love the idea of Daydreamers Guides - not just because I came up with it - but also because it gets us thinking about what we have around us - appreciating what makes it special and highlighting where it could improve to make everyone in that community happier. </p>
 
 <p>All of our communities are special in their own way - and they've got to being that way thanks to the people who are part of those communities. People like you who come up with bold, brilliant and slightly outrageous ideas to make the community happier. </p>
 
@@ -5204,13 +5222,35 @@ Lorem Ipsum Welsh
 <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Discuss what you want to put forward as your dream to the BFG and then when ready send me the word BOOK</span>
+            <span>It's time to decide what dream you want to send the BFG!<br>
+            You can send him something you've already written - a night-time dream, a daydream or a future dream - or using all the new skills you've learned to write a dream, you can write him something new! <br>
+            But remember what the BFG said: you has the biggest, bestest, most delumptious Dreams in your thinkings’ That’s what we need! <br>
+            So let's make sure we're checking our dreams to make them the best of the best!
+            </span>
+        </div>
+        <</append>>
+<</timed>>
+
+<<timed 5s>>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>Once you have decided what you want to share with The BFG, read it to someone else.<br>
+            Together you can decide if the dream needs some more adventure, some surprises or some new words to make it the bestest dream you've ever written!
+            </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>When you’re ready to move on, send me the word BOOK. </span>
         </div>
         <</append>>
     <</timed>>
 
 
-<<timed 5s>>
+<<timed 12s>>
     <<append "#chatInputWrapper">>
       /* $codewordsStage3.codeword10 */
       <<include "codeword-chat">>
