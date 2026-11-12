@@ -20,14 +20,138 @@ Artichoke Templating
 @import url("styles/generics.css");
 @import url("styles/removetwinestyles.css");
 @import url("styles/styles.css");
-
-
-
 :: UserScript [script]
 
 :: Story JavaScript [script]
 $('#ui-bar').remove();
 $(document.head).find('#style-ui-bar').remove();
+
+// Sorting activity widgets accept an activity object with title, instructions, and items.
+var sortingActivityDraggedItem = null;
+
+setup.shuffleSortingActivitySentences = function (sentences) {
+    var items = sentences.map(function (sentence, index) {
+        return {
+            sentence: sentence,
+            correctPosition: index + 1
+        };
+    });
+
+    for (var i = items.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var item = items[i];
+        items[i] = items[j];
+        items[j] = item;
+    }
+
+    if (items.length > 1 && items.every(function (item, index) {
+        return item.correctPosition === index + 1;
+    })) {
+        var firstItem = items[0];
+        items[0] = items[1];
+        items[1] = firstItem;
+    }
+
+    return items;
+};
+
+function updateSortingActivityCorrectness(list) {
+    Array.from(list.querySelectorAll(".sorting-activity-row")).forEach(function (row, index) {
+        var item = row.querySelector(".sorting-activity-option");
+        item.classList.toggle("correct", item.dataset.correctPosition === String(index + 1));
+    });
+}
+
+$(document).on(":passagedisplay", function () {
+    document.querySelectorAll(".sorting-activity-list").forEach(updateSortingActivityCorrectness);
+});
+
+function moveSortingActivityItem(list, fromIndex, toIndex) {
+    var rows = Array.from(list.querySelectorAll(".sorting-activity-row"));
+    var items = rows.map(function (row) {
+        return row.querySelector(".sorting-activity-option");
+    });
+    var movedItem = items.splice(fromIndex, 1)[0];
+    items.splice(toIndex, 0, movedItem);
+
+    rows.forEach(function (row, index) {
+        row.appendChild(items[index]);
+    });
+
+    updateSortingActivityCorrectness(list);
+}
+
+document.addEventListener("dragstart", function (event) {
+    var item = event.target.closest(".sorting-activity-list .sorting-activity-option");
+    if (!item) {
+        return;
+    }
+
+    sortingActivityDraggedItem = item;
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.setData("text/plain", item.textContent.trim());
+    item.classList.add("dragging");
+});
+
+document.addEventListener("dragover", function (event) {
+    var list = event.target.closest(".sorting-activity-list");
+    var targetRow = event.target.closest(".sorting-activity-row");
+    if (!list || !targetRow || !sortingActivityDraggedItem
+        || sortingActivityDraggedItem.closest(".sorting-activity-list") !== list) {
+        return;
+    }
+
+    event.preventDefault();
+    var rows = Array.from(list.querySelectorAll(".sorting-activity-row"));
+    var fromIndex = rows.indexOf(sortingActivityDraggedItem.closest(".sorting-activity-row"));
+    var targetIndex = rows.indexOf(targetRow);
+    var midpoint = targetRow.getBoundingClientRect().top + targetRow.getBoundingClientRect().height / 2;
+    var toIndex = targetIndex + (event.clientY > midpoint ? 1 : 0);
+
+    if (fromIndex < toIndex) {
+        toIndex--;
+    }
+
+    toIndex = Math.max(0, Math.min(toIndex, rows.length - 1));
+    if (fromIndex !== toIndex) {
+        moveSortingActivityItem(list, fromIndex, toIndex);
+    }
+});
+
+document.addEventListener("dragend", function (event) {
+    var item = event.target.closest(".sorting-activity-list .sorting-activity-option");
+    if (!item) {
+        return;
+    }
+
+    item.classList.remove("dragging");
+    updateSortingActivityCorrectness(item.closest(".sorting-activity-list"));
+    sortingActivityDraggedItem = null;
+});
+
+document.addEventListener("keydown", function (event) {
+    var item = event.target.closest(".sorting-activity-list .sorting-activity-option");
+    if (!item) {
+        return;
+    }
+
+    var list = item.closest(".sorting-activity-list");
+    var rows = Array.from(list.querySelectorAll(".sorting-activity-row"));
+    var fromIndex = rows.indexOf(item.closest(".sorting-activity-row"));
+
+    if (event.key === "ArrowUp" && fromIndex > 0) {
+        event.preventDefault();
+        moveSortingActivityItem(list, fromIndex, fromIndex - 1);
+        item.focus();
+    } else if (event.key === "ArrowDown") {
+        if (fromIndex >= rows.length - 1) {
+            return;
+        }
+        event.preventDefault();
+        moveSortingActivityItem(list, fromIndex, fromIndex + 1);
+        item.focus();
+    }
+});
 
 // Change this for each compiled version.
 // Examples:
@@ -809,6 +933,32 @@ codeword11: {
         </div>
     <</append>>
  <<run setup.scrollIntoView("chatHistory")>>
+<</widget>>
+
+<<widget "sortingActivity">>
+    /* _args[0]: title, instructions, position titles, and sentences in correct order */
+    <<set _sortingActivity to _args[0]>>
+    <<if _sortingActivity and Array.isArray(_sortingActivity.titles)
+        and Array.isArray(_sortingActivity.sentences)
+        and _sortingActivity.titles.length > 0
+        and _sortingActivity.titles.length is _sortingActivity.sentences.length>>
+        <<set _sortingItems to setup.shuffleSortingActivitySentences(_sortingActivity.sentences)>>
+        <section class="sorting-activity" aria-label="Sorting activity">
+            <h2><<= _sortingActivity.title>></h2>
+            <p><<= _sortingActivity.instructions>></p>
+            <div class="sorting-activity-list" role="list">
+                <<for _i, _item range _sortingItems>>
+                    <div class="sorting-activity-row" role="listitem">
+                        <span class="sorting-activity-label"><<= _sortingActivity.titles[_i]>></span>
+                        <div class="sorting-activity-option" draggable="true" tabindex="0"
+                             data-correct-position="<<= _item.correctPosition>>"><<= _item.sentence>></div>
+                    </div>
+                <</for>>
+            </div>
+        </section>
+    <<else>>
+        <p class="sorting-activity-error">Sorting activity data is missing or has no items.</p>
+    <</if>>
 <</widget>>>>
 
 
@@ -1166,6 +1316,15 @@ codeword11: {
 <<set $userchoices.keyStage to 2>>
 
 <<include "_templateLandingPage">>
+
+:: sorting-activity [nobr]
+<<set _sortingActivity to {
+    title: "Put the morning routine in order",
+    instructions: "Drag the sentences to reorder them, or focus a sentence and use the arrow keys.",
+    titles: ["Beginning", "Middle", "End"],
+    sentences: ["The alarm rang.", "I got out of bed.", "I ate breakfast."]
+}>>
+<<sortingActivity _sortingActivity>>
 
 
 :: entry-page [nobr]
