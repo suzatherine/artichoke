@@ -1317,7 +1317,7 @@ codeword11: {
 
 :: entry-page [nobr]
 
-<<set $prevPassage to "landing-ks"+$userchoices.keyStage+"-"+$userchoices.language>>>
+<<set $prevPassage to "landing-ks"+$userchoices.keyStage+"-"+$userchoices.language>>
 <<set $passage to "entry-page">>
 <<set $nextPassage to "">>
  <div class="page-wrapper">
