@@ -1110,14 +1110,13 @@ codeword11: {
 <<include "footer">>
 
 :: _templateFullScreenChat [nobr]
-<div class="page-wrapper">
-<<include "header-logo">>
 <div id="audio"></div>
+<<include "header-logo">>
 <main class="full-screen-chat" id="fullScreenChatMain">
 
 <div class="chat-wrapper" id="chatWrapper">
     <div class="chat-header">
-        <img src="assets/img/user-round-black.png" alt="avatar"/>
+        <img src="assets/img/icons/BEA_ICON.png" alt="avatar"/>
         <span>Bea</span>
     </div>
     <div class="chat-history" id="chatHistory">
@@ -1131,12 +1130,11 @@ codeword11: {
 </div>
 
 </main>
-</div>
 <<include "footer">>
 
 
 :: _templateSecurityCheck [nobr]
-<div class="page-wrapper">
+<div class="page-wrapper bg login-bg">
 /* <<include "header-logo">> */
 <br/><br/>
 <div id="audio"></div>
@@ -1144,7 +1142,6 @@ codeword11: {
 
 <div class="chat-wrapper" id="chatWrapper">
     <div class="chat-header">
-        <img src="assets/img/security-icon.png" alt="Security"/>
         <span>Security Check</span>
     </div>
     <div class="chat-history" id="chatHistory">
@@ -1163,7 +1160,7 @@ codeword11: {
 </div>
 
 :: _templateFullScreenVideo [nobr]
-<div class="page-wrapper">
+<div class="page-wrapper bg login-bg">
 <<include "header-logo">>
 <div id="audio"></div>
 <main class="full-screen-video">
@@ -1570,12 +1567,10 @@ codeword11: {
 
 :: connecting [nobr]
 
- <div class="page-wrapper full-screen-landing connecting">
+ <div class="page-wrapper full-screen-landing connecting bg login-bg">
      <main class="main-content-center">
         <div class="connecting-image-wrapper">
-         <img src="assets/img/portal-logo-w.png" class="spinning" alt="logo"/>
-         <img src="assets/img/user-round-white.png" alt="user icon" class="user-icon"/>
-         
+         <img src="assets/img/logo/LOGO.png" class="spinning" alt="logo"/>
          </div>
      <div class="hero-text" id="heroText">
    
@@ -1638,12 +1633,10 @@ codeword11: {
 :: loadingBea [nobr]
 /* NB Had to make this a separate passage from "connecting" because using "connecting as a destination in the template codeword functionality cause a connecting loop */
 
- <div class="page-wrapper full-screen-landing connecting">
+ <div class="page-wrapper full-screen-landing connecting bg login-bg" >
      <main class="main-content-center">
         <div class="connecting-image-wrapper">
-         <img src="assets/img/portal-logo-w.png" class="spinning" alt="logo"/>
-         <img src="assets/img/user-round-white.png" alt="user icon" class="user-icon"/>
-         
+         <img src="assets/img/logo/LOGO.png" class="spinning" alt="logo"/>
          </div>
      <div class="hero-text" id="heroText">
    
@@ -1709,8 +1702,11 @@ codeword11: {
 <<set $prevPassage to "stage2-video">>
 <<set $passage to "stage2-intro-a">>
 <<set $nextPassage to "stage2-intro-b">>
+<div class="page-wrapper bg login-bg">
 <<include "_templateFullScreenChat">>
+</div>
 <<include "choose-messages-language">>
+
 
 
 :: stage2-intro-a-messages-eng [nobr]

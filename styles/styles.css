@@ -18,6 +18,8 @@
   --palette-cream-rose: #fde9ee;
   --palette-ice: #edf6fc;
   --palette-light-grey-blue: #ccd5d8;
+  --palette-light-grey: #FAFAFA;
+  --palette-dark-light-grey: #E6E5E1;
   --palette-pale: #e0e6e8;
   --palette-offwhite: #f5f7f7;
   --main-bg-color: var(--palette-navy);
@@ -25,7 +27,7 @@
   --button-hover-color: var(--palette-ocre);
   --text-color: var(--palette-ice);
   --input-bg-color: rgba(0,0,0,0);
-  --input-bg-color-hover: rgba(0,0,0,0.3);;
+  --input-bg-color-hover: rgba(0,0,0,0.1);;
   --font-chapter: 'FSMe', sans-serif;
   --font-headings: 'Fantastic Mr Font', sans-serif;
   --font-body: 'FSMe', sans-serif;
@@ -476,6 +478,9 @@ input[type='text']::placeholder {
   display: flex;
 }
 
+
+
+
 #coderesult {
   font-weight: 900;
   font-size: 1.6rem;
@@ -712,8 +717,8 @@ input[type='text']::placeholder {
   max-height: 70vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
-  border: 3px solid #ccc;
-  border-radius: 5px;
+  border-radius: 20px;
+  background: var(--palette-dark-light-grey);
 }
 
 #chatHistory {
@@ -722,12 +727,12 @@ input[type='text']::placeholder {
 
 #chatHistory > .message-received,
 #chatHistory > .voicenote {
-  background: var(--palette-light-grey-blue);
+  background: white;
   color: black;
   padding: 7px 18px;
   position: relative;
   margin-left: 1rem;
-  border-radius: 8px;
+  border-radius: 20px;
   width: fit-content;
   line-height: 1.4;
   font-size: 2rem;
@@ -755,7 +760,7 @@ input[type='text']::placeholder {
   padding: 0;
   margin-right: 2rem;
   background: white;
-  border: 0;
+  border: 1px solid black;
   border-radius: 50%;
   color: black;
   cursor: pointer;
@@ -768,7 +773,7 @@ input[type='text']::placeholder {
 
 .voicenote-toggle:hover,
 .voicenote-toggle:focus {
-  background: var(--palette-pink);
+  background: var(--palette-light-grey-blue);
 }
 
 .voicenote .icon-pause,
@@ -785,17 +790,18 @@ input[type='text']::placeholder {
   margin-left: 1rem;
   font-size: 1.6rem;
   font-style: italic;
+  color: black;
 }
 
 #chatHistory > .voicenote-transcript-link:hover {
   text-decoration: underline;
-  color: var(--palette-cream-rose);
+  color: black;
 }
 
 #chatHistory > .transcript {
   font-size: 1.6rem;
   font-style: italic;
-  color: var(--palette-offwhite);
+  color: black;
   margin-top: 0.5rem;
   margin-left: 1rem;
   max-width: 80%;
@@ -814,7 +820,6 @@ input[type='text']::placeholder {
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-  border-bottom: 3px solid #ccc;
   background: var(--palette-light-grey-blue);
   color: black;
   margin-bottom: 1rem;
@@ -840,7 +845,6 @@ input[type='text']::placeholder {
     min-width: 0;
     padding: 1rem;
     overflow-y: auto;
-
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
@@ -859,7 +863,6 @@ input[type='text']::placeholder {
 
 .chat-input-wrapper {
   padding: 1rem;
-  border-top: 1px solid #ccc;
   background: #d4ddec;
   color: black;
 }
@@ -917,8 +920,6 @@ input[type='text']::placeholder {
 
   display: grid;
   grid-template-rows: auto 1fr auto;
-
-  border: 3px solid #ccc;
   border-radius: 8px;
   overflow: hidden;
 }
@@ -932,9 +933,7 @@ input[type='text']::placeholder {
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-
-  border-bottom: 3px solid #ccc;
-  background: var(--palette-light-grey-blue);
+  background: var(--palette-light-grey);
 }
 
 .full-screen-chat .chat-header img {
@@ -1010,8 +1009,7 @@ input[type='text']::placeholder {
 
 .full-screen-chat .chat-input-wrapper {
   padding: 1rem;
-  border-top: 3px solid #ccc;
-  background: #d4ddec;
+  background: var(--palette-light-grey);
   display: flex;
   justify-content: end;
   align-items: center;
@@ -1043,14 +1041,13 @@ input[type='text']::placeholder {
 
 /* SECURITY CHECK CHAT */
 .security-check .chat-wrapper {
-  border: 3px solid #ccc;
-  border-radius: 8px;
+  border-radius: 20px;
   overflow: hidden;
   max-width: 600px;
 }
 
 .full-screen-chat.security-check .chat-header {
-  background: var(--palette-pink);
+  background: var(--palette-light-grey);
 }
 
 .full-screen-chat.security-check .chat-header img {
@@ -1764,16 +1761,16 @@ body:is(
   }
 
   #chatHistory > .voicenote-transcript-link {
-    color: var(--tutorial-accent);
+    color: black;
   }
 
   #chatHistory > .transcript {
-    color: var(--palette-ice);
+    color: black;
   }
 
   .chat-input-wrapper,
   .full-screen-chat .chat-input-wrapper {
-    background: var(--palette-navy);
+    background: var(--palette-light-grey);
     border-top-color: var(--tutorial-accent);
     color: var(--palette-ice);
   }
@@ -2347,4 +2344,9 @@ main.entry-page-content {
   .sorting-activity-label {
     font-size: 0.9rem;
   }
+}
+
+.full-screen-chat .chat-input-wrapper #textbox-codeword {
+  border: 2px solid black;
+  color: black;
 }
