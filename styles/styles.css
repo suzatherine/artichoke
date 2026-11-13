@@ -568,6 +568,14 @@ input[type='text']::placeholder {
   box-sizing: border-box;
 }
 
+#chatHistory {
+  border-radius: 20px;
+  background: var(--palette-dark-light-grey);
+  padding-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
 .video-chat > .chat-wrapper {
   border-radius: 20px;
 }
@@ -747,7 +755,7 @@ input[type='text']::placeholder {
   display: grid;
   grid-template-rows: auto 1fr auto;
   border-radius: 20px;
-  background: var(--palette-dark-light-grey);
+  background: var(--palette-light-grey);
 }
 
 #chatHistory {
