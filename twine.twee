@@ -1258,7 +1258,6 @@ codeword11: {
 <</timed>>
 
 :: landing-text [nobr]
-<p>landing KS$userchoices.keyStage $userchoices.language</p>
 <<button "Restart">>
     <<set $rz to Engine.restart()>>
 <</button>>
@@ -1329,10 +1328,11 @@ codeword11: {
 <<set $passage to "entry-page">>
 <<set $nextPassage to "">>
  <div class="page-wrapper">
-     <main class="entry-page-content">
+     <main class="entry-page-content bg login-bg">
         <div class="hero-image">
-        <img src="assets/img/portal-logo-w.png"/>
+        <img src="assets/img/logo/LOGO.png"/>
         </div>
+        <br>
         <div class="hero-text-wrapper">
             <div class="hero-text">
            <<if $userchoices.language is "eng">>
@@ -1349,7 +1349,7 @@ codeword11: {
 
 
 :: entry-page-messages-eng [nobr]
-            <p>Welcome to the Library Portal</p>
+            <p class="yellow-welcome-text">Welcome</p>
             <p>To gain entry please enter the codeword from the Library Assistant</p>
           
 
@@ -1366,7 +1366,7 @@ codeword11: {
   <<textbox "$codeword" "">>
 
   <div class="input-btn" id="codeword-input-btn">
-  <<button "Enter">>
+  <<button "Enter →">>
 
             /* Normalise the user's input */
             <<set $codeword to $codeword.trim().toUpperCase()>>

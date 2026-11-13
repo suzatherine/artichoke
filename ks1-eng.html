@@ -1267,8 +1267,7 @@ codeword11: {
 &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
     &lt;&lt;include $videoToShow&gt;&gt;
 &lt;&lt;/replace&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="landing-text" tags="nobr" position="475,350" size="100,100">&lt;p&gt;landing KS$userchoices.keyStage $userchoices.language&lt;/p&gt;
-&lt;&lt;button &quot;Restart&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="24" name="landing-text" tags="nobr" position="475,350" size="100,100">&lt;&lt;button &quot;Restart&quot;&gt;&gt;
     &lt;&lt;set $rz to Engine.restart()&gt;&gt;
 &lt;&lt;/button&gt;&gt;
 
@@ -1316,10 +1315,11 @@ codeword11: {
 &lt;&lt;set $passage to &quot;entry-page&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
  &lt;div class=&quot;page-wrapper&quot;&gt;
-     &lt;main class=&quot;entry-page-content&quot;&gt;
+     &lt;main class=&quot;entry-page-content bg login-bg&quot;&gt;
         &lt;div class=&quot;hero-image&quot;&gt;
-        &lt;img src=&quot;assets/img/portal-logo-w.png&quot;/&gt;
+        &lt;img src=&quot;assets/img/logo/LOGO.png&quot;/&gt;
         &lt;/div&gt;
+        &lt;br&gt;
         &lt;div class=&quot;hero-text-wrapper&quot;&gt;
             &lt;div class=&quot;hero-text&quot;&gt;
            &lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
@@ -1332,7 +1332,7 @@ codeword11: {
                 &lt;/div&gt;
             &lt;/main&gt;
         &lt;/div&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="entry-page-messages-eng" tags="nobr" position="100,475" size="100,100">&lt;p&gt;Welcome to the Library Portal&lt;/p&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="31" name="entry-page-messages-eng" tags="nobr" position="100,475" size="100,100">&lt;p class=&quot;yellow-welcome-text&quot;&gt;Welcome&lt;/p&gt;
             &lt;p&gt;To gain entry please enter the codeword from the Library Assistant&lt;/p&gt;</tw-passagedata><tw-passagedata pid="32" name="entry-page-messages-cym" tags="nobr" position="225,475" size="100,100">&lt;p&gt;Lorem Ipsum welsh&lt;/p&gt;</tw-passagedata><tw-passagedata pid="33" name="codeword-landing" tags="nobr" position="350,475" size="100,100">/* Not using template because there are two options of journey  */
 &lt;&lt;set $codeword to &quot;&quot;&gt;&gt;  /* ensure it&#39;s blank so the placeholder shows */
 
@@ -1340,7 +1340,7 @@ codeword11: {
   &lt;&lt;textbox &quot;$codeword&quot; &quot;&quot;&gt;&gt;
 
   &lt;div class=&quot;input-btn&quot; id=&quot;codeword-input-btn&quot;&gt;
-  &lt;&lt;button &quot;Enter&quot;&gt;&gt;
+  &lt;&lt;button &quot;Enter →&quot;&gt;&gt;
 
             /* Normalise the user&#39;s input */
             &lt;&lt;set $codeword to $codeword.trim().toUpperCase()&gt;&gt;
