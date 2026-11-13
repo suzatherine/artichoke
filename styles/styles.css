@@ -70,6 +70,38 @@
   font-display: swap;
 }
 
+/* Backgrounds */
+
+.login-bg {
+  background-image: url('../assets/img/bgs/01 LOGIN.jpg');
+}
+
+.day-bg {
+  background-image: url('../assets/img/bgs/02 DAY.jpg');
+}
+
+.night-bg {
+  background-image: url('../assets/img/bgs/03 NIGHT.jpg');
+}
+
+.future-bg {
+  background-image: url('../assets/img/bgs/04 FUTURE.jpg');
+}
+
+.doodle-bg {
+  background-image: url('../assets/img/bgs/05 DOODLE.jpg');
+}
+
+.end-bg {
+  background-image: url('../assets/img/bgs/06 END.jpg');
+}
+
+.bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 /* BUTTONS & LINKS  */
 
 button,

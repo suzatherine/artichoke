@@ -1051,16 +1051,12 @@ codeword11: {
     </div>
 
 :: _templateLandingPage [nobr]
-<div class="page-wrapper full-screen-landing">
-    <header>
-    <h2>KS$userchoices.keyStage, $userchoices.language</h2></header>
+<div class="login-bg bg page-wrapper full-screen-landing">
+    <header></header>
     <main class="main-content-center">
     <div class="hero-image">
-    <img src="assets/img/portal-logo-w.png" alt="logo"/>
+    <img src="assets/img/logo/LOGO.png" alt="logo"/>
     </div>
-      <<if $passage is "landing-ks2-cym">>
-          <<include "sorting-activity">>
-      <</if>>
       <div class="enter-button-wrapper">
             <<button "Enter">>
                 <<goto $nextPassage>>
