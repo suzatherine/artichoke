@@ -749,7 +749,7 @@ input[type='text']::placeholder {
 /* CHAT  */
 
 .chat-wrapper {
-  min-width: 0;
+  min-width: 100%;
   min-height: 0;
   max-height: 70vh;
   display: grid;
@@ -957,7 +957,7 @@ input[type='text']::placeholder {
 
   display: grid;
   grid-template-rows: auto 1fr auto;
-  border-radius: 8px;
+  border-radius: 20px;
   overflow: hidden;
 }
 
@@ -1409,6 +1409,86 @@ input[type='text']::placeholder {
 .label-green {
   background-color: var(--palette-green);
 }
+
+.dreams {
+  width: 180px;
+  height: 220px;
+  box-sizing: border-box;
+  padding: 19px 8px 4px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-family: var(--font-headings);
+}
+
+.nighttime-dreams{
+ background: linear-gradient(
+    160deg,
+    #06344f 0%,
+    #07527a 50%,
+    #187db5 100%
+  );
+  color: #fff;
+}
+
+.day-dreams{
+ background: linear-gradient(
+    160deg,
+    #F7A3AF 0%,
+    #FAC2BB 50%,
+    #fef3ca 100%
+  );
+  color: #0A3956;
+}
+
+.future-dreams{
+ background: linear-gradient(
+    160deg,
+    #F06530 0%,
+    #F47D83 65%,
+    #F48B9F 100%
+  );
+  color: #fff;
+}
+
+
+.dreams__icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-bottom: 0.5rem;
+}
+
+.bubble-btn:focus img {
+  width: auto;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  padding: 0;
+}
+
+.dreams h2 {
+  font-family: var(--font-headings);
+  font-size: 29px;
+  font-weight: 700;
+  margin: 0 0 9px;
+}
+
+.dreams p {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0;
+}
+
+
 
 @keyframes dream-jar-fade-in {
   from {
