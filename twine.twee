@@ -1089,15 +1089,13 @@ codeword11: {
 <main class="video-chat">
 <div class="chat-wrapper" id="chatWrapper">
     <div class="chat-header">
-        <img src="assets/img/portal-logo-b.png" alt="avatar"/>
+        <img src="assets/img/icons/BEA_ICON.png" alt="avatar"/>
         <span>Bea</span>
     </div>
     <div class="chat-history" id="chatHistory">
     
     </div>
     <div class="chat-input-wrapper" id="chatInputWrapper">
-
-   
     </div>
 </div>
 <div class="video-wrapper" id="videoWrapper">
@@ -1120,7 +1118,6 @@ codeword11: {
         <span>Bea</span>
     </div>
     <div class="chat-history" id="chatHistory">
-   
     </div>
    
     <div class="chat-input-wrapper" id="chatInputWrapper">
@@ -1743,7 +1740,9 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage2-intro-a">>
 <<set $passage to "stage2-intro-b">>
 <<set $nextPassage to "stage2-BFGRecap">>
+<div class="bg login-bg dreamjar-page-background">
 <<include "_templateFullScreenChat">>
+</div>
 <<include "choose-messages-language">>
 
 :: stage2-intro-b-messages-eng [nobr]
@@ -1877,7 +1876,9 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage2-intro-b">>
 <<set $passage to "stage2-BFGRecap">>
 <<set $nextPassage to "stage2-exercise-dreamJar-a">>
+<div class="bg login-bg dreamjar-page-background">
 <<include "_templateFullScreenChat">>
+</div>
 <<include "choose-messages-language">>
 
 :: stage2-BFGRecap-messages-eng [nobr]
@@ -1951,7 +1952,9 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage2-BFGRecap">>
 <<set $passage to "stage2-exercise-dreamJar-a">>
 <<set $nextPassage to "stage2-exercise-dreamJar-b">>
+<div class="bg login-bg dreamjar-page-background">
 <<include "_templateFullScreenChat">>
+</div>
 /* Contains KS-specific content */
 <<include "choose-messages-language-ks-specific">>
 
@@ -2094,7 +2097,10 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage2-exercise-dreamJar-a">>
 <<set $passage to "stage2-exercise-dreamJar-b">>
 <<set $nextPassage to "stage2-exercise-dreamJar-c">>
+
+<div class="bg login-bg dreamjar-page-background">
 <<include "_templateVideoChat">>
+</div>
 <<include "choose-messages-language-ks-specific">>
 
 
@@ -2216,7 +2222,9 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage2-exercise-dreamJar-b">>
 <<set $passage to "stage2-exercise-dreamJar-c">>
 <<set $nextPassage to "stage2-exercise-dreamJar-c2">>
+<div class="cream-bg dreamjar-page-background">
 <<include "_templateVideoChat">>
+</div>
 <<include "choose-messages-language-ks-specific">>
 
 
@@ -2423,7 +2431,7 @@ Lorem Ipsum Welsh
 :: dreamJar-Bea [nobr]
 <div id="dream-jar-container">
  <img id="dream-jar-image"
-             src="assets/img/jar.png"
+             src="assets/img/imgs/EMPTYJAR.png"
              alt="Dream jar">
 </div>
 :: dreamJar-example [nobr]

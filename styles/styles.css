@@ -3,6 +3,7 @@
 :root {
   /* Palette added from user-supplied values */
   --palette-yellow: #F7E139;
+  --palette-cream: #F0EBE2;
   --palette-ocre: #F7C439;
   --palette-navy: #0a3956;
   --palette-slate: #64778d;
@@ -101,10 +102,20 @@
   background-image: url('../assets/img/bgs/06 END.jpg');
 }
 
+.cream-bg {
+  background-color: var(--palette-cream);
+}
+
 .bg {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
+
+.dreamjar-page-background {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* BUTTONS & LINKS  */
@@ -557,6 +568,24 @@ input[type='text']::placeholder {
   box-sizing: border-box;
 }
 
+.video-chat > .chat-wrapper {
+  border-radius: 20px;
+}
+
+.video-chat > .chat-wrapper > .chat-header {
+  background: var(--palette-light-grey);
+  border-radius: 20px 20px 0 0;
+}
+
+.video-chat >  .chat-wrapper > .chat-input-wrapper  {
+  background: var(--palette-light-grey);
+  border-radius: 0 0 20px 20px;
+}
+.video-chat >  .chat-wrapper > .chat-input-wrapper #textbox-codeword {
+  border: 2px solid black;
+  color: black;
+}
+
 /* =========================
    VIDEO
    ========================= */
@@ -793,7 +822,7 @@ input[type='text']::placeholder {
   color: black;
 }
 
-#chatHistory > .voicenote-transcript-link:hover {
+#chatHistory > .voicenote-transcript-link > a:hover {
   text-decoration: underline;
   color: black;
 }
