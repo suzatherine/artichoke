@@ -2432,6 +2432,7 @@ Lorem Ipsum Welsh
 <img id="dream-jar-image"
              src="assets/img/imgs/EMPTYJAR.png"
              alt="Dream jar">
+</div>             
 
 :: night-time-dreamJar-label [nobr]
 <div class="dreams nighttime-dreams">
@@ -2478,39 +2479,23 @@ Lorem Ipsum Welsh
 
 
 :: dreamJar-example [nobr]
-<div id="dream-jars">
-<div class="dream-jar-item" data-jar="night">
-<img class="dream-jar-image" src="assets/img/jar.png" alt="Dream jar">
-<div class="dream-jar-slot"></div>
+
 <<timed 1s>>
-<div class="dream-jar-static-label label-blue">
-<span>NIGHT-TIME DREAMS</span>
-<span>Where magical stories happen</span>
-</div>
+<<include "night-time-dreamJar-label">>
 
 <</timed>>
-</div>
-<div class="dream-jar-item" data-jar="day">
-<img class="dream-jar-image" src="assets/img/jar.png" alt="Dream jar">
-<div class="dream-jar-slot"></div>
+
 <<timed 3s>>
-<div class="dream-jar-static-label label-red">
-<span>DAY DREAMS</span>
-<span>Where our imagination changes the world around us</span>
-</div>
+<<include "day-dreamJar-label">>
+
+
 <</timed>>
-</div>
-<div class="dream-jar-item" data-jar="future">
-<img class="dream-jar-image" src="assets/img/jar.png" alt="Dream jar">
-<div class="dream-jar-slot"></div>
+
 <<timed 5s>>
-<div class="dream-jar-static-label label-green">
-<span>FUTURE DREAMS</span>
-<span>Where we dream of what we want to achieve</span>
-</div>
+<<include "future-dreamJar-label">>
+
 <</timed>>
-</div>
-</div>
+
 
 :: dreamJar-drag [nobr]
 <div id="dream-jars">
