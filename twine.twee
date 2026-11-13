@@ -1053,14 +1053,14 @@ codeword11: {
 :: _templateLandingPage [nobr]
 <div class="login-bg bg page-wrapper full-screen-landing">
     <header></header>
-    <main class="main-content-center">
+    <main class="main-content-center landing-main-content">
     <div class="hero-image">
     <img src="assets/img/logo/LOGO.png" alt="logo"/>
     </div>
-      <div class="enter-button-wrapper">
-            <<button "Enter">>
+      <div class="landing-btn-wrapper">
+            <<button "Login">>
                 <<goto $nextPassage>>
-                <</button>>
+            <</button>>
       </div>
     </main>
 
@@ -1324,6 +1324,8 @@ codeword11: {
 
 
 :: entry-page [nobr]
+
+<<set $prevPassage to "landing-ks"+$userchoices.keyStage+"-"+$userchoices.language>>>
 <<set $passage to "entry-page">>
 <<set $nextPassage to "">>
  <div class="page-wrapper">

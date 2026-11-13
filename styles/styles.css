@@ -104,6 +104,8 @@
 
 /* BUTTONS & LINKS  */
 
+
+
 button,
 .inline-btn-wrapper > a {
   font-family: var(--font-headings);
@@ -122,6 +124,26 @@ button:focus,
 button:active {
   background-color: var(--button-hover-color);
   color: var(black);
+}
+
+.landing-btn-wrapper > button {
+  display: inline-flex;
+  align-items: center;
+  background-color: #ffe45c;
+  border-radius: 20px;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  color: #233916;
+}
+
+.landing-btn-wrapper > button::after {
+  content: "";
+  display: block;
+  width: 1em;
+  height: 1em;
+  margin-left: 0.75em;
+  flex: 0 0 1em;
+  background: url('../assets/img/user-round-black.png') center / contain no-repeat;
 }
 
 .btn-container {
@@ -463,6 +485,12 @@ input[type='text']::placeholder {
   justify-items: center;
   padding: 2rem;
   text-align: center;
+}
+
+.landing-main-content {
+  grid-template-rows: auto auto;
+  align-content: center;
+  gap: 7rem;
 }
 
 .hero-image {

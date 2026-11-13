@@ -1111,16 +1111,16 @@ codeword11: {
             &lt;&lt;timed 1.5s&gt;&gt;&lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;&lt;&lt;/timed&gt;&gt;
         &lt;&lt;/if&gt;&gt;
     &lt;&lt;/button&gt;&gt;
-    &lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="_templateLandingPage" tags="nobr" position="975,100" size="100,100">&lt;div class=&quot;login-bg page-wrapper full-screen-landing&quot;&gt;
+    &lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="_templateLandingPage" tags="nobr" position="975,100" size="100,100">&lt;div class=&quot;login-bg bg page-wrapper full-screen-landing&quot;&gt;
     &lt;header&gt;&lt;/header&gt;
-    &lt;main class=&quot;main-content-center&quot;&gt;
+    &lt;main class=&quot;main-content-center landing-main-content&quot;&gt;
     &lt;div class=&quot;hero-image&quot;&gt;
     &lt;img src=&quot;assets/img/logo/LOGO.png&quot; alt=&quot;logo&quot;/&gt;
     &lt;/div&gt;
-      &lt;div class=&quot;enter-button-wrapper&quot;&gt;
-            &lt;&lt;button &quot;Enter&quot;&gt;&gt;
+      &lt;div class=&quot;landing-btn-wrapper&quot;&gt;
+            &lt;&lt;button &quot;Login&quot;&gt;&gt;
                 &lt;&lt;goto $nextPassage&gt;&gt;
-                &lt;&lt;/button&gt;&gt;
+            &lt;&lt;/button&gt;&gt;
       &lt;/div&gt;
     &lt;/main&gt;
 
@@ -1312,7 +1312,8 @@ codeword11: {
     sentences: [&quot;I ate breakfast.&quot;, &quot;The alarm rang.&quot;, &quot;I got out of bed.&quot;],
     correctOrder: [&quot;The alarm rang.&quot;, &quot;I got out of bed.&quot;, &quot;I ate breakfast.&quot;]
 }&gt;&gt;
-&lt;&lt;sortingActivity _sortingActivity&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="entry-page" tags="nobr" position="1225,350" size="100,100">&lt;&lt;set $passage to &quot;entry-page&quot;&gt;&gt;
+&lt;&lt;sortingActivity _sortingActivity&gt;&gt;</tw-passagedata><tw-passagedata pid="30" name="entry-page" tags="nobr" position="1225,350" size="100,100">&lt;&lt;set $prevPassage to &quot;landing-ks&quot;+$userchoices.keyStage+&quot;-&quot;+$userchoices.language&gt;&gt;&gt;
+&lt;&lt;set $passage to &quot;entry-page&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;&quot;&gt;&gt;
  &lt;div class=&quot;page-wrapper&quot;&gt;
      &lt;main class=&quot;entry-page-content&quot;&gt;
