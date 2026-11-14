@@ -2503,25 +2503,35 @@ Lorem Ipsum Welsh
     <div class="dream-jar-item" data-jar="night">
         <img class="dream-jar-image" src="assets/img/imgs/JARBG1.png" alt="Dream jar">
         <div class="dream-jar-slot"></div>    
-        <div class="dream-jar-static-label label-blue">
-            <span>NIGHT-TIME DREAMS</span>
-            <span>Where magical stories happen</span>
+        <div class="dreams nighttime-dreams dream-jar-static-label">
+            <div class="dreams__icon">
+                <img src="assets/img/icons/ICON1NIGHT_WHITE.png" alt="">
+            </div>
+            <h2>Night-time<br>Dreams</h2>
+            <p>Where magical stories happen</p>
         </div>
     </div>
     <div class="dream-jar-item" data-jar="day">
         <img class="dream-jar-image" src="assets/img/imgs/JARBG2.png" alt="Dream jar">
         <div class="dream-jar-slot"></div>
-        <div class="dream-jar-static-label label-red">
-            <span>DAY DREAMS</span>
-            <span>Where our imagination changes the world around us</span>
+        <div class="dreams day-dreams dream-jar-static-label">
+            <div class="dreams__icon">
+                <img src="assets/img/icons/ICON2DAY_NAVY.png" alt="">
+            </div>
+            <h2>Daydreams</h2>
+
+            <p>Where our imagination changes the world around us</p>
         </div>
     </div>
     <div class="dream-jar-item" data-jar="future">
         <img class="dream-jar-image" src="assets/img/imgs/JARBG3.png" alt="Dream jar">
         <div class="dream-jar-slot"></div>
-        <div class="dream-jar-static-label label-green">
-            <span>FUTURE DREAMS</span>
-            <span>What we dream of achieving</span>
+        <div class="dreams future-dreams dream-jar-static-label">
+            <div class="dreams__icon">
+                <img src="assets/img/icons/ICON3FUTURE_WHITE.png" alt="">
+            </div>
+            <h2>Future Dreams</h2>
+            <p>Where we dream of what we want to achieve</p>
         </div>
     </div>
 </div>
