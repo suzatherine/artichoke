@@ -2717,10 +2717,10 @@ Lorem Ipsum Welsh
 
 :: loading-tutorial-menu [nobr]
 
- <div class="page-wrapper full-screen-landing connecting">
+ <div class="page-wrapper full-screen-landing login-bg bg ">
      <main class="main-content-center">
         <div class="connecting-image-wrapper">
-         <img src="assets/img/stamp3.png" class="spinning" alt="logo"/>
+         <img src="assets/img/bubble.png" class="spinning" alt="logo"/>
           </div>
         </main>
  </div>
@@ -2787,25 +2787,34 @@ Lorem Ipsum Welsh
 
 :: loading-tutorial [nobr]
 
- <div class="page-wrapper full-screen-landing connecting">
+    <<if $nextPassage is "stage3-tutorial1-video">>
+    <div class="page-wrapper full-screen-landing connecting night-bg bg">
+        <main class="main-content-center">
+            <div class="connecting-image-wrapper">
+                <img src="assets/img/icons/ICON1NIGHT_WHITE.png" class="spinning" alt="logo"/>   
+            </div>
+        </main>
+    </div>
+    <<elseif $nextPassage is "stage3-tutorial2-video">>
+        <div class="page-wrapper full-screen-landing connecting day-bg bg">
+           <main class="main-content-center">
+        <div class="connecting-image-wrapper">   
+         <img src="assets/img/icons/ICON2DAY_NAVY.png" class="spinning" alt="logo"/>
+         </div>
+        </main>
+        </div>
+         <<elseif $nextPassage is "stage3-tutorial3-video">>
+              <div class="page-wrapper full-screen-landing connecting future-bg bg">
      <main class="main-content-center">
         <div class="connecting-image-wrapper">
-        <<if $nextPassage is "stage3-tutorial1-video">>
-         <img src="assets/img/bubble-blue.png" class="spinning" alt="logo"/>
-         <span>Night Dreams</span>
-         <<elseif $nextPassage is "stage3-tutorial2-video">>
-         <img src="assets/img/bubble-pink.png" class="spinning" alt="logo"/>
-          <span>Day Dreams</span>
-         <<elseif $nextPassage is "stage3-tutorial3-video">>
-         <img src="assets/img/bubble-green.png" class="spinning" alt="logo"/>
-         <span>Future Dreams</span>
+         <img src="assets/img/icons/ICON3FUTURE_WHITE.png" class="spinning" alt="logo"/>
+                  </div>
+        </main>
+ </div>
          <</if>>
         
          
-         </div>
 
-        </main>
- </div>
 
 
    <<timed 6s>>

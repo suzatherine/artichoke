@@ -2422,10 +2422,10 @@ codeword11: {
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
       src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="103" name="stage3-video-video-cym" tags="nobr" position="350,1350" size="100,100">/* VIDEO 3 */
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="104" name="loading-tutorial-menu" tags="nobr" position="475,1350" size="100,100">&lt;div class=&quot;page-wrapper full-screen-landing connecting&quot;&gt;
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="104" name="loading-tutorial-menu" tags="nobr" position="475,1350" size="100,100">&lt;div class=&quot;page-wrapper full-screen-landing login-bg bg &quot;&gt;
      &lt;main class=&quot;main-content-center&quot;&gt;
         &lt;div class=&quot;connecting-image-wrapper&quot;&gt;
-         &lt;img src=&quot;assets/img/stamp3.png&quot; class=&quot;spinning&quot; alt=&quot;logo&quot;/&gt;
+         &lt;img src=&quot;assets/img/bubble.png&quot; class=&quot;spinning&quot; alt=&quot;logo&quot;/&gt;
           &lt;/div&gt;
         &lt;/main&gt;
  &lt;/div&gt;
@@ -2483,25 +2483,36 @@ codeword11: {
 &lt;/div&gt;
 
 &lt;/main&gt;
-&lt;&lt;include &quot;footer-tutorial&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="106" name="loading-tutorial" tags="nobr" position="725,1350" size="100,100">&lt;div class=&quot;page-wrapper full-screen-landing connecting&quot;&gt;
+&lt;&lt;include &quot;footer-tutorial&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="106" name="loading-tutorial" tags="nobr" position="725,1350" size="100,100">&lt;&lt;if $nextPassage is &quot;stage3-tutorial1-video&quot;&gt;&gt;
+    &lt;div class=&quot;page-wrapper full-screen-landing connecting night-bg bg&quot;&gt;
+        &lt;main class=&quot;main-content-center&quot;&gt;
+            &lt;div class=&quot;connecting-image-wrapper&quot;&gt;
+                &lt;img src=&quot;assets/img/icons/ICON1NIGHT_WHITE.png&quot; class=&quot;spinning&quot; alt=&quot;logo&quot;/&gt;   
+            &lt;/div&gt;
+        &lt;/main&gt;
+    &lt;/div&gt;
+    &lt;&lt;elseif $nextPassage is &quot;stage3-tutorial2-video&quot;&gt;&gt;
+        &lt;div class=&quot;page-wrapper full-screen-landing connecting day-bg bg&quot;&gt;
+           &lt;main class=&quot;main-content-center&quot;&gt;
+        &lt;div class=&quot;connecting-image-wrapper&quot;&gt;   
+         &lt;img src=&quot;assets/img/icons/ICON2DAY_NAVY.png&quot; class=&quot;spinning&quot; alt=&quot;logo&quot;/&gt;
+         &lt;/div&gt;
+        &lt;/main&gt;
+        &lt;/div&gt;
+         &lt;&lt;elseif $nextPassage is &quot;stage3-tutorial3-video&quot;&gt;&gt;
+              &lt;div class=&quot;page-wrapper full-screen-landing connecting night-bg bg&quot;&gt;
      &lt;main class=&quot;main-content-center&quot;&gt;
         &lt;div class=&quot;connecting-image-wrapper&quot;&gt;
-        &lt;&lt;if $nextPassage is &quot;stage3-tutorial1-video&quot;&gt;&gt;
-         &lt;img src=&quot;assets/img/bubble-blue.png&quot; class=&quot;spinning&quot; alt=&quot;logo&quot;/&gt;
-         &lt;span&gt;Night Dreams&lt;/span&gt;
-         &lt;&lt;elseif $nextPassage is &quot;stage3-tutorial2-video&quot;&gt;&gt;
-         &lt;img src=&quot;assets/img/bubble-pink.png&quot; class=&quot;spinning&quot; alt=&quot;logo&quot;/&gt;
-          &lt;span&gt;Day Dreams&lt;/span&gt;
-         &lt;&lt;elseif $nextPassage is &quot;stage3-tutorial3-video&quot;&gt;&gt;
-         &lt;img src=&quot;assets/img/bubble-green.png&quot; class=&quot;spinning&quot; alt=&quot;logo&quot;/&gt;
+         &lt;img src=&quot;assets/img/icons/ICON3FUTURE_WHITE.png&quot; class=&quot;spinning&quot; alt=&quot;logo&quot;/&gt;
          &lt;span&gt;Future Dreams&lt;/span&gt;
-         &lt;&lt;/if&gt;&gt;
-        
-         
-         &lt;/div&gt;
+                  &lt;/div&gt;
 
         &lt;/main&gt;
  &lt;/div&gt;
+         &lt;&lt;/if&gt;&gt;
+        
+         
+
 
 
    &lt;&lt;timed 6s&gt;&gt;
