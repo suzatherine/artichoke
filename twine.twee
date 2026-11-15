@@ -292,14 +292,21 @@ setup.initVoicenote = (transcriptDelay, transcriptPassage, triggeredPassage) => 
 
   const showTranscriptLink = () => {
     if (!document.body.contains($vn[0]) || !transcriptPassage) return;
-    $("<a class='link-internal' role='button' tabindex='0'>Show Transcript</a>")
+    let $transcript;
+    $("<a class='link-internal' role='button' tabindex='0' aria-expanded='false'>Show Transcript</a>")
       .on("click keydown", function (ev) {
         if (ev.type === "keydown" && ev.key !== "Enter" && ev.key !== " ") return;
         ev.preventDefault();
-        $transcriptLink.empty();
-        $("<div class='transcript'></div>")
-          .appendTo("#chatHistory")
-          .wiki(include(transcriptPassage));
+        if (!$transcript) {
+          $transcript = $("<div class='transcript'></div>").insertAfter($transcriptLink);
+          $transcript.wiki(include(transcriptPassage));
+        } else {
+          $transcript.toggle();
+        }
+        const isExpanded = $transcript.is(":visible");
+        $(this)
+          .text(isExpanded ? "Hide Transcript" : "Show Transcript")
+          .attr("aria-expanded", isExpanded);
       })
       .appendTo($transcriptLink);
   };
@@ -2070,7 +2077,6 @@ Lorem Ipsum Welsh
 </div>
 <<include "choose-messages-language-ks-specific">>
 
-
 :: stage2-exercise-dreamJar-b-messages-eng-ks1 [nobr]
 
 <<timed 1s>>
@@ -2111,6 +2117,24 @@ Lorem Ipsum Welsh
 
 :: stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks1 [nobr]
 <<timed 5s>>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>Discuss the quotes together. Make sure you understand what the words mean.
+            In pairs, discuss how this quote might inspire your own Dream Jar design.
+            How will your Dream Jar look?</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 8s>>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>Remember, message me the word COLOURFUL when you want to move on.</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 5s>>
     <<replace "#videoWrapper">>
         /* WORDS SHOWING IN EXERCISE SPACE */
         <div class="scatter-words ">
@@ -2134,6 +2158,24 @@ Lorem Ipsum Welsh
     <</timed>>
 
 :: stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks2 [nobr]
+<<timed 5s>>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>Discuss the quotes together. Make sure you understand what the words mean.
+            In pairs, discuss how this quote might inspire your own Dream Jar design.
+            How will your Dream Jar look?</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 8s>>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>Remember, message me the word COLOURFUL when you want to move on.</span>
+        </div>
+    <</append>>
+<</timed>>
+
 <<timed 7s>>
     <<replace "#videoWrapper">>
         /* QUOTE SHOWING IN EXERCISE SPACE */

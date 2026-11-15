@@ -375,14 +375,21 @@ setup.initVoicenote = (transcriptDelay, transcriptPassage, triggeredPassage) => 
 
   const showTranscriptLink = () => {
     if (!document.body.contains($vn[0]) || !transcriptPassage) return;
-    $("<a class='link-internal' role='button' tabindex='0'>Show Transcript</a>")
+    let $transcript;
+    $("<a class='link-internal' role='button' tabindex='0' aria-expanded='false'>Show Transcript</a>")
       .on("click keydown", function (ev) {
         if (ev.type === "keydown" && ev.key !== "Enter" && ev.key !== " ") return;
         ev.preventDefault();
-        $transcriptLink.empty();
-        $("<div class='transcript'></div>")
-          .appendTo("#chatHistory")
-          .wiki(include(transcriptPassage));
+        if (!$transcript) {
+          $transcript = $("<div class='transcript'></div>").insertAfter($transcriptLink);
+          $transcript.wiki(include(transcriptPassage));
+        } else {
+          $transcript.toggle();
+        }
+        const isExpanded = $transcript.is(":visible");
+        $(this)
+          .text(isExpanded ? "Hide Transcript" : "Show Transcript")
+          .attr("aria-expanded", isExpanded);
       })
       .appendTo($transcriptLink);
   };
@@ -1944,6 +1951,24 @@ codeword11: {
 &lt;p&gt;So Dream Jars when filled are colourful and vibrant and Dreams are alive!  Each of them are unique. Discuss the quotes and then I’ll leave you to design yours. &lt;/p&gt;
 &lt;p&gt;Message me the word &lt;span class=&quot;codeword-text&quot;&gt;COLOURFUL&lt;/span&gt; when you are ready for the next part. 
 &lt;/p&gt;</tw-passagedata><tw-passagedata pid="71" name="stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks1" tags="nobr" position="100,975" size="100,100">&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+        &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt;Discuss the quotes together. Make sure you understand what the words mean.
+            In pairs, discuss how this quote might inspire your own Dream Jar design.
+            How will your Dream Jar look?&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 8s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+        &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt;Remember, message me the word COLOURFUL when you want to move on.&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 5s&gt;&gt;
     &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
         /* WORDS SHOWING IN EXERCISE SPACE */
         &lt;div class=&quot;scatter-words &quot;&gt;
@@ -1964,7 +1989,25 @@ codeword11: {
         /* $codewordsStage2.codeword3 */
       &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks2" tags="nobr" position="225,975" size="100,100">&lt;&lt;timed 7s&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="72" name="stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks2" tags="nobr" position="225,975" size="100,100">&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+        &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt;Discuss the quotes together. Make sure you understand what the words mean.
+            In pairs, discuss how this quote might inspire your own Dream Jar design.
+            How will your Dream Jar look?&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 8s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+        &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt;Remember, message me the word COLOURFUL when you want to move on.&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 7s&gt;&gt;
     &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
         /* QUOTE SHOWING IN EXERCISE SPACE */
          &lt;div class=&quot;accented-quote&quot;&gt;
