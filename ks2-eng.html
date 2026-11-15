@@ -1095,7 +1095,7 @@ codeword11: {
       &lt;/div&gt;
     &lt;/main&gt;
 
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="_templateContentCenter" tags="nobr" position="975,100" size="100,100">&lt;div class=&quot;page-wrapper full-screen-landing&quot;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="_templateContentCenter" tags="nobr" position="975,100" size="100,100">&lt;div class=&quot;page-wrapper full-screen-landing bg end-bg&quot;&gt;
    &lt;&lt;include &quot;header-logo&quot;&gt;&gt;
 &lt;div id=&quot;audio&quot;&gt;&lt;/div&gt;
     &lt;main class=&quot;main-content-center&quot; id=&quot;mainContent&quot;&gt;
@@ -2503,10 +2503,6 @@ codeword11: {
  &lt;/div&gt;
          &lt;&lt;/if&gt;&gt;
         
-         
-
-
-
    &lt;&lt;timed 6s&gt;&gt;
         &lt;&lt;goto $nextPassage&gt;&gt;
         &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="109" name="stage3-tutorial1-video" tags="nobr" position="1100,1350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
@@ -4412,7 +4408,7 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
 &lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;
 &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="264" name="stage3-submission-call-bea-messages-eng" tags="nobr" position="475,3350" size="100,100">&lt;&lt;replace &quot;#heroImage&quot;&gt;&gt;
-     &lt;img src=&quot;assets/img/user-round-white.png&quot; alt=&quot;avatar&quot;/&gt;
+     &lt;img src=&quot;assets/img/icons/BEA_ICON.png&quot; alt=&quot;avatar&quot;/&gt;
 &lt;&lt;button &quot;Call Bea&quot;&gt;&gt;
     &lt;&lt;goto &quot;calling&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
@@ -4423,7 +4419,10 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
 &lt;&lt;/replace&gt;&gt;</tw-passagedata><tw-passagedata pid="266" name="stage3-submission-video" tags="nobr" position="725,3350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-call-bea&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submission-video&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-submission-a&quot;&gt;&gt;
+
+&lt;div class=&quot;end-bg bg page-wrapper&quot;&gt;
 &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
+&lt;/div&gt;
 &lt;&lt;include &quot;choose-video-language&quot;&gt;&gt;
 
 &lt;&lt;addclass &quot;body&quot; &quot;submission-gradient&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="267" name="stage3-submission-video-video-eng" tags="nobr" position="850,3350" size="100,100">/* Video 7 -  SUBMISSION */
@@ -4433,9 +4432,10 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
       src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="269" name="stage3-submission-a" tags="nobr" position="1100,3350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-video&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submission-a&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-submission-b&quot;&gt;&gt;
+&lt;div class=&quot;end-bg bg page-background&quot;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
-&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;submission-gradient&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="270" name="stage3-submission-a-messages-eng" tags="nobr" position="1225,3350" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+&lt;/div&gt;
+&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="270" name="stage3-submission-a-messages-eng" tags="nobr" position="1225,3350" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
             &lt;span&gt;It&#39;s time to decide what dream you want to send the BFG!&lt;br&gt;
@@ -4474,9 +4474,10 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
     &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="271" name="stage3-submission-a-messages-cym" tags="nobr" position="100,3475" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="272" name="stage3-submission-b" tags="nobr" position="225,3475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-a&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submission-b&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-submission-c&quot;&gt;&gt;
+&lt;div class=&quot;end-bg bg page-background&quot;&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
-&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;submission-gradient&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="273" name="stage3-submission-b-messages-eng" tags="nobr" position="350,3475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+&lt;/div&gt;
+&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="273" name="stage3-submission-b-messages-eng" tags="nobr" position="350,3475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Time to put your book together. &lt;/span&gt;
@@ -4525,9 +4526,10 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
     &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="274" name="stage3-submission-b-messages-cym" tags="nobr" position="475,3475" size="100,100">Lorem Ipsum welsh</tw-passagedata><tw-passagedata pid="275" name="stage3-submission-c" tags="nobr" position="600,3475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-b&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submission-c&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to $userchoices.landingPage&gt;&gt;
+&lt;div class=&quot;end-bg bg page-background&quot;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
-&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;submission-gradient&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="276" name="stage3-submission-c-messages-eng" tags="nobr" position="725,3475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+&lt;/div&gt;
+&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="276" name="stage3-submission-c-messages-eng" tags="nobr" position="725,3475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; 
          &quot;3s&quot; 
@@ -4575,9 +4577,7 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
 
 &lt;p&gt;I’ll message you when he has come to pick them up!&lt;/p&gt;
 
-&lt;p&gt;Until then my friends, Dream Team out.  &lt;/p&gt;
-
-:</tw-passagedata><tw-passagedata pid="278" name="stage3-submission-c-messages-cym" tags="nobr" position="975,3475" size="100,100">Lorem ipsum welsh</tw-passagedata><tw-passagedata pid="279" name="stage3-submission-c-vn-transcript-cym" tags="nobr" position="1100,3475" size="100,100"></tw-passagedata><tw-passagedata pid="280" name="stamp-collection" tags="nobr" position="1225,3475" size="100,100">&lt;div class=&quot;stamp-collection-wrapper&quot;&gt;
+&lt;p&gt;Until then my friends, Dream Team out.  &lt;/p&gt;</tw-passagedata><tw-passagedata pid="278" name="stage3-submission-c-messages-cym" tags="nobr" position="975,3475" size="100,100">Lorem ipsum welsh</tw-passagedata><tw-passagedata pid="279" name="stage3-submission-c-vn-transcript-cym" tags="nobr" position="1100,3475" size="100,100"></tw-passagedata><tw-passagedata pid="280" name="stamp-collection" tags="nobr" position="1225,3475" size="100,100">&lt;div class=&quot;stamp-collection-wrapper&quot;&gt;
 &lt;&lt;include &quot;stamp1&quot;&gt;&gt;
 &lt;&lt;include &quot;stamp2&quot;&gt;&gt;
 &lt;&lt;include &quot;stamp3&quot;&gt;&gt;

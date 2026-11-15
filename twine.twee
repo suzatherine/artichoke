@@ -1036,7 +1036,7 @@ codeword11: {
 
 
 :: _templateContentCenter [nobr]
-<div class="page-wrapper full-screen-landing">
+<div class="page-wrapper full-screen-landing bg end-bg">
    <<include "header-logo">>
 <div id="audio"></div>
     <main class="main-content-center" id="mainContent">
@@ -2813,10 +2813,6 @@ Lorem Ipsum Welsh
  </div>
          <</if>>
         
-         
-
-
-
    <<timed 6s>>
         <<goto $nextPassage>>
         <</timed>>
@@ -5250,7 +5246,7 @@ Lorem Ipsum Welsh
 :: stage3-submission-call-bea-messages-eng [nobr]
 
 <<replace "#heroImage">>
-     <img src="assets/img/user-round-white.png" alt="avatar"/>
+     <img src="assets/img/icons/BEA_ICON.png" alt="avatar"/>
 <<button "Call Bea">>
     <<goto "calling">>
 <</button>>
@@ -5268,7 +5264,10 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-submission-call-bea">>
 <<set $passage to "stage3-submission-video">>
 <<set $nextPassage to "stage3-submission-a">>
+
+<div class="end-bg bg page-wrapper">
 <<include "_templateFullScreenVideo">>
+</div>
 <<include "choose-video-language">>
 
 <<addclass "body" "submission-gradient">>
@@ -5291,9 +5290,10 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-submission-video">>
 <<set $passage to "stage3-submission-a">>
 <<set $nextPassage to "stage3-submission-b">>
+<div class="end-bg bg page-background">
 <<include "_templateFullScreenChat">>
+</div>
 <<include "choose-messages-language">>
-<<addclass "body" "submission-gradient">>
 
 :: stage3-submission-a-messages-eng [nobr]
 
@@ -5343,9 +5343,10 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-submission-a">>
 <<set $passage to "stage3-submission-b">>
 <<set $nextPassage to "stage3-submission-c">>
+<div class="end-bg bg page-background">
 <<include "_templateVideoChat">>
+</div>
 <<include "choose-messages-language">>
-<<addclass "body" "submission-gradient">>
 
 
 :: stage3-submission-b-messages-eng [nobr]
@@ -5406,9 +5407,10 @@ Lorem Ipsum welsh
 <<set $prevPassage to "stage3-submission-b">>
 <<set $passage to "stage3-submission-c">>
 <<set $nextPassage to $userchoices.landingPage>>
+<div class="end-bg bg page-background">
 <<include "_templateFullScreenChat">>
+</div>
 <<include "choose-messages-language">>
-<<addclass "body" "submission-gradient">>
 
 :: stage3-submission-c-messages-eng [nobr]
 
@@ -5464,8 +5466,6 @@ Lorem Ipsum welsh
 <p>I’ll message you when he has come to pick them up!</p>
 
 <p>Until then my friends, Dream Team out.  </p>
-
-:
 
 :: stage3-submission-c-messages-cym [nobr]
 Lorem ipsum welsh

@@ -105,7 +105,7 @@
 }
 
 .end-bg {
-  background-image: url('../assets/img/bgs/06 END.jpg');
+  background-image: url('../assets/img/bgs/06 END SCREEN.jpg');
 }
 
 .cream-bg {
@@ -156,7 +156,11 @@ button:active {
 main.tutorials-menu button:not(.voicenote-toggle),
 main.tutorials-menu button:not(.voicenote-toggle):hover,
 main.tutorials-menu button:not(.voicenote-toggle):focus,
-main.tutorials-menu button:not(.voicenote-toggle):active {
+main.tutorials-menu button:not(.voicenote-toggle):active,
+footer button,
+footer button:hover,
+footer button:focus,
+footer button:active {
   background-color: var(--palette-navy);
   color: white;
   font-family: var(--font-body);
