@@ -1156,7 +1156,7 @@ codeword11: {
 </div>
 
 :: _templateFullScreenVideo [nobr]
-<div class="page-wrapper bg login-bg">
+
 <<include "header-logo">>
 <div id="audio"></div>
 <main class="full-screen-video">
@@ -1166,7 +1166,6 @@ codeword11: {
  <img src="assets/img/placeholder.jpeg"/>
 </div>
 </main>
-</div>
 <<include "footerFullScreenVideo">>
 
 /* PAGE ELEMENTS  */
@@ -1661,7 +1660,10 @@ codeword11: {
 <<set $prevPassage to $userchoices.landingPage>>
 <<set $passage to "stage2-video">>
 <<set $nextPassage to "stage2-intro-a">>
-<<include "_templateFullScreenVideo">>
+
+<div class="page-wrapper bg login-bg">
+    <<include "_templateFullScreenVideo">>
+</div>
 <<include "choose-video-language">>
 
 
@@ -2677,7 +2679,9 @@ Lorem Ipsum Welsh
 <<set $prevPassage to $userchoices.landingPage>>
 <<set $passage to "stage3-video">>
 <<set $nextPassage to "loading-tutorial-menu">>
-<<include "_templateFullScreenVideo">>
+<div class="login-bg bg page-wrapper">
+    <<include "_templateFullScreenVideo">>
+</div>
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
    

@@ -1198,8 +1198,7 @@ codeword11: {
 &lt;/main&gt;
 
 /* &lt;&lt;include &quot;footer&quot;&gt;&gt; */
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="13" name="_templateFullScreenVideo" tags="nobr" position="350,225" size="100,100">&lt;div class=&quot;page-wrapper bg login-bg&quot;&gt;
-&lt;&lt;include &quot;header-logo&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="13" name="_templateFullScreenVideo" tags="nobr" position="350,225" size="100,100">&lt;&lt;include &quot;header-logo&quot;&gt;&gt;
 &lt;div id=&quot;audio&quot;&gt;&lt;/div&gt;
 &lt;main class=&quot;full-screen-video&quot;&gt;
 
@@ -1208,7 +1207,6 @@ codeword11: {
  &lt;img src=&quot;assets/img/placeholder.jpeg&quot;/&gt;
 &lt;/div&gt;
 &lt;/main&gt;
-&lt;/div&gt;
 &lt;&lt;include &quot;footerFullScreenVideo&quot;&gt;&gt;
 
 /* PAGE ELEMENTS  */</tw-passagedata><tw-passagedata pid="14" name="footerFullScreenVideo" tags="nobr" position="475,225" size="100,100">&lt;footer&gt;
@@ -1601,7 +1599,10 @@ codeword11: {
         &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="42" name="stage2-video" tags="nobr" position="225,600" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
 &lt;&lt;set $passage to &quot;stage2-video&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage2-intro-a&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
+
+&lt;div class=&quot;page-wrapper bg login-bg&quot;&gt;
+    &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
+&lt;/div&gt;
 &lt;&lt;include &quot;choose-video-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="43" name="stage2-video-video-eng" tags="nobr" position="350,600" size="100,100">/* VIDEO 2: BEA ‘LIVE’ */
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
       src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="44" name="stage2-video-video-cym" tags="nobr" position="475,600" size="100,100">/* VIDEO 2: BEA ‘LIVE’ */
@@ -2398,7 +2399,9 @@ codeword11: {
     &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="101" name="stage3-video" tags="nobr" position="100,1350" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-video&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;loading-tutorial-menu&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
+&lt;div class=&quot;login-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
+&lt;/div&gt;
 &lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
     &lt;&lt;timed 0.1s&gt;&gt;
    
