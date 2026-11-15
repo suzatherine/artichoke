@@ -1033,14 +1033,7 @@ codeword11: {
 &lt;&lt;/widget&gt;&gt;&gt;&gt;
 
 
-/* STRUCTURAL  */</tw-passagedata><tw-passagedata pid="4" name="header-logo" tags="nobr" position="475,100" size="100,100">&lt;header class=&quot;logo-left&quot;&gt;
-&lt;div class=&quot;logo-container&quot;&gt;
-    &lt;div class=&quot;logo-wrapper&quot;&gt;
-    &lt;img src=&quot;assets/img/portal-logo-w-header.png&quot; alt=&quot;logo&quot;/&gt;
-    &lt;/div&gt;
-        /* &lt;h2&gt;Library Portal&lt;/h2&gt; */
-&lt;/div&gt;
-
+/* STRUCTURAL  */</tw-passagedata><tw-passagedata pid="4" name="header-logo" tags="nobr" position="475,100" size="100,100">&lt;header&gt;
 
 &lt;div id=&quot;pageName&quot;&gt;&lt;/div&gt;
 &lt;/header&gt;</tw-passagedata><tw-passagedata pid="5" name="footer" tags="nobr" position="600,100" size="100,100">&lt;footer&gt;
@@ -1225,8 +1218,7 @@ codeword11: {
 &lt;/div&gt;    
 
 &lt;/footer&gt;</tw-passagedata><tw-passagedata pid="15" name="nextBtn" tags="nobr" position="600,225" size="100,100">&lt;&lt;button &quot;Next&quot;&gt;&gt;&lt;&lt;goto $nextPassage&gt;&gt;&lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="16" name="solologo" tags="nobr" position="725,225" size="100,100">&lt;div class=&quot;connecting-image-wrapper&quot;&gt;
-       
-        
+&lt;div id=&quot;pageName&quot;&gt; &lt;/div&gt;    
          &lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="stamp1" tags="nobr" position="850,225" size="100,100">&lt;img src=&quot;assets/img/stamp1.png&quot; alt=&quot;Stamp 1&quot;/&gt;</tw-passagedata><tw-passagedata pid="18" name="stamp2" tags="nobr" position="975,225" size="100,100">&lt;img src=&quot;assets/img/stamp2.png&quot; alt=&quot;Stamp 2&quot;/&gt;</tw-passagedata><tw-passagedata pid="19" name="stamp3" tags="nobr" position="1100,225" size="100,100">&lt;img src=&quot;assets/img/stamp3.png&quot; alt=&quot;Stamp 3&quot;/&gt;</tw-passagedata><tw-passagedata pid="20" name="stamp4" tags="nobr" position="1225,225" size="100,100">&lt;img src=&quot;assets/img/stamp4.png&quot; alt=&quot;Stamp 4&quot;/&gt;
 
 /* REUSABLE FUNCTIONALITY  */</tw-passagedata><tw-passagedata pid="21" name="choose-messages-language" tags="nobr" position="100,350" size="100,100">/* This is for passages where the content DOESN&#39;T change depending on KS choice */
@@ -2517,10 +2509,10 @@ codeword11: {
         &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="107" name="stage3-tutorial1-video" tags="nobr" position="850,1350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-video&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-a&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
-&lt;&lt;include &quot;choose-video-language&quot;&gt;&gt;
-
-&lt;&lt;addclass &quot;body&quot; &quot;blue-bubble-bg&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="108" name="stage3-tutorial1-video-video-eng" tags="nobr" position="975,1350" size="100,100">/* VIDEO 4  */
+&lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
+&lt;/div&gt;
+&lt;&lt;include &quot;choose-video-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="108" name="stage3-tutorial1-video-video-eng" tags="nobr" position="975,1350" size="100,100">/* VIDEO 4  */
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
       src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="109" name="stage3-tutorial1-video-video-cym" tags="nobr" position="1100,1350" size="100,100">/* VIDEO 4  */
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
@@ -2586,8 +2578,10 @@ codeword11: {
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="112" name="tutorial1-empty-picture" tags="nobr" position="225,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/empty-picture.png&quot; alt=&quot;Empty picture&quot; &gt;</tw-passagedata><tw-passagedata pid="113" name="tutorial1-picture1-ks1" tags="nobr" position="350,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-1-ks1.png&quot; alt=&quot;Present&quot; &gt;</tw-passagedata><tw-passagedata pid="114" name="tutorial1-picture2-ks1" tags="nobr" position="475,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-2-ks1.png&quot; alt=&quot;Elephant&quot; &gt;</tw-passagedata><tw-passagedata pid="115" name="tutorial1-picture3-ks1" tags="nobr" position="600,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-3-ks1.png&quot; alt=&quot;Ride&quot; &gt;</tw-passagedata><tw-passagedata pid="116" name="tutorial1-picture1-ks2" tags="nobr" position="725,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-1.png&quot; alt=&quot;Lionel&quot; &gt;</tw-passagedata><tw-passagedata pid="117" name="tutorial1-picture2-ks2" tags="nobr" position="850,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-2.png&quot; alt=&quot;Book&quot; &gt;</tw-passagedata><tw-passagedata pid="118" name="tutorial1-picture3-ks2" tags="nobr" position="975,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-3.png&quot; alt=&quot;Frog&quot; &gt;</tw-passagedata><tw-passagedata pid="119" name="tutorial1-picture4-ks2" tags="nobr" position="1100,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-4.png&quot; alt=&quot;Bea using Magic Book&quot; &gt;</tw-passagedata><tw-passagedata pid="120" name="tutorial1-picture5-ks2" tags="nobr" position="1225,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-5.png&quot; alt=&quot;Library&quot; &gt;</tw-passagedata><tw-passagedata pid="121" name="stage3-tutorial1-a" tags="nobr" position="100,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-video&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-a&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-b&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;blue-bubble-bg&quot;&gt;&gt;
+&lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;/div&gt;
+
 &lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
     &lt;&lt;timed 0.1s&gt;&gt;
    &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
@@ -2657,8 +2651,9 @@ codeword11: {
 &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="123" name="stage3-tutorial1-a-messages-cym" tags="nobr" position="350,1600" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="124" name="stage3-tutorial1-b" tags="nobr" position="475,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-a&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-b&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-c&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;blue-bubble-bg&quot;&gt;&gt;
+&lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
+&lt;/div&gt;
 &lt;&lt;timed 0.1s&gt;&gt;
    &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
     &lt;h2&gt;Night-time Dreams&lt;/h2&gt;
@@ -2742,13 +2737,9 @@ codeword11: {
 &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="131" name="stage3-tutorial1-b-messages-cym-ks1" tags="nobr" position="100,1725" size="100,100">Lorem ipsum Welsh KS1</tw-passagedata><tw-passagedata pid="132" name="stage3-tutorial1-b-vn-transcript-cym-ks1" tags="nobr" position="225,1725" size="100,100">Lorem ipsum Welsh KS1</tw-passagedata><tw-passagedata pid="133" name="stage3-tutorial1-b-vn-triggered-content-cym-ks1" tags="nobr" position="350,1725" size="100,100">Lorem ipsum Welsh KS1</tw-passagedata><tw-passagedata pid="134" name="stage3-tutorial1-b-messages-cym-ks2" tags="nobr" position="475,1725" size="100,100">Lorem ipsum Welsh KS2</tw-passagedata><tw-passagedata pid="135" name="stage3-tutorial1-b-vn-transcript-cym-ks2" tags="nobr" position="600,1725" size="100,100">Lorem ipsum Welsh KS2</tw-passagedata><tw-passagedata pid="136" name="stage3-tutorial1-b-vn-triggered-content-cym-ks2" tags="nobr" position="725,1725" size="100,100">Lorem ipsum Welsh KS2</tw-passagedata><tw-passagedata pid="137" name="stage3-tutorial1-c" tags="nobr" position="850,1725" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-b&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-c&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-d&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;blue-bubble-bg&quot;&gt;&gt;
-&lt;&lt;timed 0.1s&gt;&gt;
-   &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
-    &lt;h2&gt;Night-time Dreams&lt;/h2&gt;
-    &lt;&lt;/replace&gt;&gt;
-&lt;&lt;/timed&gt;&gt;
+&lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
+&lt;/div&gt;
 /* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
 &lt;&lt;if $userchoices.keyStage is 1&gt;&gt;
     &lt;&lt;timed 0.1s&gt;&gt;
@@ -2793,7 +2784,6 @@ codeword11: {
       &lt;&lt;include &quot;tutorial1-picture1-ks1&quot;&gt;&gt;
         &lt;&lt;include &quot;tutorial1-picture2-ks1&quot;&gt;&gt;
         &lt;&lt;include &quot;tutorial1-empty-picture&quot;&gt;&gt;
-     
         &lt;&lt;/replace&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
@@ -2828,13 +2818,9 @@ codeword11: {
 &lt;&lt;set $passage to &quot;stage3-tutorial1-d&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-e&quot;&gt;&gt;
 
-&lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;blue-bubble-bg&quot;&gt;&gt;
-&lt;&lt;timed 0.1s&gt;&gt;
-   &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
-    &lt;h2&gt;Night-time Dreams&lt;/h2&gt;
-    &lt;&lt;/replace&gt;&gt;
-&lt;&lt;/timed&gt;&gt;
+&lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
+&lt;/div&gt;
 
 /* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
 &lt;&lt;if $userchoices.keyStage is 1&gt;&gt;
@@ -2902,7 +2888,7 @@ codeword11: {
     &lt;&lt;replace &quot;#pictureContainer&quot;&gt;&gt;
       &lt;&lt;include &quot;tutorial1-picture1-ks2&quot;&gt;&gt;
         &lt;&lt;include &quot;tutorial1-picture2-ks2&quot;&gt;&gt;
-          &lt;&lt;include &quot;tutorial1-picture3-ks2&quot;&gt;&gt;
+        &lt;&lt;include &quot;tutorial1-picture3-ks2&quot;&gt;&gt;
         &lt;&lt;include &quot;tutorial1-empty-picture&quot;&gt;&gt;
         &lt;&lt;include &quot;tutorial1-empty-picture&quot;&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
@@ -2921,13 +2907,16 @@ codeword11: {
  &lt;&lt;elseif $userchoices.keyStage is 2&gt;&gt;
   &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-f&quot;&gt;&gt;
 &lt;&lt;/if&gt;&gt;
-&lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;blue-bubble-bg&quot;&gt;&gt;
-&lt;&lt;timed 0.1s&gt;&gt;
-   &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
-    &lt;h2&gt;Night-time Dreams&lt;/h2&gt;
-    &lt;&lt;/replace&gt;&gt;
-&lt;&lt;/timed&gt;&gt;
+&lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
+&lt;/div&gt;
+&lt;&lt;if $userchoices.keyStage is 2&gt;&gt;
+    &lt;&lt;timed 0.1s&gt;&gt;
+        &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+            &lt;&lt;include &quot;stage3-tutorial1-pictures-container-ks2&quot;&gt;&gt;
+        &lt;&lt;/replace&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;&lt;include &quot;choose-messages-language-ks-specific&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="164" name="stage3-tutorial1-e-messages-eng-ks1" tags="nobr" position="475,2100" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial1-e-vn-transcript-eng-ks1&quot;&gt;&gt;
@@ -2953,13 +2942,7 @@ codeword11: {
 
 &lt;p&gt;You can choose to use my first image if you’d like - the Surprise Present! &lt;/p&gt;
 
-&lt;p&gt;So, to kick off your imaginations, have a discussion about what could come out of Surprise Present? &lt;/p&gt;</tw-passagedata><tw-passagedata pid="166" name="stage3-tutorial1-e-messages-eng-ks2" tags="nobr" position="725,2100" size="100,100">&lt;&lt;timed 0.1s&gt;&gt;
-    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
-     &lt;&lt;include &quot;stage3-tutorial1-pictures-container-ks2&quot;&gt;&gt;
-    &lt;&lt;/replace&gt;&gt;
- &lt;&lt;/timed&gt;&gt;
-
-&lt;&lt;timed 1s&gt;&gt;
+&lt;p&gt;So, to kick off your imaginations, have a discussion about what could come out of Surprise Present? &lt;/p&gt;</tw-passagedata><tw-passagedata pid="166" name="stage3-tutorial1-e-messages-eng-ks2" tags="nobr" position="725,2100" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial1-e-vn-transcript-eng-ks2&quot;
          &quot;stage3-tutorial1-e-vn-triggered-content-eng-ks2&quot;&gt;&gt;
@@ -2980,16 +2963,13 @@ codeword11: {
             &lt;&lt;include &quot;nextBtn&quot;&gt;&gt;
         &lt;/div&gt;
     &lt;&lt;/replace&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="169" name="stage3-tutorial1-e-messages-cym-ks2" tags="nobr" position="1100,2100" size="100,100">Lorem Ipsum welsh KS2
-&lt;&lt;timed 0.1s&gt;&gt;
-    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
-     &lt;&lt;include &quot;stage3-tutorial1-pictures-container-ks2&quot;&gt;&gt;
-    &lt;&lt;/replace&gt;&gt;
- &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="170" name="stage3-tutorial1-e-vn-transcript-cym-ks2" tags="nobr" position="1225,2100" size="100,100">Lorem Ipsum welsh KS2</tw-passagedata><tw-passagedata pid="171" name="stage3-tutorial1-e-vn-triggered-content-cym-ks2" tags="nobr" position="100,2225" size="100,100">Lorem Ipsum welsh KS2</tw-passagedata><tw-passagedata pid="172" name="stage3-tutorial1-f" tags="nobr" position="225,2225" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-e&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="169" name="stage3-tutorial1-e-messages-cym-ks2" tags="nobr" position="1100,2100" size="100,100">Lorem Ipsum welsh KS2</tw-passagedata><tw-passagedata pid="170" name="stage3-tutorial1-e-vn-transcript-cym-ks2" tags="nobr" position="1225,2100" size="100,100">Lorem Ipsum welsh KS2</tw-passagedata><tw-passagedata pid="171" name="stage3-tutorial1-e-vn-triggered-content-cym-ks2" tags="nobr" position="100,2225" size="100,100">Lorem Ipsum welsh KS2</tw-passagedata><tw-passagedata pid="172" name="stage3-tutorial1-f" tags="nobr" position="225,2225" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-e&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-f&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-g&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;blue-bubble-bg&quot;&gt;&gt;
+&lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
+&lt;/div&gt;
+
 &lt;&lt;timed 0.1s&gt;&gt;
    &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
     &lt;h2&gt;Night-time Dreams&lt;/h2&gt;
@@ -3037,8 +3017,10 @@ codeword11: {
 
 &lt;&lt;set $passage to &quot;stage3-tutorial1-g&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-h&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;blue-bubble-bg&quot;&gt;&gt;
+
+&lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;/div&gt;
 &lt;&lt;timed 0.1s&gt;&gt;
    &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
     &lt;h2&gt;Night-time Dreams&lt;/h2&gt;
@@ -3119,8 +3101,10 @@ You can choose to use my first image but you need to imagine something else that
         &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="180" name="stage3-tutorial1-g-messages-cym-ks1" tags="nobr" position="1225,2225" size="100,100">Lorem Ipsum Welsh KS1</tw-passagedata><tw-passagedata pid="181" name="stage3-tutorial1-g-messages-cym-ks2" tags="nobr" position="100,2350" size="100,100">Lorem Ipsum Welsh KS2</tw-passagedata><tw-passagedata pid="182" name="stage3-tutorial1-h" tags="nobr" position="225,2350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-g&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-h&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;blue-bubble-bg&quot;&gt;&gt;
+&lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;/div&gt;
+
 &lt;&lt;timed 0.1s&gt;&gt;
    &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
     &lt;h2&gt;Night-time Dreams&lt;/h2&gt;
@@ -4492,6 +4476,7 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
 &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="262" name="stage3-submission-call-bea" tags="nobr" position="225,3350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submission-call-bea&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-submission-video&quot;&gt;&gt;
+
 &lt;&lt;include &quot;_templateContentCenter&quot;&gt;&gt;
 &lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;

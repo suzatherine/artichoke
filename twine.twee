@@ -961,14 +961,7 @@ codeword11: {
 /* STRUCTURAL  */
 
 :: header-logo [nobr]
-<header class="logo-left">
-<div class="logo-container">
-    <div class="logo-wrapper">
-    <img src="assets/img/portal-logo-w-header.png" alt="logo"/>
-    </div>
-        /* <h2>Library Portal</h2> */
-</div>
-
+<header>
 
 <div id="pageName"></div>
 </header>
@@ -1193,9 +1186,9 @@ codeword11: {
 
 :: solologo [nobr]
 <div class="connecting-image-wrapper">
-       
-        
+<div id="pageName"> </div>    
          </div>
+
 
 :: stamp1 [nobr]
 <img src="assets/img/stamp1.png" alt="Stamp 1"/>
@@ -2823,10 +2816,10 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorials-menu">>
 <<set $passage to "stage3-tutorial1-video">>
 <<set $nextPassage to "stage3-tutorial1-a">>
-<<include "_templateFullScreenVideo">>
+<div class="night-bg bg page-wrapper">
+    <<include "_templateFullScreenVideo">>
+</div>
 <<include "choose-video-language">>
-
-<<addclass "body" "blue-bubble-bg">>
 
 :: stage3-tutorial1-video-video-eng [nobr]
 /* VIDEO 4  */
@@ -2934,8 +2927,10 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial1-video">>
 <<set $passage to "stage3-tutorial1-a">>
 <<set $nextPassage to "stage3-tutorial1-b">>
-<<include "_templateFullScreenChat">>
-<<addclass "body" "blue-bubble-bg">>
+<div class="night-bg bg page-wrapper">
+    <<include "_templateFullScreenChat">>
+</div>
+
 <<if $userchoices.language is "eng">>
     <<timed 0.1s>>
    <<replace "#pageName">>
@@ -3019,8 +3014,9 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial1-a">>
 <<set $passage to "stage3-tutorial1-b">>
 <<set $nextPassage to "stage3-tutorial1-c">>
-<<include "_templateVideoChat">>
-<<addclass "body" "blue-bubble-bg">>
+<div class="night-bg bg page-wrapper">
+    <<include "_templateVideoChat">>
+</div>
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Night-time Dreams</h2>
@@ -3146,13 +3142,9 @@ Lorem ipsum Welsh KS2
 <<set $prevPassage to "stage3-tutorial1-b">>
 <<set $passage to "stage3-tutorial1-c">>
 <<set $nextPassage to "stage3-tutorial1-d">>
-<<include "_templateVideoChat">>
-<<addclass "body" "blue-bubble-bg">>
-<<timed 0.1s>>
-   <<replace "#pageName">>
-    <h2>Night-time Dreams</h2>
-    <</replace>>
-<</timed>>
+<div class="night-bg bg page-wrapper">
+    <<include "_templateVideoChat">>
+</div>
 /* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
 <<if $userchoices.keyStage is 1>>
     <<timed 0.1s>>
@@ -3208,7 +3200,6 @@ The next part is the <span class="codeword-text">MIDDLE</span> of the story - so
       <<include "tutorial1-picture1-ks1">>
         <<include "tutorial1-picture2-ks1">>
         <<include "tutorial1-empty-picture">>
-     
         <</replace>>
     <</timed>>
 
@@ -3273,13 +3264,9 @@ Lorem ipsum Welsh KS2
 <<set $passage to "stage3-tutorial1-d">>
 <<set $nextPassage to "stage3-tutorial1-e">>
 
-<<include "_templateVideoChat">>
-<<addclass "body" "blue-bubble-bg">>
-<<timed 0.1s>>
-   <<replace "#pageName">>
-    <h2>Night-time Dreams</h2>
-    <</replace>>
-<</timed>>
+<div class="night-bg bg page-wrapper">
+    <<include "_templateVideoChat">>
+</div>
 
 /* CHOOSE CORRECT PICTURE CONTAINER FOR KS  */
 <<if $userchoices.keyStage is 1>>
@@ -3366,7 +3353,7 @@ Then a <span class="codeword-text">CHALLENGE</span>  or <span class="codeword-te
     <<replace "#pictureContainer">>
       <<include "tutorial1-picture1-ks2">>
         <<include "tutorial1-picture2-ks2">>
-          <<include "tutorial1-picture3-ks2">>
+        <<include "tutorial1-picture3-ks2">>
         <<include "tutorial1-empty-picture">>
         <<include "tutorial1-empty-picture">>
         <</replace>>
@@ -3404,13 +3391,16 @@ Lorem ipsum Welsh KS2
  <<elseif $userchoices.keyStage is 2>>
   <<set $nextPassage to "stage3-tutorial1-f">>
 <</if>>
-<<include "_templateVideoChat">>
-<<addclass "body" "blue-bubble-bg">>
-<<timed 0.1s>>
-   <<replace "#pageName">>
-    <h2>Night-time Dreams</h2>
-    <</replace>>
-<</timed>>
+<div class="night-bg bg page-wrapper">
+    <<include "_templateVideoChat">>
+</div>
+<<if $userchoices.keyStage is 2>>
+    <<timed 0.1s>>
+        <<replace "#videoWrapper">>
+            <<include "stage3-tutorial1-pictures-container-ks2">>
+        <</replace>>
+    <</timed>>
+<</if>>
 <<include "choose-messages-language-ks-specific">>
 
 :: stage3-tutorial1-e-messages-eng-ks1 [nobr]
@@ -3446,12 +3436,6 @@ Lorem ipsum Welsh KS2
 
 
 :: stage3-tutorial1-e-messages-eng-ks2 [nobr]
-<<timed 0.1s>>
-    <<replace "#videoWrapper">>
-     <<include "stage3-tutorial1-pictures-container-ks2">>
-    <</replace>>
- <</timed>>
-
 <<timed 1s>>
     <<append "#chatHistory">>
          <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-e-vn-transcript-eng-ks2"
@@ -3484,11 +3468,6 @@ After the <span class="codeword-text">PROBLEM</span>  there is a <span class="co
 
 :: stage3-tutorial1-e-messages-cym-ks2 [nobr]
 Lorem Ipsum welsh KS2
-<<timed 0.1s>>
-    <<replace "#videoWrapper">>
-     <<include "stage3-tutorial1-pictures-container-ks2">>
-    <</replace>>
- <</timed>>
 
 :: stage3-tutorial1-e-vn-transcript-cym-ks2 [nobr]
 Lorem Ipsum welsh KS2
@@ -3499,8 +3478,10 @@ Lorem Ipsum welsh KS2
 <<set $prevPassage to "stage3-tutorial1-e">>
 <<set $passage to "stage3-tutorial1-f">>
 <<set $nextPassage to "stage3-tutorial1-g">>
-<<include "_templateVideoChat">>
-<<addclass "body" "blue-bubble-bg">>
+<div class="night-bg bg page-wrapper">
+    <<include "_templateVideoChat">>
+</div>
+
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Night-time Dreams</h2>
@@ -3565,8 +3546,10 @@ Lorem Ipsum Welsh
 
 <<set $passage to "stage3-tutorial1-g">>
 <<set $nextPassage to "stage3-tutorial1-h">>
-<<include "_templateFullScreenChat">>
-<<addclass "body" "blue-bubble-bg">>
+
+<div class="night-bg bg page-wrapper">
+    <<include "_templateFullScreenChat">>
+</div>
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Night-time Dreams</h2>
@@ -3662,8 +3645,10 @@ Lorem Ipsum Welsh KS2
 <<set $prevPassage to "stage3-tutorial1-g">>
 <<set $passage to "stage3-tutorial1-h">>
 <<set $nextPassage to "stage3-tutorials-menu">>
-<<include "_templateFullScreenChat">>
-<<addclass "body" "blue-bubble-bg">>
+<div class="night-bg bg page-wrapper">
+    <<include "_templateFullScreenChat">>
+</div>
+
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Night-time Dreams</h2>
@@ -5319,6 +5304,7 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorials-menu">>
 <<set $passage to "stage3-submission-call-bea">>
 <<set $nextPassage to "stage3-submission-video">>
+
 <<include "_templateContentCenter">>
 <<timed 0.1s>>
     <<include "choose-messages-language">>
