@@ -4524,8 +4524,9 @@ Lorem Ipsum Welsh KS2
 <<set $prevPassage to "stage3-tutorials-menu">>
 <<set $passage to "stage3-tutorial3-video">>
 <<set $nextPassage to "stage3-tutorial3-a">>
-<<include "_templateFullScreenVideo">>
-<<addclass "body" "green-bubble-bg">>
+<div class="future-bg bg page-wrapper">
+    <<include "_templateFullScreenVideo">>
+</div>
 <<include "choose-video-language">>
 
 
@@ -4544,8 +4545,9 @@ Lorem Ipsum Welsh KS2
 <<set $prevPassage to "stage3-tutorial3-video">>
 <<set $passage to "stage3-tutorial3-a">>
 <<set $nextPassage to "stage3-tutorial3-b">>
-<<include "_templateFullScreenChat">>
-<<addclass "body" "green-bubble-bg">>
+<div class="future-bg bg page-wrapper">
+    <<include "_templateFullScreenChat">>
+</div>
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Future Dreams</h2>
@@ -4654,8 +4656,10 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial3-a">>
 <<set $passage to "stage3-tutorial3-b">>
 <<set $nextPassage to "stage3-tutorial3-c">>
-<<include "_templateVideoChat">>
-<<addclass "body" "green-bubble-bg">>
+<div class="future-bg bg page-background">
+    <<include "_templateVideoChat">>
+</div>
+
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Future Dreams</h2>
@@ -4870,8 +4874,10 @@ I’ll send you some sentences to help you work out these steps. <br/>
 <<set $prevPassage to "stage3-tutorial3-b">>
 <<set $passage to "stage3-tutorial3-c">>
 <<set $nextPassage to "stage3-tutorial3-d">>
+<div class="future-bg bg page-background">
 <<include "_templateVideoChat">>
-<<addclass "body" "green-bubble-bg">>
+</div>
+
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Future Dreams</h2>
@@ -4980,8 +4986,10 @@ Lorem Ipsum Welsh KS1
 <<set $prevPassage to "stage3-tutorial3-c">>
 <<set $passage to "stage3-tutorial3-d">>
 <<set $nextPassage to "stage3-tutorial3-e">>
+<div class="future-bg bg page-background">
 <<include "_templateVideoChat">>
-<<addclass "body" "green-bubble-bg">>
+</div>
+
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Future Dreams</h2>
@@ -5129,8 +5137,9 @@ Lorem Ipsum Welsh KS2
 
 <<set $nextPassage to "stage3-tutorials-menu">>
 
+<div class="future-bg bg page-wrapper">
 <<include "_templateFullScreenChat">>
-<<addclass "body" "green-bubble-bg">>
+</div>
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Future Dreams</h2>
