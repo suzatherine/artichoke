@@ -50,12 +50,42 @@ function updateSortingActivityCorrectness(list) {
         return;
     }
 
-    Array.from(list.querySelectorAll(".sorting-activity-row")).forEach(function (row, index) {
+    var rows = Array.from(list.querySelectorAll(".sorting-activity-row"));
+    rows.forEach(function (row, index) {
         var item = row.querySelector(".sorting-activity-option");
         var isCorrect = item.dataset.correctPosition === String(index + 1);
         item.classList.toggle("correct", isCorrect);
         item.dataset.inCorrectPosition = String(isCorrect);
     });
+
+    var isComplete = rows.length > 0 && rows.every(function (row, index) {
+        return row.querySelector(".sorting-activity-option").dataset.correctPosition === String(index + 1);
+    });
+    var nextButton = document.querySelector("#sorting-next-button");
+    if (nextButton) {
+        nextButton.classList.toggle("hidden", !isComplete || Boolean(list.querySelector(".dragging")));
+    }
+
+    if (isComplete && !list.dataset.completionMessageShown && !list.querySelector(".dragging")) {
+        var chatHistory = document.querySelector("#chatHistory");
+        if (chatHistory) {
+            var message = document.createElement("div");
+            message.className = "message-received";
+            var text = document.createElement("span");
+            text.append(
+                "Amazing work.",
+                document.createElement("br"),
+                "Now you’ve learnt how to structure a story - let’s make our own.",
+                document.createElement("br"),
+                "I’m going to take an image from a dream and make a story out of it.",
+                document.createElement("br"),
+                "The story of the Surprise Present."
+            );
+            message.appendChild(text);
+            chatHistory.appendChild(message);
+            list.dataset.completionMessageShown = "true";
+        }
+    }
 }
 
 $(document).on(":passagedisplay", function () {
@@ -3073,22 +3103,19 @@ Work out together which order the story should go in.
         <</append>>
     <</timed>>
 
-<<timed 1s>>
+<<timed 20s>>
     <<append "#videoWrapper">>
          <<include "sorting-activity">>
         <</append>>
     <<run updateSortingActivityCorrectness(document.querySelector("#videoWrapper .sorting-activity-list"))>>
     <</timed>>    
 
-<<timed 15s>>
+
     <<replace "#chatInputWrapper">>
-        <div class="btn-option-wrapper">
+        <div id="sorting-next-button" class="btn-option-wrapper hidden">
             <<include "nextBtn">>
         </div>
     <</replace>>
-<</timed>>
-
-
 
 :: stage3-tutorial1-a-messages-cym [nobr]
 Lorem Ipsum Welsh

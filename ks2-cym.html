@@ -133,12 +133,42 @@ function updateSortingActivityCorrectness(list) {
         return;
     }
 
-    Array.from(list.querySelectorAll(".sorting-activity-row")).forEach(function (row, index) {
+    var rows = Array.from(list.querySelectorAll(".sorting-activity-row"));
+    rows.forEach(function (row, index) {
         var item = row.querySelector(".sorting-activity-option");
         var isCorrect = item.dataset.correctPosition === String(index + 1);
         item.classList.toggle("correct", isCorrect);
         item.dataset.inCorrectPosition = String(isCorrect);
     });
+
+    var isComplete = rows.length > 0 && rows.every(function (row, index) {
+        return row.querySelector(".sorting-activity-option").dataset.correctPosition === String(index + 1);
+    });
+    var nextButton = document.querySelector("#sorting-next-button");
+    if (nextButton) {
+        nextButton.classList.toggle("hidden", !isComplete || Boolean(list.querySelector(".dragging")));
+    }
+
+    if (isComplete && !list.dataset.completionMessageShown && !list.querySelector(".dragging")) {
+        var chatHistory = document.querySelector("#chatHistory");
+        if (chatHistory) {
+            var message = document.createElement("div");
+            message.className = "message-received";
+            var text = document.createElement("span");
+            text.append(
+                "Amazing work.",
+                document.createElement("br"),
+                "Now you’ve learnt how to structure a story - let’s make our own.",
+                document.createElement("br"),
+                "I’m going to take an image from a dream and make a story out of it.",
+                document.createElement("br"),
+                "The story of the Surprise Present."
+            );
+            message.appendChild(text);
+            chatHistory.appendChild(message);
+            list.dataset.completionMessageShown = "true";
+        }
+    }
 }
 
 $(document).on(":passagedisplay", function () {
@@ -2714,20 +2744,19 @@ Work out together which order the story should go in.
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 1s&gt;&gt;
+&lt;&lt;timed 20s&gt;&gt;
     &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
          &lt;&lt;include &quot;sorting-activity&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;run updateSortingActivityCorrectness(document.querySelector(&quot;#videoWrapper .sorting-activity-list&quot;))&gt;&gt;
     &lt;&lt;/timed&gt;&gt;    
 
-&lt;&lt;timed 15s&gt;&gt;
+
     &lt;&lt;replace &quot;#chatInputWrapper&quot;&gt;&gt;
-        &lt;div class=&quot;btn-option-wrapper&quot;&gt;
+        &lt;div id=&quot;sorting-next-button&quot; class=&quot;btn-option-wrapper hidden&quot;&gt;
             &lt;&lt;include &quot;nextBtn&quot;&gt;&gt;
         &lt;/div&gt;
-    &lt;&lt;/replace&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="stage3-tutorial1-a-messages-cym" tags="nobr" position="600,1600" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="126" name="stage3-tutorial1-b" tags="nobr" position="725,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-a&quot;&gt;&gt;
+    &lt;&lt;/replace&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="stage3-tutorial1-a-messages-cym" tags="nobr" position="600,1600" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="126" name="stage3-tutorial1-b" tags="nobr" position="725,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-a&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-b&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-c&quot;&gt;&gt;
 &lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
