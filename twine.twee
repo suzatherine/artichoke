@@ -1194,7 +1194,7 @@ codeword11: {
 
 :: solologo [nobr]
 <div class="connecting-image-wrapper">
-         <img src="assets/img/portal-logo-w.png" class="" alt="logo"/>
+       
         
          </div>
 
@@ -2565,25 +2565,16 @@ Lorem Ipsum Welsh
 </div>
 </div>
 
-:: map-img [nobr]
-<div class="uk-map-wrapper" id="uk-map-wrapper"><img src="assets/img/uk-map.jpg" alt="UK Map" id="uk-map"></div>
-
-
 :: stage2-exercise-dreamJar-outro  [nobr]
 <<set $prevPassage to "stage2-exercise-dreamJar-d">>
 <<set $passage to "stage2-exercise-dreamJar-outro">>
 <<set $nextPassage to $userchoices.landingPage>>
+<div class="map-bg dreamjar-page-background">
 <<include "_templateVideoChat">>
+</div>
 <<include "choose-messages-language">>
 
 :: stage2-exercise-dreamJar-outro-messages-eng [nobr]
-<<timed 1s>>
-    <<replace "#videoWrapper">>
-        <div id="picture-container">
-        <<include "map-img">>
-        </div>
-    <</replace>>
-    <</timed>>
 
 <<timed 2s>>
     <<append "#chatHistory">>

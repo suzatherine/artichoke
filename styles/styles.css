@@ -82,6 +82,10 @@
   background-image: url('../assets/img/bgs/01 LOGIN.jpg');
 }
 
+.map-bg {
+  background-image: url('../assets/img/bgs/MAP.jpg');
+}
+
 .day-bg {
   background-image: url('../assets/img/bgs/02 DAY.jpg');
 }
