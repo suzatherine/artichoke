@@ -3124,7 +3124,7 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial1-a">>
 <<set $passage to "stage3-tutorial1-b">>
 <<set $nextPassage to "stage3-tutorial1-c">>
-<div class="night-bg bg page-wrapper">
+<div class="night-bg bg page-background">
     <<include "_templateVideoChat">>
 </div>
 <<timed 0.1s>>
