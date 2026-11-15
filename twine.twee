@@ -2743,9 +2743,8 @@ Lorem Ipsum Welsh
 <<set $nextPassage to "">>
 
 
-<main class="tutorials-menu">
-<h2>PICK A DREAM TEAM VIDEO TO COMPLETE</h2>
-
+<main class="tutorials-menu cream-bg bg">
+<h2>Pick a dream team video to complete</h2>
 <div class="bubble-grid" role="list">
     <div class="bubble-btn one" role="listitem">
         <div class="bubble-link" id="bubble-link-1" >
@@ -2811,16 +2810,6 @@ Lorem Ipsum Welsh
         <<button "Rewatch">>
            <<goto "stage3-video">>
         <</button>>
-</div>
-
-<div class="stamp-1-container">
-    <<include "stamp1">>
-</div>
-<div class="stamp-2-container">
-    <<include "stamp2">>
-</div>
-<div class="stamp-3-container">
-    <<include "stamp3">>
 </div>
 
 </main>
