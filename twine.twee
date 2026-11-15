@@ -46,9 +46,15 @@ setup.createSortingActivityItems = function (sentences, correctOrder) {
 };
 
 function updateSortingActivityCorrectness(list) {
+    if (!list) {
+        return;
+    }
+
     Array.from(list.querySelectorAll(".sorting-activity-row")).forEach(function (row, index) {
         var item = row.querySelector(".sorting-activity-option");
-        item.classList.toggle("correct", item.dataset.correctPosition === String(index + 1));
+        var isCorrect = item.dataset.correctPosition === String(index + 1);
+        item.classList.toggle("correct", isCorrect);
+        item.dataset.inCorrectPosition = String(isCorrect);
     });
 }
 
@@ -951,7 +957,7 @@ codeword11: {
                     <div class="sorting-activity-row" role="listitem">
                         <span class="sorting-activity-label"><<= _sortingActivity.titles[_i]>></span>
                         <div class="sorting-activity-option" draggable="true" tabindex="0"
-                             data-correct-position="<<= _item.correctPosition>>"><<= _item.sentence>></div>
+                             @data-correct-position="_item.correctPosition"><<= _item.sentence>></div>
                     </div>
                 <</for>>
             </div>
@@ -1278,11 +1284,24 @@ codeword11: {
 
 :: sorting-activity [nobr]
 <<set _sortingActivity to {
-    title: "Put the morning routine in order",
-    instructions: "Drag the sentences to reorder them, or focus a sentence and use the arrow keys.",
-    titles: ["Beginning", "Middle", "End"],
-    sentences: ["I ate breakfast.", "The alarm rang.", "I got out of bed."],
-    correctOrder: ["The alarm rang.", "I got out of bed.", "I ate breakfast."]
+    title: "In Chapter 11 - The Journey to Dream Country. The BFG and Sophie make their way to Dream Country.",
+    instructions: "Drag the sentences to reorder them",
+    titles: ["An Opening", "A Mission", "A Challenge", "A Solution", "An 
+    Ending"],
+    sentences: [
+        "The BFG starts running at top speed and Sophie has to duck back into his pocket. When he slows, they are in a cool, pale land with a thick mist. Dream Country.",
+        "The BFG & Sophie are in Giant Country having just tried Frobscottle.",
+        "When they get bored, they make him run and toss rocks after him. But the BFG dodges them like a boss.",
+        "The BFG decides to go catch some dreams from Dream Country. So he puts Sophie in his pocket and starts to make his way there.",
+        "But has to get past the other giants, who are all waffling around, being bored and waiting for nightfall."
+    ],
+    correctOrder: [
+        "The BFG & Sophie are in Giant Country having just tried Frobscottle.",
+        "The BFG decides to go catch some dreams from Dream Country. So he puts Sophie in his pocket and starts to make his way there.",
+        "But has to get past the other giants, who are all waffling around, being bored and waiting for nightfall.",
+        "When they get bored, they make him run and toss rocks after him. But the BFG dodges them like a boss.",
+        "The BFG starts running at top speed and Sophie has to duck back into his pocket. When he slows, they are in a cool, pale land with a thick mist. Dream Country."
+    ]
 }>>
 <<sortingActivity _sortingActivity>>
 
@@ -2979,17 +2998,11 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial1-video">>
 <<set $passage to "stage3-tutorial1-a">>
 <<set $nextPassage to "stage3-tutorial1-b">>
-<div class="night-bg bg page-wrapper">
-    <<include "night-time-dreamJar-label-small" >>
-    <<include "_templateFullScreenChat">>
+<div class="night-bg bg page-background">
+    <<include "_templateVideoChat">>
 </div>
 
 <<if $userchoices.language is "eng">>
-    <<timed 0.1s>>
-   <<replace "#pageName">>
-    <h2>Night-time Dreams</h2>
-    <</replace>>
-    <</timed>>
       <<timed 1s>>
     <<include "stage3-tutorial1-a-messages-eng">>
      <</timed>>
@@ -3044,11 +3057,28 @@ Lorem Ipsum Welsh
 <<timed 12s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>So, let’s take an Image from a Dream and make a story out of it. <br/>
-        The story of the Surprise Present. </span>
+        <span>Stories are made up of parts. 
+We could break our story into 5 parts. <br>
+An Opening - where we discover the world of the story <br>
+A Mission - where something changes for our character or world <br>
+A Challenge - where our character faces an obstacle <br>
+A Solution - where our character tries to overcome the obstacle <br>
+An Ending - where we find out how it ends <br>
+
+Let’s look at part of the BFG’s own story to learn about how we create stories. 
+
+Work out together which order the story should go in.
+ </span>
         </div>
         <</append>>
     <</timed>>
+
+<<timed 1s>>
+    <<append "#videoWrapper">>
+         <<include "sorting-activity">>
+        <</append>>
+    <<run updateSortingActivityCorrectness(document.querySelector("#videoWrapper .sorting-activity-list"))>>
+    <</timed>>    
 
 <<timed 15s>>
     <<replace "#chatInputWrapper">>

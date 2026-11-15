@@ -2576,7 +2576,7 @@ main.entry-page-content {
 /* SORTING ACTIVITY */
 
 .sorting-activity {
-  width: min(100%, 42rem);
+  width: min(100%, 64rem);
   text-align: center;
 }
 
@@ -2614,15 +2614,20 @@ main.entry-page-content {
   outline-offset: 3px;
 }
 
-.sorting-activity-option.correct {
+.sorting-activity-option[data-in-correct-position="true"] {
   border-color: var(--palette-green);
-  background: var(--palette-mint);
+  background: var(--palette-green);
 }
 
 .sorting-activity-option.dragging {
   background: var(--palette-light-sky);
   opacity: 0.85;
   cursor: grabbing;
+}
+
+.sorting-activity-option[data-in-correct-position="true"].dragging {
+  border-color: var(--palette-dark-green);
+  background: var(--palette-green);
 }
 
 @media (max-width: 480px) {

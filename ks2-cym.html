@@ -129,9 +129,15 @@ setup.createSortingActivityItems = function (sentences, correctOrder) {
 };
 
 function updateSortingActivityCorrectness(list) {
+    if (!list) {
+        return;
+    }
+
     Array.from(list.querySelectorAll(".sorting-activity-row")).forEach(function (row, index) {
         var item = row.querySelector(".sorting-activity-option");
-        item.classList.toggle("correct", item.dataset.correctPosition === String(index + 1));
+        var isCorrect = item.dataset.correctPosition === String(index + 1);
+        item.classList.toggle("correct", isCorrect);
+        item.dataset.inCorrectPosition = String(isCorrect);
     });
 }
 
@@ -1026,7 +1032,7 @@ codeword11: {
                     &lt;div class=&quot;sorting-activity-row&quot; role=&quot;listitem&quot;&gt;
                         &lt;span class=&quot;sorting-activity-label&quot;&gt;&lt;&lt;= _sortingActivity.titles[_i]&gt;&gt;&lt;/span&gt;
                         &lt;div class=&quot;sorting-activity-option&quot; draggable=&quot;true&quot; tabindex=&quot;0&quot;
-                             data-correct-position=&quot;&lt;&lt;= _item.correctPosition&gt;&gt;&quot;&gt;&lt;&lt;= _item.sentence&gt;&gt;&lt;/div&gt;
+                             @data-correct-position=&quot;_item.correctPosition&quot;&gt;&lt;&lt;= _item.sentence&gt;&gt;&lt;/div&gt;
                     &lt;/div&gt;
                 &lt;&lt;/for&gt;&gt;
             &lt;/div&gt;
@@ -1271,11 +1277,24 @@ codeword11: {
 &lt;&lt;set $userchoices.keyStage to 2&gt;&gt;
 
 &lt;&lt;include &quot;_templateLandingPage&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="28" name="sorting-activity" tags="nobr" position="975,350" size="100,100">&lt;&lt;set _sortingActivity to {
-    title: &quot;Put the morning routine in order&quot;,
-    instructions: &quot;Drag the sentences to reorder them, or focus a sentence and use the arrow keys.&quot;,
-    titles: [&quot;Beginning&quot;, &quot;Middle&quot;, &quot;End&quot;],
-    sentences: [&quot;I ate breakfast.&quot;, &quot;The alarm rang.&quot;, &quot;I got out of bed.&quot;],
-    correctOrder: [&quot;The alarm rang.&quot;, &quot;I got out of bed.&quot;, &quot;I ate breakfast.&quot;]
+    title: &quot;In Chapter 11 - The Journey to Dream Country. The BFG and Sophie make their way to Dream Country.&quot;,
+    instructions: &quot;Drag the sentences to reorder them&quot;,
+    titles: [&quot;An Opening&quot;, &quot;A Mission&quot;, &quot;A Challenge&quot;, &quot;A Solution&quot;, &quot;An 
+    Ending&quot;],
+    sentences: [
+        &quot;The BFG starts running at top speed and Sophie has to duck back into his pocket. When he slows, they are in a cool, pale land with a thick mist. Dream Country.&quot;,
+        &quot;The BFG &amp; Sophie are in Giant Country having just tried Frobscottle.&quot;,
+        &quot;When they get bored, they make him run and toss rocks after him. But the BFG dodges them like a boss.&quot;,
+        &quot;The BFG decides to go catch some dreams from Dream Country. So he puts Sophie in his pocket and starts to make his way there.&quot;,
+        &quot;But has to get past the other giants, who are all waffling around, being bored and waiting for nightfall.&quot;
+    ],
+    correctOrder: [
+        &quot;The BFG &amp; Sophie are in Giant Country having just tried Frobscottle.&quot;,
+        &quot;The BFG decides to go catch some dreams from Dream Country. So he puts Sophie in his pocket and starts to make his way there.&quot;,
+        &quot;But has to get past the other giants, who are all waffling around, being bored and waiting for nightfall.&quot;,
+        &quot;When they get bored, they make him run and toss rocks after him. But the BFG dodges them like a boss.&quot;,
+        &quot;The BFG starts running at top speed and Sophie has to duck back into his pocket. When he slows, they are in a cool, pale land with a thick mist. Dream Country.&quot;
+    ]
 }&gt;&gt;
 &lt;&lt;sortingActivity _sortingActivity&gt;&gt;</tw-passagedata><tw-passagedata pid="29" name="entry-page" tags="nobr" position="1100,350" size="100,100">&lt;&lt;set $prevPassage to &quot;landing-ks&quot;+$userchoices.keyStage+&quot;-&quot;+$userchoices.language&gt;&gt;
 &lt;&lt;set $passage to &quot;entry-page&quot;&gt;&gt;
@@ -2626,17 +2645,11 @@ codeword11: {
 &lt;&lt;/if&gt;&gt;</tw-passagedata><tw-passagedata pid="114" name="tutorial1-empty-picture" tags="nobr" position="475,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/empty-picture.jpg&quot; alt=&quot;Empty picture&quot; &gt;</tw-passagedata><tw-passagedata pid="115" name="tutorial1-picture1-ks1" tags="nobr" position="600,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-1-ks1.png&quot; alt=&quot;Present&quot; &gt;</tw-passagedata><tw-passagedata pid="116" name="tutorial1-picture2-ks1" tags="nobr" position="725,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-2-ks1.png&quot; alt=&quot;Elephant&quot; &gt;</tw-passagedata><tw-passagedata pid="117" name="tutorial1-picture3-ks1" tags="nobr" position="850,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-3-ks1.png&quot; alt=&quot;Ride&quot; &gt;</tw-passagedata><tw-passagedata pid="118" name="tutorial1-picture1-ks2" tags="nobr" position="975,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-1.jpg&quot; alt=&quot;Lionel&quot; &gt;</tw-passagedata><tw-passagedata pid="119" name="tutorial1-picture2-ks2" tags="nobr" position="1100,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-2.jpg&quot; alt=&quot;Book&quot; &gt;</tw-passagedata><tw-passagedata pid="120" name="tutorial1-picture3-ks2" tags="nobr" position="1225,1475" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-3.jpg&quot; alt=&quot;Frog&quot; &gt;</tw-passagedata><tw-passagedata pid="121" name="tutorial1-picture4-ks2" tags="nobr" position="100,1600" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-4.jpg&quot; alt=&quot;Bea using Magic Book&quot; &gt;</tw-passagedata><tw-passagedata pid="122" name="tutorial1-picture5-ks2" tags="nobr" position="225,1600" size="100,100">&lt;img src=&quot;assets/img/stage3-tutorial1/picture-5.jpg&quot; alt=&quot;Library&quot; &gt;</tw-passagedata><tw-passagedata pid="123" name="stage3-tutorial1-a" tags="nobr" position="350,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-video&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-a&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-b&quot;&gt;&gt;
-&lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
-    &lt;&lt;include &quot;night-time-dreamJar-label-small&quot; &gt;&gt;
-    &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;div class=&quot;night-bg bg page-background&quot;&gt;
+    &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
 &lt;/div&gt;
 
 &lt;&lt;if $userchoices.language is &quot;eng&quot;&gt;&gt;
-    &lt;&lt;timed 0.1s&gt;&gt;
-   &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
-    &lt;h2&gt;Night-time Dreams&lt;/h2&gt;
-    &lt;&lt;/replace&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;
       &lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;include &quot;stage3-tutorial1-a-messages-eng&quot;&gt;&gt;
      &lt;&lt;/timed&gt;&gt;
@@ -2685,11 +2698,28 @@ codeword11: {
 &lt;&lt;timed 12s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;So, let’s take an Image from a Dream and make a story out of it. &lt;br/&gt;
-        The story of the Surprise Present. &lt;/span&gt;
+        &lt;span&gt;Stories are made up of parts. 
+We could break our story into 5 parts. &lt;br&gt;
+An Opening - where we discover the world of the story &lt;br&gt;
+A Mission - where something changes for our character or world &lt;br&gt;
+A Challenge - where our character faces an obstacle &lt;br&gt;
+A Solution - where our character tries to overcome the obstacle &lt;br&gt;
+An Ending - where we find out how it ends &lt;br&gt;
+
+Let’s look at part of the BFG’s own story to learn about how we create stories. 
+
+Work out together which order the story should go in.
+ &lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
+         &lt;&lt;include &quot;sorting-activity&quot;&gt;&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;run updateSortingActivityCorrectness(document.querySelector(&quot;#videoWrapper .sorting-activity-list&quot;))&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;    
 
 &lt;&lt;timed 15s&gt;&gt;
     &lt;&lt;replace &quot;#chatInputWrapper&quot;&gt;&gt;
