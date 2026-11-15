@@ -2499,46 +2499,48 @@ Lorem Ipsum Welsh
 
 
 :: dreamJar-drag [nobr]
-<div id="dream-jars">
-    <div class="dream-jar-item" data-jar="night">
-        <img class="dream-jar-image" src="assets/img/imgs/JARBG1.png" alt="Dream jar">
-        <div class="dream-jar-slot"></div>    
-        <div class="dreams nighttime-dreams dream-jar-static-label">
-            <div class="dreams__icon">
-                <img src="assets/img/icons/ICON1NIGHT_WHITE.png" alt="">
+<div id="dream-jar-draggable-activity">
+    <div id="dream-jars">
+        <div class="dream-jar-item" data-jar="night">
+            <img class="dream-jar-image" src="assets/img/imgs/JARBG1.png" alt="Dream jar">
+            <div class="dream-jar-slot"></div>    
+            <div class="dreams nighttime-dreams dream-jar-static-label">
+                <div class="dreams__icon">
+                    <img src="assets/img/icons/ICON1NIGHT_WHITE.png" alt="">
+                </div>
+                <h2>Night-time<br>Dreams</h2>
+                <p>Where magical stories happen</p>
             </div>
-            <h2>Night-time<br>Dreams</h2>
-            <p>Where magical stories happen</p>
         </div>
-    </div>
-    <div class="dream-jar-item" data-jar="day">
-        <img class="dream-jar-image" src="assets/img/imgs/JARBG2.png" alt="Dream jar">
-        <div class="dream-jar-slot"></div>
-        <div class="dreams day-dreams dream-jar-static-label">
-            <div class="dreams__icon">
-                <img src="assets/img/icons/ICON2DAY_NAVY.png" alt="">
-            </div>
-            <h2>Daydreams</h2>
+        <div class="dream-jar-item" data-jar="day">
+            <img class="dream-jar-image" src="assets/img/imgs/JARBG2.png" alt="Dream jar">
+            <div class="dream-jar-slot"></div>
+            <div class="dreams day-dreams dream-jar-static-label">
+                <div class="dreams__icon">
+                    <img src="assets/img/icons/ICON2DAY_NAVY.png" alt="">
+                </div>
+                <h2>Daydreams</h2>
 
-            <p>Where our imagination changes the world around us</p>
-        </div>
-    </div>
-    <div class="dream-jar-item" data-jar="future">
-        <img class="dream-jar-image" src="assets/img/imgs/JARBG3.png" alt="Dream jar">
-        <div class="dream-jar-slot"></div>
-        <div class="dreams future-dreams dream-jar-static-label">
-            <div class="dreams__icon">
-                <img src="assets/img/icons/ICON3FUTURE_WHITE.png" alt="">
+                <p>Where our imagination changes the world around us</p>
             </div>
-            <h2>Future Dreams</h2>
-            <p>Where we dream of what we want to achieve</p>
+        </div>
+        <div class="dream-jar-item" data-jar="future">
+            <img class="dream-jar-image" src="assets/img/imgs/JARBG3.png" alt="Dream jar">
+            <div class="dream-jar-slot"></div>
+            <div class="dreams future-dreams dream-jar-static-label">
+                <div class="dreams__icon">
+                    <img src="assets/img/icons/ICON3FUTURE_WHITE.png" alt="">
+                </div>
+                <h2>Future Dreams</h2>
+                <p>Where we dream of what we want to achieve</p>
+            </div>
         </div>
     </div>
-</div>
-<div id="dream-jar-draggable-labels-container">
-    <div id="dream-label-draggable-one" class="dream-jar-label " data-jar="day">Dreaming your classroom is made of jelly.</div>
-    <div id="dream-label-draggable-two" class="dream-jar-label" data-jar="night">Dreaming you are flying like a bird.</div>
-    <div id="dream-label-draggable-three" class="dream-jar-label " data-jar="future">Dreaming of doing a cartwheel.</div>
+    <div id="dream-jar-draggable-labels-container">
+        <div id="dream-label-draggable-one" class="dream-jar-label " data-jar="day">Dreaming your classroom is made of jelly.</div>
+        <div id="dream-label-draggable-two" class="dream-jar-label" data-jar="night">Dreaming you are flying like a bird.</div>
+        <div id="dream-label-draggable-three" class="dream-jar-label " data-jar="future">Dreaming of doing a cartwheel.</div>
+    </div>
 </div>
 <<done>><<run setup.dreamJarDrag()>><</done>>
 

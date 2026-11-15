@@ -1371,7 +1371,7 @@ input[type='text']::placeholder {
   position: absolute;
   left: 15%;
   right: 15%;
-  top: 25%;
+  top: 50%;
   display: flex;
   justify-content: center;
 }
@@ -1404,12 +1404,12 @@ input[type='text']::placeholder {
 }
 
 #dream-jars .dream-jar-static-label h2 {
-  font-size: clamp(0.9rem, 2vw, 1.6rem);
+  font-size: clamp(1.1rem, 2.5vw, 2rem);
   margin-bottom: 0.25rem;
 }
 
 #dream-jars .dream-jar-static-label p {
-  font-size: clamp(0.65rem, 1.2vw, 1rem);
+  font-size: clamp(0.75rem, 1.5vw, 1.2rem);
   line-height: 1.15;
 }
 
@@ -1424,6 +1424,11 @@ input[type='text']::placeholder {
   font-family: var(--font-headings);
   font-weight: bold;
   font-size: clamp(1.9rem, calc(1.4rem + 0.7vw), 2.8rem);
+}
+
+.dream-jar-draggable-activity{
+  max-height: 70vh;
+  overflow-y: auto;
 }
 
 .label-blue {
@@ -1606,9 +1611,8 @@ input[type='text']::placeholder {
   user-select: none;
   -webkit-user-select: none;
   touch-action: none;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
   transition: box-shadow 0.15s ease;
-  background-color: var(--palette-muted);
+  background-color: var(--palette-light-grey);
 }
 
 .label-one {
