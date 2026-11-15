@@ -3979,7 +3979,7 @@ Lorem Ipsum Welsh
 <</if>>
 
 /* TODO loads strangely */
-<div class="day-bg bg page-wrapper mapping-activity">
+<div class="day-bg bg page-background">
     <<include "_templateVideoChat">>
 </div>
 
@@ -4125,7 +4125,7 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial2-c">>
 <<set $passage to "stage3-tutorial2-d">>
 <<set $nextPassage to "stage3-tutorial2-e">>
-<div class="day-bg bg page-wrapper">
+<div class="day-bg bg page-background">
     <<include "_templateVideoChat">>
 </div>
 /*TODO also loading strangely */

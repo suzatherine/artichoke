@@ -343,6 +343,14 @@ header:has(> #pageName) {
   justify-content: center;
 }
 
+.page-background {
+  flex: 1 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
 /* TYPOGRAPHY  */
 
 h1,
