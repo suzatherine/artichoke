@@ -4125,7 +4125,7 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial2-c">>
 <<set $passage to "stage3-tutorial2-d">>
 <<set $nextPassage to "stage3-tutorial2-e">>
-<div class="day-bg bg page-background">
+<div class="doodle-bg bg page-background">
     <<include "_templateVideoChat">>
 </div>
 /*TODO also loading strangely */
@@ -4172,7 +4172,8 @@ Lorem Ipsum Welsh
         <<replace "#chatHistory">><</replace>>
         <<replace "#chatInputWrapper">><</replace>>
         <<replace "#videoWrapper">>
-            <<include "scribble">>
+             <h1>What could be added or changed in this place to make everyone in it happier?</h1>
+             <img src="assets/img/imgs/DOODLE.gif" alt="doodle">
             <<run setup.startScribbleTimer()>>
         <</replace>>
 
@@ -4186,7 +4187,8 @@ Lorem Ipsum Welsh
        <<timed 2s>>
             <<button "DOODLE">>
                 <<replace "#videoWrapper">>
-                <<include "scribble">>
+                 <h1>What could be added or changed in this place to make everyone in it happier?</h1>
+                 <img src="assets/img/imgs/DOODLE.gif" alt="doodle">
                    <<run setup.startScribbleTimer()>>
                    <</replace>>
                    <<timed 300s>>
@@ -4208,14 +4210,14 @@ Lorem Ipsum Welsh
 Lorem Ipsum Welsh
 
 :: day-dreamers-guide-img [nobr]
-<img src="assets/img/placeholder.jpeg" alt="Day Dreamers Guide">
+<img src="assets/img/dream-guide.png" alt="Day Dreamers Guide">
 
 :: stage3-tutorial2-e [nobr]
 <<set $prevPassage to "stage3-tutorial2-d">>
 <<set $passage to "stage3-tutorial2-e">>
 <<set $nextPassage to "stage3-tutorial2-f">>
+<div class="day-bg bg page-background">
 <<include "_templateVideoChat">>
-<<addclass "body" "pink-bubble-bg">>
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Day Dreams</h2>
@@ -4370,8 +4372,9 @@ Lorem Ipsum Welsh KS2
 <<set $prevPassage to "stage3-tutorial2-e">>
 <<set $passage to "stage3-tutorial2-f">>
 <<set $nextPassage to "stage3-tutorials-menu">>
+<div class="day-bg bg page-wrapper">
 <<include "_templateFullScreenChat">>
-<<addclass "body" "pink-bubble-bg">>
+</div>
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Day Dreams</h2>
@@ -4516,96 +4519,6 @@ Lorem Ipsum Welsh KS2
        <</append>>
     <<run setup.startBubbles(60)>>
 <</timed>>
-:: scribble [nobr]
-<div class="neon-scene">
-
-    <div class="scribble-timer" id="scribbleTimer" role="timer" aria-label="5 minutes remaining" aria-live="off">05:00</div>
-
-    <!-- Background video -->
-   <div class="neon-background-image"></div>
-    <!-- Optional dark overlay for contrast -->
-    <div class="neon-shade"></div>
-
-    <!-- Animated neon scribbles -->
-    <svg class="neon-overlay"
-         viewBox="0 0 1000 650"
-         preserveAspectRatio="xMidYMid slice"
-         xmlns="http://www.w3.org/2000/svg"
-         aria-hidden="true">
-
-        <defs>
-            <filter id="neon-glow" x="-60%" y="-60%"
-                    width="220%" height="220%">
-                <feGaussianBlur stdDeviation="4"
-                                result="blur"/>
-                <feMerge>
-                    <feMergeNode in="blur"/>
-                    <feMergeNode in="blur"/>
-                    <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-            </filter>
-        </defs>
-
-        <g class="neon-drift">
-
-            <!-- Cyan scribble -->
-            <path class="neon-line neon-cyan"
-                  pathLength="1"
-                  d="M 80,330
-                     C 150,160 270,190 210,310
-                     S 100,470 245,430
-                     S 350,210 410,300
-                     S 300,490 190,390
-                     S 300,160 430,250
-                     S 490,430 370,400"/>
-
-            <!-- Pink scribble -->
-            <path class="neon-line neon-pink"
-                  pathLength="1"
-                  d="M 510,130
-                     C 650,40 750,210 640,260
-                     S 480,160 590,100
-                     S 820,120 750,260
-                     S 550,340 600,210
-                     S 840,80 880,220"/>
-
-            <!-- Purple scribble -->
-            <path class="neon-line neon-purple"
-                  pathLength="1"
-                  d="M 520,500
-                     C 430,390 620,350 690,450
-                     S 830,590 740,500
-                     S 570,380 550,510
-                     S 760,610 870,460
-                     S 690,390 640,500"/>
-
-            <!-- Yellow energetic strokes -->
-            <path class="neon-line neon-yellow"
-                  pathLength="1"
-                  d="M 100,100
-                     Q 190,30 260,100
-                     T 350,100
-                     M 800,350
-                     Q 900,300 920,380
-                     T 840,420"/>
-
-            <!-- Green scribble -->
-            <path class="neon-line neon-green"
-                  pathLength="1"
-                  d="M 330,550
-                     Q 260,450 350,430
-                     T 430,520
-                     Q 380,590 310,520
-                     T 420,450"/>
-
-        </g>
-    </svg>
-
-    <div class="neon-caption">
-        <span>What could be added or changed in this place to make everyone in it happier?</span>
-    </div>
-
-</div>
 
 :: stage3-tutorial3-video [nobr]
 <<set $prevPassage to "stage3-tutorials-menu">>

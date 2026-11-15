@@ -101,6 +101,7 @@
 
 .doodle-bg {
   background-image: url('../assets/img/bgs/05 DOODLE.jpg');
+  color: var(--palette-navy)
 }
 
 .end-bg {
