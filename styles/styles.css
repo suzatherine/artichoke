@@ -149,14 +149,14 @@ button:active {
 }
 
 
-.chat-wrapper button,
-.chat-wrapper button:hover,
-.chat-wrapper button:focus,
-.chat-wrapper button:active,
-main.tutorials-menu button,
-main.tutorials-menu button:hover,
-main.tutorials-menu button:focus,
-main.tutorials-menu button:active {
+.chat-wrapper button:not(.voicenote-toggle),
+.chat-wrapper button:not(.voicenote-toggle):hover,
+.chat-wrapper button:not(.voicenote-toggle):focus,
+.chat-wrapper button:not(.voicenote-toggle):active,
+main.tutorials-menu button:not(.voicenote-toggle),
+main.tutorials-menu button:not(.voicenote-toggle):hover,
+main.tutorials-menu button:not(.voicenote-toggle):focus,
+main.tutorials-menu button:not(.voicenote-toggle):active {
   background-color: var(--palette-navy);
   color: white;
   font-family: var(--font-body);
