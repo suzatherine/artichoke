@@ -2748,61 +2748,38 @@ Lorem Ipsum Welsh
 <div class="bubble-grid" role="list">
     <div class="bubble-btn one" role="listitem">
         <div class="bubble-link" id="bubble-link-1" >
-    <<link [img[assets/img/bubble-blue.png]]>>
+     <<link [img[assets/img/transparent-180x220.svg]]>>
         <<set $nextPassage to "stage3-tutorial1-video">>
         <<goto "loading-tutorial">>
-
         <</link>>
-     <span>Night-time Dreams</span>
+     <<include "night-time-dreamJar-label">>
         </div>
-<<timed 0.1s>>
-    <<if $userchoices.tutorialProgress.includes(1)>>
-      /* REMOVED COMPLETE */
-    
-           <</if>>
-        <</timed>>
     </div>
-
 
     <div class="bubble-btn " role="listitem">
     <div class="bubble-link" id="bubble-link-2" >
-    <<link [img[assets/img/bubble-pink.png]]>>
+    <<link [img[assets/img/transparent-180x220.svg]]>>
         <<set $nextPassage to "stage3-tutorial2-video">>
         <<goto "loading-tutorial">>
         <</link>>
-         <span>Day Dreams</span>
+        <<include "day-dreamJar-label">>
         </div>
-        <<timed 0.1s>>
-        <<if $userchoices.tutorialProgress.includes(2)>>
-                <</if>>
-           <</timed>>
     </div>
 
     <div class="bubble-btn " role="listitem">
-    
         <div class="bubble-link" id="bubble-link-3" >
-        <<link [img[assets/img/bubble-green.png]]>>
+        <<link [img[assets/img/transparent-180x220.svg]]>>
         <<set $nextPassage to "stage3-tutorial3-video">>
         <<goto "loading-tutorial">>
-       
         <</link>>
-         <span>Future Dreams</span>
+        <<include "future-dreamJar-label">>
         </div>
-            <<timed 0.1s>>
-        <<if $userchoices.tutorialProgress.includes(3)>>
-                <</if>>
-            <</timed>>
     </div>
 </div>
 <div class="tutorial-complete">
-    <h3>READY TO SEND DREAMS TO THE BFG? </h3>
- <div class="tutorial-complete-btns">
-     <<link [img[assets/img/bubble-multi.png]]>>
-         <<goto "stage3-submission-call-bea">>
-    <</link>>
-     <span>SEND</span>
-      
- </div>
+ <<button "Send dreams to The BFG">>
+    <<goto "stage3-submission-call-bea">>
+<</button>>
 </div>
 
 <div class="tutorial-options">

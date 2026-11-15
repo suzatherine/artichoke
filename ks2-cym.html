@@ -2449,61 +2449,38 @@ codeword11: {
 &lt;div class=&quot;bubble-grid&quot; role=&quot;list&quot;&gt;
     &lt;div class=&quot;bubble-btn one&quot; role=&quot;listitem&quot;&gt;
         &lt;div class=&quot;bubble-link&quot; id=&quot;bubble-link-1&quot; &gt;
-    &lt;&lt;link [img[assets/img/bubble-blue.png]]&gt;&gt;
+     &lt;&lt;link [img[assets/img/transparent-180x220.svg]]&gt;&gt;
         &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-video&quot;&gt;&gt;
         &lt;&lt;goto &quot;loading-tutorial&quot;&gt;&gt;
-
         &lt;&lt;/link&gt;&gt;
-     &lt;span&gt;Night-time Dreams&lt;/span&gt;
+     &lt;&lt;include &quot;night-time-dreamJar-label&quot;&gt;&gt;
         &lt;/div&gt;
-&lt;&lt;timed 0.1s&gt;&gt;
-    &lt;&lt;if $userchoices.tutorialProgress.includes(1)&gt;&gt;
-      /* REMOVED COMPLETE */
-    
-           &lt;&lt;/if&gt;&gt;
-        &lt;&lt;/timed&gt;&gt;
     &lt;/div&gt;
-
 
     &lt;div class=&quot;bubble-btn &quot; role=&quot;listitem&quot;&gt;
     &lt;div class=&quot;bubble-link&quot; id=&quot;bubble-link-2&quot; &gt;
-    &lt;&lt;link [img[assets/img/bubble-pink.png]]&gt;&gt;
+    &lt;&lt;link [img[assets/img/transparent-180x220.svg]]&gt;&gt;
         &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-video&quot;&gt;&gt;
         &lt;&lt;goto &quot;loading-tutorial&quot;&gt;&gt;
         &lt;&lt;/link&gt;&gt;
-         &lt;span&gt;Day Dreams&lt;/span&gt;
+        &lt;&lt;include &quot;day-dreamJar-label&quot;&gt;&gt;
         &lt;/div&gt;
-        &lt;&lt;timed 0.1s&gt;&gt;
-        &lt;&lt;if $userchoices.tutorialProgress.includes(2)&gt;&gt;
-                &lt;&lt;/if&gt;&gt;
-           &lt;&lt;/timed&gt;&gt;
     &lt;/div&gt;
 
     &lt;div class=&quot;bubble-btn &quot; role=&quot;listitem&quot;&gt;
-    
         &lt;div class=&quot;bubble-link&quot; id=&quot;bubble-link-3&quot; &gt;
-        &lt;&lt;link [img[assets/img/bubble-green.png]]&gt;&gt;
+        &lt;&lt;link [img[assets/img/transparent-180x220.svg]]&gt;&gt;
         &lt;&lt;set $nextPassage to &quot;stage3-tutorial3-video&quot;&gt;&gt;
         &lt;&lt;goto &quot;loading-tutorial&quot;&gt;&gt;
-       
         &lt;&lt;/link&gt;&gt;
-         &lt;span&gt;Future Dreams&lt;/span&gt;
+        &lt;&lt;include &quot;future-dreamJar-label&quot;&gt;&gt;
         &lt;/div&gt;
-            &lt;&lt;timed 0.1s&gt;&gt;
-        &lt;&lt;if $userchoices.tutorialProgress.includes(3)&gt;&gt;
-                &lt;&lt;/if&gt;&gt;
-            &lt;&lt;/timed&gt;&gt;
     &lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;tutorial-complete&quot;&gt;
-    &lt;h3&gt;READY TO SEND DREAMS TO THE BFG? &lt;/h3&gt;
- &lt;div class=&quot;tutorial-complete-btns&quot;&gt;
-     &lt;&lt;link [img[assets/img/bubble-multi.png]]&gt;&gt;
-         &lt;&lt;goto &quot;stage3-submission-call-bea&quot;&gt;&gt;
-    &lt;&lt;/link&gt;&gt;
-     &lt;span&gt;SEND&lt;/span&gt;
-      
- &lt;/div&gt;
+ &lt;&lt;button &quot;Send dreams to The BFG&quot;&gt;&gt;
+    &lt;&lt;goto &quot;stage3-submission-call-bea&quot;&gt;&gt;
+&lt;&lt;/button&gt;&gt;
 &lt;/div&gt;
 
 &lt;div class=&quot;tutorial-options&quot;&gt;
