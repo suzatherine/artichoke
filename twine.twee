@@ -2519,6 +2519,7 @@ Lorem Ipsum Welsh
   </h2>
 
 :: dreamJar-example [nobr]
+<div class="dreamjar-example">
 
 <<timed 1s>>
 <<include "night-time-dreamJar-label">>
@@ -2535,6 +2536,8 @@ Lorem Ipsum Welsh
 <<include "future-dreamJar-label">>
 
 <</timed>>
+
+</div>
 
 
 :: dreamJar-drag [nobr]
