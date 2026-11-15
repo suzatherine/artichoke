@@ -148,15 +148,26 @@ button:active {
   color: var(black);
 }
 
+
 .chat-wrapper button,
 .chat-wrapper button:hover,
 .chat-wrapper button:focus,
-.chat-wrapper button:active {
+.chat-wrapper button:active,
+main.tutorials-menu button,
+main.tutorials-menu button:hover,
+main.tutorials-menu button:focus,
+main.tutorials-menu button:active {
   background-color: var(--palette-navy);
   color: white;
   font-family: var(--font-body);
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+main.tutorials-menu button:hover,
+main.tutorials-menu button:focus,
+main.tutorials-menu button:active {
+  background-color: var(--palette-yellow);
 }
 
 .landing-btn-wrapper > button {
@@ -167,6 +178,10 @@ button:active {
   padding-left: 2rem;
   padding-right: 2rem;
   color: #233916;
+}
+
+.landing-btn-wrapper > button:hover {
+  background-color: var(--palette-ocre);
 }
 
 .landing-btn-wrapper > button::after {
@@ -304,7 +319,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background: var(--palette-slate);
+  background: rbga(0,0,0,0);
 }
 
 footer > .footer-back-button > a > img,
@@ -1720,7 +1735,7 @@ input[type='text']::placeholder {
 main.tutorials-menu {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
-  grid-template-rows: auto auto auto 1fr;
+  grid-template-rows: auto auto auto;
   gap: 1rem;
   height: 90vh;
   align-items: center;
@@ -1737,7 +1752,6 @@ main.tutorials-menu > h2 {
 }
 
 main.tutorials-menu > .bubble-grid {
-  margin-top: 5rem;
   grid-column: 2;
   grid-row: 2;
   width: 100%;
@@ -1832,8 +1846,8 @@ main.tutorials-menu .tutorial-complete button {
 
 main.tutorials-menu > .tutorial-options {
   grid-column: 1;
-  grid-row: 4;
-  align-self: center;
+  grid-row: 3;
+  align-self: start;
   justify-self: start;
   flex-direction: column;
   text-align: center;
@@ -1841,6 +1855,7 @@ main.tutorials-menu > .tutorial-options {
   gap: 2rem;
   justify-content: center;
   align-items: center;
+  padding-top: 2em;
 }
 main.tutorials-menu > .tutorial-options > p {
   font-size: 1.6rem;
@@ -1872,7 +1887,7 @@ main.tutorials-menu .stamp-2-container {
 }
 main.tutorials-menu .stamp-3-container {
   grid-column: 3;
-  grid-row: 4;
+  grid-row: 3;
 }
 
 /* TUTORIALS COLOR STYLES */

@@ -974,34 +974,9 @@ codeword11: {
 
 <<button "Restart">>
 <<set $f to Engine.restart()>>
-    <</button>>
+<</button>>
     
       [img[assets/img/home-icon.png][$userchoices.landingPage]]
-<<if $nextPassage is not "">>
-<div class="footer-next-button" id="footer-next">
-      [img[assets/img/for-sharp-b.png][$nextPassage]]
-</div> 
-<<else>>
-    <div>
-</div> 
-<</if>>
-
-</footer>
-
-:: footer-tutorial [nobr]
-<footer>
-<div class="footer-back-button">
-[img[assets/img/back-sharp-b.png][$prevPassage]]
-    </div>
-
-    
-      [img[assets/img/home-icon.png][$userchoices.landingPage]]
-
-        <<link "Reset tutorials">>
-            <<set $userchoices.tutorialProgress to []>>
-            <<run setup.clearTutorialProgress()>>
-            <<goto "stage3-tutorials-menu">>
-        <</link>>
 <<if $nextPassage is not "">>
 <div class="footer-next-button" id="footer-next">
       [img[assets/img/for-sharp-b.png][$nextPassage]]
@@ -1150,7 +1125,6 @@ codeword11: {
 
 :: _templateFullScreenVideo [nobr]
 
-<<include "header-logo">>
 <div id="audio"></div>
 <main class="full-screen-video">
 
@@ -2447,6 +2421,16 @@ Lorem Ipsum Welsh
   </p>
 </div>
 
+:: night-time-dreamJar-label-small [nobr]
+ <br>
+ <div class="dreams__icon">
+    <img src="assets/img/icons/ICON1NIGHT_WHITE.png" alt="nighttime icon" />
+  </div>
+  <h2>
+    Night-time<br />
+    Dreams
+  </h2>
+
 :: day-dreamJar-label [nobr]
 <div class="dreams day-dreams">
   <div class="dreams__icon">
@@ -2462,6 +2446,14 @@ Lorem Ipsum Welsh
   </p>
 </div>
 
+:: day-dreamJar-label-small [nobr]
+  <div class="dreams__icon">
+    <img src="assets/img/icons/ICON2DAY_NAVY.png" alt="nighttime icon" />
+  </div>
+  <h2>
+    Daydreams
+  </h2>
+
 :: future-dreamJar-label [nobr]
 <div class="dreams future-dreams">
   <div class="dreams__icon">
@@ -2475,6 +2467,14 @@ Lorem Ipsum Welsh
   </p>
 </div>
 
+:: future-dreamJar-label-small [nobr]
+
+  <div class="dreams__icon">
+    <img src="assets/img/icons/ICON3FUTURE_WHITE.png" alt="nighttime icon" />
+  </div>
+  <h2>
+    Future Dreams
+  </h2>
 
 :: dreamJar-example [nobr]
 
@@ -2770,7 +2770,7 @@ Lorem Ipsum Welsh
     </div>
 </div>
 <div class="tutorial-complete">
- <<button "Send dreams to The BFG">>
+ <<button "Send dreams to The BFG →">>
     <<goto "stage3-submission-call-bea">>
 <</button>>
 </div>
@@ -2783,7 +2783,7 @@ Lorem Ipsum Welsh
 </div>
 
 </main>
-<<include "footer-tutorial">>
+<<include "footer">>
 
 :: loading-tutorial [nobr]
 
@@ -2825,7 +2825,9 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorials-menu">>
 <<set $passage to "stage3-tutorial1-video">>
 <<set $nextPassage to "stage3-tutorial1-a">>
+
 <div class="night-bg bg page-wrapper">
+    <<include "night-time-dreamJar-label-small">>
     <<include "_templateFullScreenVideo">>
 </div>
 <<include "choose-video-language">>
@@ -2937,6 +2939,7 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial1-a">>
 <<set $nextPassage to "stage3-tutorial1-b">>
 <div class="night-bg bg page-wrapper">
+    <<include "night-time-dreamJar-label-small" >>
     <<include "_templateFullScreenChat">>
 </div>
 
@@ -3732,6 +3735,7 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial2-video">>
 <<set $nextPassage to "stage3-tutorial2-a">>
 <div class="day-bg bg page-wrapper">
+    <<include "day-dreamJar-label-small">>
     <<include "_templateFullScreenVideo">>
 </div>
 <<addclass "body" "pink-bubble-bg">>
@@ -4534,6 +4538,7 @@ Lorem Ipsum Welsh KS2
 <<set $passage to "stage3-tutorial3-video">>
 <<set $nextPassage to "stage3-tutorial3-a">>
 <div class="future-bg bg page-wrapper">
+    <<include "future-dreamJar-label-small">>
     <<include "_templateFullScreenVideo">>
 </div>
 <<include "choose-video-language">>
