@@ -4385,6 +4385,109 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="254" name="stage3-tutorial3-d-messages-cym-ks1" tags="nobr" position="475,3225" size="100,100">Lorem Ipsum Welsh KS1</tw-passagedata><tw-passagedata pid="255" name="stage3-tutorial3-d-messages-cym-ks2" tags="nobr" position="600,3225" size="100,100">Lorem Ipsum Welsh KS2</tw-passagedata><tw-passagedata pid="256" name="stage3-tutorial3-e" tags="nobr" position="725,3225" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial3-d&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial3-e&quot;&gt;&gt;
+&lt;&lt;set $nextPassage to &quot;stage3-tutorial3-f&quot;&gt;&gt;
+
+&lt;div class=&quot;future-bg bg page-background&quot;&gt;
+    &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
+&lt;/div&gt;
+&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
+        &lt;h2&gt;Future Dreams&lt;/h2&gt;
+    &lt;&lt;/replace&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+&lt;&lt;include &quot;choose-messages-language-ks-specific&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="257" name="stage3-tutorial3-e-messages-eng-ks1" tags="nobr" position="850,3225" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+        &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt;You’ve thought about your Future Dream and the steps that could help you reach it.&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 4s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+        &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt;Here’s an example of how one small step could bring a dream closer.&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 6s&gt;&gt;
+    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+        &lt;div class=&quot;accented-quote&quot;&gt;
+            &lt;span&gt;My Future Dream is to be a librarian.&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/replace&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 9s&gt;&gt;
+    &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
+        &lt;div class=&quot;accented-quote&quot;&gt;
+            &lt;span&gt;One step I could take is to read a new book this week.&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 12s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+        &lt;div class=&quot;btn-option-wrapper&quot;&gt;
+            &lt;&lt;button &quot;Next&quot;&gt;&gt;
+                &lt;&lt;goto $nextPassage&gt;&gt;
+            &lt;&lt;/button&gt;&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="258" name="stage3-tutorial3-e-messages-eng-ks2" tags="nobr" position="975,3225" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+        &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt;Excellent work, these feet show your Future Dreams.
+            It might seem like a leap, but there are steps to get there.
+            Some steps will feel tricky. That’s okay, challenges are there to be overcome.
+            &lt;br&gt;
+            You aren’t on your own. 
+            &lt;br&gt;
+            And everyone goes further with a boost.
+            Swap with someone and encourage them to carry on their journey to their Future Dreams- I call it a Pep Talk! 
+            &lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 6s&gt;&gt;
+    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+        &lt;div class=&quot;accented-quote&quot;&gt;
+            &lt;span&gt;
+You can reach your Future Dream because…
+
+&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/replace&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 9s&gt;&gt;
+    &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
+        &lt;div class=&quot;accented-quote&quot;&gt;
+            &lt;span&gt;When it gets hard, remember…&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 12s&gt;&gt;
+    &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
+        &lt;div class=&quot;accented-quote&quot;&gt;
+            &lt;span&gt;I believe in you because…&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 15s&gt;&gt;
+    &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
+        &lt;div class=&quot;btn-option-wrapper&quot;&gt;
+            &lt;&lt;button &quot;Next&quot;&gt;&gt;
+                &lt;&lt;goto $nextPassage&gt;&gt;
+            &lt;&lt;/button&gt;&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="259" name="stage3-tutorial3-e-messages-cym-ks1" tags="nobr" position="1100,3225" size="100,100">Lorem Ipsum Welsh KS1</tw-passagedata><tw-passagedata pid="260" name="stage3-tutorial3-e-messages-cym-ks2" tags="nobr" position="1225,3225" size="100,100">Lorem Ipsum Welsh KS2</tw-passagedata><tw-passagedata pid="261" name="stage3-tutorial3-f" tags="nobr" position="100,3350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial3-e&quot;&gt;&gt;
+&lt;&lt;set $passage to &quot;stage3-tutorial3-f&quot;&gt;&gt;
 
 &lt;&lt;set $nextPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 
@@ -4398,10 +4501,10 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
 &lt;&lt;/timed&gt;&gt;
 &lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;
 
-&lt;&lt;run setup.completeTutorial(3)&gt;&gt;</tw-passagedata><tw-passagedata pid="257" name="stage3-tutorial3-e-messages-eng" tags="nobr" position="850,3225" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+&lt;&lt;run setup.completeTutorial(3)&gt;&gt;</tw-passagedata><tw-passagedata pid="262" name="stage3-tutorial3-f-messages-eng" tags="nobr" position="225,3350" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial3-e-vn-transcript-eng&quot;
-         &quot;stage3-tutorial3-e-vn-triggered-content-eng&quot;&gt;&gt;
+         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial3-f-vn-transcript-eng&quot;
+         &quot;stage3-tutorial3-f-vn-triggered-content-eng&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
@@ -4414,7 +4517,7 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
         &lt;&lt;/button&gt;&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="258" name="stage3-tutorial3-e-vn-transcript-eng" tags="nobr" position="975,3225" size="100,100">&lt;p&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="263" name="stage3-tutorial3-f-vn-transcript-eng" tags="nobr" position="350,3350" size="100,100">&lt;p&gt;
     You have leapt for your Future Dreams. &lt;br/&gt;
     Or at least planned how to take that first step. &lt;br/&gt;
     It’s hard to say what you want to do so well done for finding something today. &lt;br/&gt;
@@ -4427,7 +4530,7 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
     If you want to come back to complete that is A OK. &lt;br/&gt;
 &lt;/p&gt;
 
-&lt;p&gt;Speak soon. &lt;/p&gt;</tw-passagedata><tw-passagedata pid="259" name="stage3-tutorial3-e-vn-triggered-content-eng" tags="nobr" position="1100,3225" size="100,100">/* RUN BUBBLES  */
+&lt;p&gt;Speak soon. &lt;/p&gt;</tw-passagedata><tw-passagedata pid="264" name="stage3-tutorial3-f-vn-triggered-content-eng" tags="nobr" position="475,3350" size="100,100">/* RUN BUBBLES  */
   &lt;&lt;timed 7s&gt;&gt;
     &lt;&lt;append &quot;#fullScreenChatMain&quot;&gt;&gt;
         &lt;div class=&quot;bubbles-wrapper&quot;&gt;
@@ -4435,7 +4538,7 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
             &lt;/div&gt;
        &lt;&lt;/append&gt;&gt;
     &lt;&lt;run setup.startBubbles(60)&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="260" name="stage3-tutorial3-e-messages-cym" tags="nobr" position="1225,3225" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="261" name="stage3-tutorial3-e-vn-transcript-cym" tags="nobr" position="100,3350" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="262" name="stage3-tutorial3-e-vn-triggered-content-cym" tags="" position="225,3350" size="100,100">/* RUN BUBBLES  */
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="265" name="stage3-tutorial3-f-messages-cym" tags="nobr" position="600,3350" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="266" name="stage3-tutorial3-f-vn-transcript-cym" tags="nobr" position="725,3350" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="267" name="stage3-tutorial3-f-vn-triggered-content-cym" tags="" position="850,3350" size="100,100">/* RUN BUBBLES  */
   &lt;&lt;timed 7s&gt;&gt;
     &lt;&lt;append &quot;#fullScreenChatMain&quot;&gt;&gt;
         &lt;div class=&quot;bubbles-wrapper&quot;&gt;
@@ -4443,23 +4546,23 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
             &lt;/div&gt;
        &lt;&lt;/append&gt;&gt;
     &lt;&lt;run setup.startBubbles(60)&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="263" name="stage3-submission-call-bea" tags="nobr" position="350,3350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="268" name="stage3-submission-call-bea" tags="nobr" position="975,3350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submission-call-bea&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-submission-video&quot;&gt;&gt;
 
 &lt;&lt;include &quot;_templateContentCenter&quot;&gt;&gt;
 &lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="264" name="stage3-submission-call-bea-messages-eng" tags="nobr" position="475,3350" size="100,100">&lt;&lt;replace &quot;#heroImage&quot;&gt;&gt;
+&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="269" name="stage3-submission-call-bea-messages-eng" tags="nobr" position="1100,3350" size="100,100">&lt;&lt;replace &quot;#heroImage&quot;&gt;&gt;
      &lt;img src=&quot;assets/img/icons/BEA_ICON.png&quot; alt=&quot;avatar&quot;/&gt;
 &lt;&lt;button &quot;Call Bea&quot;&gt;&gt;
     &lt;&lt;goto &quot;calling&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;&lt;/replace&gt;&gt;</tw-passagedata><tw-passagedata pid="265" name="stage3-submission-call-bea-messages-cym" tags="nobr" position="600,3350" size="100,100">&lt;&lt;replace &quot;#heroImage&quot;&gt;&gt;
+&lt;&lt;/replace&gt;&gt;</tw-passagedata><tw-passagedata pid="270" name="stage3-submission-call-bea-messages-cym" tags="nobr" position="1225,3350" size="100,100">&lt;&lt;replace &quot;#heroImage&quot;&gt;&gt;
 &lt;&lt;button &quot;Call Bea Welsh&quot;&gt;&gt;
     &lt;&lt;goto &quot;calling&quot;&gt;&gt;
 &lt;&lt;/button&gt;&gt;
-&lt;&lt;/replace&gt;&gt;</tw-passagedata><tw-passagedata pid="266" name="stage3-submission-video" tags="nobr" position="725,3350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-call-bea&quot;&gt;&gt;
+&lt;&lt;/replace&gt;&gt;</tw-passagedata><tw-passagedata pid="271" name="stage3-submission-video" tags="nobr" position="100,3475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-call-bea&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submission-video&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-submission-a&quot;&gt;&gt;
 
@@ -4468,17 +4571,17 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
 &lt;/div&gt;
 &lt;&lt;include &quot;choose-video-language&quot;&gt;&gt;
 
-&lt;&lt;addclass &quot;body&quot; &quot;submission-gradient&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="267" name="stage3-submission-video-video-eng" tags="nobr" position="850,3350" size="100,100">/* Video 7 -  SUBMISSION */
+&lt;&lt;addclass &quot;body&quot; &quot;submission-gradient&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="272" name="stage3-submission-video-video-eng" tags="nobr" position="225,3475" size="100,100">/* Video 7 -  SUBMISSION */
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="268" name="stage3-submission-video-video-cym" tags="nobr" position="975,3350" size="100,100">/* Video 7 -  SUBMISSION */
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="273" name="stage3-submission-video-video-cym" tags="nobr" position="350,3475" size="100,100">/* Video 7 -  SUBMISSION */
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
-      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="269" name="stage3-submission-a" tags="nobr" position="1100,3350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-video&quot;&gt;&gt;
+      src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="274" name="stage3-submission-a" tags="nobr" position="475,3475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-video&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submission-a&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-submission-b&quot;&gt;&gt;
 &lt;div class=&quot;end-bg bg page-background&quot;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="270" name="stage3-submission-a-messages-eng" tags="nobr" position="1225,3350" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="275" name="stage3-submission-a-messages-eng" tags="nobr" position="600,3475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
             &lt;span&gt;It&#39;s time to decide what dream you want to send the BFG!&lt;br&gt;
@@ -4514,13 +4617,13 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
       /* $codewordsStage3.codeword10 */
       &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="271" name="stage3-submission-a-messages-cym" tags="nobr" position="100,3475" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="272" name="stage3-submission-b" tags="nobr" position="225,3475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-a&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="276" name="stage3-submission-a-messages-cym" tags="nobr" position="725,3475" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="277" name="stage3-submission-b" tags="nobr" position="850,3475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-a&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submission-b&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-submission-c&quot;&gt;&gt;
 &lt;div class=&quot;end-bg bg page-background&quot;&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="273" name="stage3-submission-b-messages-eng" tags="nobr" position="350,3475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="278" name="stage3-submission-b-messages-eng" tags="nobr" position="975,3475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Time to put your book together. &lt;/span&gt;
@@ -4566,13 +4669,13 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
         /* $codewordsStage3.codeword11 */
       &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="274" name="stage3-submission-b-messages-cym" tags="nobr" position="475,3475" size="100,100">Lorem Ipsum welsh</tw-passagedata><tw-passagedata pid="275" name="stage3-submission-c" tags="nobr" position="600,3475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-b&quot;&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="279" name="stage3-submission-b-messages-cym" tags="nobr" position="1100,3475" size="100,100">Lorem Ipsum welsh</tw-passagedata><tw-passagedata pid="280" name="stage3-submission-c" tags="nobr" position="1225,3475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-submission-b&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-submission-c&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to $userchoices.landingPage&gt;&gt;
 &lt;div class=&quot;end-bg bg page-background&quot;&gt;
 &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
 &lt;/div&gt;
-&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="276" name="stage3-submission-c-messages-eng" tags="nobr" position="725,3475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
+&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="281" name="stage3-submission-c-messages-eng" tags="nobr" position="100,3600" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; 
          &quot;3s&quot; 
@@ -4605,7 +4708,7 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
      &lt;&lt;/append&gt;&gt;
 /* GO BACK TO LANDING  */
    
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="277" name="stage3-submission-c-vn-transcript-eng" tags="nobr" position="850,3475" size="100,100">&lt;p&gt;You’re ready - amazing news. &lt;/p&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="282" name="stage3-submission-c-vn-transcript-eng" tags="nobr" position="225,3600" size="100,100">&lt;p&gt;You’re ready - amazing news. &lt;/p&gt;
 
 &lt;p&gt;I’m getting ready myself -  I’ve been thinking about the Dream Team. I mean do they have a motto? A headquarters? Do they wear hats? Do they all have to drink Frobscottle for breakfast!? It is delicious but it does make you toot.  &lt;/p&gt;
 
@@ -4620,7 +4723,7 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
 
 &lt;p&gt;I’ll message you when he has come to pick them up!&lt;/p&gt;
 
-&lt;p&gt;Until then my friends, Dream Team out.  &lt;/p&gt;</tw-passagedata><tw-passagedata pid="278" name="stage3-submission-c-messages-cym" tags="nobr" position="975,3475" size="100,100">Lorem ipsum welsh</tw-passagedata><tw-passagedata pid="279" name="stage3-submission-c-vn-transcript-cym" tags="nobr" position="1100,3475" size="100,100"></tw-passagedata><tw-passagedata pid="280" name="stamp-collection" tags="nobr" position="1225,3475" size="100,100">&lt;div class=&quot;stamp-collection-wrapper&quot;&gt;
+&lt;p&gt;Until then my friends, Dream Team out.  &lt;/p&gt;</tw-passagedata><tw-passagedata pid="283" name="stage3-submission-c-messages-cym" tags="nobr" position="350,3600" size="100,100">Lorem ipsum welsh</tw-passagedata><tw-passagedata pid="284" name="stage3-submission-c-vn-transcript-cym" tags="nobr" position="475,3600" size="100,100"></tw-passagedata><tw-passagedata pid="285" name="stamp-collection" tags="nobr" position="600,3600" size="100,100">&lt;div class=&quot;stamp-collection-wrapper&quot;&gt;
 &lt;&lt;include &quot;stamp1&quot;&gt;&gt;
 &lt;&lt;include &quot;stamp2&quot;&gt;&gt;
 &lt;&lt;include &quot;stamp3&quot;&gt;&gt;
@@ -4629,17 +4732,17 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
 
 
 
-/* STAGE 4 */</tw-passagedata><tw-passagedata pid="281" name="stage4-video" tags="nobr" position="100,3600" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
+/* STAGE 4 */</tw-passagedata><tw-passagedata pid="286" name="stage4-video" tags="nobr" position="725,3600" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
 &lt;&lt;set $passage to &quot;stage4-video&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to $userchoices.landingPage&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
-&lt;&lt;include &quot;choose-video-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="282" name="stage4-video-video-eng" tags="nobr" position="225,3600" size="100,100">/* VIDEO 8 */
+&lt;&lt;include &quot;choose-video-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="287" name="stage4-video-video-eng" tags="nobr" position="850,3600" size="100,100">/* VIDEO 8 */
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
       src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;
 
   &lt;&lt;button &quot;Replay&quot;&gt;&gt;
          &lt;&lt;goto $passage&gt;&gt;
-        &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="283" name="stage4-video-video-cym" tags="nobr" position="350,3600" size="100,100">/* VIDEO 8 */
+        &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="288" name="stage4-video-video-cym" tags="nobr" position="975,3600" size="100,100">/* VIDEO 8 */
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
       src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;
 
@@ -4648,17 +4751,17 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
         &lt;&lt;/button&gt;&gt;
 
 
-/* STAGE 5  */</tw-passagedata><tw-passagedata pid="284" name="stage5-video" tags="nobr" position="475,3600" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
+/* STAGE 5  */</tw-passagedata><tw-passagedata pid="289" name="stage5-video" tags="nobr" position="1100,3600" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
 &lt;&lt;set $passage to &quot;stage5-video&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to $userchoices.landingPage&gt;&gt;
 &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
-&lt;&lt;include &quot;choose-video-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="285" name="stage5-video-video-eng" tags="nobr" position="600,3600" size="100,100">/* VIDEO 9 */
+&lt;&lt;include &quot;choose-video-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="290" name="stage5-video-video-eng" tags="nobr" position="1225,3600" size="100,100">/* VIDEO 9 */
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
       src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;
 
    &lt;&lt;button &quot;Replay&quot;&gt;&gt;
          &lt;&lt;goto $passage&gt;&gt;
-        &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="286" name="stage5-video-video-cym" tags="nobr" position="725,3600" size="100,100">/* VIDEO 9 */
+        &lt;&lt;/button&gt;&gt;</tw-passagedata><tw-passagedata pid="291" name="stage5-video-video-cym" tags="nobr" position="100,3725" size="100,100">/* VIDEO 9 */
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
       src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;
 

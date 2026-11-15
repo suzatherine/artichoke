@@ -5180,12 +5180,128 @@ Lorem Ipsum Welsh KS1
 Lorem Ipsum Welsh KS2
 
 
-
-
 :: stage3-tutorial3-e [nobr]
-
 <<set $prevPassage to "stage3-tutorial3-d">>
 <<set $passage to "stage3-tutorial3-e">>
+<<set $nextPassage to "stage3-tutorial3-f">>
+
+<div class="future-bg bg page-background">
+    <<include "_templateVideoChat">>
+</div>
+<<timed 0.1s>>
+    <<replace "#pageName">>
+        <h2>Future Dreams</h2>
+    <</replace>>
+<</timed>>
+<<include "choose-messages-language-ks-specific">>
+
+:: stage3-tutorial3-e-messages-eng-ks1 [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>You’ve thought about your Future Dream and the steps that could help you reach it.</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 4s>>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>Here’s an example of how one small step could bring a dream closer.</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 6s>>
+    <<replace "#videoWrapper">>
+        <div class="accented-quote">
+            <span>My Future Dream is to be a librarian.</span>
+        </div>
+    <</replace>>
+<</timed>>
+
+<<timed 9s>>
+    <<append "#videoWrapper">>
+        <div class="accented-quote">
+            <span>One step I could take is to read a new book this week.</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 12s>>
+    <<append "#chatInputWrapper">>
+        <div class="btn-option-wrapper">
+            <<button "Next">>
+                <<goto $nextPassage>>
+            <</button>>
+        </div>
+    <</append>>
+<</timed>>
+
+:: stage3-tutorial3-e-messages-eng-ks2 [nobr]
+<<timed 1s>>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>Excellent work, these feet show your Future Dreams.
+            It might seem like a leap, but there are steps to get there.
+            Some steps will feel tricky. That’s okay, challenges are there to be overcome.
+            <br>
+            You aren’t on your own. 
+            <br>
+            And everyone goes further with a boost.
+            Swap with someone and encourage them to carry on their journey to their Future Dreams- I call it a Pep Talk! 
+            </span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 6s>>
+    <<replace "#videoWrapper">>
+        <div class="accented-quote">
+            <span>
+You can reach your Future Dream because…
+
+</span>
+        </div>
+    <</replace>>
+<</timed>>
+
+<<timed 9s>>
+    <<append "#videoWrapper">>
+        <div class="accented-quote">
+            <span>When it gets hard, remember…</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 12s>>
+    <<append "#videoWrapper">>
+        <div class="accented-quote">
+            <span>I believe in you because…</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 15s>>
+    <<append "#chatInputWrapper">>
+        <div class="btn-option-wrapper">
+            <<button "Next">>
+                <<goto $nextPassage>>
+            <</button>>
+        </div>
+    <</append>>
+<</timed>>
+
+:: stage3-tutorial3-e-messages-cym-ks1 [nobr]
+Lorem Ipsum Welsh KS1
+
+:: stage3-tutorial3-e-messages-cym-ks2 [nobr]
+Lorem Ipsum Welsh KS2
+
+:: stage3-tutorial3-f [nobr]
+
+<<set $prevPassage to "stage3-tutorial3-e">>
+<<set $passage to "stage3-tutorial3-f">>
 
 <<set $nextPassage to "stage3-tutorials-menu">>
 
@@ -5201,11 +5317,11 @@ Lorem Ipsum Welsh KS2
 
 <<run setup.completeTutorial(3)>>
 
-:: stage3-tutorial3-e-messages-eng [nobr]
+:: stage3-tutorial3-f-messages-eng [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial3-e-vn-transcript-eng"
-         "stage3-tutorial3-e-vn-triggered-content-eng">>
+         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial3-f-vn-transcript-eng"
+         "stage3-tutorial3-f-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
 
@@ -5220,7 +5336,7 @@ Lorem Ipsum Welsh KS2
         <</append>>
     <</timed>>
 
-:: stage3-tutorial3-e-vn-transcript-eng [nobr]
+:: stage3-tutorial3-f-vn-transcript-eng [nobr]
 <p>
     You have leapt for your Future Dreams. <br/>
     Or at least planned how to take that first step. <br/>
@@ -5236,7 +5352,7 @@ Lorem Ipsum Welsh KS2
 
 <p>Speak soon. </p>
 
-:: stage3-tutorial3-e-vn-triggered-content-eng [nobr]
+:: stage3-tutorial3-f-vn-triggered-content-eng [nobr]
 /* RUN BUBBLES  */
   <<timed 7s>>
     <<append "#fullScreenChatMain">>
@@ -5247,14 +5363,14 @@ Lorem Ipsum Welsh KS2
     <<run setup.startBubbles(60)>>
 <</timed>>
 
-:: stage3-tutorial3-e-messages-cym [nobr]
+:: stage3-tutorial3-f-messages-cym [nobr]
 Lorem Ipsum Welsh
 
 
-:: stage3-tutorial3-e-vn-transcript-cym [nobr]
+:: stage3-tutorial3-f-vn-transcript-cym [nobr]
 Lorem Ipsum Welsh
 
-:: stage3-tutorial3-e-vn-triggered-content-cym
+:: stage3-tutorial3-f-vn-triggered-content-cym
 /* RUN BUBBLES  */
   <<timed 7s>>
     <<append "#fullScreenChatMain">>
