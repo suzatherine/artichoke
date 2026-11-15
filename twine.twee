@@ -2950,7 +2950,7 @@ Lorem Ipsum Welsh
 <</if>>
 
 :: tutorial1-empty-picture [nobr]
-   <img src="assets/img/stage3-tutorial1/empty-picture.png" alt="Empty picture" >
+   <img src="assets/img/stage3-tutorial1/empty-picture.jpg" alt="Empty picture" >
 :: tutorial1-picture1-ks1 [nobr]
    <img src="assets/img/stage3-tutorial1/picture-1-ks1.png" alt="Present" >
 
@@ -2961,19 +2961,19 @@ Lorem Ipsum Welsh
    <img src="assets/img/stage3-tutorial1/picture-3-ks1.png" alt="Ride" >
 
 :: tutorial1-picture1-ks2 [nobr]
-   <img src="assets/img/stage3-tutorial1/picture-1.png" alt="Lionel" >
+   <img src="assets/img/stage3-tutorial1/picture-1.jpg" alt="Lionel" >
 
 :: tutorial1-picture2-ks2 [nobr]
-   <img src="assets/img/stage3-tutorial1/picture-2.png" alt="Book" >
+   <img src="assets/img/stage3-tutorial1/picture-2.jpg" alt="Book" >
 
 :: tutorial1-picture3-ks2 [nobr]
-   <img src="assets/img/stage3-tutorial1/picture-3.png" alt="Frog" >
+   <img src="assets/img/stage3-tutorial1/picture-3.jpg" alt="Frog" >
 
 :: tutorial1-picture4-ks2 [nobr]
-   <img src="assets/img/stage3-tutorial1/picture-4.png" alt="Bea using Magic Book" >
+   <img src="assets/img/stage3-tutorial1/picture-4.jpg" alt="Bea using Magic Book" >
 
 :: tutorial1-picture5-ks2 [nobr]
-   <img src="assets/img/stage3-tutorial1/picture-5.png" alt="Library" >
+   <img src="assets/img/stage3-tutorial1/picture-5.jpg" alt="Library" >
 
 :: stage3-tutorial1-a [nobr]
 <<set $prevPassage to "stage3-tutorial1-video">>
