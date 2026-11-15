@@ -2138,7 +2138,7 @@ Lorem Ipsum Welsh
     <<replace "#videoWrapper">>
         /* QUOTE SHOWING IN EXERCISE SPACE */
          <div class="accented-quote">
-        <span>‘There was just a touch of colour in it, a pale sea-green, soft and shimmering and very beautiful.’ </span>
+        <span>‘There was just a touch of colour in it, a <span class="bolder">pale sea-green</span>, <span class="bolder">soft</span> and <span class="bolder">shimmering</span> and very <span class="bolder">beautiful</span>.’ </span>
         </div>
         <</replace>>
     <</timed>>
@@ -2147,7 +2147,7 @@ Lorem Ipsum Welsh
     <<append "#videoWrapper">>
         /* QUOTE SHOWING IN EXERCISE SPACE */
          <div class="accented-quote">
-        <span>‘There it lay, this small oblong sea-green jellyfish thing, at the bottom of the jar, quite peaceful, but pulsing gently, the whole of it moving in and out ever so slightly, as though it was breathing.’ </span>
+        <span>‘There it lay, this small <span class="bolder">oblong sea-green</span> jellyfish thing, at the bottom of the jar, quite peaceful, but pulsing gently, the whole of it moving in and out ever so slightly, as though it was <span class="bolder">breathing</span>.’ </span>
         </div>
         <</append>>
     <</timed>>

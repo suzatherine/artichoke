@@ -148,6 +148,11 @@ button:active {
   color: var(black);
 }
 
+.bolder{
+  font-weight: 800;
+  font-size: 4rem;
+}
+
 
 .chat-wrapper button:not(.voicenote-toggle),
 .chat-wrapper button:not(.voicenote-toggle):hover,
