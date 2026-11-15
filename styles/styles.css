@@ -148,6 +148,17 @@ button:active {
   color: var(black);
 }
 
+.chat-wrapper button,
+.chat-wrapper button:hover,
+.chat-wrapper button:focus,
+.chat-wrapper button:active {
+  background-color: var(--palette-navy);
+  color: white;
+  font-family: var(--font-body);
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
 .landing-btn-wrapper > button {
   display: inline-flex;
   align-items: center;
