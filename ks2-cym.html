@@ -3155,7 +3155,9 @@ You can choose to use my first image but you need to imagine something else that
 &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="189" name="stage3-tutorial2-video" tags="nobr" position="1100,2350" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorials-menu&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial2-video&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-a&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
+&lt;div class=&quot;day-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateFullScreenVideo&quot;&gt;&gt;
+&lt;/div&gt;
 &lt;&lt;addclass &quot;body&quot; &quot;pink-bubble-bg&quot;&gt;&gt;
 &lt;&lt;include &quot;choose-video-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="190" name="stage3-tutorial2-video-video-eng" tags="nobr" position="1225,2350" size="100,100">/* VIDEO 5  */
 &lt;iframe width=&#39;800px&#39; height=&#39;450px&#39; 
@@ -3164,8 +3166,9 @@ You can choose to use my first image but you need to imagine something else that
       src=&#39;https://player.vimeo.com/video/938105229?h=afecc81d56&amp;amp;badge=0&amp;amp;autoplay=1&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&#39;&gt;&lt;/iframe&gt;</tw-passagedata><tw-passagedata pid="192" name="stage3-tutorial2-a" tags="nobr" position="225,2475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-video&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial2-a&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-b&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;pink-bubble-bg&quot;&gt;&gt;
+&lt;div class=&quot;day-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
+&lt;/div&gt;
 &lt;&lt;timed 0.1s&gt;&gt;
    &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
     &lt;h2&gt;Day Dreams&lt;/h2&gt;
@@ -3379,19 +3382,12 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
     &lt;&lt;set $mappingQuestions = $mappingQuestionsKs2&gt;&gt;
 &lt;&lt;/if&gt;&gt;
 
-&lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;pink-bubble-bg&quot;&gt;&gt;
-&lt;&lt;timed 0.1s&gt;&gt;
-   &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
-    &lt;h2&gt;Day Dreams&lt;/h2&gt;
-        &lt;h3&gt;Mapping&lt;/h3&gt;
-
-    &lt;&lt;/replace&gt;&gt;
-&lt;&lt;/timed&gt;&gt;
-
+/* TODO loads strangely */
+&lt;div class=&quot;day-bg bg page-wrapper mapping-activity&quot;&gt;
+    &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
+&lt;/div&gt;
 
 &lt;&lt;timed 1s&gt;&gt;
-
     /* SHOW MAPPING QUESTION WIDGET */
     &lt;&lt;mappingShowQuestion false&gt;&gt;
 &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="198" name="stage3-tutorial2-b-question" tags="nobr" position="975,2475" size="100,100">&lt;&lt;set _question = $mappingQuestions[$mappingQuestionIndex]&gt;&gt;
@@ -3465,8 +3461,9 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="200" name="stage3-tutorial2-c" tags="nobr" position="1225,2475" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-video&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial2-c&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-d&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;pink-bubble-bg&quot;&gt;&gt;
+&lt;div class=&quot;day-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateFullScreenChat&quot;&gt;&gt;   
+&lt;/div&gt;
 &lt;&lt;timed 0.1s&gt;&gt;
    &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
     &lt;h2&gt;Day Dreams&lt;/h2&gt;
@@ -3504,8 +3501,10 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
 &lt;p&gt;So, get what you need and then enter the word DOODLE and I’ll give you a prompt to start. &lt;/p&gt;</tw-passagedata><tw-passagedata pid="203" name="stage3-tutorial2-d" tags="nobr" position="350,2600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-c&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial2-d&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-e&quot;&gt;&gt;
-&lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
-&lt;&lt;addclass &quot;body&quot; &quot;pink-bubble-bg&quot;&gt;&gt;
+&lt;div class=&quot;day-bg bg page-wrapper&quot;&gt;
+    &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
+&lt;/div&gt;
+/*TODO also loading strangely */
 &lt;&lt;timed 0.1s&gt;&gt;
    &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
     &lt;h2&gt;Day Dreams&lt;/h2&gt;

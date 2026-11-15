@@ -3722,7 +3722,9 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorials-menu">>
 <<set $passage to "stage3-tutorial2-video">>
 <<set $nextPassage to "stage3-tutorial2-a">>
-<<include "_templateFullScreenVideo">>
+<div class="day-bg bg page-wrapper">
+    <<include "_templateFullScreenVideo">>
+</div>
 <<addclass "body" "pink-bubble-bg">>
 <<include "choose-video-language">>
 
@@ -3740,8 +3742,9 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial2-video">>
 <<set $passage to "stage3-tutorial2-a">>
 <<set $nextPassage to "stage3-tutorial2-b">>
-<<include "_templateFullScreenChat">>
-<<addclass "body" "pink-bubble-bg">>
+<div class="day-bg bg page-wrapper">
+    <<include "_templateFullScreenChat">>
+</div>
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Day Dreams</h2>
@@ -3975,19 +3978,12 @@ Lorem Ipsum Welsh
     <<set $mappingQuestions = $mappingQuestionsKs2>>
 <</if>>
 
-<<include "_templateVideoChat">>
-<<addclass "body" "pink-bubble-bg">>
-<<timed 0.1s>>
-   <<replace "#pageName">>
-    <h2>Day Dreams</h2>
-        <h3>Mapping</h3>
-
-    <</replace>>
-<</timed>>
-
+/* TODO loads strangely */
+<div class="day-bg bg page-wrapper mapping-activity">
+    <<include "_templateVideoChat">>
+</div>
 
 <<timed 1s>>
-
     /* SHOW MAPPING QUESTION WIDGET */
     <<mappingShowQuestion false>>
 <</timed>>
@@ -4077,8 +4073,9 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial2-video">>
 <<set $passage to "stage3-tutorial2-c">>
 <<set $nextPassage to "stage3-tutorial2-d">>
-<<include "_templateFullScreenChat">>
-<<addclass "body" "pink-bubble-bg">>
+<div class="day-bg bg page-wrapper">
+    <<include "_templateFullScreenChat">>   
+</div>
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Day Dreams</h2>
@@ -4128,8 +4125,10 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial2-c">>
 <<set $passage to "stage3-tutorial2-d">>
 <<set $nextPassage to "stage3-tutorial2-e">>
-<<include "_templateVideoChat">>
-<<addclass "body" "pink-bubble-bg">>
+<div class="day-bg bg page-wrapper">
+    <<include "_templateVideoChat">>
+</div>
+/*TODO also loading strangely */
 <<timed 0.1s>>
    <<replace "#pageName">>
     <h2>Day Dreams</h2>

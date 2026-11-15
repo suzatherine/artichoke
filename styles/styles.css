@@ -88,6 +88,7 @@
 
 .day-bg {
   background-image: url('../assets/img/bgs/02 DAY.jpg');
+  color: var(--palette-navy);
 }
 
 .night-bg {
