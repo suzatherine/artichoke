@@ -128,7 +128,7 @@ setup.createSortingActivityItems = function (sentences, correctOrder) {
     return items.every(Boolean) ? items : null;
 };
 
-function updateSortingActivityCorrectness(list) {
+setup.updateSortingActivityCorrectness = function (list) {
     if (!list) {
         return;
     }
@@ -169,10 +169,10 @@ function updateSortingActivityCorrectness(list) {
             list.dataset.completionMessageShown = "true";
         }
     }
-}
+};
 
 $(document).on(":passagedisplay", function () {
-    document.querySelectorAll(".sorting-activity-list").forEach(updateSortingActivityCorrectness);
+    document.querySelectorAll(".sorting-activity-list").forEach(setup.updateSortingActivityCorrectness);
 });
 
 function moveSortingActivityItem(list, fromIndex, toIndex) {
@@ -187,7 +187,7 @@ function moveSortingActivityItem(list, fromIndex, toIndex) {
         row.appendChild(items[index]);
     });
 
-    updateSortingActivityCorrectness(list);
+    setup.updateSortingActivityCorrectness(list);
 }
 
 document.addEventListener("dragstart", function (event) {
@@ -234,7 +234,7 @@ document.addEventListener("dragend", function (event) {
     }
 
     item.classList.remove("dragging");
-    updateSortingActivityCorrectness(item.closest(".sorting-activity-list"));
+    setup.updateSortingActivityCorrectness(item.closest(".sorting-activity-list"));
     sortingActivityDraggedItem = null;
 });
 
@@ -2748,7 +2748,7 @@ Work out together which order the story should go in.
     &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
          &lt;&lt;include &quot;sorting-activity&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;run updateSortingActivityCorrectness(document.querySelector(&quot;#videoWrapper .sorting-activity-list&quot;))&gt;&gt;
+    &lt;&lt;run setup.updateSortingActivityCorrectness(document.querySelector(&quot;#videoWrapper .sorting-activity-list&quot;))&gt;&gt;
     &lt;&lt;/timed&gt;&gt;    
 
 
@@ -2759,7 +2759,7 @@ Work out together which order the story should go in.
     &lt;&lt;/replace&gt;&gt;</tw-passagedata><tw-passagedata pid="125" name="stage3-tutorial1-a-messages-cym" tags="nobr" position="600,1600" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="126" name="stage3-tutorial1-b" tags="nobr" position="725,1600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial1-a&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial1-b&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-c&quot;&gt;&gt;
-&lt;div class=&quot;night-bg bg page-wrapper&quot;&gt;
+&lt;div class=&quot;night-bg bg page-background&quot;&gt;
     &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
 &lt;/div&gt;
 &lt;&lt;timed 0.1s&gt;&gt;
