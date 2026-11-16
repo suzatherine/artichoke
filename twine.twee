@@ -2039,17 +2039,26 @@ Lorem Ipsum Welsh
 <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Before we share our Dreams - we need to understand what Dreams are. 
-        <br/>
-        Let’s start with how the BFG holds onto Dreams. 
-      <br/>
-        Dream Jars. 
- </span>
+        <span>Before we share our Dreams - we need to understand what Dreams are.</span>
+        <</append>>
+    <</timed>>
+
+<<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>
+        Let’s start with how the BFG holds onto Dreams.</span>
         </div>
         <</append>>
     <</timed>>
 
-
+ <<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Dream Jars.</span>
+        </div>
+        <</append>>
+    <</timed>>   
 
 <<timed 7s>>
     <<append "#chatHistory">>
@@ -2089,16 +2098,26 @@ Lorem Ipsum Welsh
 <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Before we share our Dreams - we need to understand what Dreams are. 
-        <br/>
-        Let’s start with how the BFG holds onto Dreams. 
-      <br/>
-        Dream Jars. 
- </span>
+        <span>Before we share our Dreams - we need to understand what Dreams are.</span>
         </div>
         <</append>>
     <</timed>>
 
+<<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Let’s start with how the BFG holds onto Dreams. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+    <<timed 4s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span> Dream Jars.</span>
+        </div>
+        <</append>>
+    <</timed>>
 
 
 <<timed 7s>>
@@ -2174,7 +2193,7 @@ Lorem Ipsum Welsh
 <<set $passage to "stage2-exercise-dreamJar-b">>
 <<set $nextPassage to "stage2-exercise-dreamJar-c">>
 
-<div class="bg login-bg dreamjar-page-background">
+<div class="bg cream-bg dreamjar-page-background">
 <<include "_templateVideoChat">>
 </div>
 <<include "choose-messages-language-ks-specific">>
@@ -2183,7 +2202,7 @@ Lorem Ipsum Welsh
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng-ks1" "stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks1">>
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 2 YOUNGER.mp3 "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng-ks1" "stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks1">>
         <</append>>
     <</timed>>
 
@@ -2191,7 +2210,7 @@ Lorem Ipsum Welsh
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng-ks2" "stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks2">>
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 2 OLDER.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng-ks2" "stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks2">>
         <</append>>
     <</timed>>
 
@@ -2340,23 +2359,8 @@ Lorem Ipsum Welsh
 
 
 :: stage2-exercise-dreamJar-c-messages-eng-ks1 [nobr]
+
 <<timed 0.1s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>I’ve uploaded my jar onto the portal - here it is. </span>
-        </div>
-        <</append>>
-    <</timed>>
-
- <<timed 3s>>
-    <<replace "#videoWrapper">>
-         <div class="picture-container">
-      <<include "dreamJar-Bea">>
-      </div>
-        <</replace>>
-    <</timed>>   
-
-<<timed 5s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>Now, a beautiful Dream Jar is one thing - but it’s what’s inside that’s important. </span>
@@ -2364,7 +2368,7 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
 
-<<timed 11s>>
+<<timed 5s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>I've done a bit of research and it seems like there are 3 main types of dreams...</span>
@@ -2372,7 +2376,7 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
 
- <<timed 17s>>
+ <<timed 10s>>
     <<replace "#videoWrapper">>
          <div class="picture-container">
       <<include "dreamJar-example">>
@@ -2392,23 +2396,8 @@ Lorem Ipsum Welsh
     <</timed>>
 
 :: stage2-exercise-dreamJar-c-messages-eng-ks2 [nobr]
+
 <<timed 0.1s>>
-    <<append "#chatHistory">>
-         <div class="message-received">
-        <span>I’ve uploaded my jar onto the portal - here it is. </span>
-        </div>
-        <</append>>
-    <</timed>>
-
- <<timed 3s>>
-    <<replace "#videoWrapper">>
-         <div class="picture-container">
-      <<include "dreamJar-Bea">>
-      </div>
-        <</replace>>
-    <</timed>>   
-
-<<timed 5s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>Now, a beautiful Dream Jar is one thing - but it’s what’s inside that’s important. </span>
@@ -2416,7 +2405,7 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
 
-<<timed 11s>>
+<<timed 4s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>I've done a bit of Dreamological research and it seems like there are 3 main types of dreams...</span>
@@ -2424,7 +2413,7 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
 
- <<timed 17s>>
+ <<timed 10s>>
     <<replace "#videoWrapper">>
          <div class="picture-container">
       <<include "dreamJar-example">>
@@ -2504,8 +2493,6 @@ Lorem ipsum Welsh
 
 :: stage2-exercise-dreamJar-d-messages-eng [nobr]
 
-     <<replace "#videoWrapper">>
-    <</replace>>
 <<timed 1s>>
     <<replace "#chatHistory">>
          <div class="message-received">
@@ -2516,15 +2503,20 @@ Lorem ipsum Welsh
         <</replace>>
     <</timed>>
 
- <<timed 3s>>
+ <<timed 6s>>
     <<replace "#videoWrapper">>
-
-      <<include "dreamJar-yourTurn">>
-      
+         <div class="picture-container">
+      <div class="dreamjar-example">
+      <<include "night-time-dreamJar-label">>
+        <<include "day-dreamJar-label">>
+        <<include "future-dreamJar-label">>
+    </div>
+      </div>
         <</replace>>
     <</timed>>   
 
-<<timed 15s>>
+
+<<timed 10s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>Let me know when you have filled your Dream Jars then send me the word FILLED</span>
@@ -2533,7 +2525,7 @@ Lorem ipsum Welsh
     <</timed>>
 
 
-<<timed 17s>>
+<<timed 15s>>
     <<append "#chatInputWrapper">>
         /* $codewordsStage2.codeword4 */
      <<include "codeword-chat">>
@@ -2720,7 +2712,7 @@ Lorem Ipsum Welsh
 
 <<timed 2s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage2-exercise-dreamJar-outro-vn-transcript-eng"
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 3.mp3" "3s" "stage2-exercise-dreamJar-outro-vn-transcript-eng"
          "stage2-exercise-dreamJar-outro-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
@@ -2776,6 +2768,7 @@ Lorem Ipsum Welsh
 <<set $nextPassage to "stage3-video">>
 <<include "_templateSecurityCheck">>
 <<include "choose-messages-language">>
+<<audio "wrong-answer" "play">>
 
 
 
@@ -2864,10 +2857,11 @@ Lorem Ipsum Welsh
 
 :: loading-tutorial-menu [nobr]
 
+<<audio "loading" "play">>
  <div class="page-wrapper full-screen-landing login-bg bg ">
      <main class="main-content-center">
         <div class="connecting-image-wrapper">
-         <img src="assets/img/bubble.png" class="spinning" alt="logo"/>
+         <img src="assets/img/logo/LOGO.png" class="spinning" alt="logo"/>
           </div>
         </main>
  </div>
@@ -2934,6 +2928,8 @@ Lorem Ipsum Welsh
 
 :: loading-tutorial [nobr]
 
+
+    <<audio "loading" "play">>
     <<if $nextPassage is "stage3-tutorial1-video">>
     <div class="page-wrapper full-screen-landing connecting night-bg bg">
         <main class="main-content-center">
