@@ -3430,7 +3430,7 @@ The next part is the <span class="codeword-text">MIDDLE</span> of the story - so
     <</timed>>
     
 :: stage3-tutorial1-c-vn-transcript-eng-ks2 [nobr]
-The next part is the <span class="codeword-text">MISSION</span>  where something changes and that could be ‘I open the present inside is a Magic Book, which is full of spells’.  
+The next part is the <span class="codeword-text">MISSION</span>  where something changes and that could be ‘I open the present, inside is a Magic Book, which is full of spells’.  
 
 :: stage3-tutorial1-c-vn-triggered-content-eng-ks2 [nobr]
 <<timed 10s>>
@@ -3757,8 +3757,8 @@ Lorem Ipsum Welsh
 <<set $passage to "stage3-tutorial1-g">>
 <<set $nextPassage to "stage3-tutorial1-h">>
 
-<div class="night-bg bg page-wrapper">
-    <<include "_templateFullScreenChat">>
+<div class="night-bg bg page-background">
+    <<include "_templateVideoChat">>
 </div>
 <<timed 0.1s>>
    <<replace "#pageName">>
@@ -3802,39 +3802,17 @@ Lorem Ipsum Welsh
         <</timed>>
 
 :: stage3-tutorial1-g-messages-eng-ks2 [nobr]
-<<timed 1s>> 
-     <<append "#chatHistory">>
-         <div class="message-received">
-        <span>It’s a story totally made up from my imagination from one image from my dream to make a full Night-time Dream for the BFG.   </span>
-        </div>
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 4 OLDER - BACKUP - 4E.mp3" "3s" "stage3-tutorial1-g-vn-1-transcript-eng-ks2"
+         "stage3-tutorial1-g-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
 
-<<timed 4s>> 
-     <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Now over to you, I made my Night-Time Dream from my dream image. <br/>
-You can choose to use my first image but you need to imagine something else that comes out of the box. What else could come out of the box?  
-  </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 10s>> 
-     <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Remember, the BFG is looking for exciting, fun stories with happy endings that can go into his Dream Jar and we want these to be the best they can be for him. 
-  </span>
-        </div>
-        <</append>>
-    <</timed>>
-
-<<timed 15s>> 
-     <<append "#chatHistory">>
-         <div class="message-received">
-        <span>When you are finished, send me the word DREAM. 
-  </span>
-        </div>
+    <<timed 4s>>
+    <<append "#chatHistory">>
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 4 OLDER - BACKUP - 4F.mp3" "3s" "stage3-tutorial1-g-vn-2-transcript-eng-ks2">>
         <</append>>
     <</timed>>
 
@@ -3845,11 +3823,45 @@ You can choose to use my first image but you need to imagine something else that
   <</replace>>
         <</timed>>
 
+
+:: stage3-tutorial1-g-vn-1-transcript-eng-ks2 [nobr]
+
+<p>It’s a story totally made up from my imagination from one image from my dream to make a full Night-time Dream for the BFG.</p>
+
+<p>Now over to you, I made my Night-Time Dream from my image from my dream.</p>
+
+<p>You can choose to use my first image but you need to imagine something else that comes out of the box. What else could come out of the box?</p>
+
+:: stage3-tutorial1-g-vn-2-transcript-eng-ks2 [nobr]
+
+<p>Those ideas could be part of your story. </p>
+
+<p>I’ve made a Night-Time Dream Sequence resource that you can use that has the story structure.</p> 
+
+<p>You can start from the box OR you can use your own starter Night-time dream image from your Dream Jar. </p>
+
+<p>Remember, the BFG is looking for exciting, fun stories with happy endings that can go into his Dream Jar and we want these to be the best they can be for him. </p>
+
+<p>When you are finished, send me the word DREAM. </p>
+
+
 :: stage3-tutorial1-g-messages-cym-ks1 [nobr]
 Lorem Ipsum Welsh KS1
 
 :: stage3-tutorial1-g-messages-cym-ks2 [nobr]
 Lorem Ipsum Welsh KS2
+
+:: stage3-tutorial1-g-vn-triggered-content-eng [nobr]
+
+<<timed 21s>>
+    <<replace "#videoWrapper">>
+        <div class="accented-quote">
+            <span>What else could come out of the box?</span>
+        </div>
+    <</replace>>
+<</timed>>
+
+
 
 :: stage3-tutorial1-h [nobr]
 <<set $prevPassage to "stage3-tutorial1-g">>
@@ -3908,6 +3920,7 @@ Lorem Ipsum Welsh
 :: stage3-tutorial1-h-vn-triggered-content-eng [nobr]
   /* RUN BUBBLES  */
   <<timed 7s>>
+    <<audio "complete-simple" "play">>
     <<append "#fullScreenChatMain">>
         <div class="bubbles-wrapper">
          <div id="bubbles"></div>
