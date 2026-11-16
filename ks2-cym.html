@@ -134,16 +134,15 @@ setup.updateSortingActivityCorrectness = function (list) {
     }
 
     var rows = Array.from(list.querySelectorAll(".sorting-activity-row"));
-    rows.forEach(function (row, index) {
-        var item = row.querySelector(".sorting-activity-option");
-        var isCorrect = item.dataset.correctPosition === String(index + 1);
-        item.classList.toggle("correct", isCorrect);
-        item.dataset.inCorrectPosition = String(isCorrect);
-    });
-
     var isComplete = rows.length > 0 && rows.every(function (row, index) {
         return row.querySelector(".sorting-activity-option").dataset.correctPosition === String(index + 1);
     });
+    rows.forEach(function (row) {
+        var item = row.querySelector(".sorting-activity-option");
+        item.classList.toggle("correct", isComplete);
+        item.dataset.inCorrectPosition = String(isComplete);
+    });
+
     var nextButton = document.querySelector("#sorting-next-button");
     if (nextButton) {
         nextButton.classList.toggle("hidden", !isComplete || Boolean(list.querySelector(".dragging")));
@@ -2774,23 +2773,78 @@ codeword11: {
 &lt;&lt;timed 12s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;Stories are made up of parts. 
-We could break our story into 5 parts. &lt;br&gt;
-An Opening - where we discover the world of the story &lt;br&gt;
-A Mission - where something changes for our character or world &lt;br&gt;
-A Challenge - where our character faces an obstacle &lt;br&gt;
-A Solution - where our character tries to overcome the obstacle &lt;br&gt;
-An Ending - where we find out how it ends &lt;br&gt;
-
-Let’s look at part of the BFG’s own story to learn about how we create stories. 
-
-Work out together which order the story should go in.
- &lt;/span&gt;
+        &lt;span&gt;Stories are made up of parts.&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 20s&gt;&gt;
+                         &lt;&lt;timed 15s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;We could break our story into 5 parts.&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+                     &lt;&lt;timed 18s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;An Opening - where we discover the world of the story&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+                 &lt;&lt;timed 21s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;A Mission - where something changes for our character or world &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+             &lt;&lt;timed 24s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;A Challenge - where our character faces an obstacle&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+         &lt;&lt;timed 28s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;A Solution - where our character tries to overcome the obstacle&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+  
+      &lt;&lt;timed 32s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;An Ending - where we find out how it ends&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+
+      &lt;&lt;timed 36s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Let’s look at part of the BFG’s own story to learn about how we create stories. 
+&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+    &lt;&lt;timed 40s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Work out together which order the story should go in. &lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 44s&gt;&gt;
     &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
          &lt;&lt;include &quot;sorting-activity&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;

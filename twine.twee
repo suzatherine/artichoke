@@ -51,16 +51,15 @@ setup.updateSortingActivityCorrectness = function (list) {
     }
 
     var rows = Array.from(list.querySelectorAll(".sorting-activity-row"));
-    rows.forEach(function (row, index) {
-        var item = row.querySelector(".sorting-activity-option");
-        var isCorrect = item.dataset.correctPosition === String(index + 1);
-        item.classList.toggle("correct", isCorrect);
-        item.dataset.inCorrectPosition = String(isCorrect);
-    });
-
     var isComplete = rows.length > 0 && rows.every(function (row, index) {
         return row.querySelector(".sorting-activity-option").dataset.correctPosition === String(index + 1);
     });
+    rows.forEach(function (row) {
+        var item = row.querySelector(".sorting-activity-option");
+        item.classList.toggle("correct", isComplete);
+        item.dataset.inCorrectPosition = String(isComplete);
+    });
+
     var nextButton = document.querySelector("#sorting-next-button");
     if (nextButton) {
         nextButton.classList.toggle("hidden", !isComplete || Boolean(list.querySelector(".dragging")));
@@ -3136,23 +3135,78 @@ Lorem Ipsum Welsh
 <<timed 12s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Stories are made up of parts. 
-We could break our story into 5 parts. <br>
-An Opening - where we discover the world of the story <br>
-A Mission - where something changes for our character or world <br>
-A Challenge - where our character faces an obstacle <br>
-A Solution - where our character tries to overcome the obstacle <br>
-An Ending - where we find out how it ends <br>
-
-Let’s look at part of the BFG’s own story to learn about how we create stories. 
-
-Work out together which order the story should go in.
- </span>
+        <span>Stories are made up of parts.</span>
         </div>
         <</append>>
     <</timed>>
 
-<<timed 20s>>
+                         <<timed 15s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>We could break our story into 5 parts.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+                     <<timed 18s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>An Opening - where we discover the world of the story</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+                 <<timed 21s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>A Mission - where something changes for our character or world </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+             <<timed 24s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>A Challenge - where our character faces an obstacle</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+         <<timed 28s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>A Solution - where our character tries to overcome the obstacle</span>
+        </div>
+        <</append>>
+    <</timed>>
+  
+      <<timed 32s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>An Ending - where we find out how it ends</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+
+      <<timed 36s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Let’s look at part of the BFG’s own story to learn about how we create stories. 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+    <<timed 40s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Work out together which order the story should go in. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 44s>>
     <<append "#videoWrapper">>
          <<include "sorting-activity">>
         <</append>>
