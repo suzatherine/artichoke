@@ -922,7 +922,7 @@ codeword11: {
     <<set _transcriptDelay to _args[1]>>
     <<set _transcriptPassage to _args[2]>>
     <<set _triggeredPassage to _args[3]>>
-  <<audio "ping" "play">>
+  <<audio "notification" "play">>
     <<append "#chatHistory">>
  <div class="voicenote">
 <audio preload="auto"><source sc-eval:src=_soundFile></audio>
@@ -1579,6 +1579,7 @@ codeword11: {
 <<set $prevPassage to $userchoices.landingPage>>
 <<set $passage to "stage2-securityCheck-a">>
 <<set $nextPassage to "stage2-video">>
+<<audio "wrong-answer" "play">>
 <<include "_templateSecurityCheck">>
 <<include "choose-messages-language">>
 
@@ -1587,7 +1588,7 @@ codeword11: {
 <<timed 1s>> 
      <<append "#chatHistory">>
          <div class="message-received">
-        <span>Sorry - I need to confirm you are real. </span>
+        <span>Sorry - I need to confirm you are real.<br><br></span>
         </div>
         <</append>>
     <</timed>>
@@ -1620,14 +1621,13 @@ codeword11: {
 
 
 :: connecting [nobr]
-
+     <<audio "loading" "play">>
  <div class="page-wrapper full-screen-landing connecting bg login-bg">
      <main class="main-content-center">
         <div class="connecting-image-wrapper">
          <img src="assets/img/logo/LOGO.png" class="spinning" alt="logo"/>
          </div>
      <div class="hero-text" id="heroText">
-   
         </div>  
         </main>
  </div>
@@ -1687,6 +1687,7 @@ codeword11: {
 :: loadingBea [nobr]
 /* NB Had to make this a separate passage from "connecting" because using "connecting as a destination in the template codeword functionality cause a connecting loop */
 
+ <<audio "loading" "play">>
  <div class="page-wrapper full-screen-landing connecting bg login-bg" >
      <main class="main-content-center">
         <div class="connecting-image-wrapper">
@@ -1820,22 +1821,37 @@ Lorem Ipsum Welsh
         <span>If you need to rewatch my livefeed - the video transmission is available to <<button "rewatch here">>
             <<goto "stage2-video-rewatch">>
             <</button>></span>
-            <br>
-            <span>I’ve uploaded a copy of the BFG’s letter to us here as well - if you want to read it again together.</span>
-        </div>
+            </div>
         <</append>>
     <</timed>>
 
 <<timed 4s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Oh, also, I just realised - you might not have read the BFG 43 times and might be slightly confused. Do you want me to summarise the book for you or do you want to just get on with the exercise? 
+            <span>I’ve uploaded a copy of the BFG’s letter to us here as well - if you want to read it again together.</span>
+        </div>
+        <</append>>
+    <</timed>>    
+
+<<timed 6s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Oh, also, I just realised - you might not have read the BFG 43 times and might be slightly confused.
 </span>
         </div>
         <</append>>
     <</timed>>
 
-<<timed 6s>>
+    <<timed 8s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Do you want me to summarise the book for you or do you want to just get on with the exercise? 
+</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 10s>>
     <<append "#chatInputWrapper">>
          <div class="btn-option-wrapper">
       <<button "BFG Recap">>
@@ -1952,7 +1968,7 @@ Lorem Ipsum Welsh
 
 <<timed 2s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ticker.mp3" "3s" "stage2-BFGRecap-vn-transcript-eng">>
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 1 OLDER.mp3" "3s" "stage2-BFGRecap-vn-transcript-eng">>
         <</append>>
     <</timed>>
 
@@ -2767,7 +2783,7 @@ Lorem Ipsum Welsh
 <<timed 1s>> 
      <<append "#chatHistory">>
          <div class="message-received">
-        <span>Sorry - I need to confirm you are real.  </span>
+        <span>Sorry - I need to confirm you are real.</span>
         </div>
         <</append>>
     <</timed>>

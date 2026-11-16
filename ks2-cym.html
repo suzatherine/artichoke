@@ -997,7 +997,7 @@ codeword11: {
     &lt;&lt;set _transcriptDelay to _args[1]&gt;&gt;
     &lt;&lt;set _transcriptPassage to _args[2]&gt;&gt;
     &lt;&lt;set _triggeredPassage to _args[3]&gt;&gt;
-  &lt;&lt;audio &quot;ping&quot; &quot;play&quot;&gt;&gt;
+  &lt;&lt;audio &quot;notification&quot; &quot;play&quot;&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
  &lt;div class=&quot;voicenote&quot;&gt;
 &lt;audio preload=&quot;auto&quot;&gt;&lt;source sc-eval:src=_soundFile&gt;&lt;/audio&gt;
@@ -1543,11 +1543,12 @@ codeword11: {
 &lt;&lt;done&gt;&gt;&lt;&lt;set $e to setup.addPlaceholder()&gt;&gt;&lt;&lt;/done&gt;&gt;</tw-passagedata><tw-passagedata pid="35" name="stage2-securityCheck-a" tags="nobr" position="600,475" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
 &lt;&lt;set $passage to &quot;stage2-securityCheck-a&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage2-video&quot;&gt;&gt;
+&lt;&lt;audio &quot;wrong-answer&quot; &quot;play&quot;&gt;&gt;
 &lt;&lt;include &quot;_templateSecurityCheck&quot;&gt;&gt;
 &lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="36" name="stage2-securityCheck-a-messages-eng" tags="nobr" position="725,475" size="100,100">&lt;&lt;timed 1s&gt;&gt; 
      &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;Sorry - I need to confirm you are real. &lt;/span&gt;
+        &lt;span&gt;Sorry - I need to confirm you are real.&lt;br&gt;&lt;br&gt;&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
@@ -1572,13 +1573,13 @@ codeword11: {
         &lt;span&gt;Lorem Ipsum Welsh&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
-    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="connecting" tags="nobr" position="975,475" size="100,100">&lt;div class=&quot;page-wrapper full-screen-landing connecting bg login-bg&quot;&gt;
+    &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="38" name="connecting" tags="nobr" position="975,475" size="100,100">&lt;&lt;audio &quot;loading&quot; &quot;play&quot;&gt;&gt;
+ &lt;div class=&quot;page-wrapper full-screen-landing connecting bg login-bg&quot;&gt;
      &lt;main class=&quot;main-content-center&quot;&gt;
         &lt;div class=&quot;connecting-image-wrapper&quot;&gt;
          &lt;img src=&quot;assets/img/logo/LOGO.png&quot; class=&quot;spinning&quot; alt=&quot;logo&quot;/&gt;
          &lt;/div&gt;
      &lt;div class=&quot;hero-text&quot; id=&quot;heroText&quot;&gt;
-   
         &lt;/div&gt;  
         &lt;/main&gt;
  &lt;/div&gt;
@@ -1630,6 +1631,7 @@ codeword11: {
         &lt;&lt;goto $nextPassage&gt;&gt;
         &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="40" name="loadingBea" tags="nobr" position="1225,475" size="100,100">/* NB Had to make this a separate passage from &quot;connecting&quot; because using &quot;connecting as a destination in the template codeword functionality cause a connecting loop */
 
+ &lt;&lt;audio &quot;loading&quot; &quot;play&quot;&gt;&gt;
  &lt;div class=&quot;page-wrapper full-screen-landing connecting bg login-bg&quot; &gt;
      &lt;main class=&quot;main-content-center&quot;&gt;
         &lt;div class=&quot;connecting-image-wrapper&quot;&gt;
@@ -1723,22 +1725,37 @@ codeword11: {
         &lt;span&gt;If you need to rewatch my livefeed - the video transmission is available to &lt;&lt;button &quot;rewatch here&quot;&gt;&gt;
             &lt;&lt;goto &quot;stage2-video-rewatch&quot;&gt;&gt;
             &lt;&lt;/button&gt;&gt;&lt;/span&gt;
-            &lt;br&gt;
-            &lt;span&gt;I’ve uploaded a copy of the BFG’s letter to us here as well - if you want to read it again together.&lt;/span&gt;
-        &lt;/div&gt;
+            &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 4s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;Oh, also, I just realised - you might not have read the BFG 43 times and might be slightly confused. Do you want me to summarise the book for you or do you want to just get on with the exercise? 
+            &lt;span&gt;I’ve uploaded a copy of the BFG’s letter to us here as well - if you want to read it again together.&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;    
+
+&lt;&lt;timed 6s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Oh, also, I just realised - you might not have read the BFG 43 times and might be slightly confused.
 &lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 6s&gt;&gt;
+    &lt;&lt;timed 8s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Do you want me to summarise the book for you or do you want to just get on with the exercise? 
+&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 10s&gt;&gt;
     &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
          &lt;div class=&quot;btn-option-wrapper&quot;&gt;
       &lt;&lt;button &quot;BFG Recap&quot;&gt;&gt;
@@ -1833,7 +1850,7 @@ codeword11: {
 
 &lt;&lt;timed 2s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;&lt;voicenote &quot;assets/sound/ticker.mp3&quot; &quot;3s&quot; &quot;stage2-BFGRecap-vn-transcript-eng&quot;&gt;&gt;
+         &lt;&lt;voicenote &quot;assets/sound/voicenotes/VOICENOTE 1 OLDER.mp3&quot; &quot;3s&quot; &quot;stage2-BFGRecap-vn-transcript-eng&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
@@ -2489,7 +2506,7 @@ codeword11: {
 &lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="101" name="stage3-securityCheck-a-messages-eng" tags="nobr" position="100,1350" size="100,100">&lt;&lt;timed 1s&gt;&gt; 
      &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;Sorry - I need to confirm you are real.  &lt;/span&gt;
+        &lt;span&gt;Sorry - I need to confirm you are real.&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
