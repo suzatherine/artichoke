@@ -1341,8 +1341,8 @@ codeword11: {
 <<set $prevPassage to "landing-ks"+$userchoices.keyStage+"-"+$userchoices.language>>
 <<set $passage to "entry-page">>
 <<set $nextPassage to "">>
- <div class="page-wrapper">
-     <main class="entry-page-content bg login-bg">
+ <div class="page-wrapper bg login-bg">
+     <main class="entry-page-content ">
         <div class="hero-image">
         <img src="assets/img/logo/LOGO.png"/>
         </div>
@@ -1358,8 +1358,9 @@ codeword11: {
                 <<include "codeword-landing">>
                 </div>
             </main>
+            <<include "footer">>
         </div>
-<<include "footer">>
+
 
 
 :: entry-page-messages-eng [nobr]
