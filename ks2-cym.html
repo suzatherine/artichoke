@@ -618,31 +618,36 @@ setup.startScribbleTimer = (durationSeconds = 300) => {
   });
 };
 
-/* Shared bubble runner. Bubbles keep spawning for `seconds`, then stop;
-   those already rising finish their animation and are removed.
-   `colours` is an optional list of CSS colours picked at random per bubble. */
-setup.runBubbles = (seconds = 10, colours = null) => {
-console.log("running bubbles normal")
+/* Shared bubble runner. Image bubbles spawn for `seconds`; existing ones
+   finish their animation before being removed. */
+setup.runBubbles = (seconds = 10) => {
     const container = document.getElementById('bubbles');
     if (!container) return;
 
     if (setup.bubbleTimer) clearInterval(setup.bubbleTimer);
     container.innerHTML = '';
 
+    const bubbleImages = [
+        'assets/img/bubbles/Bubble_1.png',
+        'assets/img/bubbles/Bubble_2.png',
+        'assets/img/bubbles/Bubble_3.png',
+        'assets/img/bubbles/Bubble_4.png',
+        'assets/img/bubbles/Bubble_5.png'
+    ];
+
     const spawn = () => {
-        const b = document.createElement('div');
-        b.className = 'bubble';
-        const size = Math.round(Math.random() * 60 + 20);
-        b.style.width = size + 'px';
-        b.style.height = size + 'px';
-        b.style.left = Math.random() * 100 + '%';
-        b.style.animationDuration = (Math.random() * 6 + 6).toFixed(2) + 's';
-        b.style.opacity = (Math.random() * 0.6 + 0.25).toFixed(2);
-        if (colours && colours.length) {
-            b.style.background = colours[Math.floor(Math.random() * colours.length)];
-        }
-        b.addEventListener('animationend', () => b.remove());
-        container.appendChild(b);
+        const bubble = document.createElement('img');
+        bubble.className = 'bubble';
+        bubble.src = bubbleImages[Math.floor(Math.random() * bubbleImages.length)];
+        bubble.alt = '';
+        bubble.setAttribute('aria-hidden', 'true');
+        const size = Math.round(Math.random() * 100 + 60);
+        bubble.style.width = size + 'px';
+        bubble.style.left = Math.random() * 100 + '%';
+        bubble.style.animationDuration = (Math.random() * 6 + 6).toFixed(2) + 's';
+        bubble.style.opacity = (Math.random() * 0.6 + 0.25).toFixed(2);
+        bubble.addEventListener('animationend', () => bubble.remove(), { once: true });
+        container.appendChild(bubble);
     };
 
     const endTime = Date.now() + seconds * 1000;
@@ -657,19 +662,11 @@ console.log("running bubbles normal")
     }, 300);
 };
 
-/* Start bubble animation by injecting bubble elements into #bubbles */
+/* Start bubble animation by injecting image bubbles into #bubbles */
 setup.startBubbles = (seconds = 10) => setup.runBubbles(seconds);
 
-/* As startBubbles, but each bubble is a random colour from the CSS palette variables */
-setup.startBubblesColourful = (seconds = 10) => {
-    console.log("running bubbles with colourful setup")
-    const names = ['pink', 'sky', 'blush', 'green', 'mint', 'light-sky', 'cream-rose'];
-    const styles = getComputedStyle(document.documentElement);
-    const colours = names
-        .map(n => styles.getPropertyValue('--palette-' + n).trim())
-        .filter(Boolean);
-    setup.runBubbles(seconds, colours);
-};
+/* All image bubbles are colourful, so this remains an alias for existing callers. */
+setup.startBubblesColourful = (seconds = 10) => setup.runBubbles(seconds);
 
 setup.dreamJarDrag = () => {
 

@@ -1223,11 +1223,13 @@ input[type='text']::placeholder {
 .bubble {
   position: absolute;
   bottom: -120px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08) inset;
+  display: block;
+  height: auto;
+  max-width: none;
+  object-fit: contain;
   animation-name: rise;
   animation-timing-function: linear;
+  will-change: transform, opacity;
 }
 
 @keyframes rise {
