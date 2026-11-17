@@ -1418,9 +1418,17 @@ input[type='text']::placeholder {
   margin: 0 auto;
 }
 
+#dream-jar-draggable-activity #dream-jars {
+  width: min(70%, 122.5vh);
+}
+
 .dream-jar-item {
   position: relative;
   min-width: 0;
+}
+
+#dream-jar-draggable-activity #dream-jars .dream-jar-item {
+  container-type: inline-size;
 }
 
 .dream-jar-image {
@@ -1432,6 +1440,18 @@ input[type='text']::placeholder {
 
 #dream-jars .dream-jar-image {
   height: auto;
+}
+
+#dream-jar-draggable-activity #dream-jars .dream-jar-item:first-child .dream-jar-image {
+  border-radius: 20px 0 0 20px;
+}
+
+#dream-jar-draggable-activity #dream-jars .dream-jar-item:nth-child(2) .dream-jar-image {
+  border-radius: 0;
+}
+
+#dream-jar-draggable-activity #dream-jars .dream-jar-item:last-child .dream-jar-image {
+  border-radius: 0 20px 20px 0;
 }
 
 /* Where a correctly placed label sits inside the jar */
@@ -1476,6 +1496,10 @@ input[type='text']::placeholder {
   margin-bottom: 0.25rem;
 }
 
+#dream-jar-draggable-activity #dream-jars .dream-jar-item:nth-child(2) .dream-jar-static-label h2 {
+  font-size: min(3.6rem, 12cqw);
+}
+
 #dream-jars .dream-jar-static-label p {
   font-size: clamp(1.35rem, 2.7vw, 2.16rem);
   line-height: 1.15;
@@ -1486,6 +1510,13 @@ input[type='text']::placeholder {
   height: 100%;
   max-width: 100%;
   object-fit: contain;
+}
+
+#dream-jar-draggable-activity #dream-jars .dream-jar-static-label,
+#dream-jar-draggable-activity #dream-jars .dreams__icon,
+#dream-jar-draggable-activity #dream-jars .dreams__icon img {
+  border-radius: 0;
+  overflow: visible;
 }
 
 .dream-jar-static-label span:first-child {
