@@ -4081,9 +4081,15 @@ When you have done send me the message &lt;span class=&quot;codeword-text&quot;&
 &lt;&lt;include &quot;choose-messages-language-ks-specific&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="232" name="stage3-tutorial3-a-messages-eng-ks1" tags="nobr" position="225,2975" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;Ok - first things first.&lt;br/&gt;
-Can you think of something real you are dreaming for your future at the moment? 
-&lt;/span&gt;
+        &lt;span&gt;Ok - first things first.&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+    &lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Can you think of something real you are dreaming for your future at the moment?&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
@@ -4124,12 +4130,19 @@ Can you think of something real you are dreaming for your future at the moment?
 &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="233" name="stage3-tutorial3-a-messages-eng-ks2" tags="nobr" position="350,2975" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;Ok - first things first.&lt;br/&gt;
-Can you think of something real you are dreaming for your future at the moment? 
-&lt;/span&gt;
+        &lt;span&gt;Ok - first things first.&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
+
+    &lt;&lt;timed 2s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;Can you think of something real you are dreaming for your future at the moment?&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
 
 &lt;&lt;timed 5s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
@@ -4210,7 +4223,7 @@ Can you think of something real you are dreaming for your future at the moment?
     },
     {
         eng: {
-            message: &quot;Last one,&quot;,
+            message: &quot;Last one&quot;,
             question: &quot;The first step I could take, perhaps this week, to reach my Future Dream is...&quot;
         },
         cym: {
@@ -4332,24 +4345,37 @@ Do you need someone to help you?&lt;br/&gt;
 &lt;&lt;timed 3s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;Now, we are going to work out our Phenomenal Leap to get there. &lt;br/&gt;
-Well, as I said, more like smaller steps for us humans. &lt;br/&gt;
-I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
- &lt;/span&gt;
+        &lt;span&gt;Now, we are going to work out our Phenomenal Leap to get there.&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 7s&gt;&gt;
+    &lt;&lt;timed 6s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;Answer this sentence... You might want to discuss in pairs before you write it down. 
+        &lt;span&gt;Well, as I said, more like smaller steps for us humans.&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+ &lt;&lt;timed 9s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+&lt;span&gt;I’ll send you some sentences to help you work out these steps.&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+    &lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 12s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+        &lt;span&gt;You might want to discuss in pairs before you write it down. 
  &lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
-    &lt;&lt;timed 9s&gt;&gt;
+    &lt;&lt;timed 14s&gt;&gt;
          &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
         &lt;&lt;include &quot;stage3-tutorial3-b-question&quot;&gt;&gt;
     &lt;&lt;/replace&gt;&gt;
@@ -4363,14 +4389,9 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
 &lt;/div&gt;
 
-&lt;&lt;timed 0.1s&gt;&gt;
-   &lt;&lt;replace &quot;#pageName&quot;&gt;&gt;
-    &lt;h2&gt;Future Dreams&lt;/h2&gt;
-    &lt;&lt;/replace&gt;&gt;
-&lt;&lt;/timed&gt;&gt;
 &lt;&lt;include &quot;choose-messages-language-ks-specific&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="242" name="stage3-tutorial3-c-messages-eng-ks1" tags="nobr" position="225,3100" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;&lt;voicenote &quot;assets/sound/ticker.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial3-c-vn-transcript-eng-ks1&quot;
+         &lt;&lt;voicenote &quot;assets/sound/voicenotes/VOICENOTE 7 YOUNGER.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial3-c-vn-transcript-eng-ks1&quot;
          &quot;stage3-tutorial3-c-vn-triggered-content-eng-ks1&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
@@ -4383,7 +4404,7 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="243" name="stage3-tutorial3-c-messages-eng-ks2" tags="nobr" position="350,3100" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;&lt;voicenote &quot;assets/sound/ticker.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial3-c-vn-transcript-eng-ks2&quot;
+         &lt;&lt;voicenote &quot;assets/sound/voicenotes/VOICENOTE 8 OLDER.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial3-c-vn-transcript-eng-ks2&quot;
          &quot;stage3-tutorial3-c-vn-triggered-content-eng-ks2&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
@@ -4419,13 +4440,13 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
 
 &lt;p&gt;Yes - a foot. You can draw around your own - no shoes or socks. Or, if you are worried about too many stinky feet being unleashed, you can use the template I have sent over. &lt;/p&gt;
 
-&lt;p&gt;When you have drawn around your foot then let me know by messaging me the word &lt;span class=&quot;codeword-text&quot;&gt;FOOTSTEP&lt;/span&gt;.  &lt;/p&gt;</tw-passagedata><tw-passagedata pid="246" name="stage3-tutorial3-c-vn-triggered-content-eng-ks1" tags="nobr" position="725,3100" size="100,100">&lt;&lt;timed 5s&gt;&gt;
+&lt;p&gt;When you have drawn around your foot then let me know by messaging me the word &lt;span class=&quot;codeword-text&quot;&gt;FOOTSTEP&lt;/span&gt;.  &lt;/p&gt;</tw-passagedata><tw-passagedata pid="246" name="stage3-tutorial3-c-vn-triggered-content-eng-ks1" tags="nobr" position="725,3100" size="100,100">&lt;&lt;timed 19s&gt;&gt;
   &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
        &lt;div class=&quot;picture-container&quot; id=&quot;pictureContainer&quot;&gt;
        &lt;img src=&quot;assets/img/stage3-tutorial3/empty-foot.png&quot; alt=&quot;Empty footprint&quot; &gt;
         &lt;/div&gt;
         &lt;&lt;/replace&gt;&gt;
- &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="247" name="stage3-tutorial3-c-vn-triggered-content-eng-ks2" tags="nobr" position="850,3100" size="100,100">&lt;&lt;timed 5s&gt;&gt;
+ &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="247" name="stage3-tutorial3-c-vn-triggered-content-eng-ks2" tags="nobr" position="850,3100" size="100,100">&lt;&lt;timed 19s&gt;&gt;
   &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
        &lt;div class=&quot;picture-container&quot; id=&quot;pictureContainer&quot;&gt;
        &lt;img src=&quot;assets/img/stage3-tutorial3/empty-foot.png&quot; alt=&quot;Empty footprint&quot; &gt;
@@ -4615,19 +4636,39 @@ I’ll send you some sentences to help you work out these steps. &lt;br/&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
         &lt;div class=&quot;message-received&quot;&gt;
             &lt;span&gt;Excellent work, these feet show your Future Dreams.
-            It might seem like a leap, but there are steps to get there.
+            It might seem like a leap, but there are steps to get there.&lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 3s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+        &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt;
             Some steps will feel tricky. That’s okay, challenges are there to be overcome.
             &lt;br&gt;
             You aren’t on your own. 
             &lt;br&gt;
             And everyone goes further with a boost.
-            Swap with someone and encourage them to carry on their journey to their Future Dreams- I call it a Pep Talk! 
-            &lt;/span&gt;
+          &lt;/span&gt;
         &lt;/div&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 6s&gt;&gt;
+
+&lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+        &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt;
+          Swap with someone and encourage them to carry on their journey to their Future Dreams- I call it a Pep Talk! 
+          &lt;br&gt;
+          When you’ve written a Pep Talk, read it to them to see if they like it.   
+          &lt;/span&gt;
+        &lt;/div&gt;
+    &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 7s&gt;&gt;
     &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
         &lt;div class=&quot;accented-quote&quot;&gt;
             &lt;span&gt;
@@ -4679,7 +4720,7 @@ You can reach your Future Dream because…
 
 &lt;&lt;run setup.completeTutorial(3)&gt;&gt;</tw-passagedata><tw-passagedata pid="265" name="stage3-tutorial3-f-messages-eng" tags="nobr" position="600,3350" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial3-f-vn-transcript-eng&quot;
+         &lt;&lt;voicenote &quot;assets/sound/voicenotes/VOICENOTE 9.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial3-f-vn-transcript-eng&quot;
          &quot;stage3-tutorial3-f-vn-triggered-content-eng&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
@@ -4689,6 +4730,7 @@ You can reach your Future Dream because…
     &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
        &lt;div class=&quot;btn-option-wrapper&quot;&gt;
       &lt;&lt;button &quot;Dream Team Menu&quot;&gt;&gt;
+        &lt;&lt;audio &quot;complete-simple&quot; &quot;play&quot;&gt;&gt;
         &lt;&lt;goto $nextPassage&gt;&gt;
         &lt;&lt;/button&gt;&gt;
         &lt;/div&gt;

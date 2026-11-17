@@ -4806,9 +4806,15 @@ Lorem Ipsum Welsh KS2
 <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Ok - first things first.<br/>
-Can you think of something real you are dreaming for your future at the moment? 
-</span>
+        <span>Ok - first things first.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+    <<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Can you think of something real you are dreaming for your future at the moment?</span>
         </div>
         <</append>>
     <</timed>>
@@ -4850,15 +4856,22 @@ Can you think of something real you are dreaming for your future at the moment?
 
 :: stage3-tutorial3-a-messages-eng-ks2 [nobr]
 
-<<timed 1s>>
+    <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Ok - first things first.<br/>
-Can you think of something real you are dreaming for your future at the moment? 
-</span>
+        <span>Ok - first things first.</span>
         </div>
         <</append>>
     <</timed>>
+
+    <<timed 2s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Can you think of something real you are dreaming for your future at the moment?</span>
+        </div>
+        <</append>>
+    <</timed>>
+
 
 <<timed 5s>>
     <<append "#chatHistory">>
@@ -4949,7 +4962,7 @@ Lorem Ipsum Welsh
     },
     {
         eng: {
-            message: "Last one,",
+            message: "Last one",
             question: "The first step I could take, perhaps this week, to reach my Future Dream is..."
         },
         cym: {
@@ -5087,24 +5100,37 @@ Do you need someone to help you?<br/>
 <<timed 3s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Now, we are going to work out our Phenomenal Leap to get there. <br/>
-Well, as I said, more like smaller steps for us humans. <br/>
-I’ll send you some sentences to help you work out these steps. <br/>
- </span>
+        <span>Now, we are going to work out our Phenomenal Leap to get there.</span>
         </div>
         <</append>>
     <</timed>>
 
-<<timed 7s>>
+    <<timed 6s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Answer this sentence... You might want to discuss in pairs before you write it down. 
+        <span>Well, as I said, more like smaller steps for us humans.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+ <<timed 9s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+<span>I’ll send you some sentences to help you work out these steps.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 12s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>You might want to discuss in pairs before you write it down. 
  </span>
         </div>
         <</append>>
     <</timed>>
 
-    <<timed 9s>>
+    <<timed 14s>>
          <<replace "#videoWrapper">>
         <<include "stage3-tutorial3-b-question">>
     <</replace>>
@@ -5123,18 +5149,13 @@ I’ll send you some sentences to help you work out these steps. <br/>
 <<include "_templateVideoChat">>
 </div>
 
-<<timed 0.1s>>
-   <<replace "#pageName">>
-    <h2>Future Dreams</h2>
-    <</replace>>
-<</timed>>
 <<include "choose-messages-language-ks-specific">>
 
 
 :: stage3-tutorial3-c-messages-eng-ks1 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ticker.mp3" "3s" "stage3-tutorial3-c-vn-transcript-eng-ks1"
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 7 YOUNGER.mp3" "3s" "stage3-tutorial3-c-vn-transcript-eng-ks1"
          "stage3-tutorial3-c-vn-triggered-content-eng-ks1">>
         <</append>>
     <</timed>>
@@ -5151,7 +5172,7 @@ I’ll send you some sentences to help you work out these steps. <br/>
 :: stage3-tutorial3-c-messages-eng-ks2 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ticker.mp3" "3s" "stage3-tutorial3-c-vn-transcript-eng-ks2"
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 8 OLDER.mp3" "3s" "stage3-tutorial3-c-vn-transcript-eng-ks2"
          "stage3-tutorial3-c-vn-triggered-content-eng-ks2">>
         <</append>>
     <</timed>>
@@ -5196,7 +5217,7 @@ I’ll send you some sentences to help you work out these steps. <br/>
 <p>When you have drawn around your foot then let me know by messaging me the word <span class="codeword-text">FOOTSTEP</span>.  </p>
 
 :: stage3-tutorial3-c-vn-triggered-content-eng-ks1 [nobr]
-<<timed 5s>>
+<<timed 19s>>
   <<replace "#videoWrapper">>
        <div class="picture-container" id="pictureContainer">
        <img src="assets/img/stage3-tutorial3/empty-foot.png" alt="Empty footprint" >
@@ -5205,7 +5226,7 @@ I’ll send you some sentences to help you work out these steps. <br/>
  <</timed>>
 
 :: stage3-tutorial3-c-vn-triggered-content-eng-ks2 [nobr]
-<<timed 5s>>
+<<timed 19s>>
   <<replace "#videoWrapper">>
        <div class="picture-container" id="pictureContainer">
        <img src="assets/img/stage3-tutorial3/empty-foot.png" alt="Empty footprint" >
@@ -5436,19 +5457,39 @@ Lorem Ipsum Welsh KS2
     <<append "#chatHistory">>
         <div class="message-received">
             <span>Excellent work, these feet show your Future Dreams.
-            It might seem like a leap, but there are steps to get there.
+            It might seem like a leap, but there are steps to get there.</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 3s>>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>
             Some steps will feel tricky. That’s okay, challenges are there to be overcome.
             <br>
             You aren’t on your own. 
             <br>
             And everyone goes further with a boost.
-            Swap with someone and encourage them to carry on their journey to their Future Dreams- I call it a Pep Talk! 
-            </span>
+          </span>
         </div>
     <</append>>
 <</timed>>
 
-<<timed 6s>>
+
+<<timed 5s>>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>
+          Swap with someone and encourage them to carry on their journey to their Future Dreams- I call it a Pep Talk! 
+          <br>
+          When you’ve written a Pep Talk, read it to them to see if they like it.   
+          </span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 7s>>
     <<replace "#videoWrapper">>
         <div class="accented-quote">
             <span>
@@ -5513,7 +5554,7 @@ Lorem Ipsum Welsh KS2
 :: stage3-tutorial3-f-messages-eng [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial3-f-vn-transcript-eng"
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 9.mp3" "3s" "stage3-tutorial3-f-vn-transcript-eng"
          "stage3-tutorial3-f-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
@@ -5523,6 +5564,7 @@ Lorem Ipsum Welsh KS2
     <<append "#chatInputWrapper">>
        <div class="btn-option-wrapper">
       <<button "Dream Team Menu">>
+        <<audio "complete-simple" "play">>
         <<goto $nextPassage>>
         <</button>>
         </div>
