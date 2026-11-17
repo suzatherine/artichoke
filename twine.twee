@@ -2964,8 +2964,10 @@ Lorem Ipsum Welsh
 
 :: stage3-tutorial1-video-video-eng [nobr]
 /* VIDEO 4  */
+
+/* night dreams */
 <iframe width='800px' height='450px' 
-      src="https://player.vimeo.com/video/1247583315?h=c4ec464d2c&amp;autopause=0&amp;player_id=0&amp;app_id=58479"></iframe>
+      src="https://player.vimeo.com/video/1247583452?h=47c1f33aee&amp;autopause=0&amp;player_id=0&amp;app_id=58479"></iframe>
 
 :: stage3-tutorial1-video-video-cym [nobr]
 /* VIDEO 4  */
@@ -3611,7 +3613,7 @@ Lorem ipsum Welsh KS2
 :: stage3-tutorial1-e-messages-eng-ks1 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-e-vn-transcript-eng-ks1">>
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 4 OLDER - E.mp3" "3s" "stage3-tutorial1-e-vn-transcript-eng-ks1">>
         <</append>>
     <</timed>>
 
@@ -3949,8 +3951,9 @@ Lorem Ipsum Welsh
 
 :: stage3-tutorial2-video-video-eng [nobr]
 /* VIDEO 5  */
+/* day dreams */
 <iframe width='800px' height='450px' 
-      src="https://player.vimeo.com/video/1247583452?h=47c1f33aee&amp;autopause=0&amp;player_id=0&amp;app_id=58479"></iframe>
+      src="https://player.vimeo.com/video/1247583315?h=c4ec464d2c&amp;autopause=0&amp;player_id=0&amp;app_id=58479"></iframe>
 
 :: stage3-tutorial2-video-video-cym [nobr]
 /* VIDEO 5  */
