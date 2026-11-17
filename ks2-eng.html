@@ -1175,13 +1175,10 @@ codeword11: {
 &lt;div id=&quot;audio&quot;&gt;&lt;/div&gt;
     &lt;main class=&quot;main-content-center&quot; id=&quot;mainContent&quot;&gt;
     &lt;div class=&quot;hero-image&quot; id=&quot;heroImage&quot;&gt;
-    &lt;img src=&quot;assets/img/portal-logo-w.png&quot; alt=&quot;logo&quot;/&gt;
-    &lt;/div&gt;
-        
+    &lt;/div&gt; 
     &lt;/main&gt;
-
-&lt;/div&gt;
-&lt;&lt;include &quot;footer&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="9" name="_templateVideoChat" tags="nobr" position="1100,100" size="100,100">&lt;div class=&quot;page-wrapper&quot;&gt;
+&lt;&lt;include &quot;footer&quot;&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="_templateVideoChat" tags="nobr" position="1100,100" size="100,100">&lt;div class=&quot;page-wrapper&quot;&gt;
 &lt;div id=&quot;audio&quot;&gt;&lt;/div&gt;
 &lt;main class=&quot;video-chat&quot;&gt;
 &lt;div class=&quot;chat-wrapper&quot; id=&quot;chatWrapper&quot;&gt;
@@ -1596,12 +1593,9 @@ codeword11: {
 
    &lt;&lt;timed 6s&gt;&gt;
         &lt;&lt;goto $nextPassage&gt;&gt;
-        &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="calling" tags="nobr" position="1100,475" size="100,100">&lt;div class=&quot;page-wrapper full-screen-landing connecting&quot;&gt;
+        &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="39" name="calling" tags="nobr" position="1100,475" size="100,100">&lt;div class=&quot;page-background bg end-bg full-screen-landing connecting&quot;&gt;
      &lt;main class=&quot;main-content-center&quot;&gt;
         &lt;div class=&quot;connecting-image-wrapper&quot;&gt;
-         &lt;img src=&quot;assets/img/portal-logo-w.png&quot; class=&quot;spinning&quot; alt=&quot;logo&quot;/&gt;
-         &lt;img src=&quot;assets/img/user-round-white.png&quot; alt=&quot;user icon&quot; class=&quot;user-icon&quot;/&gt;
-         
          &lt;/div&gt;
      &lt;div class=&quot;hero-text&quot; id=&quot;heroText&quot;&gt;
    
@@ -1609,6 +1603,7 @@ codeword11: {
         &lt;/main&gt;
  &lt;/div&gt;
 
+&lt;&lt;audio &quot;loading&quot; &quot;play&quot;&gt;&gt;
 &lt;&lt;timed 0.1s&gt;&gt;
     &lt;&lt;replace &quot;#heroText&quot;&gt;&gt;
              &lt;h2&gt;&lt;&lt;type 60ms&gt;&gt;Calling Bea...&lt;&lt;/type&gt;&gt;
@@ -4769,9 +4764,7 @@ You can reach your Future Dream because…
 &lt;&lt;set $nextPassage to &quot;stage3-submission-video&quot;&gt;&gt;
 
 &lt;&lt;include &quot;_templateContentCenter&quot;&gt;&gt;
-&lt;&lt;timed 0.1s&gt;&gt;
-    &lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;
-&lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="272" name="stage3-submission-call-bea-messages-eng" tags="nobr" position="225,3475" size="100,100">&lt;&lt;replace &quot;#heroImage&quot;&gt;&gt;
+&lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="272" name="stage3-submission-call-bea-messages-eng" tags="nobr" position="225,3475" size="100,100">&lt;&lt;replace &quot;#heroImage&quot;&gt;&gt;
      &lt;img src=&quot;assets/img/icons/BEA_ICON.png&quot; alt=&quot;avatar&quot;/&gt;
 &lt;&lt;button &quot;Call Bea&quot;&gt;&gt;
     &lt;&lt;goto &quot;calling&quot;&gt;&gt;
@@ -4802,16 +4795,37 @@ You can reach your Future Dream because…
 &lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="278" name="stage3-submission-a-messages-eng" tags="nobr" position="975,3475" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-            &lt;span&gt;It&#39;s time to decide what dream you want to send the BFG!&lt;br&gt;
-            You can send him something you&#39;ve already written - a night-time dream, a daydream or a future dream - or using all the new skills you&#39;ve learned to write a dream, you can write him something new! &lt;br&gt;
-            But remember what the BFG said: you has the biggest, bestest, most delumptious Dreams in your thinkings’ That’s what we need! &lt;br&gt;
-            So let&#39;s make sure we&#39;re checking our dreams to make them the best of the best!
+            &lt;span&gt;It&#39;s time to decide what dream you want to send the BFG!
             &lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
+&lt;&lt;timed 3s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt; You can send him something you&#39;ve already written - a night-time dream, a daydream or a future dream - or using all the new skills you&#39;ve learned to write a dream, you can write him something new!&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
 &lt;&lt;timed 5s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt; But remember what the BFG said: you has the biggest, bestest, most delumptious Dreams in your thinkings’ That’s what we need!&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 8s&gt;&gt;
+    &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
+         &lt;div class=&quot;message-received&quot;&gt;
+            &lt;span&gt; So let&#39;s make sure we&#39;re checking our dreams to make them the best of the best!&lt;/span&gt;
+        &lt;/div&gt;
+        &lt;&lt;/append&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
+&lt;&lt;timed 10s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
         &lt;div class=&quot;message-received&quot;&gt;
             &lt;span&gt;Once you have decided what you want to share with The BFG, read it to someone else.&lt;br&gt;
@@ -4821,7 +4835,7 @@ You can reach your Future Dream because…
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
-&lt;&lt;timed 10s&gt;&gt;
+&lt;&lt;timed 12s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;When you’re ready to move on, send me the word BOOK. &lt;/span&gt;
@@ -4830,7 +4844,7 @@ You can reach your Future Dream because…
     &lt;&lt;/timed&gt;&gt;
 
 
-&lt;&lt;timed 12s&gt;&gt;
+&lt;&lt;timed 13s&gt;&gt;
     &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
       /* $codewordsStage3.codeword10 */
       &lt;&lt;include &quot;codeword-chat&quot;&gt;&gt;

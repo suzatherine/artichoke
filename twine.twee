@@ -1116,13 +1116,11 @@ codeword11: {
 <div id="audio"></div>
     <main class="main-content-center" id="mainContent">
     <div class="hero-image" id="heroImage">
-    <img src="assets/img/portal-logo-w.png" alt="logo"/>
-    </div>
-        
+    </div> 
     </main>
-
-</div>
 <<include "footer">>
+</div>
+
 
 
 :: _templateVideoChat [nobr]
@@ -1648,12 +1646,9 @@ codeword11: {
 
 :: calling [nobr]
 
- <div class="page-wrapper full-screen-landing connecting">
+ <div class="page-background bg end-bg full-screen-landing connecting">
      <main class="main-content-center">
         <div class="connecting-image-wrapper">
-         <img src="assets/img/portal-logo-w.png" class="spinning" alt="logo"/>
-         <img src="assets/img/user-round-white.png" alt="user icon" class="user-icon"/>
-         
          </div>
      <div class="hero-text" id="heroText">
    
@@ -1661,6 +1656,7 @@ codeword11: {
         </main>
  </div>
 
+<<audio "loading" "play">>
 <<timed 0.1s>>
     <<replace "#heroText">>
              <h2><<type 60ms>>Calling Bea...<</type>>
@@ -5618,21 +5614,14 @@ Lorem Ipsum Welsh
 
 
 
-
-
-
-
-
-
 :: stage3-submission-call-bea [nobr]
 <<set $prevPassage to "stage3-tutorials-menu">>
 <<set $passage to "stage3-submission-call-bea">>
 <<set $nextPassage to "stage3-submission-video">>
 
 <<include "_templateContentCenter">>
-<<timed 0.1s>>
-    <<include "choose-messages-language">>
-<</timed>>
+<<include "choose-messages-language">>
+
 
 
 
@@ -5693,16 +5682,37 @@ Lorem Ipsum Welsh
 <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-            <span>It's time to decide what dream you want to send the BFG!<br>
-            You can send him something you've already written - a night-time dream, a daydream or a future dream - or using all the new skills you've learned to write a dream, you can write him something new! <br>
-            But remember what the BFG said: you has the biggest, bestest, most delumptious Dreams in your thinkings’ That’s what we need! <br>
-            So let's make sure we're checking our dreams to make them the best of the best!
+            <span>It's time to decide what dream you want to send the BFG!
             </span>
         </div>
         <</append>>
 <</timed>>
 
+<<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+            <span> You can send him something you've already written - a night-time dream, a daydream or a future dream - or using all the new skills you've learned to write a dream, you can write him something new!</span>
+        </div>
+        <</append>>
+<</timed>>
+
 <<timed 5s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+            <span> But remember what the BFG said: you has the biggest, bestest, most delumptious Dreams in your thinkings’ That’s what we need!</span>
+        </div>
+        <</append>>
+<</timed>>
+
+<<timed 8s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+            <span> So let's make sure we're checking our dreams to make them the best of the best!</span>
+        </div>
+        <</append>>
+<</timed>>
+
+<<timed 10s>>
     <<append "#chatHistory">>
         <div class="message-received">
             <span>Once you have decided what you want to share with The BFG, read it to someone else.<br>
@@ -5712,7 +5722,7 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
 
-<<timed 10s>>
+<<timed 12s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>When you’re ready to move on, send me the word BOOK. </span>
@@ -5721,7 +5731,7 @@ Lorem Ipsum Welsh
     <</timed>>
 
 
-<<timed 12s>>
+<<timed 13s>>
     <<append "#chatInputWrapper">>
       /* $codewordsStage3.codeword10 */
       <<include "codeword-chat">>

@@ -106,11 +106,12 @@
 
 .end-bg {
   background-image: url('../assets/img/bgs/06 END SCREEN.jpg');
+  color: var(--palette-navy);
 }
 
 .cream-bg {
   background-color: var(--palette-cream);
-  color:navy;
+  color:var(--palette-navy);
 }
 
 .bg {
