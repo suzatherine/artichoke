@@ -1723,7 +1723,7 @@ codeword11: {
 :: stage2-video-video-eng[nobr]
 /* VIDEO 2: BEA ‘LIVE’ */
 <iframe width='800px' height='450px' 
-      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+      src='https://player.vimeo.com/video/1247583390?h=1995b9d791&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1'></iframe>
 
 
 :: stage2-video-video-cym[nobr]
@@ -1741,7 +1741,7 @@ codeword11: {
 :: stage2-video-rewatch-video-eng[nobr]
 /* VIDEO 2: BEA ‘LIVE’ */
 <iframe width='800px' height='450px' 
-      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+      src='https://player.vimeo.com/video/1247583390?h=1995b9d791&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1'></iframe>
 
 :: stage2-video-rewatch-video-cym[nobr]
 /* VIDEO 2: BEA ‘LIVE’ */
@@ -2838,7 +2838,7 @@ Lorem Ipsum Welsh
 :: stage3-video-video-eng [nobr]
 /* VIDEO 3 */
 <iframe width='800px' height='450px' 
-      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+      src="https://player.vimeo.com/video/1247583317?h=5d3ff62cb9&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1"></iframe>
 
 :: stage3-video-video-cym [nobr]
 /* VIDEO 3 */
@@ -2965,7 +2965,7 @@ Lorem Ipsum Welsh
 :: stage3-tutorial1-video-video-eng [nobr]
 /* VIDEO 4  */
 <iframe width='800px' height='450px' 
-      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+      src="https://player.vimeo.com/video/1247583315?h=c4ec464d2c&amp;autopause=0&amp;player_id=0&amp;app_id=58479"></iframe>
 
 :: stage3-tutorial1-video-video-cym [nobr]
 /* VIDEO 4  */
@@ -3950,7 +3950,7 @@ Lorem Ipsum Welsh
 :: stage3-tutorial2-video-video-eng [nobr]
 /* VIDEO 5  */
 <iframe width='800px' height='450px' 
-      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+      src="https://player.vimeo.com/video/1247583452?h=47c1f33aee&amp;autopause=0&amp;player_id=0&amp;app_id=58479"></iframe>
 
 :: stage3-tutorial2-video-video-cym [nobr]
 /* VIDEO 5  */
@@ -4774,7 +4774,7 @@ Lorem Ipsum Welsh KS2
 :: stage3-tutorial3-video-video-eng [nobr]
 /* VIDEO 6 */
 <iframe width='800px' height='450px' 
-      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+      src="https://player.vimeo.com/video/1247583775?h=839eaa981d&amp;autopause=0&amp;player_id=0&amp;app_id=58479"></iframe>
 
 :: stage3-tutorial3-video-video-cym [nobr]
 /* VIDEO 6 */
@@ -5659,7 +5659,7 @@ Lorem Ipsum Welsh
 :: stage3-submission-video-video-eng[nobr]    
 /* Video 7 -  SUBMISSION */
 <iframe width='800px' height='450px' 
-      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+      src="https://player.vimeo.com/video/1247583865?h=16352b52ae&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1"></iframe>
 
 :: stage3-submission-video-video-cym[nobr]
 /* Video 7 -  SUBMISSION */
@@ -5845,7 +5845,7 @@ Lorem Ipsum welsh
             <div id="stampCollection" class="fade-up"><<include "stamp-collection">></div>
             <</append>>
         <</timed>>
-        <<timed 20s>>
+        <<timed 30s>>
             <<goto $nextPassage>>
         <</timed>>
         <</button>>
@@ -5888,7 +5888,9 @@ Lorem ipsum welsh
 <<set $prevPassage to $userchoices.landingPage>>
 <<set $passage to "stage4-video">>
 <<set $nextPassage to $userchoices.landingPage>>
+<div class="bg login-bg page-background">
 <<include "_templateFullScreenVideo">>
+</div>
 <<include "choose-video-language">>
 
 
@@ -5897,7 +5899,7 @@ Lorem ipsum welsh
 :: stage4-video-video-eng[nobr]
 /* VIDEO 8 */
 <iframe width='800px' height='450px' 
-      src='https://player.vimeo.com/video/938105229?h=afecc81d56&amp;badge=0&amp;autoplay=1&amp;autopause=0&amp;player_id=0&amp;app_id=58479'></iframe>
+      src="https://player.vimeo.com/video/1247584109?h=3baf6a7b72&amp;autopause=0&amp;player_id=0&amp;app_id=58479&amp;autoplay=1&amp;muted=1"></iframe>
 
   <<button "Replay">>
          <<goto $passage>>
@@ -5920,7 +5922,9 @@ Lorem ipsum welsh
 <<set $prevPassage to $userchoices.landingPage>>
 <<set $passage to "stage5-video">>
 <<set $nextPassage to $userchoices.landingPage>>
+<div class="bg login-bg page-background">
 <<include "_templateFullScreenVideo">>
+</div>
 <<include "choose-video-language">>
 
 
