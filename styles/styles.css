@@ -97,6 +97,7 @@
 
 .future-bg {
   background-image: url('../assets/img/bgs/04 FUTURE.jpg');
+  color: var(--palette-navy)
 }
 
 .doodle-bg {
@@ -2223,6 +2224,61 @@ body:is(
 
 /* MAPPING  */
 
+#videoWrapper:has(> .mapping-questions-title),
+#videoWrapper:has(> .pep-talk-title) {
+  position: relative;
+}
+
+.mapping-questions-title {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  z-index: 20;
+  width: max-content;
+  max-width: calc(100vw - 2rem);
+  margin: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-headings);
+  font-size: clamp(5rem, 4vw, 3rem);
+  text-align: center;
+}
+
+.pep-talk-title {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  z-index: 20;
+  width: max-content;
+  max-width: calc(100vw - 2rem);
+  margin: 0;
+  transform: translateX(-50%);
+  font-family: var(--font-headings);
+  font-size: clamp(4rem, 8vw, 6rem);
+  text-align: center;
+}
+
+#mappingQuestionContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+  padding-top: 3rem;
+  box-sizing: border-box;
+}
+
+#pepTalkQuoteContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1rem;
+  padding-top: 3rem;
+  box-sizing: border-box;
+}
+
 .accented-quote,
 .mapping-question {
   font-family: var(--font-headings), sans-serif;
@@ -2237,6 +2293,7 @@ body:is(
 
 .mapping-question {
   animation: mapping-question-fade-in 0.35s ease 0.2s both;
+  gap: 2rem;
 }
 
 @keyframes mapping-question-fade-in {

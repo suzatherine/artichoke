@@ -944,7 +944,7 @@ codeword11: {
     <</if>>
     <<if _msgs.length > 0>>
         <<run $mappingMessagesShown.push(_idx)>>
-        <<replace "#videoWrapper">><</replace>>
+        <<replace "#mappingQuestionContent">><</replace>>
         <<if _args[0]>>
             <<replace "#chatHistory">><</replace>>
         <</if>>
@@ -964,24 +964,24 @@ codeword11: {
     <</for>>
     <<if _msgs.length is 0>>
        
-            <<replace "#videoWrapper">>
+            <<replace "#mappingQuestionContent">>
                 <<include "stage3-tutorial2-b-question">>
             <</replace>>
    
         <<timed 2s>>
-        <<append "#videoWrapper">>
+        <<append "#mappingQuestionContent">>
             <<include "stage3-tutorial2-b-navigation">>
         <</append>>
         <</timed>>
     <<else>>
         <<timed `(_msgs.length * 3) + "s"`>>
            
-                <<replace "#videoWrapper">>
+                <<replace "#mappingQuestionContent">>
                     <<include "stage3-tutorial2-b-question">>
                 <</replace>>
       
             <<timed 2s>>
-            <<append "#videoWrapper">>
+            <<append "#mappingQuestionContent">>
                 <<include "stage3-tutorial2-b-navigation">>
             <</append>>
             <</timed>>
@@ -4144,9 +4144,9 @@ Lorem Ipsum Welsh
     },
     {
         eng: {
-            message: null,
+            message: "Next let’s look at the community",
             question: [
-                "Next let’s look at the community - what does community in this area mean to you? ",
+                "What does community in this area mean to you? ",
                 "Add in the community of the area - the people of this place, those who make this place special, those who are helpful, those who look after it."
             ]
         },
@@ -4160,9 +4160,13 @@ Lorem Ipsum Welsh
     },
     {
         eng: {
-            message: null,
+            message: "Let’s look at some of our favourite spots.",
             question: [
-                "What are your favourite parts of the area - What are your favourite places? What makes this community happy here? What makes it welcoming? What brings them together?"
+                "What are your favourite parts of the area",
+                "What are your favourite places?",
+                "What makes this community happy here?",
+                "What makes it welcoming?",
+                "What brings them together?"
             ]
         },
         cym: {
@@ -4176,9 +4180,11 @@ Lorem Ipsum Welsh
     },
     {
         eng: {
-            message: null,
+            message: "Now some important questions",
             question: [
-                "Now some important questions - what are the challenges of the area? What makes the community sad? What area needs transforming?"
+                "What are the challenges of the area?",
+                "What makes the community sad?",
+                "What area needs transforming?"
             ]
         },
         cym: {
@@ -4191,9 +4197,10 @@ Lorem Ipsum Welsh
     },
     {
         eng: {
-            message: null,
+            message: "Last part",
             question: [
-                "Last part - what could be transformed to make the community happier? What would make it more welcoming? "
+                "What could be transformed to make the community happier?",
+                "What would make it more welcoming?"
             ]
         },
         cym: {
@@ -4226,6 +4233,13 @@ Lorem Ipsum Welsh
     <<include "_templateVideoChat">>
 </div>
 
+<<timed 0.1s>>
+    <<replace "#videoWrapper">>
+        <h2 class="mapping-questions-title">MAPPING QUESTIONS</h2>
+        <div id="mappingQuestionContent"></div>
+    <</replace>>
+<</timed>>
+
 <<timed 1s>>
     /* SHOW MAPPING QUESTION WIDGET */
     <<mappingShowQuestion false>>
@@ -4255,11 +4269,11 @@ Lorem Ipsum Welsh
 
         <<set $mappingQuestionIndex-->>
 
-        <<replace "#videoWrapper">>
+        <<replace "#mappingQuestionContent">>
             <<include "stage3-tutorial2-b-question">>
         <</replace>>
 
-        <<append "#videoWrapper">>
+        <<append "#mappingQuestionContent">>
             <<include "stage3-tutorial2-b-navigation">>
         <</append>>
 
@@ -5490,19 +5504,20 @@ Lorem Ipsum Welsh KS2
     <</append>>
 <</timed>>
 
+
 <<timed 7s>>
     <<replace "#videoWrapper">>
-        <div class="accented-quote">
-            <span>
-You can reach your Future Dream because…
-
-</span>
+        <h2 class="pep-talk-title">PEP TALK</h2>
+        <div id="pepTalkQuoteContent">
+            <div class="accented-quote">
+                <span>You can reach your Future Dream because…</span>
+            </div>
         </div>
     <</replace>>
 <</timed>>
 
 <<timed 9s>>
-    <<append "#videoWrapper">>
+    <<append "#pepTalkQuoteContent">>
         <div class="accented-quote">
             <span>When it gets hard, remember…</span>
         </div>
@@ -5510,7 +5525,7 @@ You can reach your Future Dream because…
 <</timed>>
 
 <<timed 12s>>
-    <<append "#videoWrapper">>
+    <<append "#pepTalkQuoteContent">>
         <div class="accented-quote">
             <span>I believe in you because…</span>
         </div>

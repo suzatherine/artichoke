@@ -1019,7 +1019,7 @@ codeword11: {
     &lt;&lt;/if&gt;&gt;
     &lt;&lt;if _msgs.length &gt; 0&gt;&gt;
         &lt;&lt;run $mappingMessagesShown.push(_idx)&gt;&gt;
-        &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
+        &lt;&lt;replace &quot;#mappingQuestionContent&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
         &lt;&lt;if _args[0]&gt;&gt;
             &lt;&lt;replace &quot;#chatHistory&quot;&gt;&gt;&lt;&lt;/replace&gt;&gt;
         &lt;&lt;/if&gt;&gt;
@@ -1039,24 +1039,24 @@ codeword11: {
     &lt;&lt;/for&gt;&gt;
     &lt;&lt;if _msgs.length is 0&gt;&gt;
        
-            &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+            &lt;&lt;replace &quot;#mappingQuestionContent&quot;&gt;&gt;
                 &lt;&lt;include &quot;stage3-tutorial2-b-question&quot;&gt;&gt;
             &lt;&lt;/replace&gt;&gt;
    
         &lt;&lt;timed 2s&gt;&gt;
-        &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
+        &lt;&lt;append &quot;#mappingQuestionContent&quot;&gt;&gt;
             &lt;&lt;include &quot;stage3-tutorial2-b-navigation&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
         &lt;&lt;/timed&gt;&gt;
     &lt;&lt;else&gt;&gt;
         &lt;&lt;timed `(_msgs.length * 3) + &quot;s&quot;`&gt;&gt;
            
-                &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+                &lt;&lt;replace &quot;#mappingQuestionContent&quot;&gt;&gt;
                     &lt;&lt;include &quot;stage3-tutorial2-b-question&quot;&gt;&gt;
                 &lt;&lt;/replace&gt;&gt;
       
             &lt;&lt;timed 2s&gt;&gt;
-            &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
+            &lt;&lt;append &quot;#mappingQuestionContent&quot;&gt;&gt;
                 &lt;&lt;include &quot;stage3-tutorial2-b-navigation&quot;&gt;&gt;
             &lt;&lt;/append&gt;&gt;
             &lt;&lt;/timed&gt;&gt;
@@ -3530,9 +3530,9 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
     },
     {
         eng: {
-            message: null,
+            message: &quot;Next let’s look at the community&quot;,
             question: [
-                &quot;Next let’s look at the community - what does community in this area mean to you? &quot;,
+                &quot;What does community in this area mean to you? &quot;,
                 &quot;Add in the community of the area - the people of this place, those who make this place special, those who are helpful, those who look after it.&quot;
             ]
         },
@@ -3546,9 +3546,13 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
     },
     {
         eng: {
-            message: null,
+            message: &quot;Let’s look at some of our favourite spots.&quot;,
             question: [
-                &quot;What are your favourite parts of the area - What are your favourite places? What makes this community happy here? What makes it welcoming? What brings them together?&quot;
+                &quot;What are your favourite parts of the area&quot;,
+                &quot;What are your favourite places?&quot;,
+                &quot;What makes this community happy here?&quot;,
+                &quot;What makes it welcoming?&quot;,
+                &quot;What brings them together?&quot;
             ]
         },
         cym: {
@@ -3562,9 +3566,11 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
     },
     {
         eng: {
-            message: null,
+            message: &quot;Now some important questions&quot;,
             question: [
-                &quot;Now some important questions - what are the challenges of the area? What makes the community sad? What area needs transforming?&quot;
+                &quot;What are the challenges of the area?&quot;,
+                &quot;What makes the community sad?&quot;,
+                &quot;What area needs transforming?&quot;
             ]
         },
         cym: {
@@ -3577,9 +3583,10 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
     },
     {
         eng: {
-            message: null,
+            message: &quot;Last part&quot;,
             question: [
-                &quot;Last part - what could be transformed to make the community happier? What would make it more welcoming? &quot;
+                &quot;What could be transformed to make the community happier?&quot;,
+                &quot;What would make it more welcoming?&quot;
             ]
         },
         cym: {
@@ -3606,6 +3613,13 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
     &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
 &lt;/div&gt;
 
+&lt;&lt;timed 0.1s&gt;&gt;
+    &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+        &lt;h2 class=&quot;mapping-questions-title&quot;&gt;MAPPING QUESTIONS&lt;/h2&gt;
+        &lt;div id=&quot;mappingQuestionContent&quot;&gt;&lt;/div&gt;
+    &lt;&lt;/replace&gt;&gt;
+&lt;&lt;/timed&gt;&gt;
+
 &lt;&lt;timed 1s&gt;&gt;
     /* SHOW MAPPING QUESTION WIDGET */
     &lt;&lt;mappingShowQuestion false&gt;&gt;
@@ -3624,11 +3638,11 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
 
         &lt;&lt;set $mappingQuestionIndex--&gt;&gt;
 
-        &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
+        &lt;&lt;replace &quot;#mappingQuestionContent&quot;&gt;&gt;
             &lt;&lt;include &quot;stage3-tutorial2-b-question&quot;&gt;&gt;
         &lt;&lt;/replace&gt;&gt;
 
-        &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
+        &lt;&lt;append &quot;#mappingQuestionContent&quot;&gt;&gt;
             &lt;&lt;include &quot;stage3-tutorial2-b-navigation&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
 
@@ -4667,19 +4681,20 @@ Do you need someone to help you?&lt;br/&gt;
     &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
+
 &lt;&lt;timed 7s&gt;&gt;
     &lt;&lt;replace &quot;#videoWrapper&quot;&gt;&gt;
-        &lt;div class=&quot;accented-quote&quot;&gt;
-            &lt;span&gt;
-You can reach your Future Dream because…
-
-&lt;/span&gt;
+        &lt;h2 class=&quot;pep-talk-title&quot;&gt;PEP TALK&lt;/h2&gt;
+        &lt;div id=&quot;pepTalkQuoteContent&quot;&gt;
+            &lt;div class=&quot;accented-quote&quot;&gt;
+                &lt;span&gt;You can reach your Future Dream because…&lt;/span&gt;
+            &lt;/div&gt;
         &lt;/div&gt;
     &lt;&lt;/replace&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 9s&gt;&gt;
-    &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
+    &lt;&lt;append &quot;#pepTalkQuoteContent&quot;&gt;&gt;
         &lt;div class=&quot;accented-quote&quot;&gt;
             &lt;span&gt;When it gets hard, remember…&lt;/span&gt;
         &lt;/div&gt;
@@ -4687,7 +4702,7 @@ You can reach your Future Dream because…
 &lt;&lt;/timed&gt;&gt;
 
 &lt;&lt;timed 12s&gt;&gt;
-    &lt;&lt;append &quot;#videoWrapper&quot;&gt;&gt;
+    &lt;&lt;append &quot;#pepTalkQuoteContent&quot;&gt;&gt;
         &lt;div class=&quot;accented-quote&quot;&gt;
             &lt;span&gt;I believe in you because…&lt;/span&gt;
         &lt;/div&gt;
