@@ -4639,9 +4639,7 @@ Lorem Ipsum Welsh KS2
     <<append "#chatInputWrapper">>
      <<button "Dream Team Menu">>
         <<audio "complete-simple" "play">>
-        <<timed 1s>>
         <<goto $nextPassage>>
-        <</timed>>
         <</button>>
         <</append>>
     <</timed>>
@@ -4659,9 +4657,7 @@ Lorem Ipsum Welsh KS2
     <<append "#chatInputWrapper">>
      <<button "Dream Team Menu">>
         <<audio "complete-simple" "play">>
-        <<timed 1s>>
         <<goto $nextPassage>>
-        <</timed>>
         <</button>>
         <</append>>
     <</timed>>
