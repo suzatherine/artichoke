@@ -393,6 +393,10 @@ header:has(> #pageName) {
   justify-content: center;
 }
 
+.page-wrapper:has(> main.video-chat) {
+  width: 100%;
+}
+
 .page-background {
   flex: 1 0 auto;
   width: 100%;

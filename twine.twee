@@ -3039,7 +3039,7 @@ Lorem Ipsum Welsh
 <</if>>
 
 :: tutorial1-empty-picture [nobr]
-   <img src="assets/img/stage3-tutorial1/empty-picture.jpg" alt="Empty picture" >
+   <img src="assets/img/stage3-tutorial1/empty-picture.png" alt="Empty picture" >
 :: tutorial1-picture1-ks1 [nobr]
    <img src="assets/img/stage3-tutorial1/picture-1-ks1.png" alt="Present" >
 
