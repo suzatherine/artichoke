@@ -3709,13 +3709,7 @@ Lorem Ipsum welsh KS2
          "stage3-tutorial1-f-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
-<<timed 5s>>
-     <<append "#chatHistory">>
-         <div class="message-received">
-        <span>Well, that’s my story - it’s very simple now but I’ll add more exciting words like Magnificent, Forever, Unique or even a gobble funk word like Scrumdiddlyumptious!</span>
-        </div>
-        <</append>>
-    <</timed>>
+
 
 :: stage3-tutorial1-f-vn-transcript-eng [nobr]
 
@@ -3723,7 +3717,7 @@ Then an <span class="codeword-text">ENDING</span> - I hide the book in the libra
 
 
 :: stage3-tutorial1-f-vn-triggered-content-eng [nobr]
-<<timed 10s>>
+<<timed 4s>>
     <<replace "#pictureContainer">>
       <<include "tutorial1-picture1-ks2">>
         <<include "tutorial1-picture2-ks2">>
@@ -3731,6 +3725,14 @@ Then an <span class="codeword-text">ENDING</span> - I hide the book in the libra
         <<include "tutorial1-picture4-ks2">>
          <<include "tutorial1-picture5-ks2">>
         <</replace>>
+    <</timed>>
+
+    <<timed 8s>>
+     <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Well, that’s my story - it’s very simple now but I’ll add more exciting words like Magnificent, Forever, Unique or even a gobble funk word like Scrumdiddlyumptious!</span>
+        </div>
+        <</append>>
     <</timed>>
 
 <<timed 10s>>
