@@ -130,7 +130,8 @@
 
 
 button,
-.inline-btn-wrapper > a {
+.inline-btn-wrapper > a,
+.chat-wrapper .chat-button-link {
   font-family: var(--font-headings);
   padding: 0.8rem;
   font-size: 1.8rem;
@@ -160,6 +161,10 @@ button:active {
 .chat-wrapper button:not(.voicenote-toggle):hover,
 .chat-wrapper button:not(.voicenote-toggle):focus,
 .chat-wrapper button:not(.voicenote-toggle):active,
+.chat-wrapper .chat-button-link,
+.chat-wrapper .chat-button-link:hover,
+.chat-wrapper .chat-button-link:focus,
+.chat-wrapper .chat-button-link:active,
 main.tutorials-menu button:not(.voicenote-toggle),
 main.tutorials-menu button:not(.voicenote-toggle):hover,
 main.tutorials-menu button:not(.voicenote-toggle):focus,
@@ -235,8 +240,14 @@ main.tutorials-menu button:active {
 }
 
 button:focus,
+.chat-wrapper .chat-button-link:focus,
 .inline-btn-wrapper > a {
   transform: translate(2px, 2px);
+}
+
+.chat-wrapper .chat-button-link {
+  display: inline-block;
+  text-decoration: none;
 }
 
 /* icon buttons in footer  */

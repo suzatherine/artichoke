@@ -1824,7 +1824,7 @@ Lorem Ipsum Welsh
 <<timed 4s>>
     <<append "#chatHistory">>
          <div class="message-received">
-            <span>I’ve uploaded a copy of the BFG’s letter to us here as well - if you want to read it again together.</span>
+            <span>I’ve uploaded a copy of the BFG’s letter to us <a class="chat-button-link" href="assets/img/letter/letter.jpg" target="_blank" rel="noopener noreferrer">here</a> as well - if you want to read it again together.</span>
         </div>
         <</append>>
     <</timed>>    
@@ -3979,20 +3979,39 @@ Lorem Ipsum Welsh
 
 :: stage3-tutorial2-a-messages-eng [nobr]
 
-<<timed 1s>>
+    <<timed 1s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Before we can transform an area - we need to start from what we know. <br/>
-And you are experts in your area. <br/>
-More than me<br/>
-More than the BFG<br/>
-So - what is there? <br/>
-</span>
+        <span>Before we can transform an area - we need to start from what we know.</span>
         </div>
         <</append>>
     <</timed>>
 
-<<timed 9s>>
+      <<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>And you are experts in your area.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+    <<timed 6s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>More than me</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+       <<timed 8s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>More than the BFG</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 11s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>Decide how you want to map and then I’ll send you some prompts. <br/>
