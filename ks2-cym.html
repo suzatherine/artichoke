@@ -3691,7 +3691,7 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
 &lt;&lt;/timed&gt;&gt;
 &lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="206" name="stage3-tutorial2-c-messages-eng" tags="nobr" position="725,2600" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial2-c-vn-transcript-eng&quot;&gt;&gt;
+         &lt;&lt;voicenote &quot;assets/sound/voicenotes/VOICENOTE 6.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial2-c-vn-transcript-eng&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
@@ -3721,7 +3721,7 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
 &lt;p&gt;So, get what you need and then enter the word DOODLE and I’ll give you a prompt to start. &lt;/p&gt;</tw-passagedata><tw-passagedata pid="208" name="stage3-tutorial2-d" tags="nobr" position="975,2600" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-c&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial2-d&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-e&quot;&gt;&gt;
-&lt;div class=&quot;doodle-bg bg page-background&quot;&gt;
+&lt;div class=&quot;day-bg bg page-background&quot;&gt;
     &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
 &lt;/div&gt;
 /*TODO also loading strangely */
@@ -3870,7 +3870,7 @@ Now, you are going to take the doodle into our Dreams for the BFG.&lt;/span&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Teacher - you should have a template in your inbox. &lt;br/&gt;
-When you have done send me the message &lt;span class=&quot;codeword-text&quot;&gt;POSTED&lt;/span&gt;&lt;/span&gt;
+When you have done this, send me the message &lt;span class=&quot;codeword-text&quot;&gt;POSTED&lt;/span&gt;&lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
@@ -3953,7 +3953,7 @@ When you have done send me the message &lt;span class=&quot;codeword-text&quot;&
 
 &lt;&lt;run setup.completeTutorial(2)&gt;&gt;</tw-passagedata><tw-passagedata pid="218" name="stage3-tutorial2-f-messages-eng-ks1" tags="nobr" position="975,2725" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial2-f-vn-transcript-eng-ks1&quot;
+         &lt;&lt;voicenote &quot;assets/sound/voicenotes/VOICENOTE 7 YOUNGER.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial2-f-vn-transcript-eng-ks1&quot;
          &quot;stage3-tutorial2-f-vn-triggered-content-eng&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
@@ -3961,12 +3961,15 @@ When you have done send me the message &lt;span class=&quot;codeword-text&quot;&
 &lt;&lt;timed 9s&gt;&gt;
     &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
      &lt;&lt;button &quot;Dream Team Menu&quot;&gt;&gt;
-         &lt;&lt;goto $nextPassage&gt;&gt;
+        &lt;&lt;audio &quot;complete-simple&quot; &quot;play&quot;&gt;&gt;
+        &lt;&lt;timed 1s&gt;&gt;
+        &lt;&lt;goto $nextPassage&gt;&gt;
+        &lt;&lt;/timed&gt;&gt;
         &lt;&lt;/button&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="219" name="stage3-tutorial2-f-messages-eng-ks2" tags="nobr" position="1100,2725" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial2-f-vn-transcript-eng-ks2&quot;
+         &lt;&lt;voicenote &quot;assets/sound/voicenotes/VOICENOTE 7 OLDER.mp3&quot; &quot;3s&quot; &quot;stage3-tutorial2-f-vn-transcript-eng-ks2&quot;
          &quot;stage3-tutorial2-f-vn-triggered-content-eng&quot;&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
@@ -3974,7 +3977,10 @@ When you have done send me the message &lt;span class=&quot;codeword-text&quot;&
 &lt;&lt;timed 9s&gt;&gt;
     &lt;&lt;append &quot;#chatInputWrapper&quot;&gt;&gt;
      &lt;&lt;button &quot;Dream Team Menu&quot;&gt;&gt;
-         &lt;&lt;goto $nextPassage&gt;&gt;
+        &lt;&lt;audio &quot;complete-simple&quot; &quot;play&quot;&gt;&gt;
+        &lt;&lt;timed 1s&gt;&gt;
+        &lt;&lt;goto $nextPassage&gt;&gt;
+        &lt;&lt;/timed&gt;&gt;
         &lt;&lt;/button&gt;&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="220" name="stage3-tutorial2-f-vn-transcript-eng-ks1" tags="nobr" position="1225,2725" size="100,100">&lt;p&gt;I love postcards about our local area because it gets us thinking about what we have around us - appreciating what makes it special and highlighting where it could improve to make everyone in that community happier. &lt;/p&gt;

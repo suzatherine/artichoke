@@ -4329,7 +4329,7 @@ Lorem Ipsum Welsh
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-c-vn-transcript-eng">>
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 6.mp3" "3s" "stage3-tutorial2-c-vn-transcript-eng">>
         <</append>>
     <</timed>>
 
@@ -4367,7 +4367,7 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial2-c">>
 <<set $passage to "stage3-tutorial2-d">>
 <<set $nextPassage to "stage3-tutorial2-e">>
-<div class="doodle-bg bg page-background">
+<div class="day-bg bg page-background">
     <<include "_templateVideoChat">>
 </div>
 /*TODO also loading strangely */
@@ -4531,7 +4531,7 @@ Now, you are going to take the doodle into our Dreams for the BFG.</span>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>Teacher - you should have a template in your inbox. <br/>
-When you have done send me the message <span class="codeword-text">POSTED</span></span>
+When you have done this, send me the message <span class="codeword-text">POSTED</span></span>
         </div>
         <</append>>
     <</timed>>
@@ -4630,7 +4630,7 @@ Lorem Ipsum Welsh KS2
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng-ks1"
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 7 YOUNGER.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng-ks1"
          "stage3-tutorial2-f-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
@@ -4638,7 +4638,10 @@ Lorem Ipsum Welsh KS2
 <<timed 9s>>
     <<append "#chatInputWrapper">>
      <<button "Dream Team Menu">>
-         <<goto $nextPassage>>
+        <<audio "complete-simple" "play">>
+        <<timed 1s>>
+        <<goto $nextPassage>>
+        <</timed>>
         <</button>>
         <</append>>
     <</timed>>
@@ -4647,7 +4650,7 @@ Lorem Ipsum Welsh KS2
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng-ks2"
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 7 OLDER.mp3" "3s" "stage3-tutorial2-f-vn-transcript-eng-ks2"
          "stage3-tutorial2-f-vn-triggered-content-eng">>
         <</append>>
     <</timed>>
@@ -4655,7 +4658,10 @@ Lorem Ipsum Welsh KS2
 <<timed 9s>>
     <<append "#chatInputWrapper">>
      <<button "Dream Team Menu">>
-         <<goto $nextPassage>>
+        <<audio "complete-simple" "play">>
+        <<timed 1s>>
+        <<goto $nextPassage>>
+        <</timed>>
         <</button>>
         <</append>>
     <</timed>>

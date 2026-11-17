@@ -2686,6 +2686,7 @@ main.entry-page-content {
   background: var(--palette-ice);
   color: var(--palette-navy);
   cursor: grab;
+  font-weight: 700;
   text-align: left;
   touch-action: none;
 }
