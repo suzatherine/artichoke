@@ -605,6 +605,25 @@ input[type='text']::placeholder {
   object-fit: contain;
 }
 
+.call-bea-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.call-bea-content button,
+.call-bea-content button:hover,
+.call-bea-content button:focus,
+.call-bea-content button:active {
+  margin-top: 3rem;
+  padding: 1rem 1.5rem;
+  font-size: 2.4rem;
+  background-color: var(--palette-navy);
+  color: white;
+  font-family: var(--font-body);
+}
+
 .main-landing button {
   justify-self: center;
   margin-top: 2rem;

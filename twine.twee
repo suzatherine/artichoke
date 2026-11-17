@@ -5628,10 +5628,12 @@ Lorem Ipsum Welsh
 :: stage3-submission-call-bea-messages-eng [nobr]
 
 <<replace "#heroImage">>
-     <img src="assets/img/icons/BEA_ICON.png" alt="avatar"/>
-<<button "Call Bea">>
-    <<goto "calling">>
-<</button>>
+    <div class="call-bea-content">
+        <img src="assets/img/icons/BEA_ICON.png" alt="avatar"/>
+        <<button "Call Bea">>
+            <<goto "calling">>
+        <</button>>
+    </div>
 <</replace>>
 
 :: stage3-submission-call-bea-messages-cym [nobr]
@@ -5819,7 +5821,7 @@ Lorem Ipsum welsh
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" 
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 10.mp3"
          "3s" 
          "stage3-submission-c-vn-transcript-eng"
          >>
@@ -5876,14 +5878,7 @@ Lorem ipsum welsh
 
 
 :: stamp-collection [nobr]
-
-<div class="stamp-collection-wrapper">
-<<include "stamp1">>
-<<include "stamp2">>
-<<include "stamp3">>
-<<include "stamp4">>
-</div>
-
+<<audio "complete-developed" "play">>
 
 
 /* STAGE 4 */

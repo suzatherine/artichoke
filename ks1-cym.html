@@ -4765,10 +4765,12 @@ You can reach your Future Dream because…
 
 &lt;&lt;include &quot;_templateContentCenter&quot;&gt;&gt;
 &lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="272" name="stage3-submission-call-bea-messages-eng" tags="nobr" position="225,3475" size="100,100">&lt;&lt;replace &quot;#heroImage&quot;&gt;&gt;
-     &lt;img src=&quot;assets/img/icons/BEA_ICON.png&quot; alt=&quot;avatar&quot;/&gt;
-&lt;&lt;button &quot;Call Bea&quot;&gt;&gt;
-    &lt;&lt;goto &quot;calling&quot;&gt;&gt;
-&lt;&lt;/button&gt;&gt;
+    &lt;div class=&quot;call-bea-content&quot;&gt;
+        &lt;img src=&quot;assets/img/icons/BEA_ICON.png&quot; alt=&quot;avatar&quot;/&gt;
+        &lt;&lt;button &quot;Call Bea&quot;&gt;&gt;
+            &lt;&lt;goto &quot;calling&quot;&gt;&gt;
+        &lt;&lt;/button&gt;&gt;
+    &lt;/div&gt;
 &lt;&lt;/replace&gt;&gt;</tw-passagedata><tw-passagedata pid="273" name="stage3-submission-call-bea-messages-cym" tags="nobr" position="350,3475" size="100,100">&lt;&lt;replace &quot;#heroImage&quot;&gt;&gt;
 &lt;&lt;button &quot;Call Bea Welsh&quot;&gt;&gt;
     &lt;&lt;goto &quot;calling&quot;&gt;&gt;
@@ -4909,7 +4911,7 @@ You can reach your Future Dream because…
 &lt;/div&gt;
 &lt;&lt;include &quot;choose-messages-language&quot;&gt;&gt;</tw-passagedata><tw-passagedata pid="284" name="stage3-submission-c-messages-eng" tags="nobr" position="475,3600" size="100,100">&lt;&lt;timed 1s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
-         &lt;&lt;voicenote &quot;assets/sound/ping1.mp3&quot; 
+         &lt;&lt;voicenote &quot;assets/sound/voicenotes/VOICENOTE 10.mp3&quot;
          &quot;3s&quot; 
          &quot;stage3-submission-c-vn-transcript-eng&quot;
          &gt;&gt;
@@ -4955,13 +4957,7 @@ You can reach your Future Dream because…
 
 &lt;p&gt;I’ll message you when he has come to pick them up!&lt;/p&gt;
 
-&lt;p&gt;Until then my friends, Dream Team out.  &lt;/p&gt;</tw-passagedata><tw-passagedata pid="286" name="stage3-submission-c-messages-cym" tags="nobr" position="725,3600" size="100,100">Lorem ipsum welsh</tw-passagedata><tw-passagedata pid="287" name="stage3-submission-c-vn-transcript-cym" tags="nobr" position="850,3600" size="100,100"></tw-passagedata><tw-passagedata pid="288" name="stamp-collection" tags="nobr" position="975,3600" size="100,100">&lt;div class=&quot;stamp-collection-wrapper&quot;&gt;
-&lt;&lt;include &quot;stamp1&quot;&gt;&gt;
-&lt;&lt;include &quot;stamp2&quot;&gt;&gt;
-&lt;&lt;include &quot;stamp3&quot;&gt;&gt;
-&lt;&lt;include &quot;stamp4&quot;&gt;&gt;
-&lt;/div&gt;
-
+&lt;p&gt;Until then my friends, Dream Team out.  &lt;/p&gt;</tw-passagedata><tw-passagedata pid="286" name="stage3-submission-c-messages-cym" tags="nobr" position="725,3600" size="100,100">Lorem ipsum welsh</tw-passagedata><tw-passagedata pid="287" name="stage3-submission-c-vn-transcript-cym" tags="nobr" position="850,3600" size="100,100"></tw-passagedata><tw-passagedata pid="288" name="stamp-collection" tags="nobr" position="975,3600" size="100,100">&lt;&lt;audio &quot;complete-developed&quot; &quot;play&quot;&gt;&gt;
 
 
 /* STAGE 4 */</tw-passagedata><tw-passagedata pid="289" name="stage4-video" tags="nobr" position="1100,3600" size="100,100">&lt;&lt;set $prevPassage to $userchoices.landingPage&gt;&gt;
