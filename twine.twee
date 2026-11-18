@@ -60,7 +60,7 @@ setup.updateSortingActivityCorrectness = function (list) {
         item.dataset.inCorrectPosition = String(isComplete);
     });
 
-    var nextButton = coderesdocument.querySelector("#sorting-next-button");
+    var nextButton = document.querySelector("#sorting-next-button");
     if (nextButton) {
         nextButton.classList.toggle("hidden", !isComplete || Boolean(list.querySelector(".dragging")));
     }
@@ -757,6 +757,7 @@ setup.dreamJarDrag = () => {
         placedCount++;
 
         if (placedCount === labels.length) {
+            Wikifier.wikifyEval('<<audio "correct-answer" "play">>');
             showCompletion();
         }
     }
@@ -1562,9 +1563,9 @@ codeword11: {
             <</for>>
 
             <<if $nextPassage isnot "">>
+                <<audio "correct-answer" "play">>
                 <<replace "#codeword-input-btn">>
                    <<type 70ms>> <span class="correct-label">Confirmed!</span><</type>>
-                    <<audio "success" play>>
                 <</replace>>
         /* If we are at the end of the security check, go to connecting, otherwise go to the next passage in the security check. */
                 <<timed 3s>>
