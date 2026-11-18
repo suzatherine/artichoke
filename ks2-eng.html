@@ -1480,7 +1480,7 @@ codeword11: {
             &lt;&lt;if $nextPassage isnot &quot;&quot;&gt;&gt;
                  &lt;&lt;replace &quot;#codeword-input-btn&quot;&gt;&gt;
                     &lt;&lt;type 70ms&gt;&gt; &lt;span class=&quot;correct-label&quot;&gt;Confirmed!&lt;/span&gt;&lt;&lt;/type&gt;&gt;
-                    &lt;&lt;audio &quot;success&quot; play&gt;&gt;
+                    &lt;&lt;audio &quot;correct-answer&quot; &quot;play&quot;&gt;&gt;
                 &lt;&lt;/replace&gt;&gt;
                 &lt;&lt;set $userchoices.stage to _entry.stage&gt;&gt;
                 &lt;&lt;timed 3s&gt;&gt;
@@ -1588,7 +1588,7 @@ codeword11: {
             &lt;&lt;if $nextPassage isnot &quot;&quot;&gt;&gt;
                 &lt;&lt;replace &quot;#codeword-input-btn&quot;&gt;&gt;
                    &lt;&lt;type 70ms&gt;&gt; &lt;span class=&quot;correct-label&quot;&gt;Confirmed!&lt;/span&gt;&lt;&lt;/type&gt;&gt;
-                    &lt;&lt;audio &quot;success&quot; play&gt;&gt;
+                    &lt;&lt;audio &quot;correct-answer&quot; &quot;play&quot;&gt;&gt;
                 &lt;&lt;/replace&gt;&gt;
 
                 &lt;&lt;timed 3s&gt;&gt;
@@ -3305,7 +3305,7 @@ Where our imagination changes the world around us
         &lt;&lt;/replace&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
 
-    &lt;&lt;timed 8s&gt;&gt;
+    &lt;&lt;timed 13s&gt;&gt;
      &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
         &lt;span&gt;Well, that’s my story - it’s very simple now but I’ll add more exciting words like Magnificent, Forever, Unique or even a gobble funk word like Scrumdiddlyumptious!&lt;/span&gt;

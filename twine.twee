@@ -1507,7 +1507,7 @@ codeword11: {
             <<if $nextPassage isnot "">>
                  <<replace "#codeword-input-btn">>
                     <<type 70ms>> <span class="correct-label">Confirmed!</span><</type>>
-                    <<audio "success" play>>
+                    <<audio "correct-answer" "play">>
                 <</replace>>
                 <<set $userchoices.stage to _entry.stage>>
                 <<timed 3s>>
@@ -1621,7 +1621,7 @@ codeword11: {
             <<if $nextPassage isnot "">>
                 <<replace "#codeword-input-btn">>
                    <<type 70ms>> <span class="correct-label">Confirmed!</span><</type>>
-                    <<audio "success" play>>
+                    <<audio "correct-answer" "play">>
                 <</replace>>
 
                 <<timed 3s>>
