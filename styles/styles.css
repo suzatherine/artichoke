@@ -683,6 +683,9 @@ input[type='text']::placeholder {
 
 .video-chat:has(#dream-jar-draggable-activity) {
   height: 80vh;
+  min-width: 1400px;
+  max-width: 1490px;
+  margin-inline: auto;
   padding-block: 0.5rem;
 }
 
