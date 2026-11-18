@@ -944,7 +944,7 @@ setup.dreamJarDrag = () => {
     }, 
 codeword4: {
         startingPassage: "stage3-tutorial2-e",
-        destinationPassage: "stage3-tutorial2-f",
+        destinationPassage: "stage3-tutorial2-e-2",
         eng: "POSTED", 
         cym: "POSTED"
     }, 
@@ -4532,7 +4532,7 @@ Lorem Ipsum Welsh
 :: stage3-tutorial2-e [nobr]
 <<set $prevPassage to "stage3-tutorial2-d">>
 <<set $passage to "stage3-tutorial2-e">>
-<<set $nextPassage to "stage3-tutorial2-f">>
+<<set $nextPassage to "stage3-tutorial2-e-2">>
 <div class="day-bg bg page-background">
 <<include "_templateVideoChat">>
 <<timed 0.1s>>
@@ -4685,8 +4685,58 @@ Lorem Ipsum Welsh KS1
 :: stage3-tutorial2-e-messages-cym-ks2 [nobr]
 Lorem Ipsum Welsh KS2
 
-:: stage3-tutorial2-f [nobr]
+:: stage3-tutorial2-e-2 [nobr]
 <<set $prevPassage to "stage3-tutorial2-e">>
+<<set $passage to "stage3-tutorial2-e-2">>
+<<set $nextPassage to "stage3-tutorial2-f">>
+<div class="day-bg bg page-background">
+    <<include "_templateFullScreenChat">>
+</div>
+<<include "choose-messages-language-ks-specific">>
+
+
+:: stage3-tutorial2-e-2-messages-eng-ks1 [nobr]
+
+:: stage3-tutorial2-e-2-messages-eng-ks2 [nobr]
+
+<<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Well done!</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+    <<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>You’ve now mapped what your area looks like and come up with how you’d like to see it transformed, filled with your daydreams.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+       <<timed 6s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>If you want, you could each present part of a Daydreamers tour in the class and hear what you would all change.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 9s>>
+    <<replace "#chatInputWrapper">>
+        <div class="btn-option-wrapper">
+            <<include "nextBtn">>
+        </div>
+    <</replace>>
+<</timed>>
+
+:: stage3-tutorial2-e-2-messages-cym-ks1 [nobr]
+
+:: stage3-tutorial2-e-2-messages-cym-ks2 [nobr]
+
+:: stage3-tutorial2-f [nobr]
+<<set $prevPassage to "stage3-tutorial2-e-2">>
 <<set $passage to "stage3-tutorial2-f">>
 <<set $nextPassage to "stage3-tutorials-menu">>
 <div class="day-bg bg page-wrapper">
