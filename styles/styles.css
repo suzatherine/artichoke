@@ -681,6 +681,11 @@ input[type='text']::placeholder {
   box-sizing: border-box;
 }
 
+.video-chat:has(#dream-jar-draggable-activity) {
+  height: 80vh;
+  padding-block: 0.5rem;
+}
+
 #chatHistory {
   border-radius: 20px;
   background: var(--palette-dark-light-grey);
@@ -1477,6 +1482,15 @@ input[type='text']::placeholder {
   overflow: visible;
 }
 
+.picture-container:has(#dream-jar-draggable-activity),
+.video-wrapper:has(#dream-jar-draggable-activity) {
+  padding-block: 0 0.5rem;
+}
+
+.video-wrapper:has(#dream-jar-draggable-activity) {
+  justify-content: flex-start;
+}
+
 #dream-jars {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1486,7 +1500,10 @@ input[type='text']::placeholder {
 }
 
 #dream-jar-draggable-activity #dream-jars {
-  width: min(70%, 122.5vh);
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  grid-template-rows: minmax(0, 1fr);
 }
 
 .dream-jar-item {
@@ -1496,6 +1513,7 @@ input[type='text']::placeholder {
 
 #dream-jar-draggable-activity #dream-jars .dream-jar-item {
   container-type: inline-size;
+  min-height: 0;
 }
 
 .dream-jar-image {
@@ -1519,6 +1537,11 @@ input[type='text']::placeholder {
 
 #dream-jar-draggable-activity #dream-jars .dream-jar-item:last-child .dream-jar-image {
   border-radius: 0 20px 20px 0;
+}
+
+#dream-jar-draggable-activity #dream-jars .dream-jar-image {
+  height: 100%;
+  object-fit: contain;
 }
 
 /* Where a correctly placed label sits inside the jar */
@@ -1592,9 +1615,15 @@ input[type='text']::placeholder {
   font-size: clamp(1.9rem, calc(1.4rem + 0.7vw), 2.8rem);
 }
 
-.dream-jar-draggable-activity{
-  max-height: 70vh;
-  overflow-y: auto;
+#dream-jar-draggable-activity {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  row-gap: 1rem;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .label-blue {
@@ -1783,7 +1812,7 @@ input[type='text']::placeholder {
   display: flex;
   justify-content: center;
   gap: 1rem;
-  margin-top: 1.5rem;
+  margin-top: 0;
   position: relative;
   z-index: 10;
 }

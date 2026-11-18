@@ -60,7 +60,7 @@ setup.updateSortingActivityCorrectness = function (list) {
         item.dataset.inCorrectPosition = String(isComplete);
     });
 
-    var nextButton = document.querySelector("#sorting-next-button");
+    var nextButton = coderesdocument.querySelector("#sorting-next-button");
     if (nextButton) {
         nextButton.classList.toggle("hidden", !isComplete || Boolean(list.querySelector(".dragging")));
     }
