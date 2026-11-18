@@ -2366,6 +2366,10 @@ body:is(
   text-align: center;
 }
 
+#passage-stage3-tutorial1-g .accented-quote {
+  font-size: 6rem;
+}
+
 .mapping-question {
   animation: mapping-question-fade-in 0.35s ease 0.2s both;
   gap: 2rem;

@@ -3867,11 +3867,6 @@ Lorem Ipsum Welsh
 <div class="night-bg bg page-background">
     <<include "_templateVideoChat">>
 </div>
-<<timed 0.1s>>
-   <<replace "#pageName">>
-    <h2>Night-time Dreams</h2>
-    <</replace>>
-<</timed>>
 <<include "choose-messages-language-ks-specific">>
 
 :: stage3-tutorial1-g-messages-eng-ks1 [nobr]
