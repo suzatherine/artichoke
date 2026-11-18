@@ -3982,7 +3982,7 @@ Lorem Ipsum Welsh
 
 :: stage3-tutorial1-h-vn-triggered-content-eng [nobr]
   /* RUN BUBBLES  */
-  <<timed 7s>>
+  <<timed 46s>>
     <<audio "complete-simple" "play">>
     <<append "#fullScreenChatMain">>
         <div class="bubbles-wrapper">
@@ -4808,7 +4808,7 @@ Lorem Ipsum Welsh KS2
 
 :: stage3-tutorial2-f-vn-triggered-content-eng [nobr]
   /* RUN BUBBLES  */
-  <<timed 7s>>
+  <<timed 130s>>
     <<append "#fullScreenChatMain">>
         <div class="bubbles-wrapper">
          <div id="bubbles"></div>
@@ -5663,7 +5663,7 @@ Lorem Ipsum Welsh KS2
 
 :: stage3-tutorial3-f-vn-triggered-content-eng [nobr]
 /* RUN BUBBLES  */
-  <<timed 7s>>
+  <<timed 40s>>
     <<append "#fullScreenChatMain">>
         <div class="bubbles-wrapper">
          <div id="bubbles"></div>
