@@ -1719,7 +1719,9 @@ codeword11: {
 
  <div class="page-background bg end-bg full-screen-landing connecting">
      <main class="main-content-center">
-        <div class="connecting-image-wrapper">
+        <div class="connecting-image-wrapper calling-bea">
+            <span class="calling-spinner" aria-hidden="true"></span>
+            <img src="assets/img/icons/BEA_ICON.png" class="calling-bea-img" alt="Bea"/>
          </div>
      <div class="hero-text" id="heroText">
    
@@ -1730,14 +1732,14 @@ codeword11: {
 <<audio "loading" "play">>
 <<timed 0.1s>>
     <<replace "#heroText">>
-             <h2><<type 60ms>>Calling Bea...<</type>>
+             <h2><<type 60ms>>...Calling Bea<</type>>
         </h2>
     <</replace>>
 <</timed>>
 
 <<timed 3s>>
     <<replace "#heroText">>
-             <h2><<type 60ms>>Calling Bea...<</type>>
+             <h2><<type 60ms>>...Calling Bea<</type>>
         </h2>
     <</replace>>
 <</timed>>
