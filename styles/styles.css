@@ -552,6 +552,7 @@ input[type='text']::placeholder {
 .temp-label.correct-label {
   background: var(--palette-green);
   color: black;
+  border-radius: 8px;
 }
 
 .incorrect-label {
@@ -563,6 +564,7 @@ input[type='text']::placeholder {
   background: rgb(226, 89, 89);
   color: black;
   margin-left: 1rem;
+  border-radius: 8px;
 }
 
 .codeinput {
@@ -1024,6 +1026,27 @@ input[type='text']::placeholder {
 #codeword-input-btn > .macro-type {
   padding: 2px 6px;
   background: var(--palette-green);
+  font-family: var(--font-headings);
+  border-radius: 8px;
+}
+
+.chat-input-wrapper .codeinput {
+  align-items: stretch;
+}
+
+.chat-input-wrapper .codeinput > #textbox-codeword,
+.chat-input-wrapper .codeinput > .input-btn > button {
+  height: 4rem;
+  box-sizing: border-box;
+}
+
+.chat-input-wrapper .codeinput > .input-btn > button {
+  align-items: center;
+  justify-content: center;
+}
+
+.chat-input-wrapper .codeinput > .input-btn {
+  align-items: center;
 }
 
 #codeword-input-btn > .correct-label,
@@ -2711,6 +2734,25 @@ main.entry-page-content {
   align-items: center;
   justify-content: center;
   text-align: center;
+}
+
+main.entry-page-content .codeinput {
+  align-items: stretch;
+}
+
+main.entry-page-content .codeinput > #textbox-codeword,
+main.entry-page-content .codeinput > .input-btn > button {
+  height: 4rem;
+  box-sizing: border-box;
+}
+
+main.entry-page-content .codeinput > .input-btn {
+  align-items: center;
+}
+
+main.entry-page-content .codeinput > .input-btn > button {
+  align-items: center;
+  justify-content: center;
 }
 
 /* Stamp collection reveal */
