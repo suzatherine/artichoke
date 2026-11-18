@@ -1707,6 +1707,8 @@ input[type='text']::placeholder {
   font-family: var(--font-headings);
   font-size: 29px;
   font-weight: 700;
+  line-height: 1.1;
+  min-height: 2.2em;
   margin: 0 0 9px;
 }
 
@@ -2210,7 +2212,7 @@ body:is(
 }
 
 .dreamjar-example .dreams {
-  justify-content: center;
+  justify-content: flex-start;
   width: min(100%, 300px);
   height: clamp(250px, 42vh, 380px);
   padding: clamp(1rem, 2vw, 2rem) 1rem;

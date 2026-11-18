@@ -2394,7 +2394,7 @@ codeword11: {
     Dreams
   &lt;/h2&gt;
   &lt;p&gt;
-    Have you had any silly night-time dreams recently?
+    Where magical stories happen
   &lt;/p&gt;
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="87" name="night-time-dreamJar-label-small" tags="nobr" position="850,1100" size="100,100">&lt;br&gt;
  &lt;div class=&quot;dreams__icon&quot;&gt;
@@ -2411,7 +2411,7 @@ codeword11: {
     Daydreams
   &lt;/h2&gt;
   &lt;p&gt;
-Have you ever imagined a different version of your classroom, school or town?
+Where our imagination changes the world around us
   &lt;/p&gt;
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="89" name="day-dreamJar-label-small" tags="nobr" position="1100,1100" size="100,100">&lt;div class=&quot;dreams__icon&quot;&gt;
     &lt;img src=&quot;assets/img/icons/ICON2DAY_NAVY.png&quot; alt=&quot;nighttime icon&quot; /&gt;
@@ -2426,7 +2426,7 @@ Have you ever imagined a different version of your classroom, school or town?
     Future Dreams
   &lt;/h2&gt;
   &lt;p&gt;
-    Have you got any dreams for your future?
+    Where we dream of what we want to achieve
   &lt;/p&gt;
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="91" name="future-dreamJar-label-small" tags="nobr" position="100,1225" size="100,100">&lt;div class=&quot;dreams__icon&quot;&gt;
     &lt;img src=&quot;assets/img/icons/ICON3FUTURE_WHITE.png&quot; alt=&quot;nighttime icon&quot; /&gt;
@@ -2647,18 +2647,7 @@ Have you ever imagined a different version of your classroom, school or town?
         &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-video&quot;&gt;&gt;
         &lt;&lt;goto &quot;loading-tutorial&quot;&gt;&gt;
         &lt;&lt;/link&gt;&gt;
-     &lt;div class=&quot;dreams nighttime-dreams&quot;&gt;
-  &lt;div class=&quot;dreams__icon&quot;&gt;
-    &lt;img src=&quot;assets/img/icons/ICON1NIGHT_WHITE.png&quot; alt=&quot;nighttime icon&quot; /&gt;
-  &lt;/div&gt;
-  &lt;h2&gt;
-    Night-time&lt;br /&gt;
-    Dreams
-  &lt;/h2&gt;
-  &lt;p&gt;
-    Where magical stories happen
-  &lt;/p&gt;
-&lt;/div&gt;
+        &lt;&lt;include &quot;night-time-dreamJar-label&quot;&gt;&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 
@@ -2668,17 +2657,7 @@ Have you ever imagined a different version of your classroom, school or town?
         &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-video&quot;&gt;&gt;
         &lt;&lt;goto &quot;loading-tutorial&quot;&gt;&gt;
         &lt;&lt;/link&gt;&gt;
-        &lt;div class=&quot;dreams day-dreams&quot;&gt;
-  &lt;div class=&quot;dreams__icon&quot;&gt;
-    &lt;img src=&quot;assets/img/icons/ICON2DAY_NAVY.png&quot; alt=&quot;nighttime icon&quot; /&gt;
-  &lt;/div&gt;
-  &lt;h2&gt;
-    Daydreams
-  &lt;/h2&gt;
-  &lt;p&gt;
-Where our imagination changes the world around us
-  &lt;/p&gt;
-&lt;/div&gt;
+             &lt;&lt;include &quot;day-dreamJar-label&quot;&gt;&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 
@@ -2688,17 +2667,7 @@ Where our imagination changes the world around us
         &lt;&lt;set $nextPassage to &quot;stage3-tutorial3-video&quot;&gt;&gt;
         &lt;&lt;goto &quot;loading-tutorial&quot;&gt;&gt;
         &lt;&lt;/link&gt;&gt;
-        &lt;div class=&quot;dreams future-dreams&quot;&gt;
-  &lt;div class=&quot;dreams__icon&quot;&gt;
-    &lt;img src=&quot;assets/img/icons/ICON3FUTURE_WHITE.png&quot; alt=&quot;nighttime icon&quot; /&gt;
-  &lt;/div&gt;
-  &lt;h2&gt;
-    Future Dreams
-  &lt;/h2&gt;
-  &lt;p&gt;
-    Where we dream of what we want to achieve
-  &lt;/p&gt;
-&lt;/div&gt;
+        &lt;&lt;include &quot;future-dreamJar-label&quot;&gt;&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
@@ -4664,7 +4633,7 @@ Do you need someone to help you?&lt;br/&gt;
 &lt;&lt;timed 11s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-        &lt;span&gt;Write your Future Dream in the centre in BIG writing so the BFG can read it and then design and decorate the rest inspired by your Future Dream and the steps you might have to take to get there. Here’s an example of mine. &lt;/span&gt;
+        &lt;span&gt;Write your Future Dream in the centre in BIG writing so the BFG can read it and then design and decorate the rest inspired by your Future Dream. Add the steps you might have to take to get there. Here’s an example of mine. &lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
     &lt;&lt;/timed&gt;&gt;
@@ -4930,7 +4899,9 @@ Do you need someone to help you?&lt;br/&gt;
 &lt;&lt;timed 5s&gt;&gt;
     &lt;&lt;append &quot;#chatHistory&quot;&gt;&gt;
          &lt;div class=&quot;message-received&quot;&gt;
-            &lt;span&gt; But remember what the BFG said: you has the biggest, bestest, most delumptious Dreams in your thinkings’ That’s what we need!&lt;/span&gt;
+            &lt;span&gt;But remember what the BFG said: “You has the biggest, bestest, most delumptious Dreams in your thinkings” &lt;br&gt;
+        That’s what we need! 
+        &lt;/span&gt;
         &lt;/div&gt;
         &lt;&lt;/append&gt;&gt;
 &lt;&lt;/timed&gt;&gt;
