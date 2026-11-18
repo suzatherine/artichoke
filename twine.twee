@@ -4488,12 +4488,6 @@ Lorem Ipsum Welsh
 <div class="day-bg bg page-background">
     <<include "_templateVideoChat">>
 </div>
-/*TODO also loading strangely */
-<<timed 0.1s>>
-   <<replace "#pageName">>
-    <h2>Day Dreams</h2>
-    <</replace>>
-<</timed>>
 <<include "choose-messages-language">>
 
 :: stage3-tutorial2-d-messages-eng [nobr]
