@@ -5471,7 +5471,7 @@ Lorem Ipsum Welsh KS1
 <<timed 11s>>
     <<append "#chatHistory">>
          <div class="message-received">
-        <span>Write your Future Dream in the centre in BIG writing so the BFG can read it and then design and decorate the rest inspired by your Future Dream and the steps you might have to take to get there. Here’s an example of mine. </span>
+        <span>Write your Future Dream in the centre in BIG writing so the BFG can read it and then design and decorate the rest inspired by your Future Dream. Add the steps you might have to take to get there. Here’s an example of mine. </span>
         </div>
         <</append>>
     <</timed>>
@@ -5818,7 +5818,9 @@ Lorem Ipsum Welsh
 <<timed 5s>>
     <<append "#chatHistory">>
          <div class="message-received">
-            <span> But remember what the BFG said: you has the biggest, bestest, most delumptious Dreams in your thinkings’ That’s what we need!</span>
+            <span>But remember what the BFG said: “You has the biggest, bestest, most delumptious Dreams in your thinkings” <br>
+        That’s what we need! 
+        </span>
         </div>
         <</append>>
 <</timed>>
