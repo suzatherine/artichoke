@@ -1124,10 +1124,6 @@ codeword11: {
 [img[assets/img/back-sharp-b.png][$prevPassage]]
     </div>
 
-<<button "Restart">>
-<<set $f to Engine.restart()>>
-<</button>>
-    
       [img[assets/img/home-icon.png][$userchoices.landingPage]]
 <<if $nextPassage is not "">>
 <div class="footer-next-button" id="footer-next">
@@ -1295,10 +1291,6 @@ codeword11: {
 
 <button type="button" id="bsl-video-toggle" aria-pressed="false" disabled>BSL: Off</button>
 
-<<button "Restart">>
-<<set $f to Engine.restart()>>
-    <</button>>
-    
       [img[assets/img/home-icon.png][$userchoices.landingPage]]
 
 <div class="footer-next-button" id="footer-next">
