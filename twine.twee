@@ -68,20 +68,16 @@ setup.updateSortingActivityCorrectness = function (list) {
     if (isComplete && !list.dataset.completionMessageShown && !list.querySelector(".dragging")) {
         var chatHistory = document.querySelector("#chatHistory");
         if (chatHistory) {
-            var message = document.createElement("div");
-            message.className = "message-received";
-            var text = document.createElement("span");
-            text.append(
-                "Amazing work.",
-                document.createElement("br"),
-                "Now you’ve learnt how to structure a story - let’s make our own.",
-                document.createElement("br"),
-                "I’m going to take an image from a dream and make a story out of it.",
-                document.createElement("br"),
-                "The story of the Surprise Present."
-            );
-            message.appendChild(text);
-            chatHistory.appendChild(message);
+            var addMessage = function (firstLine, secondLine) {
+                var message = document.createElement("div");
+                message.className = "message-received";
+                var text = document.createElement("span");
+                text.append(firstLine, document.createElement("br"), secondLine);
+                message.appendChild(text);
+                chatHistory.appendChild(message);
+            };
+            addMessage("Amazing work.", "Now you’ve learnt how to structure a story - let’s make our own.");
+            addMessage("I’m going to take an image from a dream and make a story out of it.", "The story of the Surprise Present.");
             list.dataset.completionMessageShown = "true";
         }
     }
