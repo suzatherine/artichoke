@@ -1161,7 +1161,7 @@ codeword11: {
         /* Correct */
         <<if $codeword is $correctCodeword>>
             <<replace "#coderesult">><span>Confirmed!</span>
-                <<audio "success" play>>
+                <<audio "correct-answer" "play">>
             <</replace>>
      
             <<timed 3s>><<goto $nextpass>><</timed>>
@@ -2957,7 +2957,18 @@ Have you ever imagined a different version of your classroom, school or town?
         <<set $nextPassage to "stage3-tutorial1-video">>
         <<goto "loading-tutorial">>
         <</link>>
-     <<include "night-time-dreamJar-label">>
+     <div class="dreams nighttime-dreams">
+  <div class="dreams__icon">
+    <img src="assets/img/icons/ICON1NIGHT_WHITE.png" alt="nighttime icon" />
+  </div>
+  <h2>
+    Night-time<br />
+    Dreams
+  </h2>
+  <p>
+    Where magical stories happen
+  </p>
+</div>
         </div>
     </div>
 
@@ -2967,7 +2978,17 @@ Have you ever imagined a different version of your classroom, school or town?
         <<set $nextPassage to "stage3-tutorial2-video">>
         <<goto "loading-tutorial">>
         <</link>>
-        <<include "day-dreamJar-label">>
+        <div class="dreams day-dreams">
+  <div class="dreams__icon">
+    <img src="assets/img/icons/ICON2DAY_NAVY.png" alt="nighttime icon" />
+  </div>
+  <h2>
+    Daydreams
+  </h2>
+  <p>
+Where our imagination changes the world around us
+  </p>
+</div>
         </div>
     </div>
 
@@ -2977,7 +2998,17 @@ Have you ever imagined a different version of your classroom, school or town?
         <<set $nextPassage to "stage3-tutorial3-video">>
         <<goto "loading-tutorial">>
         <</link>>
-        <<include "future-dreamJar-label">>
+        <div class="dreams future-dreams">
+  <div class="dreams__icon">
+    <img src="assets/img/icons/ICON3FUTURE_WHITE.png" alt="nighttime icon" />
+  </div>
+  <h2>
+    Future Dreams
+  </h2>
+  <p>
+    Where we dream of what we want to achieve
+  </p>
+</div>
         </div>
     </div>
 </div>

@@ -1227,7 +1227,7 @@ codeword11: {
         /* Correct */
         &lt;&lt;if $codeword is $correctCodeword&gt;&gt;
             &lt;&lt;replace &quot;#coderesult&quot;&gt;&gt;&lt;span&gt;Confirmed!&lt;/span&gt;
-                &lt;&lt;audio &quot;success&quot; play&gt;&gt;
+                &lt;&lt;audio &quot;correct-answer&quot; &quot;play&quot;&gt;&gt;
             &lt;&lt;/replace&gt;&gt;
      
             &lt;&lt;timed 3s&gt;&gt;&lt;&lt;goto $nextpass&gt;&gt;&lt;&lt;/timed&gt;&gt;
@@ -2650,7 +2650,18 @@ Have you ever imagined a different version of your classroom, school or town?
         &lt;&lt;set $nextPassage to &quot;stage3-tutorial1-video&quot;&gt;&gt;
         &lt;&lt;goto &quot;loading-tutorial&quot;&gt;&gt;
         &lt;&lt;/link&gt;&gt;
-     &lt;&lt;include &quot;night-time-dreamJar-label&quot;&gt;&gt;
+     &lt;div class=&quot;dreams nighttime-dreams&quot;&gt;
+  &lt;div class=&quot;dreams__icon&quot;&gt;
+    &lt;img src=&quot;assets/img/icons/ICON1NIGHT_WHITE.png&quot; alt=&quot;nighttime icon&quot; /&gt;
+  &lt;/div&gt;
+  &lt;h2&gt;
+    Night-time&lt;br /&gt;
+    Dreams
+  &lt;/h2&gt;
+  &lt;p&gt;
+    Where magical stories happen
+  &lt;/p&gt;
+&lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 
@@ -2660,7 +2671,17 @@ Have you ever imagined a different version of your classroom, school or town?
         &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-video&quot;&gt;&gt;
         &lt;&lt;goto &quot;loading-tutorial&quot;&gt;&gt;
         &lt;&lt;/link&gt;&gt;
-        &lt;&lt;include &quot;day-dreamJar-label&quot;&gt;&gt;
+        &lt;div class=&quot;dreams day-dreams&quot;&gt;
+  &lt;div class=&quot;dreams__icon&quot;&gt;
+    &lt;img src=&quot;assets/img/icons/ICON2DAY_NAVY.png&quot; alt=&quot;nighttime icon&quot; /&gt;
+  &lt;/div&gt;
+  &lt;h2&gt;
+    Daydreams
+  &lt;/h2&gt;
+  &lt;p&gt;
+Where our imagination changes the world around us
+  &lt;/p&gt;
+&lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 
@@ -2670,7 +2691,17 @@ Have you ever imagined a different version of your classroom, school or town?
         &lt;&lt;set $nextPassage to &quot;stage3-tutorial3-video&quot;&gt;&gt;
         &lt;&lt;goto &quot;loading-tutorial&quot;&gt;&gt;
         &lt;&lt;/link&gt;&gt;
-        &lt;&lt;include &quot;future-dreamJar-label&quot;&gt;&gt;
+        &lt;div class=&quot;dreams future-dreams&quot;&gt;
+  &lt;div class=&quot;dreams__icon&quot;&gt;
+    &lt;img src=&quot;assets/img/icons/ICON3FUTURE_WHITE.png&quot; alt=&quot;nighttime icon&quot; /&gt;
+  &lt;/div&gt;
+  &lt;h2&gt;
+    Future Dreams
+  &lt;/h2&gt;
+  &lt;p&gt;
+    Where we dream of what we want to achieve
+  &lt;/p&gt;
+&lt;/div&gt;
         &lt;/div&gt;
     &lt;/div&gt;
 &lt;/div&gt;
