@@ -174,6 +174,82 @@ $(document).on(":passagedisplay", function () {
     document.querySelectorAll(".sorting-activity-list").forEach(setup.updateSortingActivityCorrectness);
 });
 
+var bslOriginalVideoMarkup = null;
+var bslVideoObserver = null;
+
+setup.initBslVideoToggle = function () {
+    if (bslVideoObserver) {
+        bslVideoObserver.disconnect();
+        bslVideoObserver = null;
+    }
+
+    bslOriginalVideoMarkup = null;
+    var button = document.getElementById("bsl-video-toggle");
+    if (!button) {
+        return;
+    }
+
+    button.setAttribute("aria-pressed", "false");
+    button.textContent = "BSL: Off";
+    button.disabled = true;
+
+    var videoWrapper = document.getElementById("videoWrapper");
+    if (!videoWrapper) {
+        return;
+    }
+
+    var enableWhenVideoIsReady = function () {
+        if (videoWrapper.querySelector("iframe")) {
+            button.disabled = false;
+            bslVideoObserver.disconnect();
+            bslVideoObserver = null;
+        }
+    };
+
+    bslVideoObserver = new MutationObserver(enableWhenVideoIsReady);
+    bslVideoObserver.observe(videoWrapper, { childList: true, subtree: true });
+    enableWhenVideoIsReady();
+};
+
+$(document).on(":passagedisplay", setup.initBslVideoToggle);
+
+document.addEventListener("click", function (event) {
+    if (!(event.target instanceof Element)) {
+        return;
+    }
+
+    var button = event.target.closest("#bsl-video-toggle");
+    if (!button || button.disabled) {
+        return;
+    }
+
+    var videoWrapper = document.getElementById("videoWrapper");
+    if (!videoWrapper) {
+        return;
+    }
+
+    var isEnabled = button.getAttribute("aria-pressed") === "true";
+    if (isEnabled) {
+        if (bslOriginalVideoMarkup === null) {
+            button.disabled = true;
+            return;
+        }
+        videoWrapper.innerHTML = bslOriginalVideoMarkup;
+        bslOriginalVideoMarkup = null;
+        button.setAttribute("aria-pressed", "false");
+        button.textContent = "BSL: Off";
+    } else {
+        if (!videoWrapper.querySelector("iframe")) {
+            button.disabled = true;
+            return;
+        }
+        bslOriginalVideoMarkup = videoWrapper.innerHTML;
+        videoWrapper.innerHTML = '<div class="bsl-video-placeholder" role="status">BSL video is not available yet.</div>';
+        button.setAttribute("aria-pressed", "true");
+        button.textContent = "BSL: On";
+    }
+});
+
 function moveSortingActivityItem(list, fromIndex, toIndex) {
     var rows = Array.from(list.querySelectorAll(".sorting-activity-row"));
     var items = rows.map(function (row) {
@@ -1255,6 +1331,8 @@ codeword11: {
 &lt;div class=&quot;footer-back-button&quot;&gt;
 [img[assets/img/back-sharp-b.png][$prevPassage]]
     &lt;/div&gt;
+
+&lt;button type=&quot;button&quot; id=&quot;bsl-video-toggle&quot; aria-pressed=&quot;false&quot; disabled&gt;BSL: Off&lt;/button&gt;
 
 &lt;&lt;button &quot;Restart&quot;&gt;&gt;
 &lt;&lt;set $f to Engine.restart()&gt;&gt;

@@ -363,6 +363,25 @@ footer > a > img {
   max-width: 50px;
 }
 
+footer #bsl-video-toggle:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.bsl-video-placeholder {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+  background: var(--palette-navy);
+  color: white;
+  font-family: var(--font-headings);
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-align: center;
+}
+
 /* headers */
 header.logo-left {
   display: flex;
