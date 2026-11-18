@@ -669,7 +669,11 @@ setup.dreamJarDrag = () => {
     }
 
     const jars = Array.from(container.querySelectorAll(".dream-jar-item"));
+    const labelsContainer = document.getElementById("dream-jar-draggable-labels-container");
     const labels = Array.from(document.querySelectorAll(".dream-jar-label"));
+    if (labelsContainer) {
+        labelsContainer.style.minHeight = `${labelsContainer.getBoundingClientRect().height}px`;
+    }
     let placedCount = 0;
 
     labels.forEach((label) => {
