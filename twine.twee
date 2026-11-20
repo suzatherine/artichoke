@@ -2121,6 +2121,7 @@ Lorem Ipsum Welsh
     <<append "#chatHistory">>
          <div class="message-received">
         <span>Before we share our Dreams - we need to understand what Dreams are.</span>
+        </div>
         <</append>>
     <</timed>>
 
@@ -2283,7 +2284,7 @@ Lorem Ipsum Welsh
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/voicenotes/VOICENOTE 2 YOUNGER.mp3 "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng-ks1" "stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks1">>
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 2 YOUNGER.mp3" "3s" "stage2-exercise-dreamJar-b-vn-transcript-eng-ks1" "stage2-exercise-dreamJar-b-vn-triggered-content-eng-ks1">>
         <</append>>
     <</timed>>
 
@@ -2856,6 +2857,8 @@ Have you ever imagined a different version of your classroom, school or town?
 <p>We all need dreams. </p>
 
 <p>I won’t stand by whilst the BFG, and the UK, is out of them.</p>
+
+<p>When you're ready to continue, Dream Team, put 'BFG' into the library portal, and we can reconnect. See you soon!</p>
 
 :: stage2-exercise-dreamJar-outro-vn-triggered-content-eng [nobr]
 <<timed 3s>>
