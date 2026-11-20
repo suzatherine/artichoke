@@ -3507,7 +3507,7 @@ Lorem Ipsum Welsh
 
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-b-vn-transcript-eng-ks1"
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 4 YONGER - A.mp3" "3s" "stage3-tutorial1-b-vn-transcript-eng-ks1"
          "stage3-tutorial1-b-vn-triggered-content-eng-ks1">>
         <</append>>
     <</timed>>
@@ -3628,7 +3628,7 @@ Lorem ipsum Welsh KS2
 :: stage3-tutorial1-c-messages-eng-ks1 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-c-vn-transcript-eng-ks1"
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 4 YONGER - B.mp3" "3s" "stage3-tutorial1-c-vn-transcript-eng-ks1"
          "stage3-tutorial1-c-vn-triggered-content-eng-ks1">>
         <</append>>
     <</timed>>
@@ -3751,7 +3751,7 @@ Lorem ipsum Welsh KS2
 :: stage3-tutorial1-d-messages-eng-ks1 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/ping1.mp3" "3s" "stage3-tutorial1-d-vn-transcript-eng-ks1"
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 4 YONGER - C.mp3" "3s" "stage3-tutorial1-d-vn-transcript-eng-ks1"
          "stage3-tutorial1-d-vn-triggered-content-eng-ks1">>
         <</append>>
     <</timed>>  
@@ -3850,7 +3850,7 @@ Lorem ipsum Welsh KS2
 :: stage3-tutorial1-e-messages-eng-ks1 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/voicenotes/VOICENOTE 4 OLDER - E.mp3" "3s" "stage3-tutorial1-e-vn-transcript-eng-ks1">>
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 4 YONGER - D.mp3" "3s" "stage3-tutorial1-e-vn-transcript-eng-ks1">>
         <</append>>
     <</timed>>
 
@@ -3876,7 +3876,7 @@ Lorem ipsum Welsh KS2
 
 <p>You can choose to use my first image if you’d like - the Surprise Present! </p>
 
-<p>So, to kick off your imaginations, have a discussion about what could come out of Surprise Present? </p>
+<p>So, to kick off your imaginations, have a discussion about what could come out of the mystery box? </p>
 
 
 :: stage3-tutorial1-e-messages-eng-ks2 [nobr]
@@ -4136,13 +4136,13 @@ Lorem Ipsum Welsh
 
 :: stage3-tutorial1-h-vn-transcript-eng [nobr]
 
-<p>Wonderful work Dream Team I’m sure. </p>
+<p>Wonderful work Dream Team.</p>
 
 <p>I love stories - as I’m sure you have gathered - and so it is brilliant to know that you have created Night-Time Dreams for the BFG to collect. They might be bizarre, silly or mad but that is brilliant - all dreams are unique and we never know what or who they’ll inspire.  </p>
 
 <p>Imagine, one of these Night-Time Dreams could be blown into someone’s bedroom by the BFG’s dream-blower trumpet when they sleep and experience it themselves. I wonder if you have someone who you’d like your dream to be experienced by? </p>
 
-<p>Right, as you have completed the Night-Time Dreams section you have the choice to move onto another section or submit to the BFG. Don’t worry if you can’t do anymore today - continue when you are ready. </p>
+<p>Right, as you have completed the Night-Time Dreams section you have the choice to move onto another section or send to the BFG. Don’t worry if you can’t do anymore today - continue when you are ready. </p>
 
 <p>Speak soon. </p>
 
