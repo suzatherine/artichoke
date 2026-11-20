@@ -179,6 +179,10 @@ function moveSortingActivityItem(list, fromIndex, toIndex) {
 }
 
 document.addEventListener("dragstart", function (event) {
+    if (!(event.target instanceof Element)) {
+        return;
+    }
+
     var item = event.target.closest(".sorting-activity-list .sorting-activity-option");
     if (!item) {
         return;
@@ -191,6 +195,10 @@ document.addEventListener("dragstart", function (event) {
 });
 
 document.addEventListener("dragover", function (event) {
+    if (!(event.target instanceof Element)) {
+        return;
+    }
+
     var list = event.target.closest(".sorting-activity-list");
     var targetRow = event.target.closest(".sorting-activity-row");
     if (!list || !targetRow || !sortingActivityDraggedItem
@@ -216,6 +224,10 @@ document.addEventListener("dragover", function (event) {
 });
 
 document.addEventListener("dragend", function (event) {
+    if (!(event.target instanceof Element)) {
+        return;
+    }
+
     var item = event.target.closest(".sorting-activity-list .sorting-activity-option");
     if (!item) {
         return;
@@ -227,6 +239,10 @@ document.addEventListener("dragend", function (event) {
 });
 
 document.addEventListener("keydown", function (event) {
+    if (!(event.target instanceof Element)) {
+        return;
+    }
+
     var item = event.target.closest(".sorting-activity-list .sorting-activity-option");
     if (!item) {
         return;
