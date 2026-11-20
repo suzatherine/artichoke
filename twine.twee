@@ -3204,26 +3204,129 @@ Have you ever imagined a different version of your classroom, school or town?
 <div class="night-bg bg page-background">
     <<include "_templateVideoChat">>
 </div>
+<<include "choose-messages-language-ks-specific">>
 
-<<if $userchoices.language is "eng">>
-      <<timed 1s>>
-    <<include "stage3-tutorial1-a-messages-eng">>
-     <</timed>>
-<<elseif $userchoices.language is "cym">>
-<<timed 0.1s>>
-   <<replace "#pageName">>
-    <h2>Night-time Dreams</h2>
-    <</replace>>
-    <</timed>>
+
+:: stage3-tutorial1-a-messages-eng-ks1 [nobr]
+
 <<timed 1s>>
- 
-    <<include "stage3-tutorial1-a-messages-cym">>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>I want to tap into our Night-Time Dreams.</span>
+        </div>
+        <</append>>
     <</timed>>
-<</if>>
+
+<<timed 3s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Full of magic and mystery </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 6s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>To tell a story</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 8s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>A story that can fill the BFG’s Dream Jars.  </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 12s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Stories are made up of parts.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+                         <<timed 15s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>We could break our story into 3 parts.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+                     <<timed 18s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>A Beginning - where we discover the world of the story or the character</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+                 <<timed 21s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>A Middle - where something happens to our character or world </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+             <<timed 24s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>An Ending - where we find out how the Middle has impacted the world or character.</span>
+        </div>
+        <</append>>
+    <</timed>>
+
+         <<timed 28s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Let’s look at part of the BFG’s own story to learn about how we create stories.</span>
+        </div>
+        <</append>>
+    <</timed>>
+  
+    <<timed 30s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>Work out together which order the story should go in. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+<<timed 44s>>
+    <<append "#videoWrapper">>
+        <<set _ks1SortingActivity to {
+            title: "In Chapter 11 - The Journey to Dream Country. The BFG and Sophie make their way to Dream Country.",
+            instructions: "Drag the sentences to reorder them",
+            titles: ["Beginning", "Middle", "End"],
+            sentences: [
+                "The BFG dodges the rocks and starts running at top speed to get to Dream Country.",
+                "The BFG decides to go catch some dreams from Dream Country.",
+                "But the other giants are blocking his path and begin to throw rocks at the BFG."
+            ],
+            correctOrder: [
+                "The BFG decides to go catch some dreams from Dream Country.",
+                "But the other giants are blocking his path and begin to throw rocks at the BFG.",
+                "The BFG dodges the rocks and starts running at top speed to get to Dream Country."
+            ]
+        }>>
+        <<sortingActivity _ks1SortingActivity>>
+        <</append>>
+    <<run setup.updateSortingActivityCorrectness(document.querySelector("#videoWrapper .sorting-activity-list"))>>
+    <</timed>>    
 
 
+    <<replace "#chatInputWrapper">>
+        <div id="sorting-next-button" class="btn-option-wrapper hidden">
+            <<include "nextBtn">>
+        </div>
+    <</replace>>
 
-:: stage3-tutorial1-a-messages-eng [nobr]
+:: stage3-tutorial1-a-messages-eng-ks2 [nobr]
 
 <<timed 1s>>
     <<append "#chatHistory">>
@@ -3345,7 +3448,10 @@ Have you ever imagined a different version of your classroom, school or town?
         </div>
     <</replace>>
 
-:: stage3-tutorial1-a-messages-cym [nobr]
+:: stage3-tutorial1-a-messages-cym-ks1 [nobr]
+Lorem Ipsum Welsh
+
+:: stage3-tutorial1-a-messages-cym-ks2 [nobr]
 Lorem Ipsum Welsh
 
 :: stage3-tutorial1-b [nobr]
