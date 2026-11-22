@@ -4031,6 +4031,9 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
     &lt;&lt;/timed&gt;&gt;</tw-passagedata><tw-passagedata pid="215" name="stage3-tutorial2-d-messages-cym" tags="nobr" position="600,2725" size="100,100">Lorem Ipsum Welsh</tw-passagedata><tw-passagedata pid="216" name="day-dreamers-guide-img" tags="nobr" position="725,2725" size="100,100">&lt;img src=&quot;assets/img/dream-guide.png&quot; alt=&quot;Day Dreamers Guide&quot;&gt;</tw-passagedata><tw-passagedata pid="217" name="stage3-tutorial2-e" tags="nobr" position="850,2725" size="100,100">&lt;&lt;set $prevPassage to &quot;stage3-tutorial2-d&quot;&gt;&gt;
 &lt;&lt;set $passage to &quot;stage3-tutorial2-e&quot;&gt;&gt;
 &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-e-2&quot;&gt;&gt;
+&lt;&lt;if $userchoices.keyStage is 1&gt;&gt;
+    &lt;&lt;set $nextPassage to &quot;stage3-tutorial2-f&quot;&gt;&gt;
+&lt;&lt;/if&gt;&gt;
 &lt;div class=&quot;day-bg bg page-background&quot;&gt;
 &lt;&lt;include &quot;_templateVideoChat&quot;&gt;&gt;
 &lt;&lt;timed 0.1s&gt;&gt;

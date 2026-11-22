@@ -4707,6 +4707,9 @@ Lorem Ipsum Welsh
 <<set $prevPassage to "stage3-tutorial2-d">>
 <<set $passage to "stage3-tutorial2-e">>
 <<set $nextPassage to "stage3-tutorial2-e-2">>
+<<if $userchoices.keyStage is 1>>
+    <<set $nextPassage to "stage3-tutorial2-f">>
+<</if>>
 <div class="day-bg bg page-background">
 <<include "_templateVideoChat">>
 <<timed 0.1s>>
