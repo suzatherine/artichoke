@@ -3639,7 +3639,7 @@ The next part is the <span class="codeword-text">MIDDLE</span> of the story - so
 
 
 :: stage3-tutorial1-c-vn-triggered-content-eng-ks1 [nobr]
-<<timed 4s>>
+<<timed 12s>>
     <<replace "#pictureContainer">>
       <<include "tutorial1-picture1-ks1">>
         <<include "tutorial1-picture2-ks1">>
@@ -3761,7 +3761,7 @@ Lorem ipsum Welsh KS2
 Then the <span class="codeword-text">END</span> of the story might show what happens after The Middle - so, in my story after the Surprise Present had a Baby Elephant it, the End might be that I ride the Elephant to the Library. The End! 
 
 :: stage3-tutorial1-d-vn-triggered-content-eng-ks1 [nobr]
-<<timed 4s>>
+<<timed 13s>>
     <<replace "#pictureContainer">>
       <<include "tutorial1-picture1-ks1">>
         <<include "tutorial1-picture2-ks1">>
