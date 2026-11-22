@@ -5203,8 +5203,8 @@ Lorem Ipsum Welsh KS2
 
 
 <<timed 15s>>
+     /* $codewordsStage3.codeword5KS2 */
     <<replace "#chatInputWrapper">>
-        /* $codewordsStage3.codeword5KS2 */
         <<include "codeword-chat">>
     <</replace>>
 <</timed>>
@@ -5385,7 +5385,7 @@ Do you need someone to help you?<br/>
 
 <<timed 15s>>
     <<replace "#chatInputWrapper">>
-        /* $codewordsStage3.codeword5KS1 */ */
+        /* $codewordsStage3.codeword5KS1 */
         <<include "codeword-chat">>
     <</replace>>
 <</timed>>
@@ -5457,7 +5457,7 @@ Do you need someone to help you?<br/>
 :: stage3-tutorial3-c-messages-eng-ks1 [nobr]
 <<timed 1s>>
     <<append "#chatHistory">>
-         <<voicenote "assets/sound/voicenotes/VOICENOTE 7 YOUNGER.mp3" "3s" "stage3-tutorial3-c-vn-transcript-eng-ks1"
+         <<voicenote "assets/sound/voicenotes/VOICENOTE 8 YOUNGER.mp3" "3s" "stage3-tutorial3-c-vn-transcript-eng-ks1"
          "stage3-tutorial3-c-vn-triggered-content-eng-ks1">>
         <</append>>
     <</timed>>
@@ -5553,7 +5553,7 @@ Lorem Ipsum Welsh KS1
 :: stage3-tutorial3-d [nobr]
 <<set $prevPassage to "stage3-tutorial3-c">>
 <<set $passage to "stage3-tutorial3-d">>
-<<set $nextPassage to "stage3-tutorial3-e">>
+<<set $nextPassage to "stage3-tuttorial3-e">>
 <div class="future-bg bg page-background">
 <<include "_templateVideoChat">>
 </div>
@@ -5715,7 +5715,9 @@ Lorem Ipsum Welsh KS2
 <<timed 1s>>
     <<append "#chatHistory">>
         <div class="message-received">
-            <span>You’ve thought about your Future Dream and the steps that could help you reach it.</span>
+            <span>Excellent work, these feet show your Future Dreams.
+It might seem like a leap, but there are steps to get there.
+</span>
         </div>
     <</append>>
 <</timed>>
@@ -5723,28 +5725,62 @@ Lorem Ipsum Welsh KS2
 <<timed 4s>>
     <<append "#chatHistory">>
         <div class="message-received">
-            <span>Here’s an example of how one small step could bring a dream closer.</span>
+            <span>Some steps will feel tricky. That’s okay, challenges are there to be overcome.
+You aren’t on your own. 
+And everyone goes further with a boost.
+</span>
         </div>
     <</append>>
 <</timed>>
 
 <<timed 6s>>
-    <<replace "#videoWrapper">>
-        <div class="accented-quote">
-            <span>My Future Dream is to be a librarian.</span>
-        </div>
-    <</replace>>
-<</timed>>
-
-<<timed 9s>>
-    <<append "#videoWrapper">>
-        <div class="accented-quote">
-            <span>One step I could take is to read a new book this week.</span>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>Swap with someone and encourage them to carry on their journey to their Future Dreams- I call it a Pep Talk! 
+</span>
         </div>
     <</append>>
 <</timed>>
 
+
+
+<<timed 10s>>
+    <<replace "#videoWrapper">>
+        <h2 class="pep-talk-title">PEP TALK</h2>
+        <div id="pepTalkQuoteContent">
+            <div class="accented-quote">
+                <span>You can do it because…</span>
+            </div>
+        </div>
+    <</replace>>
+<</timed>>
+
 <<timed 12s>>
+    <<append "#pepTalkQuoteContent">>
+        <div class="accented-quote">
+            <span>When it gets hard, remember…</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 13s>>
+    <<append "#pepTalkQuoteContent">>
+        <div class="accented-quote">
+            <span>I believe in you because…</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 14s>>
+    <<append "#chatHistory">>
+        <div class="message-received">
+            <span>When you’ve written a Pep Talk, read it to them to see if they like it.
+</span>
+        </div>
+    <</append>>
+<</timed>>
+
+<<timed 14s>>
     <<append "#chatInputWrapper">>
         <div class="btn-option-wrapper">
             <<button "Next">>
