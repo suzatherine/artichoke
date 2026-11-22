@@ -4211,7 +4211,15 @@ Lorem Ipsum Welsh
 
 :: stage3-tutorial2-a-messages-eng [nobr]
 
-    <<timed 1s>>
+  <<timed 1s>>
+    <<append "#chatHistory">>
+         <div class="message-received">
+        <span>A Daydream is imagining a different version of the world around us. </span>
+        </div>
+        <</append>>
+    <</timed>>
+
+    <<timed 2s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>Before we can transform an area - we need to start from what we know.</span>
@@ -4219,7 +4227,7 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
 
-      <<timed 3s>>
+      <<timed 4s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>And you are experts in your area.</span>
@@ -4227,7 +4235,7 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
 
-    <<timed 6s>>
+    <<timed 8s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>More than me</span>
@@ -4235,7 +4243,7 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
 
-       <<timed 8s>>
+       <<timed 10s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>More than the BFG</span>
@@ -4243,7 +4251,7 @@ Lorem Ipsum Welsh
         <</append>>
     <</timed>>
 
-<<timed 11s>>
+<<timed 13s>>
     <<append "#chatHistory">>
          <div class="message-received">
         <span>Decide how you want to map and then I’ll send you some prompts. <br/>
@@ -4253,7 +4261,7 @@ Teacher, I’ve sent you some thoughts on how you could map the area.
         <</append>>
     <</timed>>
 
-<<timed 13s>>
+<<timed 15s>>
     <<replace "#chatInputWrapper">>
         <div class="btn-option-wrapper">
             <<include "nextBtn">>
@@ -4592,7 +4600,7 @@ Lorem Ipsum Welsh
 
 <p>Well done - now the fun part. Let’s daydream about this place!</p>
  
-<p>Daydreaming takes place when our brains are given the space to float - much like drinking the BFG’s Frobscottle. </p>
+<p>Daydreaming takes place when our brains are given the space to float - much like drinking Frobscottle. </p>
 
 <p>
     Daydreaming can be activated. <br/>
@@ -4958,11 +4966,11 @@ Lorem Ipsum Welsh KS2
 
 <p>I love postcards about our local area because it gets us thinking about what we have around us - appreciating what makes it special and highlighting where it could improve to make everyone in that community happier. </p>
 
-<p>All of our communities are special in their own way - and they've got to being that way thanks to the people who are part of those communities. People like you who come up with bold, brilliant and slightly silly ideas to make the community happier. </p>
+<p>All of our communities are special in their own way - and they've got to being that way thanks to the people who are part of those communities. People like you who come up with bold, brilliant and slightly outrageous ideas to make the community happier. </p>
 
 
 <p>
-    Lionel is always on the reception desk of our library, he is always thinking of ways to make our community feel welcome. It's a never ending vision we all commit to in the Library - a space for all. We all can play our part in making a community feel welcoming to others. 
+    Lionel is always on the reception desk of our library, he is always thinking of ways to make our community feel welcome. It's a never ending vision we all commit to in the Library - a space for all. We can all play our part in making a community feel welcoming to others. 
     Even small acts can make a big difference. <br/>
     Lionel knows how to say hello in 26 languages and I’m trying to learn too!
 </p>
@@ -4975,7 +4983,7 @@ Lorem Ipsum Welsh KS2
 <p>
     In England some say Hello. <br/>
     In Welsh - It's Shwmae!<br/>
-    You may hear someone in Scotland say " Madainn Mhath" which is good morning in Scottish Gaelic.<br/>
+    You may hear someone in Scotland say "Madainn Mhath" which is good morning in Scottish Gaelic.<br/>
     In Northern Ireland, some people speak Irish or Ulster Scots and say Dia Duit!<br/>
 </p>
 
